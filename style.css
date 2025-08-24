@@ -5,6 +5,19 @@
   box-sizing: border-box;
 }
 
+/* Initial hidden state */
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+/* Visible state */
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 /* Body styles */
 body {
   font-family: 'EB Garamond', Georgia, serif;
