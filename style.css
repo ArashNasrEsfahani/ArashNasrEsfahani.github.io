@@ -60,6 +60,27 @@ main section {
     margin-top: 1rem;
 }
 
+.about-container {
+    display: flex;
+    align-items: flex-start;
+    gap: 2rem;
+}
+
+.about-text {
+    flex: 3; /* Takes up 3/4 of the space */
+}
+
+.about-image {
+    flex: 1; /* Takes up 1/4 of the space */
+    text-align: center;
+}
+
+.about-image img {
+    max-width: 100%;
+    border-radius: 8px; /* Slightly rounded corners */
+    margin-top: 1.5rem;
+}
+
 /* Publications Section */
 #publications h2 a {
     font-family: 'Inter', sans-serif;
@@ -84,4 +105,61 @@ main section {
     margin-bottom: 0.2rem;
 }
 
-.publication-item .
+.publication-item .venue {
+    font-size: 1rem;
+    color: #555;
+}
+
+/* Experience & Teaching */
+.experience-item {
+    margin-bottom: 2rem;
+}
+
+.experience-item .role-title strong {
+    font-size: 1.1rem;
+    color: #000;
+}
+
+.experience-item .role-details {
+    font-size: 0.95rem;
+    color: #666;
+    margin-bottom: 0.4rem;
+}
+
+.experience-item .role-desc {
+    font-size: 1rem;
+    color: #333;
+    margin-bottom: 0;
+}
+
+/* =========================
+   Responsive Design
+========================= */
+
+@media (max-width: 700px) {
+    .about-container {
+        flex-direction: column-reverse; /* Stacks image on top of text */
+        align-items: center;
+    }
+    
+    .about-image {
+        margin-bottom: 1rem;
+        max-width: 200px;
+    }
+    
+    #about h2 {
+        text-align: center;
+    }
+}
+
+@media (max-width: 600px) {
+    body {
+        padding: 10px 5px;
+    }
+    .container {
+        padding: 0 10px;
+    }
+    p {
+        font-size: 1rem;
+    }
+}
