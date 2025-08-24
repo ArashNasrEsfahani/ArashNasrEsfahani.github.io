@@ -16,6 +16,20 @@ body {
     padding: 0 15px;
 }
 
+header {
+    text-align: center;
+    margin-bottom: 2rem;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 1rem;
+}
+
+h1 {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #000;
+    margin: 0;
+}
+
 h2 {
     font-family: 'Inter', sans-serif;
     font-weight: 700;
@@ -57,7 +71,7 @@ main section {
 /* About Section */
 #about h2 {
     border-bottom: none;
-    margin-top: 1rem;
+    margin-top: 0;
 }
 
 .about-container {
@@ -67,42 +81,46 @@ main section {
 }
 
 .about-text {
-    flex: 3; /* Takes up 3/4 of the space */
+    flex: 3; 
 }
 
 .about-image {
     flex: 1; 
     text-align: center;
-    margin-top: 1.5rem;
 }
 
 .about-image img {
-    width: 160px; /* Or your preferred size */
-    height: 160px; /* Must be the same as width */
-    border-radius: 50%; /* This makes the image circular */
-    object-fit: cover; /* Prevents the image from stretching */
+    width: 160px; 
+    height: 160px;
+    border-radius: 50%; 
+    object-fit: cover; 
 }
 
 .social-links {
     display: flex;
-    justify-content: center;
-    gap: 1rem;
-    margin-top: 1rem;
+    flex-direction: column; /* Stack links vertically */
+    align-items: flex-start; /* Align to the left */
+    gap: 0.75rem; /* Space between rows */
+    margin-top: 1.5rem;
+    margin-left: 10px; /* Indent the links slightly */
 }
 
 .social-links a {
-    font-size: 0.9rem;
+    font-size: 0.95rem;
     font-weight: 600;
-    color: #555;
-}
-/* Publications Section */
-#publications h2 a {
-    font-family: 'Inter', sans-serif;
-    font-size: 1.1rem;
-    font-weight: 400;
-    color: #444;
+    color: #333;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem; /* Space between icon and text */
 }
 
+.social-links a span {
+    font-size: 1.1rem; /* Adjust icon size */
+    color: #555;
+}
+
+
+/* Publications Section */
 .publication-item {
     margin-bottom: 2rem;
 }
@@ -156,9 +174,9 @@ main section {
         align-items: center;
     }
     
-    .about-image {
-        margin-bottom: 1rem;
-        max-width: 200px;
+    .social-links {
+        align-items: center; /* Center the links on mobile */
+        margin-left: 0;
     }
     
     #about h2 {
