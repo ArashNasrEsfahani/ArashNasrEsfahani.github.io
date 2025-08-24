@@ -1,17 +1,75 @@
-/* Global styles */
-body {
-  font-family: 'EB Garamond', Georgia, serif;
+/* Reset some default spacing */
+* {
   margin: 0;
   padding: 0;
-  line-height: 1.6;
-  background: #fff;
-  color: #111;
-  max-width: 700px;
-  margin-left: auto;
-  margin-right: auto;
-  padding: 20px;
+  box-sizing: border-box;
 }
 
+/* Body styles */
+body {
+  font-family: 'EB Garamond', Georgia, serif;
+  background: #fff;
+  color: #111;
+  max-width: 720px;
+  margin: auto;
+  padding: 40px 20px;
+  line-height: 1.7;
+  font-size: 1.1rem;
+}
+
+/* Headings */
+h1 {
+  font-size: 2.2rem;
+  margin-bottom: 10px;
+}
+
+h2 {
+  font-size: 1.6rem;
+  margin: 40px 0 20px;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 4px;
+}
+
+h3 {
+  font-size: 1.2rem;
+  margin: 20px 0 10px;
+}
+
+/* Navbar */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 60px;
+}
+
+nav a {
+  margin-left: 20px;
+  font-size: 1rem;
+  color: #0070f3;
+  text-decoration: none;
+}
+
+nav a:hover {
+  text-decoration: underline;
+}
+
+/* Sections */
+section {
+  margin-bottom: 80px;
+}
+
+/* Lists */
+ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+ul li {
+  margin-bottom: 12px;
+}
+
+/* Links */
 a {
   color: #0070f3;
   text-decoration: none;
@@ -21,22 +79,10 @@ a:hover {
   text-decoration: underline;
 }
 
-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 40px;
-}
-
-nav a {
-  margin-left: 15px;
-  font-size: 1rem;
-}
-
-section {
-  margin-bottom: 80px;
-}
-
-h1, h2, h3 {
-  font-weight: normal;
+/* Footer */
+footer {
+  margin-top: 60px;
+  font-size: 0.9rem;
+  text-align: center;
+  color: #666;
 }
