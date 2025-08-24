@@ -1,4 +1,6 @@
-Arash NasrEsfahani - Personal Academic Website 👋
+Arash NasrEsfahani - Personal Academic Website 
+---
+
 This repository contains the source code for my personal academic website, which can be viewed at [Arash NasrEsfahani](https://arashnasresfahani.github.io).
 
 ℹ️ About
