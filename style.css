@@ -1,78 +1,88 @@
-/* Reset some default spacing */
+/* =========================
+   Global Reset & Fonts
+========================= */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/* Initial hidden state */
-.fade-in {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-}
-
-/* Visible state */
-.fade-in.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* Body styles */
 body {
-  font-family: 'EB Garamond', Georgia, serif;
-  background: #fff;
-  color: #111;
+  font-family: Georgia, serif; /* default serif font */
+  background: #ffffff;
+  color: #111111;
   max-width: 720px;
-  margin: auto;
+  margin: 0 auto;
   padding: 40px 20px;
   line-height: 1.7;
   font-size: 1.1rem;
 }
 
-/* Headings */
-h1 {
-  font-size: 2.2rem;
-  margin-bottom: 10px;
+a {
+  color: #0070f3;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: #0056b3;
+  text-decoration: underline;
+}
+
+/* =========================
+   Header & Navigation
+========================= */
+header {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: 80px;  /* more space below header */
+}
+
+header h1 {
+  font-size: 2.4rem;
+  margin-bottom: 15px;  /* more breathing room */
+}
+
+header p {
+  font-size: 1.1rem;
+  margin-bottom: 25px;  /* space between subtitle and nav */
+  font-weight: 400;
+}
+
+nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;  /* slightly more spacing between links */
+  margin-bottom: 20px;
+}
+
+nav a {
+  font-size: 1rem;
+}
+
+/* =========================
+   Sections
+========================= */
+section {
+  margin-bottom: 80px;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.8s ease-out;
+}
+
+section.visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 h2 {
   font-size: 1.6rem;
-  margin: 40px 0 20px;
+  margin-bottom: 20px;
   border-bottom: 1px solid #eee;
   padding-bottom: 4px;
 }
 
-h3 {
-  font-size: 1.2rem;
-  margin: 20px 0 10px;
-}
-
-/* Navbar */
-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  margin-bottom: 60px;
-}
-
-nav a {
-  margin-left: 20px;
-  font-size: 1rem;
-  color: #0070f3;
-  text-decoration: none;
-}
-
-nav a:hover {
-  text-decoration: underline;
-}
-
-/* Sections */
-section {
-  margin-bottom: 80px;
-}
-
-/* Lists */
 ul {
   list-style-type: none;
   padding-left: 0;
@@ -80,22 +90,49 @@ ul {
 
 ul li {
   margin-bottom: 12px;
+  line-height: 1.5;
 }
 
-/* Links */
-a {
-  color: #0070f3;
+/* =========================
+   CV Download Button
+========================= */
+.cv-btn {
+  display: inline-block;
+  padding: 6px 12px;
+  border: 1px solid #0070f3;
+  border-radius: 4px;
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
+  margin-top: 10px;
+}
+
+.cv-btn:hover {
+  background: #0070f3;
+  color: #fff;
   text-decoration: none;
 }
 
-a:hover {
-  text-decoration: underline;
-}
-
-/* Footer */
+/* =========================
+   Footer
+========================= */
 footer {
   margin-top: 60px;
   font-size: 0.9rem;
   text-align: center;
-  color: #666;
+  color: #666666;
+}
+
+/* =========================
+   Responsive Design
+========================= */
+@media (max-width: 600px) {
+  header {
+    align-items: center;
+    text-align: center;
+  }
+
+  nav {
+    justify-content: center;
+    gap: 10px;
+  }
 }
