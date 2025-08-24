@@ -100,16 +100,7 @@ main section {
     display: flex;
     flex-direction: column; /* Stack links vertically */
     align-items: flex-start; /* Align to the left */
-    gap: 0.75rem; /* Space between rows */
-    margin-top: 1.5rem;
-    margin-left: 10px; /* Indent the links slightly */
-}
-
-.social-links {
-    display: flex;
-    flex-direction: column; /* Stack links vertically */
-    align-items: flex-start; /* Align to the left */
-    gap: 0.75rem; /* Space between rows */
+    gap: 0.8rem; /* Space between rows */
     margin-top: 1.5rem;
     margin-left: 10px; /* Indent the links slightly */
 }
@@ -120,14 +111,15 @@ main section {
     color: #333;
     display: flex;
     align-items: center;
-    gap: 0.6rem; /* Space between icon and text */
+    gap: 0.75rem; /* Space between icon and text */
 }
 
 .social-links .icon {
     display: inline-block;
-    width: 20px; /* Consistent icon width */
-    height: 20px; /* Consistent icon height */
+    width: 22px; /* Consistent icon width */
+    height: 22px; /* Consistent icon height */
     color: #555;
+    flex-shrink: 0; /* Prevents icon from shrinking */
 }
 
 /* Remove the old span style if you have it */
