@@ -17,7 +17,7 @@ body {
 }
 
 h2 {
-    font-family: 'Lora', serif;
+    font-family: 'Inter', sans-serif;
     font-weight: 700;
     font-size: 1.5rem;
     color: #000;
@@ -62,7 +62,7 @@ main section {
 
 /* Publications Section */
 #publications h2 a {
-    font-family: 'Source Sans Pro', sans-serif;
+    font-family: 'Inter', sans-serif;
     font-size: 1.1rem;
     font-weight: 400;
     color: #444;
@@ -84,45 +84,4 @@ main section {
     margin-bottom: 0.2rem;
 }
 
-.publication-item .venue {
-    font-size: 1rem;
-    color: #555;
-}
-
-/* Experience & Teaching */
-.experience-item {
-    margin-bottom: 2rem;
-}
-
-.experience-item .role-title strong {
-    font-size: 1.1rem;
-    color: #000;
-}
-
-.experience-item .role-details {
-    font-size: 0.95rem;
-    color: #666;
-    margin-bottom: 0.4rem;
-}
-
-.experience-item .role-desc {
-    font-size: 1rem;
-    color: #333;
-    margin-bottom: 0;
-}
-
-/* =========================
-   Responsive Design
-========================= */
-
-@media (max-width: 600px) {
-    body {
-        padding: 10px 5px;
-    }
-    .container {
-        padding: 0 10px;
-    }
-    p {
-        font-size: 1rem;
-    }
-}
+.publication-item .
