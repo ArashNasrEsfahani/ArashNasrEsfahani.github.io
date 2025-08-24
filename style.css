@@ -105,13 +105,35 @@ main section {
     margin-left: 10px; /* Indent the links slightly */
 }
 
+.social-links {
+    display: flex;
+    flex-direction: column; /* Stack links vertically */
+    align-items: flex-start; /* Align to the left */
+    gap: 0.75rem; /* Space between rows */
+    margin-top: 1.5rem;
+    margin-left: 10px; /* Indent the links slightly */
+}
+
 .social-links a {
     font-size: 0.95rem;
     font-weight: 600;
     color: #333;
     display: flex;
     align-items: center;
-    gap: 0.5rem; /* Space between icon and text */
+    gap: 0.6rem; /* Space between icon and text */
+}
+
+.social-links .icon {
+    display: inline-block;
+    width: 20px; /* Consistent icon width */
+    height: 20px; /* Consistent icon height */
+    color: #555;
+}
+
+/* Remove the old span style if you have it */
+.social-links a span {
+    font-size: inherit; /* Reset old styles if any */
+    color: inherit;
 }
 
 .social-links a span {
