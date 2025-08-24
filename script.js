@@ -1,28 +1,25 @@
-// Smooth scroll (if not using CSS method)
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-  anchor.addEventListener("click", function (e) {
-    e.preventDefault();
-    document.querySelector(this.getAttribute("href"))
-      .scrollIntoView({ behavior: "smooth" });
-  });
-});
+document.addEventListener('DOMContentLoaded', () => {
+    const sections = document.querySelectorAll('section');
 
-// Fade-in on scroll
-const faders = document.querySelectorAll(".fade-in");
+    const observerOptions = {
+        root: null, // observes intersections relative to the viewport
+        rootMargin: '0px',
+        threshold: 0.1 // Triggers when 10% of the section is visible
+    };
 
-const appearOptions = {
-  threshold: 0.2, // trigger when 20% of element is visible
-  rootMargin: "0px 0px -50px 0px"
-};
+    const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            // When a section comes into view
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                // Stop observing the section once it's visible
+                observer.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
 
-const appearOnScroll = new IntersectionObserver(function(entries, observer) {
-  entries.forEach(entry => {
-    if (!entry.isIntersecting) return;
-    entry.target.classList.add("visible");
-    observer.unobserve(entry.target);
-  });
-}, appearOptions);
-
-faders.forEach(fader => {
-  appearOnScroll.observe(fader);
+    // Attach the observer to each section
+    sections.forEach(section => {
+        observer.observe(section);
+    });
 });
