@@ -1,106 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
-
-
 <head>
-  <meta charset="UTF-8" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Arash NasrEsfahani</title>
-  <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arash NasrEsfahani</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-  <header>
-    <h1>Arash NasrEsfahani</h1>
-    <p>Human-Computer Interaction | Machine Learning | Human-Robot Interaction</p>
-    <nav>
-      <a href="#about">About</a>
-      <a href="#publications">Publications</a>
-      <a href="#experience">Experience</a>
-      <a href="#projects">Projects</a>
-      <a href="#cv">CV</a>
-      <a href="#contact">Contact</a>
-    </nav>
-  </header>
+    <div class="container">
+        <main>
+            <section id="about">
+                <h2>About Me</h2>
+                <p>
+                    [cite_start]I am a Master's student in Computer Science at the University of Tehran with a focus on Artificial Intelligence, holding a GPA of 19.46/20[cite: 64].
+                </p>
+                <p>
+                    [cite_start]My research interests lie at the intersection of <strong>Human-Computer Interaction (HCI)</strong>, <strong>Human-Robot Interaction (HRI)</strong>, and <strong>Machine Learning</strong>[cite: 7, 11]. [cite_start]I am driven by the goal of building data-driven systems that genuinely help people in their everyday lives[cite: 78]. [cite_start]This passion led me to join the Human and Robot Interaction Lab (TaarLab), where I've worked on challenges in robotic scene rearrangement using the AI2-THOR simulator[cite: 25, 68]. [cite_start]A part of this work grew into my first published paper[cite: 71].
+                </p>
+                <p>
+                    [cite_start]During my Master's, I've had the opportunity to dive deeper into machine learning, implementing a state-of-the-art CNN-LSTM model for human activity recognition[cite: 74]. [cite_start]This project resulted in my selection for the University of Tehran's team for the SHL 2025 Human Activity Recognition Challenge, and our work was subsequently accepted for publication at UbiComp 2025[cite: 75, 76].
+                </p>
+                 <p>
+                    [cite_start]Contact: <a href="mailto:arashnasresfahani37@gmail.com">arashnasresfahani37@gmail.com</a> [cite: 3]
+                </p>
+            </section>
 
-  <!-- About Section -->
-  <section id="about">
-    <h2>About</h2>
-    <p>
-      MSc student in Computer Science (Artificial Intelligence) at the University of Tehran, 
-      with a strong research focus on Human-Computer Interaction, Human-Robot Interaction, 
-      and Machine Learning. Ranked top 100 nationwide in the Iranian M.Sc. entrance exam. 
-    </p>
-  </section>
+            <section id="publications">
+                <h2>Publications - <a href="#">Google Scholar</a></h2>
+                <div class="publication-item">
+                    <p class="title">Ensemble of Foundation Models for Sensor-Based Locomotion and Transportation Mode Recognition</p>
+                    <p class="authors">Arash Nasr Esfahani, Mohammad Foad Abdi, Yousef Alikhani, Mohammad Mahdi Azizi, Bagher BabaAli, Mehdi Mohhebi</p>
+                    [cite_start]<p class="venue">Accepted in <em>UbiComp 2025: ACM International Joint Conference on Pervasive and Ubiquitous Computing</em> [cite: 18]</p>
+                </div>
+                <div class="publication-item">
+                    <p class="title">AI-Driven Relocation Tracking in Dynamic Kitchen Environments</p>
+                    <p class="authors">Arash Nasr Esfahani, Hamed Hosseini, Mehdi Tale Masouleh, Ahmad Kalhor, Hedieh Sajedi</p>
+                    [cite_start]<p class="venue">Published in <em>ICCKE 2024: 14th International Conference on Computer and Knowledge Engineering</em> [cite: 14, 15]</p>
+                </div>
+                 <div class="publication-item">
+                    <p class="title">Deep Spatio-Temporal Disambiguation for Scene Rearrangement in Kitchen Environments</p>
+                    <p class="authors">Arash Nasr Esfahani, Hamed Hosseini, Mehdi Tale Masouleh, Ahmad Kalhor</p>
+                    [cite_start]<p class="venue">Manuscript in preparation for submission to peer-reviewed journals, 2025 [cite: 19, 20]</p>
+                </div>
+            </section>
 
-  <!-- Publications -->
-  <section id="publications">
-    <h2>Publications</h2>
-    <ul>
-      <li><strong>AI-Driven Relocation Tracking in Dynamic Kitchen Environments</strong>, ICCKE 2024</li>
-      <li><strong>Ensemble of Foundation Models for Sensor-Based Locomotion and Transportation Mode Recognition</strong>, UbiComp 2025</li>
-      <li><strong>Deep Spatio-Temporal Disambiguation for Scene Rearrangement in Kitchen Environments</strong>, Manuscript in preparation</li>
-    </ul>
-  </section>
-
-  <!-- Experience -->
-  <section id="experience">
-    <h2>Experience</h2>
-    <ul>
-      <li><strong>Researcher</strong>, Human and Robot Interaction Lab (TAARLab), University of Tehran (Sep 2023 – Present)</li>
-      <li><strong>Researcher</strong>, School of Math, Stats & CS, University of Tehran (Apr – Jul 2025)</li>
-      <li><strong>Teaching Assistant</strong>, Database Management Systems (Oct 2023 – Jan 2024)</li>
-    </ul>
-  </section>
-
-  <!-- Projects -->
-  <section id="projects">
-    <h2>Selected Projects</h2>
-    <ul>
-      <li><a href="https://github.com/ArashNasrEsfahani/Deep-Learning-Framework-for-HAR">Deep Learning Framework for HAR</a> – CNN-LSTM with attention, 95%+ accuracy.</li>
-      <li><a href="https://github.com/ArashNasrEsfahani/Horse-Segmentation-UNet-Explainability">Horse Segmentation with U-Net & Seg-Grad-CAM</a> – 86% IoU validation.</li>
-      <li><a href="https://github.com/ArashNasrEsfahani/Persian-Sentiment-Analysis-BERT">Persian Sentiment Analysis with BERT</a> – ParsBERT outperforms baseline.</li>
-      <li><a href="https://github.com/ArashNasrEsfahani/Nasm-Image-Processor-Assembly-Project">NASM Image Processing System</a> – Efficient low-level assembly tool.</li>
-    </ul>
-  </section>
-
-  <!-- CV Section -->
-  <section id="cv">
-    <h2>Curriculum Vitae</h2>
-    <p>You can download my full CV here:</p>
-    <a href="assets/ArashNasrEsfahani_CV.pdf" download>📄 Download CV</a>
-  </section>
-
-  <!-- Contact Section -->
-  <section id="contact">
-    <h2>Contact</h2>
-    <ul>
-      <li>Email: <a href="mailto:arashnasresfahani37@gmail.com">arashnasresfahani37@gmail.com</a></li>
-      <li>GitHub: <a href="https://github.com/ArashNasrEsfahani">ArashNasrEsfahani</a></li>
-      <li>LinkedIn: <a href="https://www.linkedin.com/in/arash-nasr-esfahani-9a8743284">LinkedIn Profile</a></li>
-    </ul>
-  </section>
-<footer>
-        <p>© 2025 Arash NasrEsfahani</p>
-      </footer>
-
-      <script>
-        const sections = document.querySelectorAll('section');
-
-        const observer = new IntersectionObserver(entries => {
-          entries.forEach(entry => {
-            if (entry.isIntersecting) {
-              entry.target.classList.add('visible');
-            }
-          });
-        }, {
-          threshold: 0.1 // Triggers when 10% of the section is visible
-        });
-
-        sections.forEach(section => {
-          observer.observe(section);
-        });
-      </script>
-      
-  </body>
+            <section id="experience">
+                <h2>Research Experience</h2>
+                <div class="experience-item">
+                    <p class="role-title"><strong>Researcher</strong>, The Human and Robot Interaction Lab (TaarLab)</p>
+                    <p class="role-details">University of Tehran | [cite_start]Sep 2023 – Present [cite: 24]</p>
+                    [cite_start]<p class="role-desc">Led a project on robotic scene rearrangement in dynamic environments using the AI2-THOR simulator, developing methods integrating deep learning models for object detection and temporal frame analysis[cite: 25, 26].</p>
+                </div>
+                <div class="experience-item">
+                    <p class="role-title"><strong>Researcher</strong>, School of Math, Statistics, and Computer Science</p>
+                    <p class="role-details">University of Tehran | [cite_start]Apr 2025 – Jul 2025 [cite: 30]</p>
+                    [cite_start]<p class="role-desc">Collaborated in a five-person team for the SHL 2025 Human Activity Recognition Challenge, focusing on time series foundation models and advanced data analysis techniques[cite: 31, 32].</p>
+                </div>
+            </section>
+             <section id="teaching">
+                <h2>Teaching Experience</h2>
+                 <div class="experience-item">
+                    <p class="role-title"><strong>Teaching Assistant</strong>, Database Management Systems</p>
+                    <p class="role-details">University of Tehran | [cite_start]Oct 2023 – Jan 2024 [cite: 36]</p>
+                    [cite_start]<p class="role-desc">Contributed to developing course materials and supervised student projects, providing guidance on database design principles[cite: 37, 38].</p>
+                </div>
+            </section>
+        </main>
+    </div>
+</body>
 </html>
