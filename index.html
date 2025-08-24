@@ -80,9 +80,27 @@
       <li>LinkedIn: <a href="https://www.linkedin.com/in/arash-nasr-esfahani-9a8743284">LinkedIn Profile</a></li>
     </ul>
   </section>
+<footer>
+        <p>© 2025 Arash NasrEsfahani</p>
+      </footer>
 
-  <footer>
-    <p>© 2025 Arash NasrEsfahani</p>
-  </footer>
-</body>
+      <script>
+        const sections = document.querySelectorAll('section');
+
+        const observer = new IntersectionObserver(entries => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+            }
+          });
+        }, {
+          threshold: 0.1 // Triggers when 10% of the section is visible
+        });
+
+        sections.forEach(section => {
+          observer.observe(section);
+        });
+      </script>
+      
+  </body>
 </html>
