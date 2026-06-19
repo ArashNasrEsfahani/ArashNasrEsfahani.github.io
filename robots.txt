@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://arashnasresfahani.github.io/sitemap.xml
