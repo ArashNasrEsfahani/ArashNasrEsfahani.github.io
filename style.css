@@ -742,20 +742,32 @@ html.landing-lock, body.landing-lock { overflow: hidden; }
 .face-front img { height: var(--eh); }
 .face-inside { transform: rotateY(180deg); }
 .face-inside img { height: calc(var(--eh) * 0.92); }
-.eagle-flame {
+.eagle-thrusters {
     position: absolute;
     left: 50%;
-    top: 99%;
-    width: 38%;
+    top: 50%;
+    height: var(--eh);
+    aspect-ratio: 240 / 373;
+    transform: translate(-50%, -50%);
+    z-index: 4;
+    pointer-events: none;
+}
+.eagle-flame {
+    position: absolute;
+    top: 95%;
+    width: 14%;
     height: 0;
     transform: translateX(-50%);
     transform-origin: top center;
     background: linear-gradient(to bottom, #fff6cf 0%, #ffd24a 18%, #ff8a1f 48%, #ff3b1f 78%, rgba(255,59,31,0) 100%);
     clip-path: polygon(50% 100%, 0 0, 100% 0);
-    filter: blur(0.4px) drop-shadow(0 0 11px rgba(255,138,31,0.7));
+    filter: blur(0.4px) drop-shadow(0 0 8px rgba(255,138,31,0.7));
     opacity: 0;
     animation: flameGrow 1.5s ease 3.4s both, flameFlicker 0.09s steps(2, end) 3.4s infinite;
 }
+.eagle-flame.f1 { left: 19.7%; }
+.eagle-flame.f2 { left: 38.9%; animation-duration: 1.5s, 0.11s; }
+.eagle-flame.f3 { left: 50%; animation-duration: 1.5s, 0.08s; }
 
 .landing-caption { position: relative; z-index: 1; text-align: center; }
 .landing-title {
@@ -845,9 +857,9 @@ html.landing-lock, body.landing-lock { overflow: hidden; }
 }
 @keyframes flameGrow {
     0%   { opacity: 0; height: 0; }
-    14%  { opacity: 1; height: 42px; }
-    45%  { height: 124px; }
-    100% { height: 124px; opacity: 1; }
+    14%  { opacity: 1; height: 24px; }
+    45%  { height: 74px; }
+    100% { height: 74px; opacity: 1; }
 }
 @keyframes flameFlicker {
     from { transform: translateX(-50%) scale(1, 1); }
