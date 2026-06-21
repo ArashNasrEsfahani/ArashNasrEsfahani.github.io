@@ -10,6 +10,35 @@ document.addEventListener('DOMContentLoaded', () => {
     const yearEl = document.getElementById('year');
     if (yearEl) yearEl.textContent = new Date().getFullYear();
 
+    /* ---- Landing: automatic "Space Eagle" intro. The inside is shown, it flips
+       to the front, then the eagle launches up and the site is revealed. CSS drives
+       the whole sequence (and auto-hides the overlay even without JS); JS just locks
+       scroll, lets a tap skip ahead, and removes the node when it finishes. */
+    const landing = document.getElementById('landing');
+    if (landing) {
+        if (prefersReduced) {
+            landing.remove();
+        } else {
+            document.documentElement.classList.add('landing-lock');
+            document.body.classList.add('landing-lock');
+            const endIntro = () => {
+                if (!landing.isConnected) return;
+                document.documentElement.classList.remove('landing-lock');
+                document.body.classList.remove('landing-lock');
+                landing.remove();
+            };
+            landing.addEventListener('click', () => {
+                landing.classList.add('is-skip');
+                window.setTimeout(endIntro, 260);
+            });
+            landing.addEventListener('animationend', (e) => {
+                if (e.target === landing && e.animationName === 'overlayFade') endIntro();
+            });
+            // Fallback in case animationend never fires.
+            window.__introTimer = window.setTimeout(endIntro, 6000);
+        }
+    }
+
     /* ---- Staggered reveal on scroll ----
        Each "group" (hero, a section, the footer) reveals its items with a
        small per-item delay so content eases in as you scroll to it. */
@@ -51,42 +80,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }, { rootMargin: '0px 0px -8% 0px', threshold: 0.06 });
 
         groups.forEach(g => { if (!g.immediate) revealObserver.observe(g.container); });
-    }
-
-    /* ---- Count-up animation for project metrics ---- */
-    const metrics = Array.from(document.querySelectorAll('.metric-num'));
-    metrics.forEach(el => { el.dataset.target = el.textContent.trim(); });
-
-    const countUp = (el) => {
-        const text = el.dataset.target || el.textContent.trim();
-        const m = text.match(/^(\D*)([\d.]+)(.*)$/);
-        if (!m) return;
-        const [, prefix, numStr, suffix] = m;
-        const target = parseFloat(numStr);
-        if (isNaN(target)) return;
-        const decimals = (numStr.split('.')[1] || '').length;
-        const duration = 1100;
-        let startTs = null;
-        const frame = (ts) => {
-            if (startTs === null) startTs = ts;
-            const p = Math.min((ts - startTs) / duration, 1);
-            const eased = 1 - Math.pow(1 - p, 3);
-            el.textContent = prefix + (target * eased).toFixed(decimals) + suffix;
-            if (p < 1) requestAnimationFrame(frame);
-            else el.textContent = text;
-        };
-        requestAnimationFrame(frame);
-    };
-
-    if (!prefersReduced && hasIO && metrics.length) {
-        const metricObserver = new IntersectionObserver((entries, obs) => {
-            entries.forEach(entry => {
-                if (!entry.isIntersecting) return;
-                countUp(entry.target);
-                obs.unobserve(entry.target);
-            });
-        }, { threshold: 0.6 });
-        metrics.forEach(el => metricObserver.observe(el));
     }
 
     /* ---- Sticky topbar: show border + name once scrolled past the hero ---- */
