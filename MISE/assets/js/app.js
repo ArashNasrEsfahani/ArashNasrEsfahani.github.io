@@ -25,7 +25,7 @@
 
   /* ---------- language ---------- */
   var lang = root.lang === 'fa' ? 'fa' : 'en';
-  var KEEP = [/Gemma 4/g, /GPT6-Sol/g, /YOLO/g, /AI2-THOR/g, /Opus[ \u00A0]5\.5/g, /MISE/g, /AGPL-3\.0/g, /CC BY 4\.0/g, /Hugging Face/g, /GitHub/g];
+  var KEEP = [/Gemma 4/g, /GPT6-Sol/g, /YOLO/g, /AI2-THOR/g, /FloorPlan\d+/g, /Opus[ \u00A0]5\.5/g, /MISE/g, /AGPL-3\.0/g, /CC BY 4\.0/g, /Hugging Face/g, /GitHub/g];
   function fa(s) {
     var held = [];
     KEEP.forEach(function (re) { s = s.replace(re, function (m) { held.push(m); return String.fromCharCode(0xE000 + held.length - 1); }); });
