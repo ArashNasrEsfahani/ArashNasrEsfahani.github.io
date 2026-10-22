@@ -1,0 +1,322 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MISE</title>
+<meta name="description" content="MISE: a retrieval-based agent that lifts your local models to frontier level on robotic scene arrangement.">
+<meta name="color-scheme" content="light dark">
+<meta property="og:title" content="MISE">
+<meta property="og:description" content="A retrieval-based agent that lifts your local models to frontier level on robotic scene arrangement.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://arashnasresfahani.github.io/MISE/assets/img/explainer_en.jpg">
+<meta property="og:url" content="https://arashnasresfahani.github.io/MISE/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://arashnasresfahani.github.io/MISE/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230b0a09'/%3E%3Ctext x='16' y='22.5' font-family='Georgia,serif' font-size='17' text-anchor='middle' fill='%23e3c48c'%3EM%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&family=Instrument+Serif:ital@0;1&family=Vazirmatn:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css?v=mise-15">
+<script>
+/* set theme + language before first paint */
+(function(){var q={};try{q=Object.fromEntries(new URLSearchParams(location.search));}catch(e){}
+var t=q.theme,l=q.lang;try{t=t||localStorage.getItem('mise-theme');l=l||localStorage.getItem('mise-lang');}catch(e){}
+if(t==='dark'||t==='light')document.documentElement.setAttribute('data-theme',t);
+if(l==='fa'){document.documentElement.lang='fa';document.documentElement.dir='rtl';}})();
+</script>
+</head>
+<body>
+<a class="skip" href="#video" data-fa="رفتن به متن">Skip to content</a>
+
+<header class="nav" id="top">
+  <div class="nav-in">
+    <a class="brand" href="#top" aria-label="MISE">MISE</a>
+    <nav class="links" aria-label="Sections">
+      <a href="#video" data-fa="ویدیو">Video</a>
+      <a href="#about" data-fa="دربارهٔ کار">About</a>
+      <a href="#kitchens" data-fa="آشپزخانه‌ها">Kitchens</a>
+      <a href="#how" data-fa="روش کار">How it works</a>
+      <a href="#results" data-fa="نتیجه‌ها">Results</a>
+      <a href="#resources" data-fa="منابع">Resources</a>
+    </nav>
+    <div class="tools">
+      <button class="chip-btn" id="langBtn" type="button" aria-label="Switch language"><span class="lang-en">فارسی</span><span class="lang-fa">English</span></button>
+      <button class="chip-btn icon" id="themeBtn" type="button" aria-label="Toggle dark theme" data-fa-aria-label="تغییر پوسته">
+        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M20 14.5A8 8 0 019.5 4 8 8 0 1020 14.5z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main>
+<!-- HERO -->
+<section class="hero" aria-labelledby="title">
+  <div class="reel" aria-hidden="true">
+    <video muted loop playsinline autoplay preload="metadata" poster="assets/img/k1_pan.jpg"><source src="assets/video/k1_pan.mp4" type="video/mp4"></video>
+    <video muted loop playsinline autoplay preload="metadata" poster="assets/img/k2_toaster.jpg"><source src="assets/video/k2_toaster.mp4" type="video/mp4"></video>
+    <video muted loop playsinline autoplay preload="metadata" poster="assets/img/k3_stove.jpg"><source src="assets/video/k3_stove.mp4" type="video/mp4"></video>
+  </div>
+  <div class="veil" aria-hidden="true"></div>
+  <div class="wrap hero-in">
+    <div class="markwrap">
+      <h1 id="title" class="mark">MISE</h1>
+      <button class="mise-tip" id="miseTip" type="button" aria-expanded="false" aria-controls="miseDict" aria-label="What does MISE mean?" data-fa-aria-label="MISE یعنی چه؟"><span>/miːz/</span><b aria-hidden="true">?</b></button>
+      <div class="dict" id="miseDict" role="dialog" aria-labelledby="dictHead" hidden>
+        <p class="dict-head" id="dictHead"><span class="dict-word">mise</span> <span class="dict-ipa">/miːz/</span> <i class="dict-pos" data-fa="اسم">noun</i></p>
+        <p class="dict-ety" data-fa="از عبارت فرانسوی <i>mise en place</i>، یعنی «هر چیز سر جای خودش».">from French <i>mise en place</i>, “putting in place”.</p>
+        <ol class="dict-senses">
+          <li><span class="dict-tag" data-fa="آشپزخانه">kitchen</span> <span data-fa="عادت آشپزهای حرفه‌ای که پیش از پختن، هر ماده و ابزار را آماده و سر جایش می‌گذارند.">The chef’s habit of having every ingredient and tool ready and in its place before cooking starts.</span></li>
+          <li><span class="dict-tag" data-fa="این پروژه">this project</span> <span data-fa="<b>M</b>emory-<b>I</b>nformed <b>S</b>mall <b>E</b>mbodied Agent؛ مدلی کوچک که مثل یک آشپز خوب، با کمک حافظه‌اش هر چیز را سر جایش می‌گذارد."><b>M</b>emory-<b>I</b>nformed <b>S</b>mall <b>E</b>mbodied Agent: a small model that, like a good chef, puts everything in its place with the help of its own memory.</span></li>
+        </ol>
+        <p class="dict-say" data-fa="درست مثل «میز» خوانده می‌شود؛ همان میز آشپزخانه.">Say it like “cheese”, with an <i>m</i>.</p>
+      </div>
+    </div>
+    <p class="expansion">Memory-Informed Small Embodied agent</p>
+    <p class="tagline" data-fa="عامل هوشمندی بر پایهٔ بازیابی که مدل‌های محلی شما را در چیدن وسایل با ربات به <em>سطح مدل‌های پیشرو</em> می‌رساند.">A retrieval-based agent that lifts your local models to <em>frontier level</em> on robotic scene arrangement.</p>
+    <p class="who"><span data-fa="آرش نصر اصفهانی">Arash NasrEsfahani</span><span class="dot" aria-hidden="true">·</span><span class="aff"><i class="lg ut" aria-hidden="true"></i><span data-fa="دانشگاه تهران">University of Tehran</span></span><span class="dot" aria-hidden="true">·</span><span class="aff"><i class="lg taar" aria-hidden="true"></i><span>TaarLab</span></span></p>
+    <div class="btns">
+      <a class="btn primary" href="#video"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5l11 7-11 7z"/></svg><span data-fa="ویدیو">Watch the video</span></a>
+      <a class="btn" href="https://github.com/ArashNasrEsfahani/MISE"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 7l-5 5 5 5 M16 7l5 5-5 5 M14 4l-4 16"/></svg><span data-fa="کد">Code</span></a>
+      <a class="btn" href="https://huggingface.co/ArashNasr"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9z M4 7.5l8 4.5 8-4.5 M12 12v9"/></svg><span data-fa="مدل‌ها">Models</span></a>
+      <a class="btn" href="#resources"><svg viewBox="0 0 24 24" aria-hidden="true"><ellipse cx="12" cy="6" rx="7" ry="3"/><path d="M5 6v6c0 1.7 3.1 3 7 3s7-1.3 7-3V6 M5 12v6c0 1.7 3.1 3 7 3s7-1.3 7-3v-6"/></svg><span data-fa="داده‌ها">Datasets</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- VIDEO -->
+<section class="sec" id="video" aria-labelledby="h-video">
+  <div class="wrap">
+    <p class="eyebrow" data-fa="۹۰ ثانیه">90 seconds</p>
+    <h2 id="h-video" data-fa="MISE در یک نگاه">MISE at a glance</h2>
+    <figure class="player">
+      <video id="explainer" controls preload="metadata" playsinline poster="assets/img/explainer_en.jpg"><source src="assets/video/explainer_en.mp4" type="video/mp4"></video>
+    </figure>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="sec tint" id="about" aria-labelledby="h-abs">
+  <div class="wrap narrow">
+    <p class="eyebrow" data-fa="دربارهٔ کار">About</p>
+    <h2 id="h-abs" data-fa="یک مدل کوچک، با حافظهٔ خودش">A small model, with a memory of its own</h2>
+    <div class="prose">
+      <p data-fa="MISE سه چیز را کنار هم می‌گذارد: یک مدل زبانی کوچک که روی لپ‌تاپ اجرا می‌شود (Gemma 4، حدود ۲ میلیارد پارامتر)، یک مدل کوچک تشخیص اشیا (YOLO) و بازیابی از <strong>حافظهٔ صحنه</strong>؛ یادداشت‌هایی که عامل هنگام تمرین در هر آشپزخانه برای خودش برمی‌دارد.">MISE combines three things: a small language model that runs on a laptop (Gemma 4, about 2 billion parameters), a small YOLO detector, and retrieval over <strong>Scene Memory</strong>, the notes the agent writes for itself while it practises in each kitchen.</p>
+      <p data-fa="نتیجه نشان می‌دهد که برای کارهای سادهٔ چیدن وسایل، یک روش بازیابی خوب و دانشی که خود عامل می‌سازد کافی است تا یک مدل محلی به سطح مدل‌های پیشرو برسد.">It shows that, for simple scene arrangement, good retrieval and self-generated knowledge are enough to bring a local model to the level of frontier models.</p>
+    </div>
+  </div>
+</section>
+
+<!-- KITCHENS -->
+<section class="sec" id="kitchens" aria-labelledby="h-kit">
+  <div class="wrap">
+    <p class="eyebrow" data-fa="محیط آزمون">Test bed</p>
+    <h2 id="h-kit" data-fa="سه آشپزخانه">Three kitchens</h2>
+    <p class="lead" data-fa="MISE در آشپزخانهٔ ۱ ساخته شد و در آشپزخانه‌های ۲ و ۳، که هرگز ندیده بود، همان نتیجه را نشان می‌دهد.">MISE was developed in Kitchen 1 and shows the same results in Kitchens 2 and 3, which it had never seen.</p>
+    <div class="kitchens">
+      <article class="kcard">
+        <div class="kmedia">
+          <video muted loop playsinline preload="none" poster="assets/img/k1_slice_apple.jpg" aria-label="The agent at work in Kitchen 1" data-fa-aria-label="عامل در آشپزخانهٔ ۱"><source src="assets/video/k1_slice_apple.mp4" type="video/mp4"></video>
+          <img class="kinset" src="assets/img/fp1_top.jpg" width="900" height="900" loading="lazy" decoding="async" alt="Top view of Kitchen 1" data-fa-alt="نمای بالای آشپزخانهٔ ۱">
+        </div>
+        <h3><span data-fa="آشپزخانهٔ ۱">Kitchen 1</span> <small data-fa="توسعه">development</small></h3>
+      </article>
+      <article class="kcard">
+        <div class="kmedia">
+          <video muted loop playsinline preload="none" poster="assets/img/k2_toaster.jpg" aria-label="The agent at work in Kitchen 2" data-fa-aria-label="عامل در آشپزخانهٔ ۲"><source src="assets/video/k2_toaster.mp4" type="video/mp4"></video>
+          <img class="kinset" src="assets/img/fp15_top.jpg" width="900" height="900" loading="lazy" decoding="async" alt="Top view of Kitchen 2" data-fa-alt="نمای بالای آشپزخانهٔ ۲">
+        </div>
+        <h3><span data-fa="آشپزخانهٔ ۲">Kitchen 2</span> <small class="new" data-fa="دیده‌نشده">unseen</small></h3>
+      </article>
+      <article class="kcard">
+        <div class="kmedia">
+          <video muted loop playsinline preload="none" poster="assets/img/k3_stove.jpg" aria-label="The agent at work in Kitchen 3" data-fa-aria-label="عامل در آشپزخانهٔ ۳"><source src="assets/video/k3_stove.mp4" type="video/mp4"></video>
+          <img class="kinset" src="assets/img/fp17_top.jpg" width="900" height="900" loading="lazy" decoding="async" alt="Top view of Kitchen 3" data-fa-alt="نمای بالای آشپزخانهٔ ۳">
+        </div>
+        <h3><span data-fa="آشپزخانهٔ ۳">Kitchen 3</span> <small class="new" data-fa="دیده‌نشده">unseen</small></h3>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="sec tint" id="how" aria-labelledby="h-how">
+  <div class="wrap">
+    <p class="eyebrow" data-fa="روش کار">How it works</p>
+    <h2 id="h-how" data-fa="از ورودی تا کار انجام‌شده">From inputs to a finished task</h2>
+    <figure class="flow" id="flow" role="img" aria-label="Diagram, left to right: See, Recall, Plan, Act, Output. See gets labelled images, the camera and the agent's own position; Recall (Scene Memory) gets the instruction, practice rounds and kitchen facts; Plan is Gemma 4 on the laptop; Act gets whether each action was accepted. After every step the agent looks again." data-fa-aria-label="نمودار، از راست به چپ: دیدن، یادآوری، برنامه‌ریزی، اجرا، خروجی. دیدن تصویرهای برچسب‌دار، دوربین و موقعیت خود عامل را می‌گیرد؛ یادآوری (حافظهٔ صحنه) دستور، دوره‌های تمرین و مشخصات آشپزخانه را؛ برنامه‌ریزی کار Gemma 4 روی لپ‌تاپ است؛ اجرا می‌فهمد هر کنش پذیرفته شد یا نه. پس از هر گام، عامل دوباره نگاه می‌کند.">
+      <div class="fgrid">
+        <div class="fin" id="in-see" style="grid-area:i1">
+          <span class="chip"><i class="w w0" aria-hidden="true"></i><span data-fa="تصویرهای برچسب‌دار">Labelled images</span></span>
+          <span class="chip"><i class="w w2" aria-hidden="true"></i><span data-fa="دوربین (رنگ و عمق)">Camera (colour + depth)</span></span>
+          <span class="chip"><i class="w w2" aria-hidden="true"></i><span data-fa="موقعیت خودش">Own position</span></span>
+        </div>
+        <div class="fin" id="in-mem" style="grid-area:i2">
+          <span class="chip"><i class="w w1" aria-hidden="true"></i><span data-fa="دستور (فارسی یا انگلیسی)">Instruction (EN / FA)</span></span>
+          <span class="chip"><i class="w w0" aria-hidden="true"></i><span data-fa="دوره‌های تمرین">Practice rounds</span></span>
+          <span class="chip"><i class="w w0" aria-hidden="true"></i><span data-fa="مشخصات آشپزخانه">Kitchen facts</span></span>
+        </div>
+        <div class="node" id="n-see" style="grid-area:n1"><b data-fa="دیدن">See</b><span data-fa="مدل‌های YOLO">YOLO detectors</span></div>
+        <div class="node gold" id="n-mem" style="grid-area:n2"><b data-fa="یادآوری">Recall</b><span data-fa="حافظهٔ صحنه">Scene Memory</span></div>
+        <div class="node" id="n-plan" style="grid-area:n3"><b data-fa="برنامه‌ریزی">Plan</b><span data-fa="Gemma 4 روی لپ‌تاپ">Gemma 4 · on the laptop</span></div>
+        <div class="node" id="n-act" style="grid-area:n4"><b data-fa="اجرا">Act</b><span data-fa="مهارت‌ها · نقشهٔ خودش · تلاش دوباره">skills · own map · retry</span></div>
+        <div class="node out" id="n-out" style="grid-area:n5"><b data-fa="خروجی">Output</b><span data-fa="کنش‌ها در آشپزخانه">actions in the kitchen</span></div>
+        <div class="floop" id="floop" style="grid-area:lp"><span data-fa="پس از هر گام دوباره نگاه می‌کند">after every step it looks again</span></div>
+        <div class="facc" id="in-act" style="grid-area:ac"><span class="chip"><i class="w w2" aria-hidden="true"></i><span data-fa="کنش پذیرفته شد؟">Action accepted?</span></span></div>
+      </div>
+      <svg class="wires" id="wires" aria-hidden="true"></svg>
+      <figcaption class="flegend">
+        <span><i class="w w0" aria-hidden="true"></i><span data-fa="یک بار برای هر آشپزخانه، پیش از آزمون">once per kitchen, before the test</span></span>
+        <span><i class="w w1" aria-hidden="true"></i><span data-fa="هر کار">every task</span></span>
+        <span><i class="w w2" aria-hidden="true"></i><span data-fa="هر گام">every step</span></span>
+      </figcaption>
+    </figure>
+
+    <div class="cards3">
+      <article class="fcard">
+        <video muted loop playsinline preload="none" poster="assets/img/k1_pan_dets.jpg" aria-label="Detector boxes on the agent's camera" data-fa-aria-label="کادرهای تشخیص اشیا روی دوربین عامل"><source src="assets/video/k1_pan_dets.mp4" type="video/mp4"></video>
+        <h3 data-fa="دیدن">See</h3><p data-fa="مدلی کوچک چیزهایی را که دوربین می‌بیند تشخیص می‌دهد.">A small detector names what the camera sees.</p>
+      </article>
+      <article class="fcard">
+        <div class="pair"><img src="assets/img/held_off.jpg" width="600" height="600" loading="lazy" decoding="async" alt="Main detector alone: it calls the held salt shaker a pepper shaker" data-fa-alt="مدل اصلی به‌تنهایی: نمکدانِ در دست را فلفل‌دان می‌نامد"><img class="on" src="assets/img/held_on.jpg" width="600" height="600" loading="lazy" decoding="async" alt="With the closer look: salt shaker" data-fa-alt="با نگاه دقیق‌تر: نمکدان"><span class="pl a" data-fa="مدل اصلی: فلفل‌دان">main detector: pepper shaker</span><span class="pl b" data-fa="نگاه دقیق‌تر: نمکدان">closer look: salt shaker</span></div>
+        <h3 data-fa="اشیای شبیه به هم">Look-alikes</h3><p data-fa="شیء را بالا می‌گیرد و دقیق‌تر نگاه می‌کند: نمکدان، نه فلفل‌دان.">It holds the object up and looks closer: salt shaker, not pepper.</p>
+      </article>
+      <article class="fcard">
+        <div class="vwrap"><video muted loop playsinline preload="none" poster="assets/img/k1_pan_top.jpg" aria-label="Top view with the agent's own map and route" data-fa-aria-label="نمای بالا با نقشه و مسیر خود عامل"><source src="assets/video/k1_pan_top.mp4" type="video/mp4"></video></div>
+        <h3 data-fa="نقشهٔ خودش">Its own map</h3><p data-fa="نقشه فقط از چیزهایی ساخته می‌شود که عامل دیده است.">Built only from what the agent has seen.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- LEVELS -->
+<section class="sec" id="levels" aria-labelledby="h-lev">
+  <div class="wrap">
+    <p class="eyebrow" data-fa="سه سطح دستور">Three kinds of instruction</p>
+    <h2 id="h-lev" data-fa="از یک کار ساده تا یک هدف">From one action to a goal</h2>
+    <div class="levels">
+      <article class="lvl">
+        <video muted loop playsinline preload="none" poster="assets/img/k1_slice_apple.jpg" aria-label="The agent slicing an apple" data-fa-aria-label="عامل سیب را برش می‌زند"><source src="assets/video/k1_slice_apple.mp4" type="video/mp4"></video>
+        <h3 data-fa="اتمی">Atomic</h3>
+        <p class="metric" data-fa="یک کار">one action</p>
+        <p class="ins en" lang="en" dir="ltr">“Slice the apple.”</p>
+        <p class="ins fa" lang="fa" dir="rtl">«سیب را بِبُر.»</p>
+        <p class="plan"><span data-fa="بریدن · سیب">Slice · Apple</span></p>
+      </article>
+      <article class="lvl">
+        <video muted loop playsinline preload="none" poster="assets/img/k2_toaster.jpg" aria-label="The agent turning on the toaster and then the coffee machine" data-fa-aria-label="عامل توستر و بعد قهوه‌ساز را روشن می‌کند"><source src="assets/video/k2_toaster.mp4" type="video/mp4"></video>
+        <h3 data-fa="ترتیبی">Sequential</h3>
+        <p class="metric" data-fa="چند کار به ترتیب">several actions, in order</p>
+        <p class="ins en" lang="en" dir="ltr">“Turn on the toaster and then the coffee machine.”</p>
+        <p class="ins fa" lang="fa" dir="rtl">«اول توستر و بعد قهوه‌ساز را روشن کن.»</p>
+        <p class="plan"><span data-fa="روشن کردن · توستر">Turn on · Toaster</span><i aria-hidden="true">›</i><span data-fa="روشن کردن · قهوه‌ساز">Turn on · Coffee machine</span></p>
+      </article>
+      <article class="lvl">
+        <video muted loop playsinline preload="none" poster="assets/img/k2_pot.jpg" aria-label="The agent putting a pot on the stove and turning it on" data-fa-aria-label="عامل قابلمه را روی اجاق می‌گذارد و روشن می‌کند"><source src="assets/video/k2_pot.mp4" type="video/mp4"></video>
+        <h3 data-fa="هدف انتزاعی">Abstract goal</h3>
+        <p class="metric" data-fa="هدفی که باید به کارها شکسته شود">a goal to break into actions</p>
+        <p class="ins en" lang="en" dir="ltr">“Start the pot on the stove for soup.”</p>
+        <p class="ins fa" lang="fa" dir="rtl">«قابلمه را برای سوپ روی اجاق بار بگذار.»</p>
+        <p class="plan"><span data-fa="گذاشتن · قابلمه روی شعله">Put · Pot on burner</span><i aria-hidden="true">›</i><span data-fa="روشن کردن · پیچ اجاق">Turn on · Stove knob</span></p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- RESULTS -->
+<section class="sec tint" id="results" aria-labelledby="h-res">
+  <div class="wrap">
+    <p class="eyebrow" data-fa="نتیجه‌ها">Results</p>
+    <h2 id="h-res" data-fa="در کارهای اتمی و ترتیبی، هم‌سطح مدل‌های پیشرو">Atomic and sequential tasks: frontier level</h2>
+    <p class="lead" data-fa="درصد کارهای انجام‌شده در آزمون هر آشپزخانه. Gemma 4 با حافظهٔ صحنه در برابر Opus&nbsp;5.5 و GPT6-Sol بدون آن.">Share of tasks completed in each kitchen’s test. Gemma 4 with Scene Memory against Opus&nbsp;5.5 and GPT6-Sol without it.</p>
+
+    <div class="hero-chart">
+      <div class="ktabs" role="tablist" aria-label="Kitchen" data-fa-aria-label="آشپزخانه">
+        <button type="button" role="tab" aria-selected="true" data-k="1" data-fa="آشپزخانهٔ ۱">Kitchen 1</button>
+        <button type="button" role="tab" aria-selected="false" data-k="2" data-fa="آشپزخانهٔ ۲">Kitchen 2</button>
+        <button type="button" role="tab" aria-selected="false" data-k="3" data-fa="آشپزخانهٔ ۳">Kitchen 3</button>
+      </div>
+      <div class="bars2" id="chMain"></div>
+      <div class="legend" id="legend"></div>
+      <p class="fine" id="mainFine"></p>
+    </div>
+
+    <aside class="cost" aria-labelledby="h-cost">
+      <h3 id="h-cost" data-fa="و تقریباً رایگان">And almost free</h3>
+      <div class="cost-grid">
+        <div class="cost-item gold"><span class="big" data-fa="۰٫۶۴ ثانیه">0.64 s</span><span data-fa="برای هر برنامه، روی لپ‌تاپ">per plan, on the laptop</span></div>
+        <div class="cost-item"><span class="big" data-fa="حدود ۴ و ۱۶ ثانیه">≈ 4 s · 16 s</span><span data-fa="Opus&nbsp;5.5 و GPT6-Sol، روی سرور ابری">Opus&nbsp;5.5 and GPT6-Sol, cloud</span></div>
+        <div class="cost-item gold"><span class="big" data-fa="حدود ۰٫۰۰۵ دلار">≈ $0.005</span><span data-fa="برق، برای برنامه‌ریزی آزمون آشپزخانهٔ&nbsp;۱">of electricity to plan the Kitchen 1 test</span></div>
+        <div class="cost-item"><span class="big" data-fa="۷٫۴۶ دلار">$7.46</span><span data-fa="هزینهٔ Opus&nbsp;5.5 برای همین آزمون">in Opus&nbsp;5.5 fees for the same test</span></div>
+      </div>
+    </aside>
+
+    <div class="minis">
+      <div class="mini">
+        <h3 data-fa="حافظهٔ صحنه در هر سه آشپزخانه">Scene Memory, in every kitchen</h3>
+        <p class="sub" data-fa="همهٔ کارها، Gemma 4 بدون و با حافظهٔ صحنه">All tasks, Gemma 4 without and with Scene Memory</p>
+        <div id="chLift"></div>
+      </div>
+      <div class="mini">
+        <h3 data-fa="نام درست اشیای شبیه به هم">Look-alikes named right</h3>
+        <p class="sub" data-fa="مدل اصلی به‌تنهایی و با نگاه دقیق‌تر">Main detector alone, and with the closer look</p>
+        <div id="chPerc"></div>
+      </div>
+      <div class="mini">
+        <h3 data-fa="هدف‌های انتزاعی هنوز سخت‌اند">Abstract goals are still hard</h3>
+        <p class="sub" data-fa="هر سه آشپزخانه، Gemma 4 با حافظهٔ صحنه در برابر دو مدل بزرگ">All three kitchens, Gemma 4 with Scene Memory against the two large models</p>
+        <div id="chAbs"></div>
+      </div>
+    </div>
+    <details class="tbl"><summary data-fa="همهٔ عددها">All numbers</summary><div id="tAll"></div></details>
+  </div>
+</section>
+
+<!-- RESOURCES -->
+<section class="sec" id="resources" aria-labelledby="h-rsc">
+  <div class="wrap narrow">
+    <p class="eyebrow" data-fa="منابع">Resources</p>
+    <h2 id="h-rsc" data-fa="کد، مدل‌ها و داده‌ها">Code, models and data</h2>
+    <table class="res">
+      <thead><tr><th scope="col" data-fa="منبع">Resource</th><th scope="col" data-fa="پیوند">Link</th><th scope="col" data-fa="مجوز">Licence</th></tr></thead>
+      <tbody>
+        <tr><th scope="row" data-fa="کد">Code</th><td><a href="https://github.com/ArashNasrEsfahani/MISE">GitHub</a></td><td>AGPL-3.0</td></tr>
+        <tr><th scope="row" data-fa="مدل‌های تشخیص اشیا، آشپزخانهٔ ۱">Detectors, Kitchen 1</th><td><a href="https://huggingface.co/ArashNasr/ai2thor-kitchen-perception-floorplan1">Hugging Face</a></td><td data-fa="کارت مدل">model card</td></tr>
+        <tr><th scope="row" data-fa="مدل‌های تشخیص اشیا، آشپزخانهٔ ۲">Detectors, Kitchen 2</th><td><a href="https://huggingface.co/ArashNasr/ai2thor-kitchen-perception-floorplan15">Hugging Face</a></td><td data-fa="کارت مدل">model card</td></tr>
+        <tr><th scope="row" data-fa="مدل‌های تشخیص اشیا، آشپزخانهٔ ۳">Detectors, Kitchen 3</th><td><a href="https://huggingface.co/ArashNasr/ai2thor-kitchen-perception-floorplan17">Hugging Face</a></td><td data-fa="کارت مدل">model card</td></tr>
+        <tr><th scope="row" data-fa="تصویرها، آشپزخانهٔ ۱">Images, Kitchen 1</th><td><a href="https://huggingface.co/datasets/ArashNasr/ai2thor-kitchen-dataset-floorplan1">Hugging Face</a></td><td>CC BY 4.0</td></tr>
+        <tr><th scope="row" data-fa="تصویرها، آشپزخانهٔ ۲">Images, Kitchen 2</th><td><a href="https://huggingface.co/datasets/ArashNasr/ai2thor-kitchen-dataset-floorplan15">Hugging Face</a></td><td>CC BY 4.0</td></tr>
+        <tr><th scope="row" data-fa="تصویرها، آشپزخانهٔ ۳">Images, Kitchen 3</th><td><a href="https://huggingface.co/datasets/ArashNasr/ai2thor-kitchen-dataset-floorplan17">Hugging Face</a></td><td>CC BY 4.0</td></tr>
+        <tr><th scope="row" data-fa="دستورها (۲۸۰ دستور، فارسی و انگلیسی)">Instructions (280, English and Persian)</th><td><a href="https://huggingface.co/datasets/ArashNasr/ai2thor-kitchen-instructions">Hugging Face</a></td><td data-fa="کارت داده">dataset card</td></tr>
+      </tbody>
+    </table>
+    <p class="note" data-fa="مقالهٔ انگلیسی در دست نوشتن است.">An English paper is in preparation.</p>
+  </div>
+</section>
+
+<!-- THANKS -->
+<section class="sec tint" id="thanks" aria-labelledby="h-ack">
+  <div class="wrap narrow">
+    <p class="eyebrow" data-fa="سپاس">Thanks</p>
+    <p class="prose-p" id="h-ack" data-fa="با سپاس ویژه از دکتر هدیه ساجدی و دکتر مهدی طالع ماسوله برای راهنمایی‌هایشان در تمام این مسیر.">With special thanks to Dr. Hedieh Sajedi and Dr. Mehdi Tale Masouleh for their guidance throughout.</p>
+  </div>
+</section>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="flogos">
+      <span class="aff big"><i class="lg ut" aria-hidden="true"></i><span data-fa="دانشگاه تهران">University of Tehran</span></span>
+      <span class="aff big"><i class="lg taar" aria-hidden="true"></i><span data-fa="آزمایشگاه تعامل انسان و ربات (TaarLab)">TaarLab · Human and Robot Interaction Lab</span></span>
+    </div>
+    <div class="fline">
+      <p><span class="fmark">MISE</span> <span data-fa="© ۲۰۲۶ آرش نصر اصفهانی">© 2026 Arash NasrEsfahani</span></p>
+      <p data-fa="کد: AGPL-3.0">Code: AGPL-3.0</p>
+    </div>
+  </div>
+</footer>
+
+<div id="tip" class="tip" role="tooltip" hidden></div>
+<script src="assets/js/app.js?v=mise-17"></script>
+</body>
+</html>
