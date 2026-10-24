@@ -7,8 +7,8 @@
   var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
   var NS = 'http://www.w3.org/2000/svg';
 
-  /* ---------- releases: the code, models and data are still private; until RELEASED their links say "coming soon" */
-  var RELEASED = false;
+  /* ---------- releases: code, models and data are public (2026-10-24); set false to show "coming soon" again */
+  var RELEASED = true;
   if (!RELEASED) {
     $$('a[href^="https://github.com/ArashNasrEsfahani/MISE"], a[href^="https://huggingface.co/"]').forEach(function (a) {
       a.setAttribute('data-href', a.getAttribute('href'));
