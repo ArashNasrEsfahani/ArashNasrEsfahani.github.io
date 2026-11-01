@@ -25,7 +25,7 @@
 
   /* ---------- language ---------- */
   var lang = root.lang === 'fa' ? 'fa' : 'en';
-  var KEEP = [/Gemma 4/g, /GPT6-Sol/g, /YOLO/g, /AI2-THOR/g, /FloorPlan\d+/g, /Opus[ \u00A0]5\.5/g, /MISE/g, /AGPL-3\.0/g, /CC BY 4\.0/g, /Hugging Face/g, /GitHub/g];
+  var KEEP = [/Gemma 4 E[24]B/g, /Qwen 3\.5 9B/g, /Gemma 4/g, /GPT6-Sol/g, /YOLO/g, /AI2-THOR/g, /FloorPlan\d+/g, /Opus[ \u00A0]5\.5/g, /MISE/g, /AGPL-3\.0/g, /CC BY 4\.0/g, /Hugging Face/g, /GitHub/g];
   function fa(s) {
     var held = [];
     KEEP.forEach(function (re) { s = s.replace(re, function (m) { held.push(m); return String.fromCharCode(0xE000 + held.length - 1); }); });
@@ -117,26 +117,18 @@
   });
   document.addEventListener('focusout', function () { tip.hidden = true; });
 
-  /* ---------- data (Kitchen 1 final test unless stated; % of tasks completed) ---------- */
-  var MAIN = [
-    { key: 'atomic', vals: [69.1, 86.2, 89.4, 89.4], ci: [null, [77.8, 94.0], [82.4, 96.2], [84.0, 95.0]] },
-    { key: 'seq', vals: [57.0, 78.0, 73.0, 74.0], ci: [null, [67.5, 87.5], [59.4, 86.0], [65.6, 83.7]] }
-  ];
-  // the main result per kitchen (atomic, sequential): Gemma 4 alone, Gemma 4 + Scene Memory, Opus 5.5, GPT6-Sol; K2/K3 from tab:res-k23-levels
-  var MAIN_K = {
-    1: MAIN,
-    2: [{ key: 'atomic', vals: [75.5, 87.2, 91.5, 93.6], ci: [null, null, null, null] }, { key: 'seq', vals: [68.6, 87.1, 87.1, 87.1], ci: [null, null, null, null] }],
-    3: [{ key: 'atomic', vals: [69.6, 77.2, 84.8, 88.0], ci: [null, null, null, null] }, { key: 'seq', vals: [65.3, 86.1, 88.9, 76.4], ci: [null, null, null, null] }]
-  };
+  /* ---------- data (paper's final analysis; % of tasks completed; Kitchen 1 = development kitchen) ---------- */
+  // the main result per kitchen (atomic, sequential): Gemma 4 alone, Gemma 4 + Scene Memory (MISE), Opus 5.5, GPT6-Sol (both without)
+  var MAIN_K = {"1": [{"key": "atomic", "vals": [73.4, 92.6, 94.7, 94.7], "ci": [null, [85.0, 98.1], [88.9, 100.0], [91.0, 98.7]]}, {"key": "seq", "vals": [62.0, 87.0, 82.0, 83.0], "ci": [null, [78.1, 94.0], [67.0, 94.0], [74.0, 92.0]]}], "2": [{"key": "atomic", "vals": [76.6, 89.4, 95.7, 97.9], "ci": [null, null, null, null]}, {"key": "seq", "vals": [74.3, 91.4, 92.9, 92.9], "ci": [null, null, null, null]}], "3": [{"key": "atomic", "vals": [75.0, 82.6, 90.2, 94.6], "ci": [null, null, null, null]}, {"key": "seq", "vals": [70.8, 88.9, 93.1, 79.2], "ci": [null, null, null, null]}]};
+  var MAIN = MAIN_K[1];
   var mainK = 1;
-  var ABS = { vals: [21.4, 67.9, 58.9], ci: [[5.6, 36.2], [51.8, 81.9], [40.5, 75.0]] };
-  // abstract goals in every kitchen: Gemma 4 + Scene Memory, Opus 5.5, GPT6-Sol (both without); thesis tab:res-levels, tab:res-k23-levels
-  var ABS_K = [[21.4, 67.9, 58.9], [30.6, 77.8, 75.0], [26.3, 84.2, 84.2]];
-  var KIT = [ // all tasks: Gemma 4 without / with Scene Memory, Opus 5.5, GPT6-Sol (both without)
-    { n: 1, g: [54.0, 68.4], opus: 78.0, gpt: 76.4, pres: 250 },
-    { n: 2, g: [63.0, 77.0], opus: 87.5, gpt: 88.0, pres: 200 },
-    { n: 3, g: [59.4, 70.8], opus: 86.1, gpt: 83.2, pres: 202 }
-  ];
+  // abstract goals in every kitchen, all with Scene Memory except the frontier models: Gemma 4 (MISE), Gemma 4 E4B, Qwen 3.5 9B, Opus 5.5, GPT6-Sol
+  var ABS_K = [[21.4, 32.1, 30.4, 73.2, 64.3], [33.3, 36.1, 41.7, 83.3, 77.8], [26.3, 44.7, 47.4, 84.2, 84.2]];
+  var KIT = [{"n": 1, "g": [57.6, 74.4], "opus": 84.8, "gpt": 83.2, "pres": 250}, {"n": 2, "g": [66.0, 80.0], "opus": 92.5, "gpt": 92.5, "pres": 200}, {"n": 3, "g": [64.4, 74.3], "opus": 90.1, "gpt": 87.1, "pres": 202}];
+  // memory or a bigger model: mean of the three kitchens, all tasks, [alone, with Scene Memory] for Gemma 4 E2B, Gemma 4 E4B, Qwen 3.5 9B
+  var SIZE = [[62.7, 76.2], [67.2, 77.2], [59.8, 62.1]];
+  // picked steps or a fixed list: mean of the three kitchens, all tasks, Gemma 4: alone, whole step list, short fixed list, Scene Memory (MISE)
+  var FIXED = [62.7, 58.9, 68.2, 76.2];
   var PERC = [[48.3, 79.1, 92.4], [66.2, 84.9, 94.8], [57.1, 78.7, 91.5]]; // main alone, fine-tuned control, main + closer look
 
   function series() {
@@ -144,7 +136,9 @@
       { name: tr('Gemma 4 alone', 'Gemma 4 به‌تنهایی'), cls: 's0' },
       { name: tr('Gemma 4 + Scene Memory', 'Gemma 4 با حافظهٔ صحنه'), cls: 's1' },
       { name: 'Opus\u00A05.5', cls: 's2' },
-      { name: 'GPT6-Sol', cls: 's3' }
+      { name: 'GPT6-Sol', cls: 's3' },
+      { name: tr('Gemma 4 E4B + Scene Memory', 'Gemma 4 E4B با حافظهٔ صحنه'), cls: 's4' },
+      { name: tr('Qwen 3.5 9B + Scene Memory', 'Qwen 3.5 9B با حافظهٔ صحنه'), cls: 's5' }
     ];
   }
   function lvlName(k) { return { atomic: tr('Atomic', 'اتمی'), seq: tr('Sequential', 'ترتیبی'), abstract: tr('Abstract goal', 'هدف انتزاعی') }[k]; }
@@ -194,10 +188,10 @@
     });
     $$('.ktabs button').forEach(function (b) { b.setAttribute('aria-selected', String(+b.dataset.k === mainK)); });
     $('#mainFine').textContent = mainK === 1
-      ? tr('Kitchen 1. The gaps to Opus\u00A05.5 and GPT6-Sol are within the margin of error (95% confidence intervals).', 'آشپزخانهٔ ۱. فاصله با Opus\u00A05.5 و GPT6-Sol در حد حاشیهٔ خطاست (بازهٔ اطمینان ۹۵٪).')
+      ? tr('Kitchen 1, where MISE was built.', 'آشپزخانهٔ ۱، که MISE در آن ساخته شد.')
       : tr('Kitchen ' + mainK + ', never used while building MISE. Close to both large models, as in Kitchen 1.', 'آشپزخانهٔ ' + mainK + '، که در ساخت MISE به کار نرفته بود. نزدیک به هر دو مدل بزرگ، مثل آشپزخانهٔ ۱.');
     var lg = $('#legend'); lg.innerHTML = '';
-    S.forEach(function (s) { var it = h('span', ''); it.appendChild(h('i', 'sw ' + s.cls)); it.appendChild(document.createTextNode(s.name)); lg.appendChild(it); });
+    S.slice(0, 4).forEach(function (s) { var it = h('span', ''); it.appendChild(h('i', 'sw ' + s.cls)); it.appendChild(document.createTextNode(s.name)); lg.appendChild(it); });
     var fr = h('span', ''); fr.appendChild(h('i', 'sw fr')); fr.appendChild(document.createTextNode(tr('frontier level', 'سطح مدل‌های پیشرو'))); lg.appendChild(fr);
   }
 
@@ -250,26 +244,35 @@
     ABS_K.forEach(function (v, i) {
       rows.push({ group: kName(i + 1) });
       rows.push({ label: 'Gemma 4', v: v[0], cls: 's1', tip: kName(i + 1) + ' · ' + S[1].name + ' · ' + pct(v[0]) });
-      rows.push({ label: 'Opus\u00A05.5', v: v[1], cls: 's2', tip: kName(i + 1) + ' · Opus\u00A05.5 · ' + pct(v[1]) });
-      rows.push({ label: 'GPT6-Sol', v: v[2], cls: 's3', tip: kName(i + 1) + ' · GPT6-Sol · ' + pct(v[2]) });
+      rows.push({ label: 'Gemma 4 E4B', v: v[1], cls: 's4', tip: kName(i + 1) + ' · ' + S[4].name + ' · ' + pct(v[1]) });
+      rows.push({ label: 'Qwen 3.5 9B', v: v[2], cls: 's5', tip: kName(i + 1) + ' · ' + S[5].name + ' · ' + pct(v[2]) });
+      rows.push({ label: 'Opus\u00A05.5', v: v[3], cls: 's2', tip: kName(i + 1) + ' · Opus\u00A05.5 · ' + pct(v[3]) });
+      rows.push({ label: 'GPT6-Sol', v: v[4], cls: 's3', tip: kName(i + 1) + ' · GPT6-Sol · ' + pct(v[4]) });
     });
     hchart($('#chAbs'), 'abs', rows);
   }
+  function chartSize() {
+    var rows = [], M = ['Gemma 4 E2B', 'Gemma 4 E4B', 'Qwen 3.5 9B'], C = ['s1', 's4', 's5'];
+    SIZE.forEach(function (v, i) {
+      rows.push({ group: M[i] });
+      rows.push({ label: tr('alone', 'به‌تنهایی'), v: v[0], cls: 's0', tip: M[i] + ' · ' + pct(v[0]) });
+      rows.push({ label: tr('with memory', 'با حافظه'), v: v[1], cls: C[i], tip: M[i] + tr(' + Scene Memory', ' با حافظهٔ صحنه') + ' · ' + pct(v[1]) });
+    });
+    hchart($('#chSize'), 'size', rows);
+  }
+  function chartFixed() {
+    var L = [tr('no memory', 'بدون حافظه'), tr('whole step list', 'همهٔ دستورها'), tr('short fixed list', 'فهرست کوتاه ثابت'), tr('Scene Memory', 'حافظهٔ صحنه')];
+    var rows = FIXED.map(function (v, i) { return { label: L[i], v: v, cls: i === 3 ? 's1' : 's0', tip: 'Gemma 4 · ' + L[i] + ' · ' + pct(v) }; });
+    hchart($('#chFixed'), 'fixed', rows);
+  }
 
   /* ---------- tables ---------- */
-  // all six planner conditions, for the "All numbers" tables (thesis tab:res-levels, tab:res-k23, tab:res-k23-levels)
-  // order: Gemma 4 alone, Gemma 4 + Scene Memory, Opus 5.5, Opus 5.5 + Scene Memory, GPT6-Sol, GPT6-Sol + Scene Memory
-  var ALL6 = {
-    k1: { atomic: [69.1, 86.2, 89.4, 88.3, 89.4, 90.4], seq: [57.0, 78.0, 73.0, 81.0, 74.0, 83.0], abstract: [23.2, 21.4, 67.9, 73.2, 58.9, 58.9] },
-    k1ci: { atomic: [null, [77.8, 94.0], [82.4, 96.2], null, [84.0, 95.0], null], seq: [null, [67.5, 87.5], [59.4, 86.0], null, [65.6, 83.7], null],
-            abstract: [null, [5.6, 36.2], [51.8, 81.9], null, [40.5, 75.0], null] },
-    k2: [[75.5, 68.6, 19.4], [87.2, 87.1, 30.6], [91.5, 87.1, 77.8], [88.3, 91.4, 80.6], [93.6, 87.1, 75.0], [88.3, 88.6, 77.8]],
-    k3: [[69.6, 65.3, 23.7], [77.2, 86.1, 26.3], [84.8, 88.9, 84.2], [88.0, 88.9, 76.3], [88.0, 76.4, 84.2], [88.0, 75.0, 76.3]],
-    overall: [[54.0, 68.4, 78.0, 82.0, 76.4, 80.4], [63.0, 77.0, 87.5, 88.0, 88.0, 86.5], [59.4, 70.8, 86.1, 86.1, 83.2, 81.2]]
-  };
-  function names6() {
-    var m = tr(' + Scene Memory', ' با حافظهٔ صحنه');
-    return [tr('Gemma 4 alone', 'Gemma 4 به‌تنهایی'), 'Gemma 4' + m, 'Opus\u00A05.5', 'Opus\u00A05.5' + m, 'GPT6-Sol', 'GPT6-Sol' + m];
+  // all ten planner conditions for the "All numbers" tables (paper: tab:main, tab:replication, tab:larger)
+  // order: Gemma 4 alone, + Scene Memory, Gemma 4 E4B alone, + SM, Qwen 3.5 9B alone, + SM, Opus 5.5, + SM, GPT6-Sol, + SM
+  var ALLK = {"k1": [[73.4, 62.0, 23.2], [92.6, 87.0, 21.4], [77.7, 57.0, 23.2], [86.2, 81.0, 32.1], [60.6, 62.0, 28.6], [69.1, 73.0, 30.4], [94.7, 82.0, 73.2], [95.7, 91.0, 80.4], [94.7, 83.0, 64.3], [97.9, 92.0, 67.9]], "k1ci": [[[60.0, 84.0], [49.2, 74.4], [7.7, 39.4]], [[85.0, 98.1], [78.1, 94.0], [5.6, 36.2]], [[64.1, 89.2], [44.7, 71.1], [7.1, 40.6]], [[77.3, 93.0], [72.4, 91.2], [18.5, 43.9]], [[38.8, 79.3], [44.4, 78.9], [11.1, 46.3]], [[42.9, 88.9], [53.7, 88.9], [15.4, 43.5]], [[88.9, 100.0], [67.0, 94.0], [56.3, 87.9]], [[89.6, 100.0], [83.3, 97.1], [67.7, 92.3]], [[91.0, 98.7], [74.0, 92.0], [46.4, 79.5]], [[93.6, 100.0], [84.0, 98.0], [52.4, 82.0]]], "k2": [[76.6, 74.3, 22.2], [89.4, 91.4, 33.3], [86.2, 77.1, 33.3], [88.3, 91.4, 36.1], [64.9, 74.3, 30.6], [61.7, 70.0, 41.7], [95.7, 92.9, 83.3], [91.5, 94.3, 86.1], [97.9, 92.9, 77.8], [91.5, 91.4, 83.3]], "k3": [[75.0, 70.8, 26.3], [82.6, 88.9, 26.3], [82.6, 73.6, 36.8], [85.9, 90.3, 44.7], [66.3, 70.8, 42.1], [66.3, 68.1, 47.4], [90.2, 93.1, 84.2], [93.5, 94.4, 81.6], [94.6, 79.2, 84.2], [92.4, 81.9, 81.6]], "overall": [[57.6, 74.4, 57.2, 72.0, 54.0, 62.0, 84.8, 90.4, 83.2, 88.8], [66.0, 80.0, 73.5, 80.0, 62.0, 61.0, 92.5, 91.5, 92.5, 90.0], [64.4, 74.3, 70.8, 79.7, 63.4, 63.4, 90.1, 91.6, 87.1, 86.6]]};
+  function namesAll() {
+    var m = tr(' + Scene Memory', ' با حافظهٔ صحنه'), a = tr(' alone', ' به‌تنهایی');
+    return ['Gemma 4' + a, 'Gemma 4' + m, 'Gemma 4 E4B' + a, 'Gemma 4 E4B' + m, 'Qwen 3.5 9B' + a, 'Qwen 3.5 9B' + m, 'Opus\u00A05.5', 'Opus\u00A05.5' + m, 'GPT6-Sol', 'GPT6-Sol' + m];
   }
   function table(caption, head, body) {
     var s = '<div class="scroll"><table><caption>' + caption + '</caption><thead><tr>' + head.map(function (c) { return '<th scope="col">' + c + '</th>'; }).join('') + '</tr></thead><tbody>';
@@ -277,25 +280,27 @@
     return s + '</tbody></table></div>';
   }
   function tables() {
-    var N = names6(), ci = function (c) { return c ? ' [' + num(c[0], 1) + '–' + num(c[1], 1) + ']' : ''; };
+    var N = namesAll(), ci = function (c) { return c ? ' [' + num(c[0], 1) + '–' + num(c[1], 1) + ']' : ''; };
     var lv = ['atomic', 'seq', 'abstract'];
-    var t1 = table(tr('Kitchen 1 test by level, % of tasks completed (95% interval where computed)', 'آزمون آشپزخانهٔ ۱ به تفکیک سطح، درصد کارهای انجام‌شده (بازهٔ ۹۵٪ هر جا محاسبه شده)'),
+    var t1 = table(tr('Kitchen 1 test by level, % of tasks completed (95% interval)', 'آزمون آشپزخانهٔ ۱ به تفکیک سطح، درصد کارهای انجام‌شده (بازهٔ ۹۵٪)'),
       [tr('Condition', 'حالت')].concat(lv.map(lvlName)),
-      N.map(function (n, c) { return [n].concat(lv.map(function (k) { return num(ALL6.k1[k][c], 1) + ci(ALL6.k1ci[k][c]); })); }));
+      N.map(function (n, c) { return [n].concat([0, 1, 2].map(function (k) { return num(ALLK.k1[c][k], 1) + ci(ALLK.k1ci[c][k]); })); }));
     var t23 = table(tr('Kitchens 2 and 3 by level, % of tasks completed', 'آشپزخانه‌های ۲ و ۳ به تفکیک سطح، درصد کارهای انجام‌شده'),
       [tr('Condition', 'حالت')].concat([2, 3].reduce(function (a, k) { return a.concat(lv.map(function (l) { return kName(k) + ' · ' + lvlName(l); })); }, [])),
-      N.map(function (n, c) { return [n].concat(ALL6.k2[c].concat(ALL6.k3[c]).map(function (v) { return num(v, 1); })); }));
+      N.map(function (n, c) { return [n].concat(ALLK.k2[c].concat(ALLK.k3[c]).map(function (v) { return num(v, 1); })); }));
     var t2 = table(tr('All tasks, three kitchens, %', 'همهٔ کارها، سه آشپزخانه، درصد'),
       [tr('Condition', 'حالت')].concat(KIT.map(function (k) { return kName(k.n) + ' (' + num(k.pres, 0) + tr(' presentations', ' ارائه') + ')'; })),
-      N.map(function (n, c) { return [n].concat(ALL6.overall.map(function (row) { return num(row[c], 1); })); }));
+      N.map(function (n, c) { return [n].concat(ALLK.overall.map(function (row) { return num(row[c], 1); })); }));
     var t3 = table(tr('Held object named right, sealed holdout, %', 'نام درست شیء در دست، مجموعهٔ آزمون مهرشده، درصد'),
       [tr('Kitchen', 'آشپزخانه'), tr('Main detector alone', 'مدل اصلی به‌تنهایی'), tr('Fine-tuned control', 'شاهد تنظیم‌شده'), tr('With the closer look', 'با نگاه دقیق‌تر')],
       PERC.map(function (p, i) { return [kName(i + 1), num(p[0], 1), num(p[1], 1), num(p[2], 1)]; }));
-    var t4 = table(tr('Planning time and cost (Kitchen 1 test, 250 presentations)', 'زمان و هزینهٔ برنامه‌ریزی (آزمون آشپزخانهٔ ۱، ۲۵۰ ارائه)'),
+    var t4 = table(tr('Planning time and cost (Kitchen 1 test, 250 presentations, with Scene Memory)', 'زمان و هزینهٔ برنامه‌ریزی (آزمون آشپزخانهٔ ۱، ۲۵۰ ارائه، با حافظهٔ صحنه)'),
       [tr('Model', 'مدل'), tr('Median time per plan', 'میانهٔ زمان هر برنامه'), tr('Cost of the whole test', 'هزینهٔ کل آزمون')],
-      [[N[1], tr('0.64 s, laptop', '۰٫۶۴ ثانیه، لپ‌تاپ'), tr('≈ $0.005 electricity', 'حدود ۰٫۰۰۵ دلار برق')],
-       ['Opus\u00A05.5', tr('≈ 3.95 s, cloud', 'حدود ۳٫۹۵ ثانیه، روی سرور ابری'), tr('$7.46 without Scene Memory, $7.52 with it', '۷٫۴۶ دلار بدون حافظهٔ صحنه، ۷٫۵۲ دلار با آن')],
-       ['GPT6-Sol', tr('≈ 16 s, cloud', 'حدود ۱۶ ثانیه، روی سرور ابری'), tr('not reported', 'گزارش نشده')]]);
+      [[N[1], tr('0.64 s, laptop', '0.64 ثانیه، لپ‌تاپ'), tr('≈ $0.03, estimated', 'حدود ۰٫۰۳ دلار، تخمینی')],
+       [N[3], tr('1.17 s, laptop', '1.17 ثانیه، لپ‌تاپ'), tr('not priced', 'قیمت‌گذاری نشده')],
+       [N[5], tr('3.35 s, laptop', '3.35 ثانیه، لپ‌تاپ'), tr('not priced', 'قیمت‌گذاری نشده')],
+       [N[7], tr('3.75 s, cloud', '۳٫۷۵ ثانیه، روی سرور ابری'), tr('$4.73', '۴٫۷۳ دلار')],
+       [N[9], tr('16.37 s, cloud', '۱۶٫۳۷ ثانیه، روی سرور ابری'), tr('≈ $3.28, estimated', 'حدود ۳٫۲۸ دلار، تخمینی')]]);
     $('#tAll').innerHTML = t1 + t23 + t2 + t3 + t4;
   }
 
@@ -372,7 +377,7 @@
   });
 
   /* ---------- render + resize ---------- */
-  function renderAll() { chartMain(); chartLift(); chartPerc(); chartAbs(); tables(); wires(); }
+  function renderAll() { chartMain(); chartLift(); chartPerc(); chartAbs(); chartSize(); chartFixed(); tables(); wires(); }
   var lastW = innerWidth, rt;
   window.addEventListener('resize', function () {
     clearTimeout(rt); rt = setTimeout(function () { if (Math.abs(innerWidth - lastW) > 2) { lastW = innerWidth; wires(); } }, 120);

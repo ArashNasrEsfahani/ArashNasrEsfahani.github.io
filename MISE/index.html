@@ -17,7 +17,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&family=Instrument+Serif:ital@0;1&family=Vazirmatn:wght@300;400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/style.css?v=mise-15">
+<link rel="stylesheet" href="assets/css/style.css?v=mise-16">
 <script>
 /* set theme + language before first paint */
 (function(){var q={};try{q=Object.fromEntries(new URLSearchParams(location.search));}catch(e){}
@@ -229,7 +229,7 @@ if(l==='fa'){document.documentElement.lang='fa';document.documentElement.dir='rt
 <section class="sec tint" id="results" aria-labelledby="h-res">
   <div class="wrap">
     <p class="eyebrow" data-fa="نتیجه‌ها">Results</p>
-    <h2 id="h-res" data-fa="در کارهای اتمی و ترتیبی، هم‌سطح مدل‌های پیشرو">Atomic and sequential tasks: frontier level</h2>
+    <h2 id="h-res" data-fa="در کارهای اتمی و ترتیبی، نزدیک به سطح مدل‌های پیشرو">Atomic and sequential tasks: near frontier level</h2>
     <p class="lead" data-fa="درصد کارهای انجام‌شده در آزمون هر آشپزخانه. Gemma 4 با حافظهٔ صحنه در برابر Opus&nbsp;5.5 و GPT6-Sol بدون آن.">Share of tasks completed in each kitchen’s test. Gemma 4 with Scene Memory against Opus&nbsp;5.5 and GPT6-Sol without it.</p>
 
     <div class="hero-chart">
@@ -248,8 +248,8 @@ if(l==='fa'){document.documentElement.lang='fa';document.documentElement.dir='rt
       <div class="cost-grid">
         <div class="cost-item gold"><span class="big" data-fa="۰٫۶۴ ثانیه">0.64 s</span><span data-fa="برای هر برنامه، روی لپ‌تاپ">per plan, on the laptop</span></div>
         <div class="cost-item"><span class="big" data-fa="حدود ۴ و ۱۶ ثانیه">≈ 4 s · 16 s</span><span data-fa="Opus&nbsp;5.5 و GPT6-Sol، روی سرور ابری">Opus&nbsp;5.5 and GPT6-Sol, cloud</span></div>
-        <div class="cost-item gold"><span class="big" data-fa="حدود ۰٫۰۰۵ دلار">≈ $0.005</span><span data-fa="برق، برای برنامه‌ریزی آزمون آشپزخانهٔ&nbsp;۱">of electricity to plan the Kitchen 1 test</span></div>
-        <div class="cost-item"><span class="big" data-fa="۷٫۴۶ دلار">$7.46</span><span data-fa="هزینهٔ Opus&nbsp;5.5 برای همین آزمون">in Opus&nbsp;5.5 fees for the same test</span></div>
+        <div class="cost-item gold"><span class="big" data-fa="حدود ۰٫۰۳ دلار">≈ $0.03</span><span data-fa="هزینهٔ تخمینی برنامه‌ریزی آزمون آشپزخانهٔ&nbsp;۱">estimated to plan the Kitchen 1 test</span></div>
+        <div class="cost-item"><span class="big" data-fa="۴٫۶۹ دلار">$4.69</span><span data-fa="هزینهٔ Opus&nbsp;5.5 برای همین آزمون">in Opus&nbsp;5.5 fees for the same test</span></div>
       </div>
     </aside>
 
@@ -266,8 +266,20 @@ if(l==='fa'){document.documentElement.lang='fa';document.documentElement.dir='rt
       </div>
       <div class="mini">
         <h3 data-fa="هدف‌های انتزاعی هنوز سخت‌اند">Abstract goals are still hard</h3>
-        <p class="sub" data-fa="هر سه آشپزخانه، Gemma 4 با حافظهٔ صحنه در برابر دو مدل بزرگ">All three kitchens, Gemma 4 with Scene Memory against the two large models</p>
+        <p class="sub" data-fa="هر سه آشپزخانه، مدل‌های محلی با حافظهٔ صحنه در برابر دو مدل پیشرو">All three kitchens, local models with Scene Memory against the two frontier models</p>
         <div id="chAbs"></div>
+      </div>
+    </div>
+    <div class="minis two">
+      <div class="mini">
+        <h3 data-fa="حافظه یا مدل بزرگ‌تر؟">Memory or a bigger model?</h3>
+        <p class="sub" data-fa="همهٔ کارها، میانگین سه آشپزخانه، هر مدل بدون و با حافظهٔ صحنه">All tasks, mean of the three kitchens, each model without and with Scene Memory</p>
+        <div id="chSize"></div>
+      </div>
+      <div class="mini">
+        <h3 data-fa="دستورهای درست برای هر کار">The right steps for each task</h3>
+        <p class="sub" data-fa="همهٔ کارها، میانگین سه آشپزخانه، Gemma 4 با یک فهرست ثابت از دستورها یا با حافظهٔ صحنه که برای هر کار دستورهای خودش را برمی‌دارد">All tasks, mean of the three kitchens. Gemma 4 with a fixed list of steps, or with Scene Memory picking the steps for each task</p>
+        <div id="chFixed"></div>
       </div>
     </div>
     <details class="tbl"><summary data-fa="همهٔ عددها">All numbers</summary><div id="tAll"></div></details>
@@ -320,6 +332,6 @@ if(l==='fa'){document.documentElement.lang='fa';document.documentElement.dir='rt
 </footer>
 
 <div id="tip" class="tip" role="tooltip" hidden></div>
-<script src="assets/js/app.js?v=mise-18"></script>
+<script src="assets/js/app.js?v=mise-19"></script>
 </body>
 </html>
