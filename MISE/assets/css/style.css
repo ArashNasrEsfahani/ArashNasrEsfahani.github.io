@@ -356,3 +356,4 @@ h3{font:400 26px/1.2 var(--serif);margin:0}
 .ktabs button + button{border-inline-start:1px solid var(--line2)}
 .ktabs button[aria-selected="true"]{background:var(--ink);color:var(--bg)}
 .ktabs button:hover:not([aria-selected="true"]){color:var(--ink)}
+@media (max-width:600px){.ktabs{width:auto;max-width:100%}.ktabs button{flex:1 1 0;padding:9px 8px;line-height:1.25}}

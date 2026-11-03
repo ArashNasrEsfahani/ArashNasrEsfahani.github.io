@@ -117,7 +117,7 @@
   });
   document.addEventListener('focusout', function () { tip.hidden = true; });
 
-  /* ---------- data (paper's final analysis; % of tasks completed; Kitchen 1 = development kitchen) ---------- */
+  /* ---------- data (paper's final analysis; % of tasks completed; kitchens: development kitchen (FloorPlan1), held-out kitchens A (FloorPlan15) and B (FloorPlan17)) ---------- */
   // the main result per kitchen (atomic, sequential): Gemma 4 alone, Gemma 4 + Scene Memory (MISE), Opus 5.5, GPT6-Sol (both without)
   var MAIN_K = {"1": [{"key": "atomic", "vals": [73.4, 92.6, 94.7, 94.7], "ci": [null, [85.0, 98.1], [88.9, 100.0], [91.0, 98.7]]}, {"key": "seq", "vals": [62.0, 87.0, 82.0, 83.0], "ci": [null, [78.1, 94.0], [67.0, 94.0], [74.0, 92.0]]}], "2": [{"key": "atomic", "vals": [76.6, 89.4, 95.7, 97.9], "ci": [null, null, null, null]}, {"key": "seq", "vals": [74.3, 91.4, 92.9, 92.9], "ci": [null, null, null, null]}], "3": [{"key": "atomic", "vals": [75.0, 82.6, 90.2, 94.6], "ci": [null, null, null, null]}, {"key": "seq", "vals": [70.8, 88.9, 93.1, 79.2], "ci": [null, null, null, null]}]};
   var MAIN = MAIN_K[1];
@@ -143,7 +143,7 @@
   }
   function lvlName(k) { return { atomic: tr('Atomic', 'اتمی'), seq: tr('Sequential', 'ترتیبی'), abstract: tr('Abstract goal', 'هدف انتزاعی') }[k]; }
   function lvlHint(k) { return { atomic: tr('one action', 'یک کار'), seq: tr('several actions, in order', 'چند کار به ترتیب') }[k]; }
-  function kName(i) { return tr('Kitchen ' + i, 'آشپزخانهٔ ' + i); }
+  function kName(i) { return [null, tr('Development kitchen', 'آشپزخانهٔ توسعه'), tr('Held-out kitchen A', 'آشپزخانهٔ جداشدهٔ A'), tr('Held-out kitchen B', 'آشپزخانهٔ جداشدهٔ B')][i]; }
   function pct(v) { return num(v, 1) + (lang === 'fa' ? '٪' : '%'); }
 
   /* ---------- growth on first view ---------- */
@@ -188,8 +188,8 @@
     });
     $$('.ktabs button').forEach(function (b) { b.setAttribute('aria-selected', String(+b.dataset.k === mainK)); });
     $('#mainFine').textContent = mainK === 1
-      ? tr('Kitchen 1, where MISE was built.', 'آشپزخانهٔ ۱، که MISE در آن ساخته شد.')
-      : tr('Kitchen ' + mainK + ', never used while building MISE. Close to both large models, as in Kitchen 1.', 'آشپزخانهٔ ' + mainK + '، که در ساخت MISE به کار نرفته بود. نزدیک به هر دو مدل بزرگ، مثل آشپزخانهٔ ۱.');
+      ? tr('The development kitchen, where MISE was built.', 'آشپزخانهٔ توسعه، که MISE در آن ساخته شد.')
+      : tr(kName(mainK) + ', never used while building MISE. Close to both large models, as in the development kitchen.', kName(mainK) + '، که در ساخت MISE به کار نرفته بود. نزدیک به هر دو مدل بزرگ، مثل آشپزخانهٔ توسعه.');
     var lg = $('#legend'); lg.innerHTML = '';
     S.slice(0, 4).forEach(function (s) { var it = h('span', ''); it.appendChild(h('i', 'sw ' + s.cls)); it.appendChild(document.createTextNode(s.name)); lg.appendChild(it); });
     var fr = h('span', ''); fr.appendChild(h('i', 'sw fr')); fr.appendChild(document.createTextNode(tr('frontier level', 'سطح مدل‌های پیشرو'))); lg.appendChild(fr);
@@ -282,10 +282,10 @@
   function tables() {
     var N = namesAll(), ci = function (c) { return c ? ' [' + num(c[0], 1) + '–' + num(c[1], 1) + ']' : ''; };
     var lv = ['atomic', 'seq', 'abstract'];
-    var t1 = table(tr('Kitchen 1 test by level, % of tasks completed (95% interval)', 'آزمون آشپزخانهٔ ۱ به تفکیک سطح، درصد کارهای انجام‌شده (بازهٔ ۹۵٪)'),
+    var t1 = table(tr('Development kitchen test by level, % of tasks completed (95% interval)', 'آزمون آشپزخانهٔ توسعه به تفکیک سطح، درصد کارهای انجام‌شده (بازهٔ ۹۵٪)'),
       [tr('Condition', 'حالت')].concat(lv.map(lvlName)),
       N.map(function (n, c) { return [n].concat([0, 1, 2].map(function (k) { return num(ALLK.k1[c][k], 1) + ci(ALLK.k1ci[c][k]); })); }));
-    var t23 = table(tr('Kitchens 2 and 3 by level, % of tasks completed', 'آشپزخانه‌های ۲ و ۳ به تفکیک سطح، درصد کارهای انجام‌شده'),
+    var t23 = table(tr('Held-out kitchens A and B by level, % of tasks completed', 'آشپزخانه‌های جداشدهٔ A و B به تفکیک سطح، درصد کارهای انجام‌شده'),
       [tr('Condition', 'حالت')].concat([2, 3].reduce(function (a, k) { return a.concat(lv.map(function (l) { return kName(k) + ' · ' + lvlName(l); })); }, [])),
       N.map(function (n, c) { return [n].concat(ALLK.k2[c].concat(ALLK.k3[c]).map(function (v) { return num(v, 1); })); }));
     var t2 = table(tr('All tasks, three kitchens, %', 'همهٔ کارها، سه آشپزخانه، درصد'),
@@ -294,7 +294,7 @@
     var t3 = table(tr('Held object named right, sealed holdout, %', 'نام درست شیء در دست، مجموعهٔ آزمون مهرشده، درصد'),
       [tr('Kitchen', 'آشپزخانه'), tr('Main detector alone', 'مدل اصلی به‌تنهایی'), tr('Fine-tuned control', 'شاهد تنظیم‌شده'), tr('With the closer look', 'با نگاه دقیق‌تر')],
       PERC.map(function (p, i) { return [kName(i + 1), num(p[0], 1), num(p[1], 1), num(p[2], 1)]; }));
-    var t4 = table(tr('Planning time and cost (Kitchen 1 test, 250 presentations, with Scene Memory)', 'زمان و هزینهٔ برنامه‌ریزی (آزمون آشپزخانهٔ ۱، ۲۵۰ ارائه، با حافظهٔ صحنه)'),
+    var t4 = table(tr('Planning time and cost (development kitchen test, 250 presentations, with Scene Memory)', 'زمان و هزینهٔ برنامه‌ریزی (آزمون آشپزخانهٔ توسعه، ۲۵۰ ارائه، با حافظهٔ صحنه)'),
       [tr('Model', 'مدل'), tr('Median time per plan', 'میانهٔ زمان هر برنامه'), tr('Cost of the whole test', 'هزینهٔ کل آزمون')],
       [[N[1], tr('0.64 s, laptop', '0.64 ثانیه، لپ‌تاپ'), tr('≈ $0.03, estimated', 'حدود ۰٫۰۳ دلار، تخمینی')],
        [N[3], tr('1.17 s, laptop', '1.17 ثانیه، لپ‌تاپ'), tr('not priced', 'قیمت‌گذاری نشده')],
