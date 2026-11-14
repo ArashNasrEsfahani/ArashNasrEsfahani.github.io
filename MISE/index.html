@@ -4,10 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>MISE</title>
-<meta name="description" content="MISE: a retrieval-based agent that lifts your local models to frontier level on robotic scene arrangement.">
+<meta name="description" content="MISE: a retrieval-based agent that lifts your local models close to frontier level on robotic scene arrangement.">
 <meta name="color-scheme" content="light dark">
 <meta property="og:title" content="MISE">
-<meta property="og:description" content="A retrieval-based agent that lifts your local models to frontier level on robotic scene arrangement.">
+<meta property="og:description" content="A retrieval-based agent that lifts your local models close to frontier level on robotic scene arrangement.">
 <meta property="og:type" content="website">
 <meta property="og:image" content="https://arashnasresfahani.github.io/MISE/assets/img/explainer_en.jpg">
 <meta property="og:url" content="https://arashnasresfahani.github.io/MISE/">
@@ -17,7 +17,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&family=Instrument+Serif:ital@0;1&family=Vazirmatn:wght@300;400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/style.css?v=mise-16">
+<link rel="stylesheet" href="assets/css/style.css?v=mise-17">
 <script>
 /* set theme + language before first paint */
 (function(){var q={};try{q=Object.fromEntries(new URLSearchParams(location.search));}catch(e){}
@@ -73,7 +73,7 @@ if(l==='fa'){document.documentElement.lang='fa';document.documentElement.dir='rt
       </div>
     </div>
     <p class="expansion">Memory-Informed Small Embodied agent</p>
-    <p class="tagline" data-fa="عامل هوشمندی بر پایهٔ بازیابی که مدل‌های محلی شما را در چیدن وسایل با ربات به <em>سطح مدل‌های پیشرو</em> می‌رساند.">A retrieval-based agent that lifts your local models to <em>frontier level</em> on robotic scene arrangement.</p>
+    <p class="tagline" data-fa="عاملی بر پایهٔ بازیابی که مدل‌های کوچک و محلی خودتان را در چیدن وسایل صحنه با ربات، به <em>سطح مدل‌های پیشرو</em> نزدیک می‌کند.">A retrieval-based agent that lifts your local models close to <em>frontier level</em> on robotic scene arrangement.</p>
     <p class="who"><span data-fa="آرش نصر اصفهانی">Arash NasrEsfahani</span><span class="dot" aria-hidden="true">·</span><span class="aff"><i class="lg ut" aria-hidden="true"></i><span data-fa="دانشگاه تهران">University of Tehran</span></span><span class="dot" aria-hidden="true">·</span><span class="aff"><i class="lg taar" aria-hidden="true"></i><span>TaarLab</span></span></p>
     <div class="btns">
       <a class="btn primary" href="#video"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5l11 7-11 7z"/></svg><span data-fa="ویدیو">Watch the video</span></a>
@@ -102,8 +102,9 @@ if(l==='fa'){document.documentElement.lang='fa';document.documentElement.dir='rt
     <p class="eyebrow" data-fa="دربارهٔ کار">About</p>
     <h2 id="h-abs" data-fa="یک مدل کوچک، با حافظهٔ خودش">A small model, with a memory of its own</h2>
     <div class="prose">
-      <p data-fa="MISE سه چیز را کنار هم می‌گذارد: یک مدل زبانی کوچک که روی لپ‌تاپ اجرا می‌شود (Gemma 4، حدود ۲ میلیارد پارامتر)، یک مدل کوچک تشخیص اشیا (YOLO) و بازیابی از <strong>حافظهٔ صحنه</strong>؛ یادداشت‌هایی که عامل هنگام تمرین در هر آشپزخانه برای خودش برمی‌دارد.">MISE combines three things: a small language model that runs on a laptop (Gemma 4, about 2 billion parameters), a small YOLO detector, and retrieval over <strong>Scene Memory</strong>, the notes the agent writes for itself while it practises in each kitchen.</p>
-      <p data-fa="نتیجه نشان می‌دهد که برای کارهای سادهٔ چیدن وسایل، یک روش بازیابی خوب و دانشی که خود عامل می‌سازد کافی است تا یک مدل محلی به سطح مدل‌های پیشرو برسد.">It shows that, for simple scene arrangement, good retrieval and self-generated knowledge are enough to bring a local model to the level of frontier models.</p>
+      <p data-fa="MISE سه بخش دارد: مدل زبانی کوچکی که روی لپ‌تاپ اجرا می‌شود (Gemma 4، با حدود 2 میلیارد پارامتر)، یک مدل کوچک تشخیص اشیا از نوع YOLO و بازیابی از <strong>حافظهٔ صحنه</strong>.">MISE combines three things: a small language model that runs on a laptop (Gemma 4, about 2 billion parameters), a small YOLO detector, and retrieval over <strong>Scene Memory</strong>.</p>
+      <p data-fa="حافظهٔ صحنه دانشی دربارهٔ انجام کارهاست که عامل برای هر دستور به آن رجوع می‌کند. این دانش سه بخش دارد: روال‌های کلی که در همهٔ آشپزخانه‌ها مشترک‌اند، یادداشت‌هایی که عامل از تمرین در هر آشپزخانه برداشته و خود دستور که به انگلیسی بازنویسی شده است. بیشترِ بهبود از روال‌ها و بازنویسی دستور به انگلیسی به دست می‌آید و سهم یادداشت‌های آشپزخانه کمتر است.">Scene Memory is task knowledge that the agent looks up for each instruction: general procedures shared by all kitchens, notes from practice in each kitchen, and the instruction rephrased in English. Most of the gain comes from the procedures and the rephrasing.</p>
+      <p data-fa="نتیجه: در چیدمان‌های سادهٔ صحنه، اگر دانش انجام کار خوب بازیابی شود، یک مدل کوچک محلی به سطح مدل‌های پیشرو نزدیک می‌شود.">It shows that, for simple scene arrangement, good retrieval of task knowledge brings a small local model close to the level of frontier models.</p>
     </div>
   </div>
 </section>
@@ -113,7 +114,7 @@ if(l==='fa'){document.documentElement.lang='fa';document.documentElement.dir='rt
   <div class="wrap">
     <p class="eyebrow" data-fa="محیط آزمون">Test bed</p>
     <h2 id="h-kit" data-fa="سه آشپزخانه">Three kitchens</h2>
-    <p class="lead" data-fa="MISE در آشپزخانهٔ توسعه ساخته شد و در آشپزخانه‌های جداشدهٔ A و B، که هرگز ندیده بود، همان نتیجه را نشان می‌دهد.">MISE was built in the development kitchen and shows the same results in held-out kitchens A and B, which it had never seen.</p>
+    <p class="lead" data-fa="MISE در آشپزخانهٔ توسعه ساخته شد؛ آشپزخانه‌های جداشدهٔ A و B به همان شیوه آماده شدند، اما هنگام ساختن MISE به کار نرفتند. بهبودی که حافظهٔ صحنه ایجاد می‌کند در هر دو آشپزخانهٔ جداشده دیده می‌شود، هرچند از بهبود در آشپزخانهٔ توسعه کمتر است.">MISE was built in the development kitchen. Held-out kitchens A and B were prepared in the same way but not used in building it, and the gain holds in both, though it is smaller than in the development kitchen.</p>
     <div class="kitchens">
       <article class="kcard">
         <div class="kmedia">
@@ -127,14 +128,14 @@ if(l==='fa'){document.documentElement.lang='fa';document.documentElement.dir='rt
           <video muted loop playsinline preload="none" poster="assets/img/k2_toaster.jpg" aria-label="The agent at work in held-out kitchen A" data-fa-aria-label="عامل در آشپزخانهٔ جداشدهٔ A"><source src="assets/video/k2_toaster.mp4" type="video/mp4"></video>
           <img class="kinset" src="assets/img/fp15_top.jpg" width="900" height="900" loading="lazy" decoding="async" alt="Top view of held-out kitchen A" data-fa-alt="نمای بالای آشپزخانهٔ جداشدهٔ A">
         </div>
-        <h3><span data-fa="آشپزخانهٔ جداشدهٔ A">Held-out kitchen A</span> <small class="new" data-fa="دیده‌نشده">unseen</small></h3>
+        <h3><span data-fa="آشپزخانهٔ جداشدهٔ A">Held-out kitchen A</span> <small class="new" data-fa="خارج از توسعه">held out</small></h3>
       </article>
       <article class="kcard">
         <div class="kmedia">
           <video muted loop playsinline preload="none" poster="assets/img/k3_stove.jpg" aria-label="The agent at work in held-out kitchen B" data-fa-aria-label="عامل در آشپزخانهٔ جداشدهٔ B"><source src="assets/video/k3_stove.mp4" type="video/mp4"></video>
           <img class="kinset" src="assets/img/fp17_top.jpg" width="900" height="900" loading="lazy" decoding="async" alt="Top view of held-out kitchen B" data-fa-alt="نمای بالای آشپزخانهٔ جداشدهٔ B">
         </div>
-        <h3><span data-fa="آشپزخانهٔ جداشدهٔ B">Held-out kitchen B</span> <small class="new" data-fa="دیده‌نشده">unseen</small></h3>
+        <h3><span data-fa="آشپزخانهٔ جداشدهٔ B">Held-out kitchen B</span> <small class="new" data-fa="خارج از توسعه">held out</small></h3>
       </article>
     </div>
     <p class="fine kscene" data-fa="هر سه آشپزخانه صحنه‌هایی از شبیه‌ساز AI2-THOR هستند: آشپزخانهٔ توسعه صحنهٔ FloorPlan1، آشپزخانهٔ جداشدهٔ A صحنهٔ FloorPlan15 و آشپزخانهٔ جداشدهٔ B صحنهٔ FloorPlan17.">All three are scenes of the AI2-THOR simulator: the development kitchen is FloorPlan1, held-out kitchen A is FloorPlan15 and held-out kitchen B is FloorPlan17.</p>
@@ -229,7 +230,7 @@ if(l==='fa'){document.documentElement.lang='fa';document.documentElement.dir='rt
 <section class="sec tint" id="results" aria-labelledby="h-res">
   <div class="wrap">
     <p class="eyebrow" data-fa="نتیجه‌ها">Results</p>
-    <h2 id="h-res" data-fa="در کارهای اتمی و ترتیبی، نزدیک به سطح مدل‌های پیشرو">Atomic and sequential tasks: near frontier level</h2>
+    <h2 id="h-res" data-fa="در این آزمون: کارهای ترتیبی در بازهٔ نتایج مدل‌های پیشرو، کارهای اتمی چند واحد پایین‌تر">Sequential tasks in the frontier range, atomic a few points below</h2>
     <p class="lead" data-fa="درصد کارهای انجام‌شده در آزمون هر آشپزخانه. Gemma 4 با حافظهٔ صحنه در برابر Opus&nbsp;5.5 و GPT6-Sol بدون آن.">Share of tasks completed in each kitchen’s test. Gemma 4 with Scene Memory against Opus&nbsp;5.5 and GPT6-Sol without it.</p>
 
     <div class="hero-chart">
@@ -247,10 +248,11 @@ if(l==='fa'){document.documentElement.lang='fa';document.documentElement.dir='rt
       <h3 id="h-cost" data-fa="و تقریباً رایگان">And almost free</h3>
       <div class="cost-grid">
         <div class="cost-item gold"><span class="big" data-fa="۰٫۶۴ ثانیه">0.64 s</span><span data-fa="برای هر برنامه، روی لپ‌تاپ">per plan, on the laptop</span></div>
-        <div class="cost-item"><span class="big" data-fa="حدود ۴ و ۱۶ ثانیه">≈ 4 s · 16 s</span><span data-fa="Opus&nbsp;5.5 و GPT6-Sol، روی سرور ابری">Opus&nbsp;5.5 and GPT6-Sol, cloud</span></div>
+        <div class="cost-item"><span class="big" data-fa="3.75 و 16.4 ثانیه">3.75 s · 16.4 s</span><span data-fa="Opus&nbsp;5.5 و GPT6-Sol، روی سرور ابری">Opus&nbsp;5.5 and GPT6-Sol, cloud</span></div>
         <div class="cost-item gold"><span class="big" data-fa="حدود ۰٫۰۳ دلار">≈ $0.03</span><span data-fa="هزینهٔ تخمینی برنامه‌ریزی آزمون آشپزخانهٔ توسعه">estimated to plan the development kitchen test</span></div>
-        <div class="cost-item"><span class="big" data-fa="۴٫۶۹ دلار">$4.69</span><span data-fa="هزینهٔ Opus&nbsp;5.5 برای همین آزمون">in Opus&nbsp;5.5 fees for the same test</span></div>
+        <div class="cost-item"><span class="big" data-fa="4.73 دلار">$4.73</span><span data-fa="هزینهٔ Opus&nbsp;5.5 برای همین آزمون">in Opus&nbsp;5.5 fees for the same test</span></div>
       </div>
+      <p class="fine" data-fa="این اعداد فقط زمان برنامه‌ریزی را نشان می‌دهند، نه مدت انجام کل کار. هر دو مدل بزرگ با حالت استدلالِ فعال اجرا شدند.">Planning time only, not the time a whole task takes. Both large models were run with reasoning on.</p>
     </aside>
 
     <div class="minis">
@@ -258,6 +260,7 @@ if(l==='fa'){document.documentElement.lang='fa';document.documentElement.dir='rt
         <h3 data-fa="حافظهٔ صحنه در هر سه آشپزخانه">Scene Memory, in every kitchen</h3>
         <p class="sub" data-fa="همهٔ کارها، Gemma 4 بدون و با حافظهٔ صحنه">All tasks, Gemma 4 without and with Scene Memory</p>
         <div id="chLift"></div>
+        <p class="fine" data-fa="حافظهٔ صحنه در دو آشپزخانهٔ جداشده به‌طور میانگین 11.7 واحد درصد و در هر سه آشپزخانه 13.4 واحد درصد بهبود ایجاد می‌کند.">On average, Scene Memory adds 11.7 points in the two held-out kitchens, and 13.4 across all three.</p>
       </div>
       <div class="mini">
         <h3 data-fa="نام درست اشیای شبیه به هم">Look-alikes named right</h3>
@@ -280,6 +283,20 @@ if(l==='fa'){document.documentElement.lang='fa';document.documentElement.dir='rt
         <h3 data-fa="دستورهای درست برای هر کار">The right steps for each task</h3>
         <p class="sub" data-fa="همهٔ کارها، میانگین سه آشپزخانه، Gemma 4 با یک فهرست ثابت از دستورها یا با حافظهٔ صحنه که برای هر کار دستورهای خودش را برمی‌دارد">All tasks, mean of the three kitchens. Gemma 4 with a fixed list of steps, or with Scene Memory picking the steps for each task</p>
         <div id="chFixed"></div>
+      </div>
+    </div>
+    <div class="minis two">
+      <div class="mini">
+        <h3 data-fa="آیا خود مدل زبانی هم اثری دارد؟">Does the language model matter?</h3>
+        <p class="sub" data-fa="همهٔ کارها، میانگین سه آشپزخانه. نوار اول برنامه‌ریزِ بدون مدل زبانی است: خروجی تجزیه‌گرِ دستور را مستقیم به مهارت‌ها تبدیل می‌کند.">All tasks, mean of the three kitchens. The first planner has no language model: it maps what the parser reads straight to skills.</p>
+        <div id="chLM"></div>
+        <p class="fine" data-fa="برنامه‌ریزِ بدون مدل زبانی به حدود 60% می‌رسد، یعنی 16 واحد کمتر از MISE؛ پس مدل زبانی کوچک هم سهم خودش را دارد.">Without a language model the planner reaches about 60%, 16 points below MISE, so the small model adds value.</p>
+      </div>
+      <div class="mini">
+        <h3 data-fa="ریزتنظیم مدل کوچک">Fine-tuning the small model</h3>
+        <p class="sub" data-fa="همهٔ کارها، میانگین آشپزخانه‌های جداشدهٔ A و B">All tasks, mean of held-out kitchens A and B</p>
+        <div id="chFT"></div>
+        <p class="fine" data-fa="ریزتنظیم روی کارت گرافیک یک لپ‌تاپ حدود 3 ساعت طول کشید. ترکیب مدل ریزتنظیم‌شده و حافظهٔ صحنه، MISE-FT نام دارد و بهترین پیکربندی با مدل کوچک است: 4.0 واحد بالاتر از MISE. ریزتنظیم به‌تنهایی تقریباً همان نتیجهٔ MISE را می‌دهد، در حالی که MISE به هیچ آموزشی نیاز ندارد.">About 3 hours of training on a laptop GPU. With Scene Memory added, MISE-FT is the best small setup, 4.0 points above MISE. Fine-tuning alone is about level with MISE, which needs no training.</p>
       </div>
     </div>
     <details class="tbl"><summary data-fa="همهٔ عددها">All numbers</summary><div id="tAll"></div></details>
@@ -332,6 +349,6 @@ if(l==='fa'){document.documentElement.lang='fa';document.documentElement.dir='rt
 </footer>
 
 <div id="tip" class="tip" role="tooltip" hidden></div>
-<script src="assets/js/app.js?v=mise-19"></script>
+<script src="assets/js/app.js?v=mise-20"></script>
 </body>
 </html>

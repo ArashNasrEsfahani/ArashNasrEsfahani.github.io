@@ -25,7 +25,7 @@
 
   /* ---------- language ---------- */
   var lang = root.lang === 'fa' ? 'fa' : 'en';
-  var KEEP = [/Gemma 4 E[24]B/g, /Qwen 3\.5 9B/g, /Gemma 4/g, /GPT6-Sol/g, /YOLO/g, /AI2-THOR/g, /FloorPlan\d+/g, /Opus[ \u00A0]5\.5/g, /MISE/g, /AGPL-3\.0/g, /CC BY 4\.0/g, /Hugging Face/g, /GitHub/g];
+  var KEEP = [/Gemma 4 E[24]B/g, /Qwen 3\.5 9B/g, /Gemma 4/g, /GPT6-Sol/g, /YOLO/g, /AI2-THOR/g, /FloorPlan\d+/g, /Opus[ \u00A0]5\.5/g, /MISE-FT/g, /MISE/g, /AGPL-3\.0/g, /CC BY 4\.0/g, /Hugging Face/g, /GitHub/g];
   function fa(s) {
     var held = [];
     KEEP.forEach(function (re) { s = s.replace(re, function (m) { held.push(m); return String.fromCharCode(0xE000 + held.length - 1); }); });
@@ -129,6 +129,10 @@
   var SIZE = [[62.7, 76.2], [67.2, 77.2], [59.8, 62.1]];
   // picked steps or a fixed list: mean of the three kitchens, all tasks, Gemma 4: alone, whole step list, short fixed list, Scene Memory (MISE)
   var FIXED = [62.7, 58.9, 68.2, 76.2];
+  // does the language model matter? mean of the three kitchens, all tasks: rule-based parser only (generous mapping: 59.2, 61.5, 59.9 per kitchen), Gemma 4 alone, MISE (parser_baseline score.json; paper tab:ablation)
+  var LM = [60.2, 62.7, 76.2];
+  // fine-tuning: mean of held-out kitchens A and B, all tasks (paper tab:finetune): Gemma 4 alone, fine-tuned without Scene Memory, MISE, MISE-FT (mean of the two runs, 80.8 and 81.8)
+  var FT = [65.2, 77.4, 77.2, 81.3];
   var PERC = [[48.3, 79.1, 92.4], [66.2, 84.9, 94.8], [57.1, 78.7, 91.5]]; // main alone, fine-tuned control, main + closer look
 
   function series() {
@@ -188,8 +192,8 @@
     });
     $$('.ktabs button').forEach(function (b) { b.setAttribute('aria-selected', String(+b.dataset.k === mainK)); });
     $('#mainFine').textContent = mainK === 1
-      ? tr('The development kitchen, where MISE was built.', 'آشپزخانهٔ توسعه، که MISE در آن ساخته شد.')
-      : tr(kName(mainK) + ', never used while building MISE. Close to both large models, as in the development kitchen.', kName(mainK) + '، که در ساخت MISE به کار نرفته بود. نزدیک به هر دو مدل بزرگ، مثل آشپزخانهٔ توسعه.');
+      ? tr('The development kitchen, where MISE was built. Sequential is as high as the large models, atomic about two points lower.', 'MISE در همین آشپزخانه ساخته شد. در کارهای ترتیبی هم‌پای مدل‌های پیشرو است و در کارهای اتمی حدود دو واحد پایین‌تر.')
+      : tr(kName(mainK) + ', held out from development. Sequential is within the large models\u2019 range, atomic is below them.', (mainK === 2 ? 'آشپزخانهٔ جداشدهٔ A در ساختن MISE به کار نرفت. در کارهای ترتیبی، MISE در بازهٔ نتایج مدل‌های پیشرو است و در کارهای اتمی پایین‌تر از آن‌ها.' : 'آشپزخانهٔ جداشدهٔ B در ساختن MISE به کار نرفت. در کارهای ترتیبی، MISE در بازهٔ نتایج مدل‌های پیشرو است و در کارهای اتمی پایین‌تر از آن‌ها.'));
     var lg = $('#legend'); lg.innerHTML = '';
     S.slice(0, 4).forEach(function (s) { var it = h('span', ''); it.appendChild(h('i', 'sw ' + s.cls)); it.appendChild(document.createTextNode(s.name)); lg.appendChild(it); });
     var fr = h('span', ''); fr.appendChild(h('i', 'sw fr')); fr.appendChild(document.createTextNode(tr('frontier level', 'سطح مدل‌های پیشرو'))); lg.appendChild(fr);
@@ -264,6 +268,17 @@
     var L = [tr('no memory', 'بدون حافظه'), tr('whole step list', 'همهٔ دستورها'), tr('short fixed list', 'فهرست کوتاه ثابت'), tr('Scene Memory', 'حافظهٔ صحنه')];
     var rows = FIXED.map(function (v, i) { return { label: L[i], v: v, cls: i === 3 ? 's1' : 's0', tip: 'Gemma 4 · ' + L[i] + ' · ' + pct(v) }; });
     hchart($('#chFixed'), 'fixed', rows);
+  }
+
+  function chartLM() {
+    var L = [tr('no language model', 'بدون مدل زبانی'), tr('Gemma 4 alone', 'Gemma 4 به‌تنهایی'), 'MISE'];
+    var rows = LM.map(function (v, i) { return { label: L[i], v: v, cls: i === 2 ? 's1' : 's0', tip: L[i] + ' \u00B7 ' + pct(v) }; });
+    hchart($('#chLM'), 'lm', rows);
+  }
+  function chartFT() {
+    var L = [tr('Gemma 4 alone', 'Gemma 4 به‌تنهایی'), tr('fine-tuned only', 'فقط ریزتنظیم'), 'MISE', 'MISE-FT'];
+    var rows = FT.map(function (v, i) { return { label: L[i], v: v, cls: i >= 2 ? 's1' : 's0', tip: L[i] + (i === 3 ? tr(' (mean of two runs)', ' (میانگین دو بار آموزش)') : '') + ' \u00B7 ' + pct(v) }; });
+    hchart($('#chFT'), 'ft', rows);
   }
 
   /* ---------- tables ---------- */
@@ -377,7 +392,7 @@
   });
 
   /* ---------- render + resize ---------- */
-  function renderAll() { chartMain(); chartLift(); chartPerc(); chartAbs(); chartSize(); chartFixed(); tables(); wires(); }
+  function renderAll() { chartMain(); chartLift(); chartPerc(); chartAbs(); chartSize(); chartFixed(); chartLM(); chartFT(); tables(); wires(); }
   var lastW = innerWidth, rt;
   window.addEventListener('resize', function () {
     clearTimeout(rt); rt = setTimeout(function () { if (Math.abs(innerWidth - lastW) > 2) { lastW = innerWidth; wires(); } }, 120);
