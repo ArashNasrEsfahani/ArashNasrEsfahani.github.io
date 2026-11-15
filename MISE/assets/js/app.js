@@ -95,7 +95,7 @@
     if (v.dataset.code === code) return;
     v.dataset.code = code;
     v.poster = 'assets/img/explainer_' + code + '.jpg';
-    v.pause(); v.querySelector('source').src = 'assets/video/explainer_' + code + '_v3.mp4'; v.load();
+    v.pause(); v.querySelector('source').src = 'assets/video/explainer_' + code + '_v4.mp4'; v.load();
   }
 
   /* ---------- tooltip ---------- */
