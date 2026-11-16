@@ -265,6 +265,9 @@ h3{font:400 26px/1.2 var(--serif);margin:0}
 .sw.s1,.hbar.s1{background:linear-gradient(90deg,var(--gold2),var(--gold3))}
 .vcol.s2 .vbar,.sw.s2,.hbar.s2{background:var(--bar1)}
 .vcol.s3 .vbar,.sw.s3,.hbar.s3{background:var(--bar2)}
+.vcol.s6 .vbar{background:linear-gradient(180deg,#f7d98a,#e2b64f 55%,#b98a2a);box-shadow:0 0 0 2px #fff3cf,0 0 0 3px rgba(185,138,42,.55),0 0 26px rgba(240,200,100,.6)}
+.sw.s6{background:linear-gradient(90deg,#e2b64f,#f7d98a);box-shadow:0 0 0 1px #fff3cf,0 0 0 2px rgba(185,138,42,.55)}
+.vcol.s6 .vval{color:var(--gold)}
 .sw.s4,.hbar.s4{background:#8a6fb8}
 .sw.s5,.hbar.s5{background:#a9824a}
 .minis.two{grid-template-columns:repeat(2,1fr)}

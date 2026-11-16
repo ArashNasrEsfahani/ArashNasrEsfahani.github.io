@@ -120,6 +120,8 @@
   /* ---------- data (paper's final analysis; % of tasks completed; kitchens: development kitchen (FloorPlan1), held-out kitchens A (FloorPlan15) and B (FloorPlan17)) ---------- */
   // the main result per kitchen (atomic, sequential): Gemma 4 alone, Gemma 4 + Scene Memory (MISE), Opus 5.5, GPT6-Sol (both without)
   var MAIN_K = {"1": [{"key": "atomic", "vals": [73.4, 92.6, 94.7, 94.7], "ci": [null, [85.0, 98.1], [88.9, 100.0], [91.0, 98.7]]}, {"key": "seq", "vals": [62.0, 87.0, 82.0, 83.0], "ci": [null, [78.1, 94.0], [67.0, 94.0], [74.0, 92.0]]}], "2": [{"key": "atomic", "vals": [76.6, 89.4, 95.7, 97.9], "ci": [null, null, null, null]}, {"key": "seq", "vals": [74.3, 91.4, 92.9, 92.9], "ci": [null, null, null, null]}], "3": [{"key": "atomic", "vals": [75.0, 82.6, 90.2, 94.6], "ci": [null, null, null, null]}, {"key": "seq", "vals": [70.8, 88.9, 93.1, 79.2], "ci": [null, null, null, null]}]};
+  // MISE-FT (mean of the two training runs; atomic, sequential), held-out kitchens A and B only: it was trained on the development kitchen and never tested there
+  var MAIN_FT = {"2": [87.8, 92.9], "3": [87.0, 93.8]};
   var MAIN = MAIN_K[1];
   var mainK = 1;
   // abstract goals in every kitchen, all with Scene Memory except the frontier models: Gemma 4 (MISE), Gemma 4 E4B, Qwen 3.5 9B, Opus 5.5, GPT6-Sol
@@ -142,7 +144,8 @@
       { name: 'Opus\u00A05.5', cls: 's2' },
       { name: 'GPT6-Sol', cls: 's3' },
       { name: tr('Gemma 4 E4B + Scene Memory', 'Gemma 4 E4B با حافظهٔ صحنه'), cls: 's4' },
-      { name: tr('Qwen 3.5 9B + Scene Memory', 'Qwen 3.5 9B با حافظهٔ صحنه'), cls: 's5' }
+      { name: tr('Qwen 3.5 9B + Scene Memory', 'Qwen 3.5 9B با حافظهٔ صحنه'), cls: 's5' },
+      { name: 'MISE-FT', cls: 's6' }
     ];
   }
   function lvlName(k) { return { atomic: tr('Atomic', 'اتمی'), seq: tr('Sequential', 'ترتیبی'), abstract: tr('Abstract goal', 'هدف انتزاعی') }[k]; }
@@ -166,19 +169,24 @@
   /* ---------- main chart: atomic + sequential ---------- */
   function chartMain() {
     var host = $('#chMain'); host.innerHTML = '';
-    var S = series();
+    // series 0-3 as before, 4 = MISE-FT (held-out tabs only); shown right after Gemma 4 + Scene Memory
+    var S = series(); S = S.slice(0, 4).concat([S[6]]);
+    var order = MAIN_FT[mainK] ? [0, 1, 4, 2, 3] : [0, 1, 2, 3];
     MAIN_K[mainK].forEach(function (g, gi) {
       var grp = h('div', 'grp');
       var plot = h('div', 'vchart');
       var frontier = Math.max(g.vals[2], g.vals[3]);
       var fl = h('div', 'frontier'); fl.style.bottom = frontier + '%';
       plot.appendChild(fl);
-      g.vals.forEach(function (v, k) {
+      var vals = g.vals.slice();
+      if (MAIN_FT[mainK]) vals.push(MAIN_FT[mainK][gi]); // MISE-FT value is vals[4], held-out tabs only; the frontier line and the +gain label keep using vals[2], vals[3] and k === 1
+      order.forEach(function (k) {
+        var v = vals[k];
         var col = h('div', 'vcol ' + S[k].cls);
-        col.style.setProperty('--d', [520, 1150, 0, 120][k] + 'ms');
+        col.style.setProperty('--d', [520, 1150, 0, 120, 1500][k] + 'ms');
         var bar = h('div', 'vbar'); bar.style.height = v + '%';
         var lab = h('div', 'vval', num(v, 1)); lab.style.bottom = v + '%';
-        var tipT = S[k].name + ' · ' + lvlName(g.key) + ' · ' + pct(v) + (g.ci[k] ? tr(' (95% CI ', ' (بازهٔ ۹۵٪: ') + num(g.ci[k][0], 1) + '–' + num(g.ci[k][1], 1) + ')' : '');
+        var tipT = S[k].name + (k === 4 ? tr(' (mean of two training runs)', ' (میانگین دو بار آموزش)') : '') + ' · ' + lvlName(g.key) + ' · ' + pct(v) + (g.ci[k] ? tr(' (95% CI ', ' (بازهٔ ۹۵٪: ') + num(g.ci[k][0], 1) + '–' + num(g.ci[k][1], 1) + ')' : '');
         col.setAttribute('data-tip', tipT); col.setAttribute('tabindex', '0'); col.setAttribute('aria-label', tipT);
         col.appendChild(bar); col.appendChild(lab);
         if (k === 1) { var dl = h('div', 'vdelta', plus(v - g.vals[0], 0)); dl.style.bottom = v + '%'; col.appendChild(dl); }
@@ -194,8 +202,14 @@
     $('#mainFine').textContent = mainK === 1
       ? tr('The development kitchen, where MISE was built. Sequential is as high as the large models, atomic about two points lower.', 'MISE در همین آشپزخانه ساخته شد. در کارهای ترتیبی هم‌پای مدل‌های پیشرو است و در کارهای اتمی حدود دو واحد پایین‌تر.')
       : tr(kName(mainK) + ', held out from development. Sequential is within the large models\u2019 range, atomic is below them.', (mainK === 2 ? 'آشپزخانهٔ جداشدهٔ A در ساختن MISE به کار نرفت. در کارهای ترتیبی، MISE در بازهٔ نتایج مدل‌های پیشرو است و در کارهای اتمی پایین‌تر از آن‌ها.' : 'آشپزخانهٔ جداشدهٔ B در ساختن MISE به کار نرفت. در کارهای ترتیبی، MISE در بازهٔ نتایج مدل‌های پیشرو است و در کارهای اتمی پایین‌تر از آن‌ها.'));
+    var ftn = $('#mainFtNote');
+    if (!ftn) { ftn = h('p', 'fine'); ftn.id = 'mainFtNote'; $('#mainFine').insertAdjacentElement('afterend', ftn); }
+    ftn.hidden = mainK !== 1;
+    // FA text is a placeholder until the Persian sentence is written
+    ftn.textContent = mainK === 1 ? tr('MISE-FT is not shown here: it was trained in this kitchen.', 'در این نمودار ستونی برای MISE-FT نیست، چون در همین آشپزخانه ریزتنظیم شد.') : '';
     var lg = $('#legend'); lg.innerHTML = '';
-    S.slice(0, 4).forEach(function (s) { var it = h('span', ''); it.appendChild(h('i', 'sw ' + s.cls)); it.appendChild(document.createTextNode(s.name)); lg.appendChild(it); });
+    // the MISE-FT entry applies to the held-out tabs only; it stays in the legend on the development tab, where the note below explains its absence
+    order.map(function (k) { return S[k]; }).forEach(function (s) { var it = h('span', ''); it.appendChild(h('i', 'sw ' + s.cls)); it.appendChild(document.createTextNode(s.name)); lg.appendChild(it); });
     var fr = h('span', ''); fr.appendChild(h('i', 'sw fr')); fr.appendChild(document.createTextNode(tr('frontier level', 'سطح مدل‌های پیشرو'))); lg.appendChild(fr);
   }
 
