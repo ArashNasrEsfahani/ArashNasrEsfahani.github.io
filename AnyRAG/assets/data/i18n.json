@@ -691,10 +691,6 @@
   "en": "every pipeline and experiment, the runner of the pre-specified test, evaluation and analysis scripts",
   "fa": "همهٔ پایپ‌لاین‌ها و آزمایش‌ها، اجراکنندهٔ آزمون ازپیش‌تعیین‌شده، و اسکریپت‌های ارزیابی و تحلیل"
  },
- "rsc.st.prep2": {
-  "en": "In preparation; the repository is private",
-  "fa": "در دست آماده‌سازی؛ مخزن کد خصوصی است"
- },
  "rsc.bench": {
   "en": "Benchmark",
   "fa": "بنچمارک"
@@ -756,8 +752,8 @@
   "fa": "تغییر میان پوستهٔ روشن و تیره"
  },
  "hero.btn.code.title": {
-  "en": "The repository is private until the paper is accepted",
-  "fa": "مخزن کد تا پذیرش مقاله خصوصی است"
+  "en": "The code on GitHub (opens in a new tab)",
+  "fa": "کد در GitHub (در زبانهٔ تازه باز می‌شود)"
  },
  "copy.done": {
   "en": "Copied",
@@ -1056,8 +1052,8 @@
   "fa": "بنچمارک و نتایج: به‌صورت عمومی در Hugging Face"
  },
  "rsc.l2": {
-  "en": "Paper and code: in preparation (the code repository is private)",
-  "fa": "مقاله و کد: در دست آماده‌سازی (مخزن کد خصوصی است)"
+  "en": "Code: public on GitHub. Paper: in preparation",
+  "fa": "کد: به‌صورت عمومی در GitHub. مقاله: در دست آماده‌سازی"
  },
  "rsc.l3": {
   "en": "A reviewer copy is available on request",
@@ -1078,5 +1074,13 @@
  "trust.gate.3": {
   "en": "Neither primary test was significant.",
   "fa": "هیچ‌یک از دو آزمون اصلی معنادار نبود."
+ },
+ "hero.btn.code.where": {
+  "en": "on GitHub",
+  "fa": "در GitHub"
+ },
+ "rsc.st.gh": {
+  "en": "GitHub",
+  "fa": "GitHub"
  }
 }
