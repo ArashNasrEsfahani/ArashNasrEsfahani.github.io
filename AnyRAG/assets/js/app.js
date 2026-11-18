@@ -268,25 +268,31 @@
     snap();
   }
 
-  /* ---------- BibTeX copy ---------- */
-  var copyBtn = $('#copyBib');
-  if (copyBtn) copyBtn.addEventListener('click', function () {
-    var text = $('#bibText').textContent, status = $('#copyStatus');
-    function done(ok) {
-      status.textContent = t(ok ? 'copy.done' : 'copy.fail');
-      copyBtn.classList.toggle('done', ok);
-      setTimeout(function () { status.textContent = ''; copyBtn.classList.remove('done'); }, 2400);
-    }
-    function legacy() {
-      try {
-        var sel = window.getSelection(), rg = document.createRange();
-        rg.selectNodeContents($('#bibText')); sel.removeAllRanges(); sel.addRange(rg);
-        var ok = document.execCommand && document.execCommand('copy');
-        done(!!ok);
-      } catch (e) { done(false); }
-    }
-    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(function () { done(true); }, legacy);
-    else legacy();
+  /* ---------- copy buttons: BibTeX and the skill's install commands ---------- */
+  function wireCopy(btn, target, status) {
+    if (!btn || !target || !status) return;
+    btn.addEventListener('click', function () {
+      var text = target.textContent;
+      function done(ok) {
+        status.textContent = t(ok ? 'copy.done' : 'copy.fail');
+        btn.classList.toggle('done', ok);
+        setTimeout(function () { status.textContent = ''; btn.classList.remove('done'); }, 2400);
+      }
+      function legacy() {
+        try {
+          var sel = window.getSelection(), rg = document.createRange();
+          rg.selectNodeContents(target); sel.removeAllRanges(); sel.addRange(rg);
+          var ok = document.execCommand && document.execCommand('copy');
+          done(!!ok);
+        } catch (e) { done(false); }
+      }
+      if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(function () { done(true); }, legacy);
+      else legacy();
+    });
+  }
+  wireCopy(document.getElementById('copyBib'), document.getElementById('bibText'), document.getElementById('copyStatus'));
+  Array.prototype.forEach.call(document.querySelectorAll('[data-copy]'), function (b) {
+    wireCopy(b, document.getElementById(b.getAttribute('data-copy')), document.getElementById(b.getAttribute('data-copy-status')));
   });
 
   /* ---------- start ---------- */

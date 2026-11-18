@@ -1,6 +1,6 @@
 /* AnyRAG pipeline scene (W4). Classic script.
    3D (three.js 0.160.0 from cdnjs, loaded lazily) in #pipeline3d; 2D SVG fallback in #pipeline2d when WebGL is
-   missing or the screen is narrower than 720 px. One shared controller: question, pipeline, five steps, play/pause.
+   missing or the screen is narrower than 720 px. One shared controller: question, pipeline, six numbered stages, previous/play/next, replay.
    Data: assets/data/viz_pipeline.json (recorded development traces, reduced). Strings {en, fa}; fa "" falls back to en.
    Listens to 'langchange' and 'themechange' on document. Respects prefers-reduced-motion (no autoplay, no tweening). */
 (function () {
@@ -11,7 +11,26 @@
   /* cache-busting: the ?v= of this script's own URL (set in index.html) is added to the files it loads */
   var VQ = (function () { try { var v = new URL(document.currentScript.src).searchParams.get('v'); return v ? '?v=' + encodeURIComponent(v) : ''; } catch (e) { return ''; } })();
   var BASE = (function () { try { return new URL('../data/', SCRIPT.src).href; } catch (e) { return 'assets/data/'; } })();
-  var STEPS = 5, STEP_MS = 3600, BUDGET = 6000;
+  /* six stages, one at a time: 0 the question arrives, 1 search (candidates light up), 2 order or select (the
+     pipeline's own step: fusion, the reranker or the selection call; losers fade), 3 pack into the budget (the budget
+     bar fills), 4 the pack goes to the reader, 5 the answer comes out. Each stage moves for about 1.1 s, then holds. */
+  var STEPS = 6, STEP_MS = 2700, MOVE_MS = 1100, BUDGET = 6000;
+  /* step names and the few new captions live in i18n.json (pipe.*); this table is the fallback if it has not loaded */
+  var FB = {
+    'pipe.steps': { en: 'Steps of the pipeline', fa: 'گام‌های پایپ‌لاین' },
+    'pipe.st.q': { en: 'Question', fa: 'پرسش' }, 'pipe.st.search': { en: 'Search', fa: 'جست‌وجو' },
+    'pipe.st.fuse': { en: 'Fuse and order', fa: 'ادغام و ترتیب' }, 'pipe.st.rerank': { en: 'Rerank', fa: 'بازرتبه‌بندی' },
+    'pipe.st.select': { en: 'Select', fa: 'گزینش' }, 'pipe.st.pack': { en: 'Pack', fa: 'بسته‌سازی' },
+    'pipe.st.read': { en: 'To the reader', fa: 'به مدل پاسخ‌گو' }, 'pipe.st.answer': { en: 'Answer', fa: 'پاسخ' },
+    'pipe.stage.rerank': { en: 'Reranker', fa: 'بازرتبه‌ساز' }, 'pipe.stage.select': { en: 'Selection call', fa: 'فراخوانی گزینش' },
+    'pipe.budget': { en: 'Budget', fa: 'بودجه' }, 'pipe.chars': { en: 'characters', fa: 'کاراکتر' },
+    'pipe.cap.read': { en: 'The pack, {n} passages, goes to the reader. It is all the reader sees.', fa: 'بسته با {n} بخش به مدل پاسخ‌گو می‌رسد. مدل پاسخ‌گو جز همین بسته چیزی نمی‌بیند.' },
+    'pipe.replay': { en: 'Replay', fa: 'پخش دوباره' }
+  };
+  function I(k) { var A = window.AnyRAG; if (A && A.t) { var v = A.t(k); if (v && v !== k) return v; } return T(FB[k]) || k; }
+  /* the pipeline's own middle step */
+  function midKey() { return st.pipe === 'hr' ? 'rerank' : st.pipe === 'lex5b' ? 'select' : 'fuse'; }
+  function stepName(k) { return I(['pipe.st.q', 'pipe.st.search', 'pipe.st.' + midKey(), 'pipe.st.pack', 'pipe.st.read', 'pipe.st.answer'][k]); }
   var mqReduce = window.matchMedia ? window.matchMedia('(prefers-reduced-motion: reduce)') : { matches: false };
   var mqWide = window.matchMedia ? window.matchMedia('(min-width: 720px)') : { matches: true };
 
@@ -62,19 +81,23 @@
     var dropIdx = {}, nd = 0;
     list2.forEach(function (i) { if (packIdx[i] == null) dropIdx[i] = nd++; });
     var gDocs = ex.docs.filter(function (d) { return d.g; }).length;
-    return { ex: ex, cell: cell, list1: list1, list2: list2, ids: ids, packIdx: packIdx, packPos: packPos, ev1: ev1, srcDocs: srcDocs, dropIdx: dropIdx, gDocs: gDocs,
+    var pick = {}; cell.pack.forEach(function (p) { if (p.pick) pick[p.p] = 1; });
+    return { ex: ex, cell: cell, list1: list1, list2: list2, ids: ids, packIdx: packIdx, packPos: packPos, ev1: ev1, srcDocs: srcDocs, dropIdx: dropIdx, gDocs: gDocs, pick: pick,
+      used: Math.min(1, cell.rendered / BUDGET),
       evIds: ids.filter(function (i) { return ex.passages[i].sp.length > 0; }) };
   }
   /* state of item i at step k: {zone: 'doc'|'list'|'drop'|'pack'|'reader', slot, di, vis, lit}. 'drop' is a candidate
      the pack left out; it keeps its list slot for the 2D view, and di is its place on the 3D pile. */
   function itemState(M, i, k) {
     var r1 = M.list1.indexOf(i), r2 = M.list2.indexOf(i), inPack = M.packIdx[i] != null, ev = M.ex.passages[i].sp.length > 0;
+    var pick = !!(M.pick && M.pick[i]);
     if (k === 0) return { zone: 'doc', vis: 0 };
     if (k === 1) return r1 >= 0 ? { zone: 'list', slot: r1, vis: 1, ev: ev } : { zone: 'doc', vis: 0 };
-    if (k === 2) return r2 >= 0 ? { zone: 'list', slot: r2, vis: 1, ev: ev } : (r1 >= 0 ? { zone: 'list', slot: r1, vis: 0.15, ev: ev, out: 1 } : { zone: 'doc', vis: 0 });
+    // order or select: the new order; what will not fit the pack (the losers) fades
+    if (k === 2) return r2 >= 0 ? { zone: 'list', slot: r2, vis: inPack ? 1 : 0.32, ev: ev, pick: pick, lose: !inPack } : (r1 >= 0 ? { zone: 'list', slot: r1, vis: 0.12, ev: ev, out: 1, lose: true } : { zone: 'doc', vis: 0 });
     if (k === 3) return inPack ? { zone: 'pack', vis: 1, ev: ev, pp: M.packPos[i] } : (r2 >= 0 ? { zone: 'drop', slot: r2, di: M.dropIdx[i], vis: 0.28, ev: ev } : { zone: 'doc', vis: 0 });
     if (inPack && M.packPos[i].lit) return { zone: 'reader', vis: 1, ev: ev, pp: M.packPos[i], lit: true };
-    return inPack ? { zone: 'pack', vis: 0.35, ev: ev, pp: M.packPos[i] } : (r2 >= 0 ? { zone: 'drop', slot: r2, di: M.dropIdx[i], vis: 0.12, ev: ev } : { zone: 'doc', vis: 0 });
+    return inPack ? { zone: 'reader', vis: 0, ev: ev, pp: M.packPos[i] } : (r2 >= 0 ? { zone: 'drop', slot: r2, di: M.dropIdx[i], vis: 0.12, ev: ev } : { zone: 'doc', vis: 0 });
   }
   function caption(M, k) {
     var c = M.cell;
@@ -82,7 +105,8 @@
     if (k === 1) return fill(S('s1'), { ev: fmt(M.ev1) });
     if (k === 2) return S('s2_' + (st.pipe === 'lex5b' ? 'lex' : st.pipe));
     if (k === 3) return fill(S('s3'), { n: fmt(c.pack.length), chars: fmt(c.rendered) });
-    return (c.correct ? S('s4_ok') : S('s4_no')) + ' ' + (c.full ? S('full_yes') : S('full_no'));
+    if (k === 4) return fill(I('pipe.cap.read'), { n: fmt(c.pack.length) }) + ' ' + (c.full ? S('full_yes') : S('full_no'));
+    return c.correct ? S('s4_ok') : S('s4_no');
   }
 
   /* ---------------- widget (controls, caption) ---------------- */
@@ -105,21 +129,31 @@
     var q = h('div', { 'class': 'pv-q' }, root);
     var qt = h('p', { 'class': 'pv-qt', dir: 'auto' }, q);
     var qgl = h('p', { 'class': 'pv-gl', dir: 'auto' }, q);
+    // the six stages as numbered steps; each is also a button that jumps to it
+    var steps = h('ol', { 'class': 'pv-steps', 'aria-label': I('pipe.steps') }, root);
+    var stepB = [];
+    for (var i = 0; i < STEPS; i++) (function (k) {
+      var li = h('li', null, steps);
+      var b = h('button', { type: 'button' }, li);
+      h('span', { 'class': 'pv-sn', 'aria-hidden': 'true' }, b, fmt(k + 1));
+      h('span', { 'class': 'pv-sl' }, b);
+      b.addEventListener('click', function () { stop(); go(k); });
+      stepB.push(b);
+    })(i);
     var stage = h('div', { 'class': 'pv-stage' + (mode === '2d' ? ' is-2d' : ''), role: 'img', 'aria-label': S('stage_label') }, root);
+    // the budget meter: empty until the pack step, then it fills as passages go in
+    var meter = h('div', { 'class': 'pv-meter', 'aria-hidden': 'true' }, root);
+    var mLab = h('span', { 'class': 'pv-ml' }, meter, I('pipe.budget'));
+    var mBar = h('span', { 'class': 'pv-mbar' }, meter); var mFill = h('i', null, mBar);
+    var mNum = h('span', { 'class': 'pv-mn' }, meter);
     var key = h('ul', { 'class': 'pv-key', 'aria-hidden': 'true' }, root);
     [['k-ev', S('legend_ev')], ['k-ot', S('legend_other')], ['k-pk', S('l_pack')]].forEach(function (k) { var li = h('li', null, key); h('i', { 'class': k[0] }, li); h('span', null, li, k[1]); });
     var ctrl = h('div', { 'class': 'pv-ctrl' }, root);
     var prev = h('button', { type: 'button', 'class': 'pv-btn', 'aria-label': S('prev') }, ctrl, '‹');
     var play = h('button', { type: 'button', 'class': 'pv-btn pv-play' }, ctrl);
     var next = h('button', { type: 'button', 'class': 'pv-btn', 'aria-label': S('next') }, ctrl, '›');
+    var replay = h('button', { type: 'button', 'class': 'pv-btn pv-replay' }, ctrl, '↺ ' + I('pipe.replay'));
     if (lang() === 'fa') { prev.textContent = '›'; next.textContent = '‹'; }
-    var dots = h('div', { 'class': 'pv-dots', role: 'group', 'aria-label': S('step') }, ctrl);
-    var dotB = [];
-    for (var i = 0; i < STEPS; i++) (function (k) {
-      var b = h('button', { type: 'button', 'aria-label': S('step') + ' ' + fmt(k + 1) + ' ' + S('of') + ' ' + fmt(STEPS) }, dots);
-      b.addEventListener('click', function () { stop(); go(k); });
-      dotB.push(b);
-    })(i);
     var stepn = h('span', { 'class': 'pv-stepn', 'aria-hidden': 'true' }, ctrl);
     var cap = h('p', { 'class': 'pv-cap', 'aria-live': 'polite', dir: 'auto' }, root);
     var ans = h('div', { 'class': 'pv-ans', hidden: '' }, root);
@@ -128,7 +162,22 @@
     prev.addEventListener('click', function () { stop(); go(Math.max(0, st.step - 1)); });
     next.addEventListener('click', function () { stop(); go(Math.min(STEPS - 1, st.step + 1)); });
     play.addEventListener('click', function () { if (st.playing) stop(); else start(); });
-    ui = { root: root, stage: stage, qBtns: qBtns, pBtns: pBtns, qt: qt, qgl: qgl, prev: prev, next: next, play: play, dots: dotB, stepn: stepn, cap: cap, ans: ans };
+    replay.addEventListener('click', function () { stop(); go(0, true); start(); });
+    ui = { root: root, stage: stage, qBtns: qBtns, pBtns: pBtns, qt: qt, qgl: qgl, prev: prev, next: next, play: play, replay: replay, steps: stepB, stepn: stepn, cap: cap, ans: ans,
+      meter: meter, mFill: mFill, mNum: mNum };
+  }
+  /* the budget meter follows the stage: 0 before packing; at the pack step it fills over the move, counting up */
+  var meterRaf = 0;
+  function setMeter(M, k, instant) {
+    if (!ui) return;
+    cancelAnimationFrame(meterRaf);
+    var to = k >= 3 ? M.used : 0, chars = k >= 3 ? M.cell.rendered : 0;
+    ui.meter.classList.toggle('is-on', k === 3);
+    ui.meter.classList.toggle('is-full', k >= 3);
+    function put(f) { ui.mFill.style.width = (f * to * 100).toFixed(2) + '%'; ui.mNum.textContent = fmt(Math.round(f * chars)) + ' ' + S('of') + ' ' + fmt(BUDGET) + ' ' + I('pipe.chars'); }
+    if (instant || k !== 3) { put(1); return; }
+    var t0 = performance.now(), dur = MOVE_MS + 400;
+    (function f(now) { var t = Math.min(1, (now - t0) / dur); put(t); if (t < 1) meterRaf = requestAnimationFrame(f); })(t0);
   }
   function syncUI(M) {
     ui.qBtns.forEach(function (b, i) { b.setAttribute('aria-pressed', String(i === st.ex)); });
@@ -139,7 +188,15 @@
     ui.prev.disabled = st.step === 0; ui.next.disabled = st.step === STEPS - 1;
     ui.play.textContent = st.playing ? S('pause') : (st.step === STEPS - 1 ? S('restart') : S('play'));
     ui.play.setAttribute('aria-pressed', String(st.playing));
-    ui.dots.forEach(function (b, i) { if (i === st.step) b.setAttribute('aria-current', 'step'); else b.removeAttribute('aria-current'); });
+    var own = st.pipe !== 'hybrid'; // the reranker and the selection call are steps of their own
+    ui.steps.forEach(function (b, i) {
+      b.querySelector('.pv-sl').textContent = stepName(i);
+      b.setAttribute('aria-label', S('step') + ' ' + fmt(i + 1) + ' ' + S('of') + ' ' + fmt(STEPS) + ': ' + stepName(i));
+      if (i === st.step) b.setAttribute('aria-current', 'step'); else b.removeAttribute('aria-current');
+      b.parentNode.className = (i < st.step ? 'is-done' : i === st.step ? 'is-cur' : '') + (i === 2 && own ? ' is-own' : '');
+    });
+    ui.root.setAttribute('data-step', String(st.step));
+    ui.root.setAttribute('data-pipe', st.pipe);
     ui.stepn.textContent = S('step') + ' ' + fmt(st.step + 1) + ' ' + S('of') + ' ' + fmt(STEPS);
     ui.cap.textContent = caption(M, st.step);
     var a = ui.ans; a.textContent = '';
@@ -160,6 +217,7 @@
     st.step = k;
     var M = model();
     syncUI(M);
+    setMeter(M, k, instant || mqReduce.matches);
     if (view) view.show(M, k, instant || mqReduce.matches);
   }
   function reset() { var was = st.playing; stop(); if (view) view.setData(model()); go(0, true); if (was) start(); }
@@ -249,13 +307,55 @@
     var postGeo = new THREE.BufferGeometry(); postGeo.setAttribute('position', new THREE.Float32BufferAttribute(postPts, 3));
     scene.add(new THREE.LineSegments(postGeo, postMat));
 
-    // labels
+    // labels: the five places, plus the question, the answer and the pipeline's own middle step
     var labs = {};
     [['pool', 'l_pool'], ['list', 'l_cands'], ['pack', 'l_pack'], ['reader', 'l_reader'], ['drop', 'l_drop']].forEach(function (p) {
       labs[p[0]] = h('div', { 'class': 'pv-lab', 'aria-hidden': 'true', dir: 'auto' }, stage, S(p[1]));
     });
+    labs.q = h('div', { 'class': 'pv-lab pv-lab-q', 'aria-hidden': 'true', dir: 'auto' }, stage, I('pipe.st.q'));
+    labs.ans = h('div', { 'class': 'pv-lab pv-lab-a', 'aria-hidden': 'true', dir: 'auto' }, stage, I('pipe.st.answer'));
+    labs.mid = h('div', { 'class': 'pv-lab pv-lab-mid', 'aria-hidden': 'true', dir: 'auto' }, stage, '');
     var anchors = { pool: new THREE.Vector3(Z.poolX, FLOOR + 4.3, 0), list: new THREE.Vector3(Z.listX, Z.top + 0.45, 0), pack: new THREE.Vector3(Z.packX, Z.top + 0.45, 0),
-      reader: new THREE.Vector3(Z.readerX, 1.75, 0), drop: new THREE.Vector3(0.1, FLOOR + 1.2, 2.6) };
+      reader: new THREE.Vector3(Z.readerX, 1.75, 0), drop: new THREE.Vector3(0.1, FLOOR + 1.2, 2.6),
+      q: new THREE.Vector3(Z.poolX, 2.75, 0.4), ans: new THREE.Vector3(Z.readerX, 3.75, 0), mid: new THREE.Vector3(Z.listX - 2.6, Z.top - 0.9, 0) };
+    // which place each stage happens at, for the highlighted label
+    var curLab = ['q', 'list', 'list', 'pack', 'reader', 'ans'];
+
+    // the flow: faint dashed connectors between the places, and particles that run forward along the active one
+    var LMID = Z.top - Z.colH / 2;
+    var V = function (x, y, z) { return new THREE.Vector3(x, y, z); };
+    var segs = [
+      [V(Z.poolX, 4.4, 0.4), V(Z.poolX, FLOOR + 3.2, 0.4)],
+      [V(Z.poolX + 2.5, FLOOR + 2.4, 0.4), V(Z.listX - 1.55, LMID, 0)],
+      [V(Z.listX, Z.top - 0.1, 0.62), V(Z.listX, Z.top - Z.colH + 0.1, 0.62)],
+      [V(Z.listX + 1.5, LMID, 0), V(Z.packX - 1.55, LMID, 0)],
+      [V(Z.packX + 1.5, LMID, 0), V(Z.readerX - 1.65, -0.2, 0)],
+      [V(Z.readerX, 1.4, 0), V(Z.readerX, 2.6, 0)]
+    ];
+    var conMat = new THREE.LineDashedMaterial({ color: col.lineMuted, dashSize: 0.22, gapSize: 0.18, transparent: true, opacity: 0.9 });
+    [1, 3, 4].forEach(function (i) {
+      var g = new THREE.BufferGeometry().setFromPoints(segs[i]);
+      var ln = new THREE.Line(g, conMat); ln.computeLineDistances(); scene.add(ln);
+    });
+    var NP = 14, pPos = new Float32Array(NP * 3);
+    var pGeo = new THREE.BufferGeometry(); pGeo.setAttribute('position', new THREE.BufferAttribute(pPos, 3));
+    var pMat = new THREE.PointsMaterial({ color: col.turq, size: 0.42, transparent: true, opacity: 0.95, depthWrite: false });
+    var parts = new THREE.Points(pGeo, pMat); parts.visible = false; scene.add(parts);
+    var flow = null; // {seg, t0, t1}
+    function flowAt(now) {
+      if (!flow || now > flow.t1) { parts.visible = false; return false; }
+      var a = segs[flow.seg][0], b = segs[flow.seg][1], lift = flow.seg === 2 || flow.seg === 0 || flow.seg === 5 ? 0 : 0.9;
+      var fade = Math.min(1, (flow.t1 - now) / 400, (now - flow.t0) / 200);
+      for (var j = 0; j < NP; j++) {
+        var t = ((now - flow.t0) / 850 + j / NP) % 1;
+        pPos[j * 3] = a.x + (b.x - a.x) * t;
+        pPos[j * 3 + 1] = a.y + (b.y - a.y) * t + Math.sin(Math.PI * t) * lift;
+        pPos[j * 3 + 2] = a.z + (b.z - a.z) * t;
+      }
+      pGeo.attributes.position.needsUpdate = true;
+      pMat.opacity = 0.95 * Math.max(0, fade); parts.visible = true;
+      return true;
+    }
 
     // camera orbit (limited), three-quarter view from the front left
     var orbit = { az: -0.36, el: 0.34, baseAz: -0.36, baseEl: 0.34, dist: 30 };
@@ -332,6 +432,24 @@
         scene.add(mesh);
         items[pi] = { mesh: mesh, cur: cur, from: null, tgt: null, delay: 0 };
       });
+      // the question (a lapis card that arrives over the pool) and the answer (a card that leaves the reader)
+      ['Q', 'A'].forEach(function (kq) {
+        var mt = new THREE.MeshStandardMaterial({ roughness: 0.5, metalness: 0, transparent: true, opacity: 0, color: col.accent });
+        var mesh = new THREE.Mesh(plateGeo, mt); mesh.visible = false; scene.add(mesh);
+        var t0 = target(kq, -1);
+        var cur = { x: t0.x, y: t0.y, z: t0.z, sx: t0.sx, sy: t0.sy, sz: t0.sz, op: 0, r: t0.c.r, g: t0.c.g, b: t0.c.b, e: 0 };
+        items[kq] = { mesh: mesh, cur: cur, from: null, tgt: null, delay: 0 };
+      });
+    }
+    function cardTarget(kq, k) {
+      if (kq === 'Q') {
+        if (k < 0) return { x: Z.poolX, y: 5.2, z: 0.4, sx: 2.6, sy: 0.42, sz: 0.5, op: 0, c: col.accent, e: 0.2 };
+        if (k === 0) return { x: Z.poolX, y: 1.9, z: 0.4, sx: 2.6, sy: 0.42, sz: 0.5, op: 1, c: col.accent, e: 0.35 };
+        return { x: Z.poolX, y: FLOOR + 3.4, z: 0.4, sx: 1.2, sy: 0.12, sz: 0.3, op: 0, c: col.accent, e: 0 };
+      }
+      var good = M && M.cell.correct ? col.turq : col.saff;
+      if (k === 5) return { x: Z.readerX, y: 3.0, z: 0, sx: 2.8, sy: 0.5, sz: 0.55, op: 1, c: good, e: 0.45 };
+      return { x: Z.readerX, y: 0.4, z: 0, sx: 1.2, sy: 0.12, sz: 0.4, op: 0, c: good, e: 0 };
     }
     function docColors(k) {
       if (!docMesh) return;
@@ -344,11 +462,14 @@
       docMesh.instanceColor.needsUpdate = true;
     }
     function target(pi, k) {
+      if (pi === 'Q' || pi === 'A') return cardTarget(pi, k);
       var s = itemState(M, pi, k), p = M.ex.passages[pi];
       var w = 0.8 + 1.7 * Math.min(p.n, 1200) / 1200;
-      var base = s.ev ? col.turq : col.plate;
+      var base = s.ev ? col.turq : (s.pick && k === 2 ? col.accent : col.plate);
       if (s.zone === 'doc') { var dp = docPos(p.d); return { x: dp.x, y: dp.y + dp.h / 2, z: dp.z, sx: 0.3, sy: 0.05, sz: 0.3, op: 0, c: base, e: 0 }; }
-      if (s.zone === 'list') return { x: Z.listX, y: Z.top - 0.1 - s.slot * (Z.colH / 40), z: 0, sx: w, sy: Z.colH / 40 * 0.66, sz: 0.7, op: Math.max(s.vis, s.out ? 0.22 : 0), c: base, e: s.ev ? 0.25 : 0 };
+      // at search the candidates arrive lit (emissive), then settle; at order/select the losers slide back and fade
+      if (s.zone === 'list') return { x: Z.listX + (k === 2 && s.lose ? 0.35 : 0), y: Z.top - 0.1 - s.slot * (Z.colH / 40), z: k === 2 && s.lose ? -0.35 : 0, sx: w, sy: Z.colH / 40 * 0.66, sz: 0.7,
+        op: Math.max(s.vis, s.out ? 0.12 : 0), c: base, e: s.ev ? 0.3 : (k === 1 ? 0.18 : s.pick && k === 2 ? 0.25 : 0) };
       if (s.zone === 'drop') {
         // the pile: stacks of four in two rows of five, lying on the floor in front of the candidates
         var st2 = Math.floor(s.di / 4), lv = s.di % 4, cx = st2 % 5, rz = Math.floor(st2 / 5) % 2;
@@ -380,20 +501,29 @@
     var curStep = 0;
     function show(m, k, instant) {
       if (m !== M) setData(m);
-      curStep = k;
+      var back = k < curStep; curStep = k;
       docColors(k);
       var endCol = k >= 4 ? (M.cell.full ? col.turq : col.saff) : col.ink;
       readerEdgeMat.color.copy(endCol);
-      readerMat.emissive.copy(k >= 4 && M.cell.full ? col.turq : new THREE.Color(0x000000)).multiplyScalar(0.12);
-      var dur = instant ? 0 : 1300;
-      M.ids.forEach(function (pi) {
+      readerMat.emissive.copy(k >= 4 && M.cell.full ? col.turq : new THREE.Color(0x000000)).multiplyScalar(k === 5 ? 0.3 : 0.12);
+      frameMat.opacity = k === 3 ? 1 : 0.6; guideMat.color.copy(k === 2 && st.pipe !== 'hybrid' ? col.accent : col.lineMuted);
+      var dur = instant ? 0 : MOVE_MS, nPack = Math.max(1, M.cell.pack.length);
+      M.ids.concat(['Q', 'A']).forEach(function (pi) {
         var it = items[pi], t = target(pi, k);
         it.from = { x: it.cur.x, y: it.cur.y, z: it.cur.z, sx: it.cur.sx, sy: it.cur.sy, sz: it.cur.sz, op: it.cur.op, r: it.cur.r, g: it.cur.g, b: it.cur.b, e: it.cur.e };
         it.tgt = { x: t.x, y: t.y, z: t.z, sx: t.sx, sy: t.sy, sz: t.sz, op: t.op, r: t.c.r, g: t.c.g, b: t.c.b, e: t.e };
+        it.dur = dur;
+        if (instant || back || pi === 'Q' || pi === 'A') { it.delay = pi === 'A' && !instant && !back ? 250 : 0; return; }
         var s1 = itemState(M, pi, k);
-        it.delay = instant ? 0 : Math.min(500, (s1.zone === 'pack' || s1.zone === 'reader' ? (M.packIdx[pi] || 0) * 70 : s1.zone === 'drop' ? 200 + s1.di * 8 : (s1.slot || 0) * 9));
+        // the pack fills one passage after another, in step with the budget meter
+        if (k === 3 && s1.zone === 'pack') { it.delay = (M.packIdx[pi] || 0) * (900 / nPack); it.dur = 700; }
+        else if (k === 3 && s1.zone === 'drop') it.delay = 1000 + s1.di * 6;
+        else if (k >= 4) it.delay = (M.packIdx[pi] || 0) * 60;
+        else it.delay = Math.min(450, (s1.slot || 0) * 11);
       });
-      anim = { t0: performance.now(), dur: dur };
+      var now = performance.now();
+      anim = { t0: now };
+      flow = instant || back ? null : { seg: k, t0: now, t1: now + MOVE_MS + 900 };
       kick();
     }
     function frameStep(now) {
@@ -404,7 +534,7 @@
       if (anim) {
         Object.keys(items).forEach(function (pi) {
           var it = items[pi]; if (!it.tgt) return;
-          var t = anim.dur ? (now - anim.t0 - it.delay) / anim.dur : 1;
+          var t = it.dur ? (now - anim.t0 - it.delay) / it.dur : 1;
           t = Math.max(0, Math.min(1, t));
           if (t < 1) busy = true;
           var e = ease(t), f = it.from, g = it.tgt, c = it.cur;
@@ -416,6 +546,7 @@
         });
         if (!busy) anim = null;
       }
+      if (flowAt(now)) busy = true;
       renderer.render(scene, camera);
       placeLabels();
       if (busy || drag) kick();
@@ -427,8 +558,14 @@
         v.copy(anchors[k]).project(camera);
         labs[k].style.left = ((v.x + 1) / 2 * W) + 'px';
         labs[k].style.top = ((1 - v.y) / 2 * H) + 'px';
+        labs[k].classList.toggle('is-cur', curLab[curStep] === k);
       });
       labs.drop.style.opacity = curStep >= 3 ? '1' : '0';
+      labs.q.style.opacity = curStep === 0 ? '1' : '0';
+      labs.ans.style.opacity = curStep === 5 ? '1' : '0';
+      var own = st.pipe !== 'hybrid';
+      labs.mid.textContent = own ? I(st.pipe === 'hr' ? 'pipe.stage.rerank' : 'pipe.stage.select') : '';
+      labs.mid.style.opacity = curStep === 2 && own ? '1' : '0';
     }
     function resize() {
       W = stage.clientWidth; H = stage.clientHeight;
@@ -443,9 +580,11 @@
       grid.material.dispose(); scene.remove(grid);
       grid = new THREE.GridHelper(30, 30, col.grid2, col.grid); grid.position.y = FLOOR; grid.material.transparent = true; grid.material.opacity = 0.75; scene.add(grid);
       if (docEdges) docEdges.material.color.copy(col.turq);
+      conMat.color.copy(col.lineMuted); pMat.color.copy(col.turq);
+      if (items.Q) items.Q.mesh.material.color.copy(col.accent);
       if (M) show(M, st.step, true);
     }
-    function relabel() { labs.pool.textContent = S('l_pool'); labs.list.textContent = S('l_cands'); labs.pack.textContent = S('l_pack'); labs.reader.textContent = S('l_reader'); labs.drop.textContent = S('l_drop'); }
+    function relabel() { labs.pool.textContent = S('l_pool'); labs.list.textContent = S('l_cands'); labs.pack.textContent = S('l_pack'); labs.reader.textContent = S('l_reader'); labs.drop.textContent = S('l_drop'); labs.q.textContent = I('pipe.st.q'); labs.ans.textContent = I('pipe.st.answer'); }
     var destroyed = false;
     function destroy() {
       destroyed = true; if (raf) cancelAnimationFrame(raf); if (ro) ro.disconnect();
@@ -466,25 +605,49 @@
     var M = null, L = null, rects = {}, docs = [], texts = {}, reader = null, frame = null;
     function el(tag, a, p) { var e = document.createElementNS(NS, tag); for (var k in a) e.setAttribute(k, a[k]); (p || svg).appendChild(e); return e; }
     function mirror(x, w) { return lang() === 'fa' ? L.W - x - w : x; }
+    /* six rows, top to bottom in the order things happen: the question, the pool, the candidates, the pack, the
+       reader, the answer. Between rows a short connector carries dashes that run downward while that stage plays. */
+    var conns = [], pillQ = null, pillA = null, tag = null, zoneT = {};
     function layout() {
-      var W = Math.max(280, stage.clientWidth), pad = 4, y = 0, n = M.ex.docs.length;
+      var W = Math.max(280, stage.clientWidth), pad = 4, y = 0, n = M.ex.docs.length, G = 26;
       var cell = W < 500 ? 10 : 14, cols = Math.floor((W - 2 * pad) / cell), rows = Math.ceil(n / cols);
-      var o = { W: W, pad: pad, cell: cell, cols: cols };
-      o.yPoolL = y + 14; y += 22; o.yPool = y; y += rows * cell + 18;
-      o.yListL = y + 12; y += 20; o.yList = y; o.listH = W < 500 ? 46 : 64; y += o.listH + 18;
-      o.yPackL = y + 12; y += 20; o.yPack = y; o.packH = 24; y += o.packH + 18;
-      o.yReadL = y + 12; y += 20; o.yRead = y; o.readH = 64; y += o.readH + 6;
-      o.H = y; o.colW = (W - 2 * pad) / 40;
+      var o = { W: W, pad: pad, cell: cell, cols: cols, gaps: [] };
+      o.yQ = y + 2; o.qH = 24; y += o.qH + 2; o.gaps.push(y); y += G;
+      o.yPoolL = y + 12; y += 20; o.yPool = y; y += rows * cell; o.gaps.push(y); y += G;
+      o.yListL = y + 12; y += 20; o.yList = y; o.listH = W < 500 ? 46 : 64; y += o.listH; o.gaps.push(y); y += G;
+      o.yPackL = y + 12; y += 20; o.yPack = y; o.packH = 24; y += o.packH; o.gaps.push(y); y += G;
+      o.yReadL = y + 12; y += 20; o.yRead = y; o.readH = 64; y += o.readH; o.gaps.push(y); y += G;
+      o.yA = y; o.aH = 26; y += o.aH + 4;
+      o.G = G; o.H = y; o.colW = (W - 2 * pad) / 40;
       return o;
     }
+    function pill(y, h, label, cls) {
+      var g = el('g', { 'class': 'pill ' + cls });
+      var w = Math.min(L.W - 2 * L.pad, Math.max(120, label.length * 8 + 40)), x = (L.W - w) / 2;
+      el('path', { d: 'M' + x + ',' + y + 'h' + w + 'v' + h + 'h' + (-w) + 'z', 'class': 'pb' }, g); // a path, not a rect: a label sits on it
+      var t = el('text', { x: L.W / 2, y: y + h / 2 + 4, 'text-anchor': 'middle' }, g); t.textContent = label;
+      return g;
+    }
     function setData(m) {
-      M = m; svg.textContent = ''; rects = {};
+      M = m; svg.textContent = ''; rects = {}; conns = []; zoneT = {};
       L = layout();
       svg.setAttribute('viewBox', '0 0 ' + L.W + ' ' + L.H); svg.setAttribute('width', L.W); svg.setAttribute('height', L.H);
-      [['yPoolL', 'l_pool'], ['yListL', 'l_cands'], ['yPackL', 'l_pack'], ['yReadL', 'l_reader']].forEach(function (z) {
-        var t = el('text', { x: lang() === 'fa' ? L.W - L.pad : L.pad, y: L[z[0]], 'class': 'zl', 'text-anchor': lang() === 'fa' ? 'end' : 'start' });
-        t.textContent = S(z[1]); texts[z[1]] = t;
+      var fa = lang() === 'fa';
+      [['yPoolL', 'l_pool', 1], ['yListL', 'l_cands', 2], ['yPackL', 'l_pack', 3], ['yReadL', 'l_reader', 4]].forEach(function (z) {
+        var t = el('text', { x: fa ? L.W - L.pad : L.pad, y: L[z[0]], 'class': 'zl', 'text-anchor': fa ? 'end' : 'start' });
+        t.textContent = S(z[1]); texts[z[1]] = t; zoneT[z[2]] = t;
       });
+      // the pipeline's own middle step, named at the end of the candidates' label row
+      tag = el('text', { x: fa ? L.pad : L.W - L.pad, y: L.yListL, 'class': 'tag', 'text-anchor': fa ? 'start' : 'end' });
+      // connectors, one per stage transition (0: question to pool ... 4: reader to answer)
+      L.gaps.forEach(function (gy, i) {
+        var g = el('g', { 'class': 'con' });
+        el('line', { x1: L.W / 2, x2: L.W / 2, y1: gy + 3, y2: gy + L.G - 6 }, g);
+        el('path', { d: 'M' + (L.W / 2 - 4) + ',' + (gy + L.G - 9) + 'l4,5l4,-5', 'class': 'head' }, g);
+        conns.push(g);
+      });
+      pillQ = pill(L.yQ, L.qH, I('pipe.st.q'), 'q');
+      pillA = pill(L.yA, L.aH, I('pipe.st.answer'), 'a');
       docs = M.ex.docs.map(function (d, i) {
         var c = i % L.cols, r = Math.floor(i / L.cols), s = L.cell - 3;
         return el('rect', { x: mirror(L.pad + c * L.cell, s), y: L.yPool + r * L.cell, width: s, height: s, 'class': 'doc' });
@@ -500,29 +663,47 @@
       });
     }
     function docBox(di) { var c = di % L.cols, r = Math.floor(di / L.cols), s = L.cell - 3; return { x: mirror(L.pad + c * L.cell, s), y: L.yPool + r * L.cell, w: s, h: s }; }
+    var prevK = 0;
     function show(m, k, instant) {
       if (m !== M || !L || Math.abs(L.W - stage.clientWidth) > 2) setData(m);
+      var back = k < prevK; prevK = k;
       svg.classList.toggle('instant', !!instant);
       docs.forEach(function (d, i) {
         d.setAttribute('class', 'doc' + (k >= 1 && M.srcDocs[i] ? ' src' : '') + (M.ex.docs[i].g ? ' gold' : ''));
       });
-      reader.setAttribute('class', 'reader' + (k >= 4 && M.cell.full ? ' lit' : ''));
+      reader.setAttribute('class', 'reader' + (k >= 4 && M.cell.full ? ' lit' : '') + (k === 4 ? ' cur' : ''));
+      frame.setAttribute('class', 'frame' + (k === 3 ? ' cur' : ''));
+      pillQ.setAttribute('class', 'pill q' + (k === 0 ? ' cur' : ' past'));
+      pillA.setAttribute('class', 'pill a' + (k === 5 ? ' cur ' + (M.cell.correct ? 'ok' : 'no') : k < 5 ? ' wait' : ''));
+      // the connector into the current stage runs; the ones already passed stay solid; the rest wait
+      // connector i leads into stage i (0 question to pool ... 4 reader to answer); order/select happens inside the list
+      var ci = [0, 1, -1, 2, 3, 4][k], done = [-1, 0, 1, 1, 2, 3][k];
+      conns.forEach(function (g, i) { g.setAttribute('class', 'con' + (i === ci && !instant && !back ? ' run' : i <= done || i === ci ? ' past' : '')); });
+      var curZone = [0, 2, 2, 3, 4, 0][k];
+      [1, 2, 3, 4].forEach(function (z) { zoneT[z].setAttribute('class', 'zl' + (z === curZone ? ' cur' : '')); });
+      var own = st.pipe !== 'hybrid';
+      tag.textContent = own ? I(st.pipe === 'hr' ? 'pipe.stage.rerank' : 'pipe.stage.select') : '';
+      tag.setAttribute('class', 'tag' + (k === 2 && own ? ' on' : ''));
       var evList = M.cell.pack.filter(function (q) { return q.sp.length > 0; }).map(function (q) { return q.p; });
+      var nPack = Math.max(1, M.cell.pack.length);
       M.ids.forEach(function (pi) {
         var s = itemState(M, pi, k), p = M.ex.passages[pi], r = rects[pi], b;
         var hgt = L.listH * (0.25 + 0.75 * Math.min(p.n, 1200) / 1200);
         if (s.zone === 'doc') b = docBox(p.d);
-        else if (s.zone === 'list' || s.zone === 'drop') { var w = Math.max(2, L.colW - 2); b = { x: mirror(L.pad + s.slot * L.colW + 1, w), y: L.yList + L.listH - hgt, w: w, h: hgt }; }
+        else if (s.zone === 'list' || s.zone === 'drop') { var w = Math.max(2, L.colW - 2); b = { x: mirror(L.pad + s.slot * L.colW + 1, w), y: L.yList + L.listH - hgt + (k === 2 && s.lose ? hgt * 0.35 : 0), w: w, h: hgt * (k === 2 && s.lose ? 0.65 : 1) }; }
         else if (s.zone === 'pack') { var full = L.W - 2 * L.pad - 4, a = s.pp.a * full, bb = s.pp.b * full; b = { x: mirror(L.pad + 2 + a, bb - a - 2), y: L.yPack + 3, w: Math.max(2, bb - a - 2), h: L.packH - 6 }; }
         else if (s.lit) { var j = evList.indexOf(pi), fw = Math.min(140, (L.W - 2 * L.pad - 24) / Math.max(1, evList.length)); b = { x: mirror(L.pad + 12 + j * (fw + 6), fw), y: L.yRead + L.readH / 2 - 7, w: fw, h: 14 }; }
         else b = { x: L.W / 2, y: L.yRead + L.readH / 2, w: 1, h: 1 };
-        r.style.transitionDelay = instant ? '0ms' : Math.min(400, (s.zone === 'pack' || s.zone === 'reader' ? (M.packIdx[pi] || 0) * 60 : (s.slot || 0) * 8)) + 'ms';
+        var d = instant || back ? 0 : k === 3 && s.zone === 'pack' ? (M.packIdx[pi] || 0) * (900 / nPack) : k === 3 ? 1000 : k >= 4 ? (M.packIdx[pi] || 0) * 60 : Math.min(450, (s.slot || 0) * 11);
+        r.style.transitionDelay = d + 'ms';
         if (instant) r.style.transition = 'none'; else r.style.transition = '';
         r.style.transform = 'translate(' + b.x.toFixed(1) + 'px,' + b.y.toFixed(1) + 'px) scale(' + b.w.toFixed(2) + ',' + b.h.toFixed(2) + ')';
         var cls = 'it ' + (p.sp.length ? 'ev' : 'ot');
         if (s.vis === 0 || (s.zone === 'reader' && !s.lit)) cls += ' hid';
         else if (s.vis < 0.5) cls += ' dim';
         if (s.lit) cls += ' lit';
+        if (k === 1 && s.zone === 'list') cls += ' new';
+        if (k === 2 && s.pick) cls += ' pick';
         r.setAttribute('class', cls);
       });
     }

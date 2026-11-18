@@ -2,8 +2,8 @@
  {
   "id": "bench-size",
   "claim": {
-   "en": "The benchmark has 156 questions over six document pools, half Persian and half English: 60 for development and 96 for the test, of which 90 are answerable.",
-   "fa": "بنچمارک ۱۵۶ پرسش در شش مخزن سند دارد، نیمی فارسی و نیمی انگلیسی: ۶۰ پرسش برای توسعه و ۹۶ پرسش برای آزمون، که ۹۰ پرسش از آن‌ها پاسخ‌پذیرند."
+   "en": "156 questions in six pools, half Persian, half English: 60 for development, 96 for the test, 90 of them answerable.",
+   "fa": "۱۵۶ پرسش در شش مخزن، نیمی فارسی و نیمی انگلیسی: ۶۰ پرسش توسعه و ۹۶ پرسش آزمون، که ۹۰ پرسش از آن‌ها پاسخ‌پذیرند."
   },
   "numbers": [
    {
@@ -97,8 +97,8 @@
   },
   "confidence": "measured",
   "caveat": {
-   "en": "The Persian and English halves use different documents, so a difference between the halves mixes language and source.",
-   "fa": "نیمهٔ فارسی و نیمهٔ انگلیسی اسناد متفاوتی دارند، پس تفاوت میان دو نیمه اثر زبان و اثر منبع را در هم می‌آمیزد."
+   "en": "The halves use different documents, so language and source are mixed.",
+   "fa": "دو نیمه اسناد متفاوتی دارند، پس اثر زبان و اثر منبع از هم جدا نیست."
   },
   "tags": [
    "benchmark",
@@ -108,8 +108,8 @@
  {
   "id": "bench-tiers",
   "claim": {
-   "en": "Questions come in three tiers, set by the simplest evidence that answers them anywhere in the pool: one passage (T1), several parts of one document (T2), or at least two documents (T3).",
-   "fa": "پرسش‌ها سه سطح دارند و سطح هر پرسش را ساده‌ترین شواهدی تعیین می‌کند که در هر جای مخزن به آن پاسخ می‌دهد: یک بخش متن (T1)، چند بخش از یک سند (T2)، یا دست‌کم دو سند (T3)."
+   "en": "Three tiers, set by the simplest evidence that answers: one passage (T1), several parts of one document (T2), or two or more documents (T3).",
+   "fa": "سه سطح، بر پایهٔ ساده‌ترین شواهدی که برای پاسخ کافی است: یک بخش متن (T1)، چند قسمت از یک سند (T2) یا دست‌کم دو سند (T3)."
   },
   "numbers": [
    {
@@ -173,8 +173,8 @@
   },
   "confidence": "measured",
   "caveat": {
-   "en": "Each tier has only 30 test questions, so tier-level differences are small samples.",
-   "fa": "هر سطح فقط ۳۰ پرسش آزمون دارد، پس تفاوت‌های درون هر سطح بر نمونه‌هایی کوچک تکیه دارند."
+   "en": "Only 30 test questions per tier.",
+   "fa": "هر سطح فقط ۳۰ پرسش آزمون دارد."
   },
   "tags": [
    "benchmark",
@@ -185,8 +185,8 @@
  {
   "id": "bench-pools",
   "claim": {
-   "en": "The documents are natural company reports, non-fiction books and statutes, each genre in Persian and in English, searched in full with no document picked in advance.",
-   "fa": "اسناد، متن‌های واقعی‌اند: گزارش شرکت‌ها، کتاب‌های غیرداستانی و متن قوانین، هر نوع هم به فارسی و هم به انگلیسی. جست‌وجو در کل اسناد انجام می‌شود و هیچ سندی از پیش انتخاب نمی‌شود."
+   "en": "Real company reports, non-fiction books and statutes in both languages, searched in full.",
+   "fa": "متن واقعی گزارش شرکت‌ها، کتاب‌های غیرداستانی و قوانین، به هر دو زبان؛ هر مخزن به‌طور کامل جست‌وجو می‌شود."
   },
   "numbers": [
    {
@@ -260,8 +260,8 @@
   },
   "confidence": "measured",
   "caveat": {
-   "en": "Only born-digital text or verified transcriptions were used, never scans.",
-   "fa": "فقط متن‌هایی به کار رفت که از ابتدا دیجیتال بوده‌اند یا رونویسی‌شان تأیید شده است؛ هیچ متن اسکن‌شده‌ای در کار نیست."
+   "en": "Born-digital text or checked transcriptions only; no scans.",
+   "fa": "فقط متنی که از ابتدا دیجیتال بوده یا رونویسی تأییدشده؛ بدون متن اسکن‌شده."
   },
   "tags": [
    "benchmark"
@@ -270,8 +270,8 @@
  {
   "id": "bench-annotation",
   "claim": {
-   "en": "Every question carries the atomic requirements a correct answer must meet, evidence passages with exact quotes and offsets, and one or more evidence bundles: sets of passages that together suffice. Pipelines never see these; only the evaluator does.",
-   "fa": "هر پرسش این‌ها را همراه دارد: الزامات پایه‌ای و تفکیک‌ناپذیری که پاسخ درست باید برآورده کند، بخش‌های شاهد با نقل‌قول دقیق و جایگاهشان در متن، و یک یا چند مجموعهٔ شواهد، یعنی مجموعه‌هایی از بخش‌ها که با هم کافی‌اند. پایپ‌لاین‌ها هیچ‌وقت این‌ها را نمی‌بینند؛ فقط ارزیاب می‌بیند."
+   "en": "Each question has requirements, exact evidence quotes and one or more evidence bundles. Only the evaluator sees them, never the pipelines.",
+   "fa": "هر پرسش الزامات، نقل‌قول دقیق شواهد و یک یا چند مجموعهٔ شواهد دارد. این‌ها را فقط ارزیاب می‌بیند، نه پایپ‌لاین‌ها."
   },
   "numbers": [
    {
@@ -315,8 +315,8 @@
   },
   "confidence": "measured",
   "caveat": {
-   "en": "Questions were drafted and checked by AI agents and a mechanical verifier; a native speaker reviewed the Persian wording.",
-   "fa": "پرسش‌ها را عامل‌های هوش مصنوعی و یک بررسی‌کنندهٔ خودکار نوشتند و وارسی کردند؛ یک فارسی‌زبان متن فارسی را بازبینی کرد."
+   "en": "Drafted and checked by AI agents and a mechanical verifier; a native speaker reviewed the Persian.",
+   "fa": "برچسب‌ها را عامل‌های هوش مصنوعی نوشتند و همراه با یک بررسی‌کنندهٔ خودکار وارسی کردند؛ متن فارسی را یک فارسی‌زبان بازبینی کرد."
   },
   "tags": [
    "benchmark"
@@ -325,8 +325,8 @@
  {
   "id": "pipelines",
   "claim": {
-   "en": "Four whole pipelines were compared. All share 1,000-character chunks, the answer prompt and the reader; they differ in how candidates are found and packed into the evidence budget.",
-   "fa": "چهار پایپ‌لاین کامل مقایسه شدند. قطعه‌های ۱٬۰۰۰ کاراکتری، پرامپت پاسخ و مدل پاسخ‌گو در همه یکسان است؛ تفاوتشان در شیوهٔ یافتن نامزدها و جا دادن آن‌ها در بودجهٔ شواهد است."
+   "en": "Four whole pipelines with the same 1,000-character chunks, prompt and reader; they differ in how candidates are found and packed.",
+   "fa": "چهار پایپ‌لاین کامل با قطعه‌های ۱٬۰۰۰ کاراکتری، پرامپت و مدل پاسخ‌گوی یکسان؛ تفاوتشان در یافتن نامزدها و چیدن آن‌ها در بسته است."
   },
   "numbers": [
    {
@@ -390,8 +390,8 @@
   },
   "confidence": "measured",
   "caveat": {
-   "en": "SetR-p+fill is an adaptation; its results say nothing about the published SetR system.",
-   "fa": "SetR-p+fill اقتباسی از SetR است؛ نتایج آن دربارهٔ سامانهٔ منتشرشدهٔ SetR چیزی نمی‌گوید."
+   "en": "SetR-p+fill is our adaptation, not the published SetR.",
+   "fa": "SetR-p+fill اقتباس ماست، نه خود سامانهٔ منتشرشدهٔ SetR."
   },
   "tags": [
    "pipelines",
@@ -401,8 +401,8 @@
  {
   "id": "frozen-gate",
   "claim": {
-   "en": "The one test fixed in advance was inconclusive. The gate required Lex-RAG to beat both Hybrid and HR by at least 5 of 90 answers; it beat Hybrid by 5 to 7 and trailed HR by 0 to 3, and neither primary test was significant.",
-   "fa": "تنها آزمون ازپیش‌تعیین‌شده به نتیجهٔ قطعی نرسید. معیار، برتری دست‌کم ۵ پاسخ از ۹۰ برای Lex-RAG هم بر ترکیبی و هم بر HR بود. Lex-RAG از ترکیبی ۵ تا ۷ پاسخ جلو افتاد و از HR ۰ تا ۳ پاسخ عقب ماند، و هیچ‌یک از دو آزمون اصلی معنادار نبود."
+   "en": "The test fixed in advance was inconclusive. Lex-RAG had to beat Hybrid and HR by at least 5 of 90; it beat Hybrid by 5 to 7 and trailed HR by 0 to 3. Neither primary test was significant.",
+   "fa": "آزمون ازپیش‌تعیین‌شده به نتیجهٔ قطعی نرسید. Lex-RAG باید هم از پایپ‌لاین ترکیبی و هم از HR دست‌کم ۵ پاسخ از ۹۰ جلوتر باشد؛ از ترکیبی ۵ تا ۷ پاسخ جلوتر بود و از HR ۰ تا ۳ پاسخ عقب ماند. هیچ‌یک از دو آزمون اصلی معنادار نبود."
   },
   "numbers": [
    {
@@ -466,8 +466,8 @@
   },
   "confidence": "measured",
   "caveat": {
-   "en": "With 90 questions the gate was likely to fail whether or not selection helps, so its failure is weak evidence either way.",
-   "fa": "با ۹۰ پرسش، این معیار به احتمال زیاد برآورده نمی‌شد، چه گزینش کمک کند چه نکند؛ پس برآورده نشدنش در هیچ جهتی دلیل محکمی نیست."
+   "en": "With 90 questions the gate was likely to fail either way, so its failure says little.",
+   "fa": "با ۹۰ پرسش، این معیار در هر حال احتمالاً برآورده نمی‌شد؛ پس برآورده نشدنش چیز زیادی نمی‌گوید."
   },
   "tags": [
    "frozen",
@@ -478,8 +478,8 @@
  {
   "id": "frozen-scores",
   "claim": {
-   "en": "Correct answers of 90 in the frozen test, machine judge. At 6,000 characters the reranked pipeline and Lex-RAG lead plain hybrid retrieval; at 15,500 characters the four pipelines are close.",
-   "fa": "پاسخ‌های درست از ۹۰ در آزمون ازپیش‌تعیین‌شده، با داور ماشینی. در ۶٬۰۰۰ کاراکتر، پایپ‌لاین با بازرتبه‌ساز و Lex-RAG از بازیابی ترکیبیِ ساده جلوترند؛ در ۱۵٬۵۰۰ کاراکتر چهار پایپ‌لاین به هم نزدیک‌اند."
+   "en": "Correct answers of 90 in the test fixed in advance. At 6,000 characters the reranker and Lex-RAG lead plain hybrid; at 15,500 all four are close.",
+   "fa": "پاسخ‌های درست از ۹۰ در آزمون ازپیش‌تعیین‌شده. در ۶٬۰۰۰ کاراکتر، بازرتبه‌ساز و Lex-RAG از ترکیبیِ ساده جلوترند؛ در ۱۵٬۵۰۰ کاراکتر هر چهار به هم نزدیک‌اند."
   },
   "numbers": [
    {
@@ -573,8 +573,8 @@
   },
   "confidence": "measured",
   "caveat": {
-   "en": "A range a–b covers answers the judge could not resolve. Every pipeline abstained correctly on all six unanswerable questions.",
-   "fa": "بازهٔ a–b پاسخ‌هایی را در بر می‌گیرد که داور نتوانست دربارهٔ آن‌ها حکم کند. همهٔ پایپ‌لاین‌ها در هر شش پرسش بی‌پاسخ به‌درستی از پاسخ دادن خودداری کردند."
+   "en": "Ranges cover answers the judge could not resolve. All pipelines correctly declined the six unanswerable questions.",
+   "fa": "بازه‌ها پاسخ‌هایی را در بر می‌گیرند که داور نتوانست دربارهٔ آن‌ها حکم کند. همهٔ پایپ‌لاین‌ها به‌درستی از پاسخ دادن به هر شش پرسش بی‌پاسخ خودداری کردند."
   },
   "tags": [
    "frozen",
@@ -585,8 +585,8 @@
  {
   "id": "frozen-tiers",
   "claim": {
-   "en": "By tier at 6,000 characters: single facts are near ceiling for every pipeline; the pipelines differ on within-document and cross-document questions.",
-   "fa": "به تفکیک سطح در ۶٬۰۰۰ کاراکتر: در پرسش‌های تک‌واقعیتی همهٔ پایپ‌لاین‌ها نزدیک سقف‌اند؛ تفاوت پایپ‌لاین‌ها در پرسش‌های درون‌سندی و میان‌سندی است."
+   "en": "By tier at 6,000 characters: single facts are near ceiling for all; pipelines differ on T2 and T3.",
+   "fa": "به تفکیک سطح در ۶٬۰۰۰ کاراکتر: در پرسش‌های تک‌واقعیتی همه نزدیک سقف‌اند؛ تفاوت پایپ‌لاین‌ها در T2 و T3 است."
   },
   "numbers": [
    {
@@ -641,8 +641,8 @@
  {
   "id": "human-merge",
   "claim": {
-   "en": "When the author's blinded verdicts replace the judge's on the 30 questions where pipelines differed, every score rises but the conclusion stays: no selection pipeline is clearly better than the reranker.",
-   "fa": "وقتی در ۳۰ پرسشی که پایپ‌لاین‌ها در آن‌ها اختلاف داشتند حکم‌های نویسنده در بازبینی کور جای حکم داور را می‌گیرد، همهٔ امتیازها بالا می‌روند اما نتیجه همان می‌ماند: هیچ پایپ‌لاین گزینشی آشکارا بهتر از بازرتبه‌ساز نیست."
+   "en": "With the author's blind verdicts on the 30 questions where pipelines differed, all scores rise, but no selection pipeline clearly beats the reranker.",
+   "fa": "اگر در ۳۰ پرسشی که پایپ‌لاین‌ها در آن‌ها اختلاف داشتند حکم نویسنده در بازبینی کور جای حکم داور را بگیرد، همهٔ امتیازها بالا می‌رود، اما هیچ پایپ‌لاین گزینشی آشکارا از بازرتبه‌ساز بهتر نمی‌شود."
   },
   "numbers": [
    {
@@ -686,8 +686,8 @@
   },
   "confidence": "measured",
   "caveat": {
-   "en": "The merge was added after the test and rests on one reviewer.",
-   "fa": "این جایگزینی پس از آزمون افزوده شد و بر یک بازبین تکیه دارد."
+   "en": "Added after the test; one reviewer.",
+   "fa": "پس از آزمون افزوده شد؛ یک بازبین."
   },
   "tags": [
    "frozen",
@@ -698,8 +698,8 @@
  {
   "id": "equivalence",
   "claim": {
-   "en": "An equivalence test cannot show that Lex-RAG and the reranked pipeline are equivalent, even within a margin of 8 answers of 90.",
-   "fa": "آزمون هم‌ارزی نمی‌تواند نشان دهد که Lex-RAG و پایپ‌لاین با بازرتبه‌ساز هم‌ارزند، حتی با حاشیهٔ ۸ پاسخ از ۹۰."
+   "en": "Lex-RAG and the reranked pipeline cannot be shown equivalent, even within 8 answers of 90.",
+   "fa": "نمی‌توان نشان داد Lex-RAG و پایپ‌لاین با بازرتبه‌ساز هم‌ارزند، حتی با حاشیهٔ ۸ پاسخ از ۹۰."
   },
   "numbers": [
    {
@@ -745,8 +745,8 @@
  {
   "id": "power",
   "claim": {
-   "en": "With 90 questions the test can only detect a difference of about 11 answers. A difference of 5 would be detected in fewer than one case in five and needs about 400 to 460 questions.",
-   "fa": "با ۹۰ پرسش، آزمون فقط تفاوتی در حدود ۱۱ پاسخ را آشکار می‌کند. تفاوت ۵ پاسخ در کمتر از یک مورد از هر پنج مورد آشکار می‌شود و برای آن حدود ۴۰۰ تا ۴۶۰ پرسش لازم است."
+   "en": "90 questions detect only gaps of about 11 answers. A gap of 5 is caught less than one time in five; it needs about 400 to 460 questions.",
+   "fa": "با ۹۰ پرسش فقط تفاوت‌های حدود ۱۱ پاسخ آشکار می‌شود. تفاوت ۵ پاسخ در کمتر از یک مورد از پنج آشکار می‌شود و حدود ۴۰۰ تا ۴۶۰ پرسش لازم دارد."
   },
   "numbers": [
    {
@@ -822,8 +822,8 @@
  {
   "id": "reader-bounds",
   "claim": {
-   "en": "The reader is rarely the problem. Given only the gold evidence (about 570 characters) it answers 83 of 90; with no evidence it still answers 26 from memory. The best single-pass pipelines reach about 70.",
-   "fa": "مشکل به‌ندرت از مدل پاسخ‌گوست. اگر فقط شواهد مرجع را ببیند (حدود ۵۷۰ کاراکتر) به ۸۳ پرسش از ۹۰ درست پاسخ می‌دهد؛ بدون هیچ شاهدی هم ۲۶ پرسش را از حافظه پاسخ می‌دهد. بهترین پایپ‌لاین‌های تک‌مرحله‌ای به حدود ۷۰ می‌رسند."
+   "en": "The reader is rarely the problem: with only the gold evidence (about 570 characters) it gets 83 of 90; with none, 26 from memory. The best single-pass pipelines reach about 70.",
+   "fa": "مشکل به‌ندرت از مدل پاسخ‌گوست: فقط با شواهد مرجع (حدود ۵۷۰ کاراکتر) به ۸۳ پرسش از ۹۰ درست پاسخ می‌دهد و بدون شواهد ۲۶ پرسش را از حافظه. بهترین پایپ‌لاین‌های تک‌مرحله‌ای به حدود ۷۰ می‌رسند."
   },
   "numbers": [
    {
@@ -877,8 +877,8 @@
   },
   "confidence": "measured",
   "caveat": {
-   "en": "Post hoc: the 90 test questions had already been answered and seen.",
-   "fa": "پسینی: پاسخ ۹۰ پرسش آزمون پیش‌تر گرفته و دیده شده بود."
+   "en": "Post hoc.",
+   "fa": "پسینی."
   },
   "tags": [
    "funnel",
@@ -889,8 +889,8 @@
  {
   "id": "funnel",
   "claim": {
-   "en": "Answers are lost in two stages before the reader: the complete evidence never reaches the top 40 candidates (15 to 18 of 90 questions), or it is dropped when the evidence pack is built (a further 11 to 15).",
-   "fa": "پاسخ‌ها پیش از رسیدن به مدل پاسخ‌گو در دو مرحله از دست می‌روند: یا شواهد کامل هیچ‌وقت به ۴۰ نامزد برتر نمی‌رسد (۱۵ تا ۱۸ پرسش از ۹۰)، یا هنگام ساختن بستهٔ شواهد کنار گذاشته می‌شود (۱۱ تا ۱۵ پرسش دیگر)."
+   "en": "Answers are lost before the reader: the complete evidence misses the top 40 candidates (15 to 18 of 90), or is cut from the pack (11 to 15 more).",
+   "fa": "پاسخ‌ها پیش از مدل پاسخ‌گو از دست می‌روند: یا شواهد کامل به ۴۰ نامزد برتر نمی‌رسد (۱۵ تا ۱۸ پرسش از ۹۰)، یا هنگام بسته‌سازی کنار گذاشته می‌شود (۱۱ تا ۱۵ پرسش دیگر)."
   },
   "numbers": [
    {
@@ -994,8 +994,8 @@
   },
   "confidence": "measured",
   "caveat": {
-   "en": "Counts of questions (of 90) with a complete gold bundle; 6,000-character packs. Post hoc: the 90 test questions had already been answered and seen.",
-   "fa": "تعداد پرسش‌هایی (از ۹۰) که یک مجموعهٔ کامل شواهد مرجع دارند؛ بسته‌های ۶٬۰۰۰ کاراکتری. پسینی: پاسخ ۹۰ پرسش آزمون پیش‌تر گرفته و دیده شده بود."
+   "en": "Questions (of 90) with a complete gold bundle; 6,000-character packs. Post hoc.",
+   "fa": "تعداد پرسش‌ها (از ۹۰) با مجموعهٔ کامل شواهد مرجع؛ بسته‌های ۶٬۰۰۰ کاراکتری. پسینی."
   },
   "tags": [
    "funnel",
@@ -1006,8 +1006,8 @@
  {
   "id": "partial-misses",
   "claim": {
-   "en": "Most wrong answers had part of the needed evidence, not none of it; misses with a complete bundle are mostly judge disagreements.",
-   "fa": "بیشتر پاسخ‌های نادرست بخشی از شواهد لازم را داشتند، نه اینکه هیچ شاهدی نداشته باشند؛ پاسخ‌های نادرستی که مجموعهٔ کامل شواهد داشتند بیشتر مواردی‌اند که داور با بازبین انسانی هم‌نظر نبود."
+   "en": "Most wrong answers had some of the evidence, not none; misses with a complete bundle are mostly judge disagreements.",
+   "fa": "بیشتر پاسخ‌های نادرست بخشی از شواهد را داشتند، نه اینکه هیچ شاهدی نداشته باشند؛ پاسخ‌های نادرستی که مجموعهٔ کامل داشتند بیشتر مواردی‌اند که داور با بازبین انسانی هم‌نظر نبود."
   },
   "numbers": [
    {
@@ -1071,8 +1071,8 @@
   },
   "confidence": "measured",
   "caveat": {
-   "en": "Post hoc: the 90 test questions had already been answered and seen.",
-   "fa": "پسینی: پاسخ ۹۰ پرسش آزمون پیش‌تر گرفته و دیده شده بود."
+   "en": "Post hoc.",
+   "fa": "پسینی."
   },
   "tags": [
    "funnel"
@@ -1081,8 +1081,8 @@
  {
   "id": "selection-6000",
   "claim": {
-   "en": "Removing Lex-RAG's selection call (same candidates, same packer) costs about 5 to 10 answers at 6,000 characters, and fewer complete bundles reach the reader.",
-   "fa": "حذف فراخوانی گزینش Lex-RAG (با همان نامزدها و همان بسته‌ساز) در ۶٬۰۰۰ کاراکتر حدود ۵ تا ۱۰ پاسخ درست را از دست می‌دهد، و مجموعه‌های کامل کمتری به مدل پاسخ‌گو می‌رسند."
+   "en": "Removing Lex-RAG's selection call (same candidates and packer) costs about 5 to 10 answers at 6,000 characters.",
+   "fa": "با حذف فراخوانی گزینش Lex-RAG (با همان نامزدها و بسته‌ساز)، در ۶٬۰۰۰ کاراکتر حدود ۵ تا ۱۰ پاسخ درست از دست می‌رود."
   },
   "numbers": [
    {
@@ -1146,8 +1146,8 @@
   },
   "confidence": "tentative",
   "caveat": {
-   "en": "Without the call Lex-RAG is no better than Hybrid. Post hoc: the 90 test questions had already been answered and seen.",
-   "fa": "Lex-RAG بدون این فراخوانی بهتر از ترکیبی نیست. پسینی: پاسخ ۹۰ پرسش آزمون پیش‌تر گرفته و دیده شده بود."
+   "en": "Without the call, Lex-RAG is no better than Hybrid. Post hoc.",
+   "fa": "Lex-RAG بدون این فراخوانی بهتر از ترکیبی نیست. پسینی."
   },
   "tags": [
    "selection",
@@ -1232,8 +1232,8 @@
   },
   "confidence": "measured",
   "caveat": {
-   "en": "Lex-RAG minus Lex-RAG without selection. The 3,000 figure is one run, with no redraw and no second judge; the comparison pack is itself 6 below plain Hybrid at 3,000.",
-   "fa": "Lex-RAG منهای Lex-RAG بدون گزینش. نتیجهٔ ۳٬۰۰۰ کاراکتر از یک اجراست، بدون اجرای دوباره و بدون داور دوم؛ بسته‌ای که مبنای مقایسه است، خود در ۳٬۰۰۰ کاراکتر ۶ پاسخ پایین‌تر از ترکیبیِ ساده است."
+   "en": "Lex-RAG minus Lex-RAG without selection. The 3,000 figure is one run, no redraw, no second judge; its comparison pack is 6 below plain Hybrid.",
+   "fa": "Lex-RAG منهای Lex-RAG بدون گزینش. عدد ۳٬۰۰۰ کاراکتر از یک اجراست، بدون اجرای دوباره و داور دوم؛ بستهٔ مبنای مقایسه خود ۶ پاسخ پایین‌تر از ترکیبیِ ساده است."
   },
   "tags": [
    "selection",
@@ -1243,8 +1243,8 @@
  {
   "id": "selection-over-ce",
   "claim": {
-   "en": "Running Lex-RAG's selection call over the reranker's candidates is no better than the reranker alone: once a cross-encoder has ordered the candidates, the call adds no measurable gain.",
-   "fa": "اجرای فراخوانی گزینش Lex-RAG روی نامزدهای بازرتبه‌ساز بهتر از خود بازرتبه‌ساز نیست: وقتی cross-encoder نامزدها را مرتب کرده باشد، این فراخوانی سودی که بتوان اندازه گرفت نمی‌افزاید."
+   "en": "A selection call over the reranker's candidates adds nothing measurable to the reranker alone.",
+   "fa": "فراخوانی گزینش روی نامزدهای بازرتبه‌ساز در مقایسه با بازرتبه‌ساز به‌تنهایی سود قابل‌اندازه‌گیری‌ای ندارد."
   },
   "numbers": [
    {
@@ -1288,8 +1288,8 @@
   },
   "confidence": "tentative",
   "caveat": {
-   "en": "Not scored by the second judge. Post hoc: the 90 test questions had already been answered and seen.",
-   "fa": "داور دوم این را نسنجیده است. پسینی: پاسخ ۹۰ پرسش آزمون پیش‌تر گرفته و دیده شده بود."
+   "en": "Not scored by the second judge. Post hoc.",
+   "fa": "داور دوم این را نسنجید. پسینی."
   },
   "tags": [
    "selection",
@@ -1300,8 +1300,8 @@
  {
   "id": "other-selectors",
   "claim": {
-   "en": "Packers without an LLM do not replace the selection call, and other LLM rerankers cost more without beating the cross-encoder.",
-   "fa": "بسته‌سازهای بدون LLM جای فراخوانی گزینش را نمی‌گیرند، و بازرتبه‌سازهای LLM دیگر گران‌ترند و از cross-encoder هم بهتر نیستند."
+   "en": "Packers without an LLM cannot replace the selection call; LLM rerankers cost more and do not beat the cross-encoder.",
+   "fa": "بسته‌سازهای بدون LLM جای فراخوانی گزینش را نمی‌گیرند؛ بازرتبه‌سازهای مبتنی بر LLM گران‌ترند و از cross-encoder بهتر نیستند."
   },
   "numbers": [
    {
@@ -1375,8 +1375,8 @@
   },
   "confidence": "measured",
   "caveat": {
-   "en": "Post hoc: the 90 test questions had already been answered and seen.",
-   "fa": "پسینی: پاسخ ۹۰ پرسش آزمون پیش‌تر گرفته و دیده شده بود."
+   "en": "Post hoc.",
+   "fa": "پسینی."
   },
   "tags": [
    "selection"
@@ -1385,8 +1385,8 @@
  {
   "id": "ce-vs-hybrid",
   "claim": {
-   "en": "The cross-encoder reranker is the suggested starting point: it needs no LLM tokens and was ahead of plain hybrid in all nine pairings of reader draws, but its lead is not significant.",
-   "fa": "بازرتبه‌ساز cross-encoder نقطهٔ شروع پیشنهادی است: توکن LLM مصرف نمی‌کند و در هر نُه جفت از اجراهای مدل پاسخ‌گو از ترکیبیِ ساده جلوتر بود، اما برتری‌اش معنادار نیست."
+   "en": "The cross-encoder reranker is the suggested start: no LLM tokens, ahead of plain hybrid in all nine pairings of reader draws, but not significantly.",
+   "fa": "بازرتبه‌ساز cross-encoder نقطهٔ شروع پیشنهادی است: توکن LLM مصرف نمی‌کند و در هر نُه جفت اجرای مدل پاسخ‌گو از ترکیبیِ ساده جلوتر بود، اما برتری‌اش معنادار نیست."
   },
   "numbers": [
    {
@@ -1450,8 +1450,8 @@
   },
   "confidence": "tentative",
   "caveat": {
-   "en": "Absent in the Persian half. Post hoc: the 90 test questions had already been answered and seen.",
-   "fa": "در نیمهٔ فارسی دیده نمی‌شود. پسینی: پاسخ ۹۰ پرسش آزمون پیش‌تر گرفته و دیده شده بود."
+   "en": "Absent in the Persian half. Post hoc.",
+   "fa": "در نیمهٔ فارسی دیده نمی‌شود. پسینی."
   },
   "tags": [
    "reranker",
@@ -1461,8 +1461,8 @@
  {
   "id": "budget-curves",
   "claim": {
-   "en": "Plain hybrid retrieval keeps improving as the pack grows; the reranked pipeline gets most of its accuracy from the first 6,000 characters; at 24,000 the pipelines converge.",
-   "fa": "بازیابی ترکیبیِ ساده با بزرگ‌تر شدن بسته پیوسته بهتر می‌شود؛ پایپ‌لاین با بازرتبه‌ساز بیشتر دقتش را از ۶٬۰۰۰ کاراکتر نخست می‌گیرد؛ در ۲۴٬۰۰۰ کاراکتر پایپ‌لاین‌ها به هم می‌رسند."
+   "en": "Plain hybrid keeps improving as the pack grows; the reranker gets most of its accuracy by 6,000 characters; at 24,000 all converge.",
+   "fa": "ترکیبیِ ساده با بزرگ‌تر شدن بسته پیوسته بهتر می‌شود؛ بازرتبه‌ساز بیشتر دقتش را تا ۶٬۰۰۰ کاراکتر به دست می‌آورد؛ در ۲۴٬۰۰۰ همه به هم می‌رسند."
   },
   "numbers": [
    {
@@ -1526,8 +1526,8 @@
   },
   "confidence": "measured",
   "caveat": {
-   "en": "Only 6,000 and 15,500 are frozen cells; Lex-RAG at 3,000, 10,000 and 24,000 reuses the selection made at 6,000. First judge only. Post hoc: the 90 test questions had already been answered and seen.",
-   "fa": "فقط ۶٬۰۰۰ و ۱۵٬۵۰۰ از خانه‌های آزمون ازپیش‌تعیین‌شده‌اند؛ Lex-RAG در ۳٬۰۰۰، ۱۰٬۰۰۰ و ۲۴٬۰۰۰ از همان گزینشِ انجام‌شده در ۶٬۰۰۰ استفاده می‌کند. فقط داور اول. پسینی: پاسخ ۹۰ پرسش آزمون پیش‌تر گرفته و دیده شده بود."
+   "en": "Only 6,000 and 15,500 were in the test fixed in advance; Lex-RAG at 3,000, 10,000 and 24,000 reuses its 6,000 selection. First judge only. Post hoc.",
+   "fa": "فقط ۶٬۰۰۰ و ۱۵٬۵۰۰ در آزمون ازپیش‌تعیین‌شده بودند؛ Lex-RAG در ۳٬۰۰۰، ۱۰٬۰۰۰ و ۲۴٬۰۰۰ همان گزینشِ ۶٬۰۰۰ را به کار می‌برد. فقط داور اول. پسینی."
   },
   "tags": [
    "budget",
@@ -1538,8 +1538,8 @@
  {
   "id": "budget-hr",
   "claim": {
-   "en": "Whether the reranked pipeline gains from a bigger pack is unclear: flat on the saved draw, up by 5 or 6 on two redraws.",
-   "fa": "روشن نیست پایپ‌لاین با بازرتبه‌ساز از بستهٔ بزرگ‌تر سود می‌برد یا نه: در اجرای ذخیره‌شده تغییری نکرد و در دو اجرای دوباره ۵ یا ۶ پاسخ بالا رفت."
+   "en": "Whether the reranker gains from a bigger pack is unclear: flat on the saved draw, up 5 or 6 on two redraws.",
+   "fa": "روشن نیست بازرتبه‌ساز از بستهٔ بزرگ‌تر سود می‌برد یا نه: در اجرای ذخیره‌شده تغییری نکرد و در دو اجرای دوباره ۵ یا ۶ پاسخ بالا رفت."
   },
   "numbers": [
    {
@@ -1614,8 +1614,8 @@
  {
   "id": "budget-tokens",
   "claim": {
-   "en": "A bigger budget is an alternative to selection, but it costs tokens: Hybrid needs 15,500 characters to match Lex-RAG at 6,000, at about the same total tokens; the reranker gets there at 6,000 with less than half.",
-   "fa": "بودجهٔ بزرگ‌تر جایگزینی برای گزینش است، اما توکن مصرف می‌کند: ترکیبی برای رسیدن به Lex-RAG در ۶٬۰۰۰ کاراکتر به ۱۵٬۵۰۰ کاراکتر نیاز دارد، با کل توکنی تقریباً برابر؛ بازرتبه‌ساز در همان ۶٬۰۰۰ کاراکتر و با کمتر از نیمِ آن توکن به همین‌جا می‌رسد."
+   "en": "A bigger budget can replace selection, at a token cost: Hybrid needs 15,500 characters to match Lex-RAG at 6,000, at similar tokens; the reranker gets there at 6,000 with less than half.",
+   "fa": "بودجهٔ بزرگ‌تر می‌تواند جای گزینش را بگیرد، اما توکن می‌خواهد: ترکیبی برای رسیدن به Lex-RAG در ۶٬۰۰۰ کاراکتر به ۱۵٬۵۰۰ کاراکتر نیاز دارد، با توکنی تقریباً برابر؛ بازرتبه‌ساز در همان ۶٬۰۰۰ و با کمتر از نصف آن توکن به همین امتیاز می‌رسد."
   },
   "numbers": [
    {
@@ -1659,8 +1659,8 @@
   },
   "confidence": "measured",
   "caveat": {
-   "en": "Post hoc: the 90 test questions had already been answered and seen.",
-   "fa": "پسینی: پاسخ ۹۰ پرسش آزمون پیش‌تر گرفته و دیده شده بود."
+   "en": "Post hoc.",
+   "fa": "پسینی."
   },
   "tags": [
    "budget",
@@ -1670,8 +1670,8 @@
  {
   "id": "cost-latency",
   "claim": {
-   "en": "Query-time cost and speed of the frozen pipelines. Selection calls double or triple the tokens; latencies were measured under contention, so only their order is informative.",
-   "fa": "هزینه و سرعت پایپ‌لاین‌های آزمون ازپیش‌تعیین‌شده هنگام پرسش. فراخوانی‌های گزینش توکن را دو یا سه برابر می‌کنند؛ زمان پاسخ در شرایط رقابت بر سر منابع اندازه‌گیری شد، پس فقط ترتیب این اعداد معنا دارد."
+   "en": "Cost and speed per question. Selection calls double or triple the tokens; only the order of the latencies is reliable.",
+   "fa": "هزینه و سرعت هر پرسش. فراخوانی‌های گزینش توکن را دو یا سه برابر می‌کنند؛ از زمان‌های پاسخ فقط ترتیبشان قابل اتکاست."
   },
   "numbers": [
    {
@@ -1735,8 +1735,8 @@
   },
   "confidence": "measured",
   "caveat": {
-   "en": "Latency measured with GPU contention and two restarts; descriptive only.",
-   "fa": "زمان پاسخ با رقابت بر سر GPU و دو بار راه‌اندازی مجدد اندازه‌گیری شد؛ فقط توصیفی است."
+   "en": "Measured on a shared GPU with two restarts; descriptive only.",
+   "fa": "روی GPU مشترک و با دو بار راه‌اندازی مجدد اندازه‌گیری شد؛ فقط توصیفی است."
   },
   "tags": [
    "cost",
@@ -1746,8 +1746,8 @@
  {
   "id": "channels-recall",
   "claim": {
-   "en": "Before any reader is involved, BM25 and dense retrieval find a complete evidence bundle in their top 40 for a similar number of questions; dense finds more of the individual gold passages.",
-   "fa": "پیش از آنکه پای مدل پاسخ‌گو در میان باشد، BM25 و جست‌وجوی معنایی برای تعداد مشابهی از پرسش‌ها یک مجموعهٔ کامل شواهد در ۴۰ نامزد برترشان پیدا می‌کنند؛ جست‌وجوی معنایی تعداد بیشتری از بخش‌های شاهد مرجع را جداجدا پیدا می‌کند."
+   "en": "BM25 and dense retrieval put a complete bundle in their top 40 for similar numbers of questions; dense finds more single gold passages.",
+   "fa": "BM25 و جست‌وجوی معنایی برای تعداد مشابهی از پرسش‌ها مجموعهٔ کامل شواهد را در ۴۰ نامزد برترشان می‌آورند؛ جست‌وجوی معنایی بخش‌های شاهد مرجع بیشتری را تک‌به‌تک پیدا می‌کند."
   },
   "numbers": [
    {
@@ -1841,8 +1841,8 @@
  {
   "id": "channels-complement",
   "claim": {
-   "en": "The two channels are complementary: they disagree on a third of the questions, and fusion helps through ordering, not recall.",
-   "fa": "دو کانال مکمل یکدیگرند: در یک‌سوم پرسش‌ها نتیجهٔ متفاوت می‌دهند، و ادغام از راه ترتیب کمک می‌کند، نه از راه بازیابی بیشتر."
+   "en": "The channels complement each other: they disagree on a third of questions, and fusion helps by ordering, not recall.",
+   "fa": "دو کانال مکمل یکدیگرند: در یک‌سوم پرسش‌ها نتیجهٔ متفاوت می‌دهند و ادغام از راه ترتیب کمک می‌کند، نه بازیابی بیشتر."
   },
   "numbers": [
    {
@@ -1926,8 +1926,8 @@
  {
   "id": "chunks",
   "claim": {
-   "en": "Large chunks lose at packing, not at retrieval: only about four 2,000-character chunks fit a 6,000-character pack and the last is usually cut.",
-   "fa": "قطعه‌های بزرگ در بسته‌سازی می‌بازند، نه در بازیابی: فقط حدود چهار قطعهٔ ۲٬۰۰۰ کاراکتری در بستهٔ ۶٬۰۰۰ کاراکتری جا می‌شود و آخری معمولاً بریده می‌شود."
+   "en": "Large chunks lose at packing, not retrieval: only about four 2,000-character chunks fit a 6,000-character pack, and the last is usually cut.",
+   "fa": "افت قطعه‌های بزرگ در بسته‌سازی است، نه در بازیابی: فقط حدود چهار قطعهٔ ۲٬۰۰۰ کاراکتری در بستهٔ ۶٬۰۰۰ کاراکتری جا می‌شود و قطعهٔ آخر معمولاً بریده می‌شود."
   },
   "numbers": [
    {
@@ -1979,6 +1979,16 @@
      "en": "79–80 vs 72–75",
      "fa": "۷۹–۸۰ در برابر ۷۲–۷۵"
     }
+   },
+   {
+    "label": {
+     "en": "Second judge, 1,000 / 2,000: Hybrid; HR",
+     "fa": "داور دوم، ۱٬۰۰۰ / ۲٬۰۰۰: ترکیبی؛ HR"
+    },
+    "value": {
+     "en": "59–61 / 48–53; 63 / 52–55 of 90",
+     "fa": "۵۹–۶۱ / ۴۸–۵۳؛ ۶۳ / ۵۲–۵۵ از ۹۰"
+    }
    }
   ],
   "source": {
@@ -1986,7 +1996,7 @@
     "en": "Table “Retrieval components varied one at a time”; Sect. “Retrieval components and where answers are lost”; Data release: anyrag-results/posthoc/S12_chunks",
     "fa": "جدول «تغییر اجزای بازیابی، هر بار یک جزء»؛ بخش «اجزای بازیابی و مرحله‌ای که پاسخ‌ها در آن از دست می‌روند»؛ داده‌های منتشرشده: anyrag-results/posthoc/S12_chunks"
    },
-   "file": "work/posthoc_2026-11/S12_chunks/RESULTS.md (sec. 2)",
+   "file": "work/posthoc_2026-11/S12_chunks/RESULTS.md (sec. 2); work/posthoc_2026-11/S16_judge2/tables.md",
    "manuscript": "paper_journal/main.pdf (journal manuscript, in preparation)"
   },
   "confidence": "measured",
@@ -2001,8 +2011,8 @@
  {
   "id": "rewrite",
   "claim": {
-   "en": "Query rewriting did not help: neither a hypothetical answer passage (HyDE) nor multi-query beat the unrewritten query, and both lowered the number of complete bundles reaching the reader, mostly in Persian.",
-   "fa": "بازنویسی پرسش کمکی نکرد: نه متن فرضیِ پاسخ (HyDE) و نه multi-query از پرسش بازنویسی‌نشده بهتر نبودند، و هر دو تعداد مجموعه‌های کاملی را که به مدل پاسخ‌گو می‌رسید کم کردند، بیشتر در فارسی."
+   "en": "Query rewriting did not help: HyDE (a hypothetical answer) and multi-query did not beat the original query, and both cut complete bundles, mostly in Persian.",
+   "fa": "بازنویسی پرسش کمکی نکرد: HyDE (متن فرضیِ پاسخ) و multi-query از پرسش اصلی بهتر نبودند و هر دو مجموعه‌های کامل را کم کردند، بیشتر در فارسی."
   },
   "numbers": [
    {
@@ -2044,6 +2054,16 @@
      "en": "2,551 / 2,438 / 2,216 (one extra LLM call)",
      "fa": "۲٬۵۵۱ / ۲٬۴۳۸ / ۲٬۲۱۶ (یک فراخوانی LLM اضافی)"
     }
+   },
+   {
+    "label": {
+     "en": "Second judge: HyDE / multi-query / no rewrite",
+     "fa": "داور دوم: HyDE / multi-query / بدون بازنویسی"
+    },
+    "value": {
+     "en": "58–59 / 55–56 / 59–61 of 90",
+     "fa": "۵۸–۵۹ / ۵۵–۵۶ / ۵۹–۶۱ از ۹۰"
+    }
    }
   ],
   "source": {
@@ -2051,13 +2071,13 @@
     "en": "Table “Retrieval components varied one at a time”; Sect. “Retrieval components and where answers are lost”; Data release: anyrag-results/posthoc/S11_rewrite",
     "fa": "جدول «تغییر اجزای بازیابی، هر بار یک جزء»؛ بخش «اجزای بازیابی و مرحله‌ای که پاسخ‌ها در آن از دست می‌روند»؛ داده‌های منتشرشده: anyrag-results/posthoc/S11_rewrite"
    },
-   "file": "work/posthoc_2026-11/S11_rewrite/RESULTS.md (sec. 2)",
+   "file": "work/posthoc_2026-11/S11_rewrite/RESULTS.md (sec. 2); work/posthoc_2026-11/S16_judge2/tables.md",
    "manuscript": "paper_journal/main.pdf (journal manuscript, in preparation)"
   },
   "confidence": "measured",
   "caveat": {
-   "en": "In English the rewrites were a few answers better, within noise.",
-   "fa": "در انگلیسی بازنویسی‌ها چند پاسخ بهتر بودند، در حد نوسان."
+   "en": "In English, rewrites gained a few answers, within noise.",
+   "fa": "در انگلیسی بازنویسی چند پاسخ افزود، در حد نوسان."
   },
   "tags": [
    "rewriting"
@@ -2066,8 +2086,8 @@
  {
   "id": "embedding",
   "claim": {
-   "en": "Swapping bge-m3 for multilingual-e5-large changes little: dense-only scores tie, and inside hybrid e5 is 4 to 5 lower, all in Persian, not significantly.",
-   "fa": "جایگزینی bge-m3 با multilingual-e5-large تغییر چندانی نمی‌دهد: امتیازها در حالت فقط معنایی برابرند، و درون ترکیبی e5 چهار تا پنج پاسخ پایین‌تر است که همه در فارسی است و معنادار نیست."
+   "en": "Swapping bge-m3 for multilingual-e5-large changes little: tied as dense only; inside hybrid, e5 is 4 to 5 lower, all in Persian, not significant.",
+   "fa": "جایگزینی bge-m3 با multilingual-e5-large تغییر چندانی نمی‌دهد: در حالت فقط معنایی برابرند و درون ترکیبی e5 چهار تا پنج پاسخ پایین‌تر است، همه در فارسی؛ این تفاوت معنادار نیست."
   },
   "numbers": [
    {
@@ -2109,6 +2129,16 @@
      "en": "72 of 90",
      "fa": "۷۲ از ۹۰"
     }
+   },
+   {
+    "label": {
+     "en": "Second judge: dense only, e5 / bge-m3; Hybrid, e5 / bge-m3",
+     "fa": "داور دوم: فقط معنایی، e5 / bge-m3؛ ترکیبی، e5 / bge-m3"
+    },
+    "value": {
+     "en": "54–57 / 45–49; 54–57 / 59–61 of 90",
+     "fa": "۵۴–۵۷ / ۴۵–۴۹؛ ۵۴–۵۷ / ۵۹–۶۱ از ۹۰"
+    }
    }
   ],
   "source": {
@@ -2116,13 +2146,13 @@
     "en": "Table “Retrieval components varied one at a time”; Sect. “Retrieval components and where answers are lost”; Data release: anyrag-results/posthoc/S13_embed",
     "fa": "جدول «تغییر اجزای بازیابی، هر بار یک جزء»؛ بخش «اجزای بازیابی و مرحله‌ای که پاسخ‌ها در آن از دست می‌روند»؛ داده‌های منتشرشده: anyrag-results/posthoc/S13_embed"
    },
-   "file": "work/posthoc_2026-11/S13_embed/RESULTS.md (sec. 2)",
+   "file": "work/posthoc_2026-11/S13_embed/RESULTS.md (sec. 2); work/posthoc_2026-11/S16_judge2/tables.md",
    "manuscript": "paper_journal/main.pdf (journal manuscript, in preparation)"
   },
   "confidence": "measured",
   "caveat": {
-   "en": "Two embedding models tried.",
-   "fa": "دو مدل embedding آزموده شد."
+   "en": "Two models tried. Under the second judge e5 leads as the only channel by 5 to 12, significant only for some verdicts on unresolved answers.",
+   "fa": "دو مدل آزموده شد. با داور دوم، e5 در حالت فقط معنایی ۵ تا ۱۲ پاسخ جلوتر است که فقط با برخی حکم‌های ممکن برای پاسخ‌های داوری‌نشده معنادار است."
   },
   "tags": [
    "embedding"
@@ -2131,8 +2161,8 @@
  {
   "id": "agents",
   "claim": {
-   "en": "Iterative search agents have the best point estimates, at about four times the tokens and three times the latency. The agent over the hybrid index with the reranker scores highest of any deployable arm.",
-   "fa": "عامل‌های جست‌وجوی تکرارشونده بهترین برآوردهای نقطه‌ای را دارند، با حدود چهار برابر توکن و سه برابر زمان پاسخ. عامل روی نمایهٔ ترکیبی با بازرتبه‌ساز در میان همهٔ حالت‌های قابل استقرار بالاترین امتیاز را می‌گیرد."
+   "en": "Iterative search agents have the best point estimates, at about four times the tokens and three times the latency. The hybrid-index agent with the reranker scores highest.",
+   "fa": "عامل‌های جست‌وجوی تکرارشونده بهترین برآورد نقطه‌ای را دارند، با حدود چهار برابر توکن و سه برابر زمان پاسخ. عامل روی نمایهٔ ترکیبی با بازرتبه‌ساز بالاترین امتیاز را می‌گیرد."
   },
   "numbers": [
    {
@@ -2214,6 +2244,16 @@
      "en": "2,735 characters of 15,500 allowed",
      "fa": "۲٬۷۳۵ کاراکتر از ۱۵٬۵۰۰ کاراکتر مجاز"
     }
+   },
+   {
+    "label": {
+     "en": "Second judge: hybrid-index agent / HR",
+     "fa": "داور دوم: عامل روی نمایهٔ ترکیبی / HR"
+    },
+    "value": {
+     "en": "74–75 / 63 of 90 (+11 to +12, p .012–.027 uncorrected)",
+     "fa": "۷۴–۷۵ / ۶۳ از ۹۰ (‎+۱۱ تا ‎+۱۲، p = ۰٫۰۱۲ تا ۰٫۰۲۷ بدون اصلاح)"
+    }
    }
   ],
   "source": {
@@ -2221,13 +2261,13 @@
     "en": "Sect. “Evidence budget and iterative or long-context retrieval”; Data release: anyrag-results/posthoc/S3_agentic, anyrag-results/posthoc/S9_gpu",
     "fa": "بخش «بودجهٔ شواهد و بازیابی تکرارشونده یا با پنجرهٔ متنی بلند»؛ داده‌های منتشرشده: anyrag-results/posthoc/S3_agentic، anyrag-results/posthoc/S9_gpu"
    },
-   "file": "work/posthoc_2026-11/S3_agentic/RESULTS.md; work/posthoc_2026-11/S9_gpu/RESULTS.md (sec. 2)",
+   "file": "work/posthoc_2026-11/S3_agentic/RESULTS.md; work/posthoc_2026-11/S9_gpu/RESULTS.md (sec. 2); work/posthoc_2026-11/S16_judge2/tables.md",
    "manuscript": "paper_journal/main.pdf (journal manuscript, in preparation)"
   },
   "confidence": "measured",
   "caveat": {
-   "en": "Each agent ran once; the BM25-agent family of 17 tests has nothing surviving correction; the hybrid-index agent comparisons are uncorrected.",
-   "fa": "هر عامل یک بار اجرا شد. از خانوادهٔ ۱۷ آزمونیِ عامل BM25 هیچ آزمونی پس از اصلاح برای مقایسه‌های چندگانه معنادار نماند؛ مقایسه‌های عامل روی نمایهٔ ترکیبی اصلاح نشده‌اند."
+   "en": "Each agent ran once; nothing in the BM25-agent family of 17 tests survives correction; hybrid-index comparisons are uncorrected.",
+   "fa": "هر عامل یک بار اجرا شد؛ در خانوادهٔ ۱۷ آزمونیِ عامل BM25 هیچ آزمونی پس از اصلاح معنادار نماند؛ مقایسه‌های عامل روی نمایهٔ ترکیبی اصلاح نشده‌اند."
   },
   "tags": [
    "agents",
@@ -2238,7 +2278,7 @@
  {
   "id": "agents-language",
   "claim": {
-   "en": "Agents with only lexical tools gained in the English half and not in the Persian half; the hybrid-index agent gained in both.",
+   "en": "Agents with only lexical tools gained in the English half, not the Persian; the hybrid-index agent gained in both.",
    "fa": "عامل‌هایی که فقط ابزار واژگانی داشتند در نیمهٔ انگلیسی سود بردند و در نیمهٔ فارسی نه؛ عامل روی نمایهٔ ترکیبی در هر دو نیمه سود برد."
   },
   "numbers": [
@@ -2283,8 +2323,8 @@
   },
   "confidence": "measured",
   "caveat": {
-   "en": "Only the grep row survives correction over 14 contrasts. The halves use different documents, so the cause may be Persian or the Persian documents.",
-   "fa": "از ۱۴ مقایسه فقط ردیف grep پس از اصلاح معنادار می‌ماند. دو نیمه اسناد متفاوتی دارند، پس علت ممکن است خود زبان فارسی باشد یا اسناد فارسی."
+   "en": "Only the grep row survives correction over 14 contrasts. The cause may be Persian or the Persian documents.",
+   "fa": "از ۱۴ مقایسه فقط ردیف grep پس از اصلاح معنادار می‌ماند. علت ممکن است خود زبان فارسی باشد یا اسناد فارسی."
   },
   "tags": [
    "agents",
@@ -2361,8 +2401,8 @@
  {
   "id": "routing",
   "claim": {
-   "en": "Routing questions between a cheap and a wide pipeline has little to gain here: the reranker at 6,000 characters already scores as high as at 15,500, at fewer tokens than any router.",
-   "fa": "مسیریابی پرسش‌ها میان یک پایپ‌لاین ارزان و یک پایپ‌لاین با بودجهٔ بزرگ اینجا سود چندانی ندارد: بازرتبه‌ساز در ۶٬۰۰۰ کاراکتر همان امتیاز ۱۵٬۵۰۰ کاراکتر را می‌گیرد، با توکنی کمتر از هر مسیریابی."
+   "en": "Routing between a cheap and a wide pipeline gains little: the reranker at 6,000 characters already matches 15,500, with fewer tokens than any router.",
+   "fa": "مسیریابی میان پایپ‌لاین ارزان و پایپ‌لاین با بودجهٔ بزرگ سود چندانی ندارد: بازرتبه‌ساز در ۶٬۰۰۰ کاراکتر همان امتیاز ۱۵٬۵۰۰ کاراکتر را می‌گیرد، با توکنی کمتر از هر مسیریاب."
   },
   "numbers": [
    {
@@ -2427,8 +2467,8 @@
  {
   "id": "token-matched",
   "claim": {
-   "en": "The same character budget is a bigger token budget in Persian: for the primary reader a 6,000-character Persian pack costs about as much as a 10,000-character English one.",
-   "fa": "بودجهٔ کاراکتری یکسان در فارسی بودجهٔ توکنی بزرگ‌تری است: برای مدل پاسخ‌گوی اصلی، هزینهٔ یک بستهٔ فارسی ۶٬۰۰۰ کاراکتری تقریباً برابر یک بستهٔ انگلیسی ۱۰٬۰۰۰ کاراکتری است."
+   "en": "Equal characters mean more tokens in Persian: for the primary reader, 6,000 Persian characters cost about as much as 10,000 English.",
+   "fa": "کاراکتر برابر در فارسی توکن بیشتری می‌خواهد: برای مدل پاسخ‌گوی اصلی، ۶٬۰۰۰ کاراکتر فارسی تقریباً هم‌هزینهٔ ۱۰٬۰۰۰ کاراکتر انگلیسی است."
   },
   "numbers": [
    {
@@ -2504,8 +2544,8 @@
  {
   "id": "memory-gap",
   "claim": {
-   "en": "The reader answers far more English questions than Persian ones from memory, and the gap follows the source texts, not the language of the question.",
-   "fa": "مدل پاسخ‌گو پرسش‌های انگلیسی بسیار بیشتری را از حافظه پاسخ می‌دهد تا پرسش‌های فارسی، و این شکاف به متن‌های منبع برمی‌گردد، نه به زبان پرسش."
+   "en": "The reader answers far more English than Persian questions from memory; the gap follows the sources, not the question language.",
+   "fa": "مدل پاسخ‌گو پرسش‌های انگلیسی را بسیار بیشتر از پرسش‌های فارسی از حافظه پاسخ می‌دهد؛ این شکاف به متن‌های منبع برمی‌گردد، نه به زبان پرسش."
   },
   "numbers": [
    {
@@ -2569,7 +2609,7 @@
   },
   "confidence": "measured",
   "caveat": {
-   "en": "The English pool contains classic books and EU law, which are better known.",
+   "en": "The English pool holds better-known classics and EU law.",
    "fa": "مخزن انگلیسی کتاب‌های کلاسیک و قوانین اتحادیهٔ اروپا را دارد که شناخته‌شده‌ترند."
   },
   "tags": [
@@ -2581,8 +2621,8 @@
  {
   "id": "crossling-swap",
   "claim": {
-   "en": "When every question is asked in the other language against its own documents, BM25 collapses, dense retrieval holds, and fusion loses its lead over dense; a reranker recovers most of the loss in the Persian pool.",
-   "fa": "وقتی هر پرسش به زبان دیگر و در برابر اسناد خودش پرسیده شود، BM25 به‌شدت افت می‌کند، جست‌وجوی معنایی پابرجا می‌ماند و ادغام برتری‌اش را بر جست‌وجوی معنایی از دست می‌دهد؛ بازرتبه‌ساز در مخزن فارسی بیشتر این افت را جبران می‌کند."
+   "en": "Asked in the other language, BM25 collapses, dense holds and fusion loses its lead over dense; a reranker recovers most of the Persian pool's loss.",
+   "fa": "اگر پرسش به زبان دیگر باشد، BM25 به‌شدت افت می‌کند، جست‌وجوی معنایی پابرجا می‌ماند و ادغام برتری‌اش را بر آن از دست می‌دهد؛ بازرتبه‌ساز بیشتر افت مخزن فارسی را جبران می‌کند."
   },
   "numbers": [
    {
@@ -2654,6 +2694,16 @@
      "en": "69–71 → 53–54",
      "fa": "۶۹–۷۱ ← ۵۳–۵۴"
     }
+   },
+   {
+    "label": {
+     "en": "Same, second judge",
+     "fa": "همین، داور دوم"
+    },
+    "value": {
+     "en": "63 → 51–55",
+     "fa": "۶۳ ← ۵۱–۵۵"
+    }
    }
   ],
   "source": {
@@ -2661,7 +2711,7 @@
     "en": "Table “Retrieval when each question is asked in the other language”; Sect. “Persian and English”",
     "fa": "جدول «بازیابی وقتی هر پرسش به زبان دیگر پرسیده می‌شود»؛ بخش «فارسی و انگلیسی»"
    },
-   "file": "work/posthoc_2026-11/S15_crossling/RESULTS.md (sec. 2), results_tables.md",
+   "file": "work/posthoc_2026-11/S15_crossling/RESULTS.md (sec. 2), results_tables.md; work/posthoc_2026-11/S16_judge2/tables.md",
    "manuscript": "paper_journal/main.pdf (journal manuscript, in preparation)"
   },
   "confidence": "measured",
@@ -2678,8 +2728,8 @@
  {
   "id": "orthography",
   "claim": {
-   "en": "Persian spelling variants (Arabic letters, missing non-joiners, other digit systems) hurt BM25 badly without normalisation; dense retrieval barely notices.",
-   "fa": "گونه‌های املایی فارسی (حروف عربی، نیم‌فاصله‌های جاافتاده، دستگاه‌های رقم دیگر) بدون نرمال‌سازی به BM25 آسیب جدی می‌زنند؛ جست‌وجوی معنایی تقریباً از آن‌ها اثر نمی‌پذیرد."
+   "en": "Persian spelling variants (Arabic letters, missing non-joiners, other digits) hurt BM25 badly without normalisation; dense barely notices.",
+   "fa": "گونه‌های املایی فارسی (حروف عربی، نیم‌فاصلهٔ جاافتاده، رقم‌های دیگر) بدون نرمال‌سازی به BM25 آسیب جدی می‌زنند؛ جست‌وجوی معنایی تقریباً اثری نمی‌پذیرد."
   },
   "numbers": [
    {
@@ -2753,8 +2803,8 @@
   },
   "confidence": "measured",
   "caveat": {
-   "en": "Retrieval only; no answers were scored on the rewritten questions.",
-   "fa": "فقط بازیابی سنجیده شد؛ هیچ پاسخی روی پرسش‌های بازنویسی‌شده ارزیابی نشد."
+   "en": "Retrieval only; no answers were scored.",
+   "fa": "فقط بازیابی سنجیده شد؛ هیچ پاسخی ارزیابی نشد."
   },
   "tags": [
    "orthography",
@@ -2764,8 +2814,8 @@
  {
   "id": "halves",
   "claim": {
-   "en": "Split by language half, the selection call has the same sign in both halves; the reranker's gain, the larger budget and the SetR set lie mainly in the English half, but no difference between halves is shown.",
-   "fa": "به تفکیک نیمهٔ زبانی، اثر فراخوانی گزینش در هر دو نیمه هم‌جهت است؛ سود بازرتبه‌ساز، بودجهٔ بزرگ‌تر و مجموعهٔ SetR بیشتر در نیمهٔ انگلیسی است، اما هیچ تفاوتی میان دو نیمه اثبات نشده است."
+   "en": "By language half, the selection call points the same way in both; reranker, budget and SetR gains lie mainly in English, but no half difference is shown.",
+   "fa": "به تفکیک نیمهٔ زبانی، اثر فراخوانی گزینش در هر دو نیمه هم‌جهت است؛ سود بازرتبه‌ساز، بودجهٔ بزرگ‌تر و SetR بیشتر در نیمهٔ انگلیسی است، اما تفاوتی میان دو نیمه اثبات نشده است."
   },
   "numbers": [
    {
@@ -2819,8 +2869,8 @@
   },
   "confidence": "measured",
   "caveat": {
-   "en": "Each half detects only about 8 of 45; no claim that any method works better or worse in Persian as such.",
-   "fa": "هر نیمه فقط تفاوتی در حدود ۸ از ۴۵ را آشکار می‌کند؛ هیچ ادعایی نیست که روشی در خود زبان فارسی بهتر یا بدتر کار می‌کند."
+   "en": "Each half detects only about 8 of 45; no claim about Persian as such.",
+   "fa": "هر نیمه فقط تفاوت حدود ۸ از ۴۵ را آشکار می‌کند؛ ادعایی دربارهٔ خود زبان فارسی نیست."
   },
   "tags": [
    "persian",
@@ -2830,8 +2880,8 @@
  {
   "id": "reader-noise",
   "claim": {
-   "en": "Answering the identical packs again moves a pipeline's score by about ±2 answers, and single cells by up to six.",
-   "fa": "اگر همان بسته‌ها دوباره پاسخ داده شوند، امتیاز هر پایپ‌لاین حدود ±۲ پاسخ جابه‌جا می‌شود و امتیاز تک‌تک خانه‌ها تا شش پاسخ."
+   "en": "Re-answering identical packs moves a score by about ±2 answers, single cells by up to six.",
+   "fa": "اگر همان بسته‌ها دوباره پاسخ داده شوند، امتیاز حدود ±۲ پاسخ و تک‌خانه‌ها تا شش پاسخ جابه‌جا می‌شوند."
   },
   "numbers": [
    {
@@ -2907,8 +2957,8 @@
  {
   "id": "selector-noise",
   "claim": {
-   "en": "Re-sending the selection call with the same prompt changes the pack for about half the questions, yet accuracy varies no more than reader noise.",
-   "fa": "فرستادن دوبارهٔ فراخوانی گزینش با همان پرامپت، بستهٔ حدود نیمی از پرسش‌ها را تغییر می‌دهد، اما نوسان دقت از نوسان مدل پاسخ‌گو بیشتر نیست."
+   "en": "Re-sending the selection call changes about half the packs, yet accuracy varies no more than reader noise.",
+   "fa": "فرستادن دوبارهٔ فراخوانی گزینش بستهٔ حدود نیمی از پرسش‌ها را تغییر می‌دهد، اما دقت بیش از نوسان مدل پاسخ‌گو تغییر نمی‌کند."
   },
   "numbers": [
    {
@@ -2962,8 +3012,8 @@
  {
   "id": "two-judges",
   "claim": {
-   "en": "A second judge from another model family agrees with the first on 91% of answers but orders the middle pipelines differently.",
-   "fa": "داور دومی از خانوادهٔ مدلی دیگر در ۹۱٪ پاسخ‌ها با داور اول هم‌نظر است، اما پایپ‌لاین‌های میانی را به ترتیب دیگری می‌چیند."
+   "en": "A second judge from another model family agrees on 91% of answers but reorders the middle pipelines.",
+   "fa": "داور دوم از خانوادهٔ مدلی دیگر در ۹۱٪ پاسخ‌ها با داور اول هم‌نظر است، اما ترتیب پایپ‌لاین‌های میانی را عوض می‌کند."
   },
   "numbers": [
    {
@@ -3025,6 +3075,16 @@
      "en": "0.69 / 0.82 (p .21)",
      "fa": "۰٫۶۹ / ۰٫۸۲ (p = ۰٫۲۱)"
     }
+   },
+   {
+    "label": {
+     "en": "Agreement / kappa on 12 post hoc variants scored later",
+     "fa": "توافق / کاپا در ۱۲ حالت پسینی که بعدتر داوری شدند"
+    },
+    "value": {
+     "en": "91.8% / 0.817",
+     "fa": "۹۱٫۸٪ / ۰٫۸۱۷"
+    }
    }
   ],
   "source": {
@@ -3032,13 +3092,13 @@
     "en": "Sect. “Reliability of the rankings and practical guidance”; Table “Test accuracy of four pipelines at two evidence budgets”; Sect. “Readers and judging”",
     "fa": "بخش «اعتبار رتبه‌بندی‌ها و راهنمای عملی»؛ جدول «دقت چهار پایپ‌لاین در پرسش‌های آزمون با دو بودجهٔ شواهد»؛ بخش «مدل‌های پاسخ‌گو و داوری»"
    },
-   "file": "work/posthoc_2026-11/S1_evaluator/RESULTS.md; work/posthoc_2026-11/S8_factorial/tables.md; work/posthoc_2026-11/S14_bilingual/RESULTS.md (sec. 2.5)",
+   "file": "work/posthoc_2026-11/S1_evaluator/RESULTS.md; work/posthoc_2026-11/S8_factorial/tables.md; work/posthoc_2026-11/S14_bilingual/RESULTS.md (sec. 2.5); work/posthoc_2026-11/S16_judge2/tables.md",
    "manuscript": "paper_journal/main.pdf (journal manuscript, in preparation)"
   },
   "confidence": "measured",
   "caveat": {
-   "en": "The second judge scored only the 6,000 and 15,500 arms.",
-   "fa": "داور دوم فقط حالت‌های ۶٬۰۰۰ و ۱۵٬۵۰۰ را سنجید."
+   "en": "It scored the eight arms of the test fixed in advance and 19 post hoc variants; budget, routing and long-context runs had the first judge only.",
+   "fa": "داور دوم هشت حالت آزمون ازپیش‌تعیین‌شده و ۱۹ حالت پسینی را سنجید؛ اجراهای بودجه، مسیریابی و پنجرهٔ متنی بلند را فقط داور اول سنجید."
   },
   "tags": [
    "judges",
@@ -3106,8 +3166,8 @@
  {
   "id": "human-asymmetry",
   "claim": {
-   "en": "A partial human review can mislead. Reviewing one pipeline more thoroughly favoured it: the first review showed a significant lead for Lex-RAG that disappeared once all four pipelines were reviewed on the same questions.",
-   "fa": "بازبینی انسانی محدود می‌تواند گمراه‌کننده باشد. بازبینی دقیق‌ترِ یک پایپ‌لاین به نفع همان پایپ‌لاین تمام شد: بازبینی نخست برتری معناداری برای Lex-RAG نشان داد که وقتی هر چهار پایپ‌لاین روی همان پرسش‌ها بازبینی شدند، از میان رفت."
+   "en": "A partial human review can mislead: reviewing Lex-RAG more thoroughly gave it a significant lead that vanished once all four were reviewed alike.",
+   "fa": "بازبینی انسانی محدود می‌تواند گمراه کند: بازبینی دقیق‌ترِ Lex-RAG برتری معناداری برایش نشان داد که با بازبینی یکسان هر چهار پایپ‌لاین از میان رفت."
   },
   "numbers": [
    {
@@ -3151,8 +3211,8 @@
   },
   "confidence": "measured",
   "caveat": {
-   "en": "Because the judge is never laxer, each extra reviewed answer can only keep or raise a pipeline's score.",
-   "fa": "چون داور هرگز آسان‌گیرتر نیست، هر پاسخ بازبینی‌شدهٔ اضافه فقط می‌تواند امتیاز پایپ‌لاین را ثابت نگه دارد یا بالا ببرد."
+   "en": "The judge is never laxer, so each extra reviewed answer can only keep or raise a score.",
+   "fa": "داور هرگز آسان‌گیرتر نیست، پس هر پاسخ بازبینی‌شدهٔ اضافه امتیاز را فقط ثابت نگه می‌دارد یا بالا می‌برد."
   },
   "tags": [
    "human",
@@ -3163,8 +3223,8 @@
  {
   "id": "pooled-model",
   "claim": {
-   "en": "Pooling all six readers in one mixed model puts Lex-RAG ahead of Hybrid at 6,000 characters, but not ahead of HR, and nothing suggests the effects depend on the reader.",
-   "fa": "وقتی هر شش مدل پاسخ‌گو در یک مدل آمیخته کنار هم گذاشته شوند، Lex-RAG در ۶٬۰۰۰ کاراکتر از ترکیبی جلو می‌افتد اما از HR نه، و هیچ نشانه‌ای نیست که اثرها به مدل پاسخ‌گو وابسته باشند."
+   "en": "Pooling all six readers puts Lex-RAG ahead of Hybrid at 6,000 characters, not ahead of HR; the effects do not seem to depend on the reader.",
+   "fa": "با کنار هم گذاشتن هر شش مدل پاسخ‌گو، Lex-RAG در ۶٬۰۰۰ کاراکتر از پایپ‌لاین ترکیبی جلوتر است، اما از HR نه؛ نشانه‌ای از وابستگی اثرها به مدل پاسخ‌گو نیست."
   },
   "numbers": [
    {
@@ -3228,8 +3288,8 @@
   },
   "confidence": "measured",
   "caveat": {
-   "en": "Uncorrected, post hoc; answers a different question from the frozen test and does not rescue the failed gate.",
-   "fa": "اصلاح‌نشده و پسینی؛ به پرسشی جز پرسش آزمون ازپیش‌تعیین‌شده پاسخ می‌دهد و برآورده نشدن معیار را جبران نمی‌کند."
+   "en": "Uncorrected and post hoc; it does not rescue the failed gate.",
+   "fa": "اصلاح‌نشده و پسینی؛ ناکامی معیار آزمون را جبران نمی‌کند."
   },
   "tags": [
    "stability",
@@ -3239,8 +3299,8 @@
  {
   "id": "g-t1",
   "claim": {
-   "en": "For single-fact questions, hybrid retrieval at a modest budget is enough; every pipeline answers nearly all of them.",
-   "fa": "برای پرسش‌های تک‌واقعیتی، بازیابی ترکیبی با بودجه‌ای متوسط کافی است؛ همهٔ پایپ‌لاین‌ها تقریباً به همهٔ آن‌ها پاسخ درست می‌دهند."
+   "en": "For single-fact questions, hybrid retrieval at a modest budget is enough; every pipeline gets nearly all.",
+   "fa": "برای پرسش‌های تک‌واقعیتی، بازیابی ترکیبی با بودجهٔ متوسط کافی است؛ همهٔ پایپ‌لاین‌ها تقریباً به همه درست پاسخ می‌دهند."
   },
   "numbers": [
    {
@@ -3264,8 +3324,8 @@
   },
   "confidence": "strong",
   "caveat": {
-   "en": "Frozen test, 6,000 and 15,500 characters; the tier leaves no room for a difference.",
-   "fa": "آزمون ازپیش‌تعیین‌شده، ۶٬۰۰۰ و ۱۵٬۵۰۰ کاراکتر؛ این سطح جایی برای تفاوت نمی‌گذارد."
+   "en": "Test fixed in advance, 6,000 and 15,500 characters; no room for a difference.",
+   "fa": "آزمون ازپیش‌تعیین‌شده، ۶٬۰۰۰ و ۱۵٬۵۰۰ کاراکتر؛ جایی برای تفاوت نمی‌ماند."
   },
   "tags": [
    "guide",
@@ -3389,6 +3449,16 @@
      "en": "+6 to +8, not significant",
      "fa": "‎+۶ تا ‎+۸، معنادار نیست"
     }
+   },
+   {
+    "label": {
+     "en": "Same, second judge",
+     "fa": "همین، داور دوم"
+    },
+    "value": {
+     "en": "+11 to +12, p .012–.027 uncorrected",
+     "fa": "‎+۱۱ تا ‎+۱۲، p = ۰٫۰۱۲ تا ۰٫۰۲۷ بدون اصلاح"
+    }
    }
   ],
   "source": {
@@ -3396,13 +3466,13 @@
     "en": "Table “Practical recommendations with supporting evidence and confidence”; Sect. “Reliability of the rankings and practical guidance”; Table “Test accuracy of four pipelines at two evidence budgets”; Sect. “Evidence budget and iterative or long-context retrieval”",
     "fa": "جدول «توصیه‌های عملی، دلیل‌های پشتیبان و میزان اطمینان»؛ بخش «اعتبار رتبه‌بندی‌ها و راهنمای عملی»؛ جدول «دقت چهار پایپ‌لاین در پرسش‌های آزمون با دو بودجهٔ شواهد»؛ بخش «بودجهٔ شواهد و بازیابی تکرارشونده یا با پنجرهٔ متنی بلند»"
    },
-   "file": "work/datasets_v2/test_run/TEST_RESULTS.md; work/posthoc_2026-11/S9_gpu/RESULTS.md (sec. 2)",
+   "file": "work/datasets_v2/test_run/TEST_RESULTS.md; work/posthoc_2026-11/S9_gpu/RESULTS.md (sec. 2); work/posthoc_2026-11/S16_judge2/tables.md",
    "manuscript": "paper_journal/main.pdf (journal manuscript, in preparation)"
   },
   "confidence": "tentative",
   "caveat": {
-   "en": "The agent's lead over the reranker is not significant.",
-   "fa": "برتری عامل بر بازرتبه‌ساز معنادار نیست."
+   "en": "Not significant under the first judge; significant under the second, without correction.",
+   "fa": "با داور اول معنادار نیست؛ با داور دوم معنادار است، بدون اصلاح."
   },
   "tags": [
    "guide",
@@ -3459,6 +3529,16 @@
      "en": "68 / 61",
      "fa": "۶۸ / ۶۱"
     }
+   },
+   {
+    "label": {
+     "en": "Second judge, 6,000: Hybrid / BM25",
+     "fa": "داور دوم، ۶٬۰۰۰: ترکیبی / BM25"
+    },
+    "value": {
+     "en": "59–61 / 42–45 of 90",
+     "fa": "۵۹–۶۱ / ۴۲–۴۵ از ۹۰"
+    }
    }
   ],
   "source": {
@@ -3494,8 +3574,8 @@
  {
   "id": "g-channel-dense",
   "claim": {
-   "en": "Fusion also beats dense retrieval alone, but less clearly; if only one channel can run, use dense retrieval with a larger budget.",
-   "fa": "ادغام از جست‌وجوی معنایی به‌تنهایی هم بهتر است، اما نه چندان آشکار؛ اگر فقط یک کانال را می‌توان اجرا کرد، جست‌وجوی معنایی را با بودجهٔ بزرگ‌تر به کار ببرید."
+   "en": "Fusion beats dense alone too, less clearly; if only one channel can run, use dense with a larger budget.",
+   "fa": "ادغام از جست‌وجوی معنایی به‌تنهایی هم بهتر است، اما کمتر آشکار؛ اگر فقط یک کانال ممکن است، جست‌وجوی معنایی را با بودجهٔ بزرگ‌تر به کار ببرید."
   },
   "numbers": [
    {
@@ -3516,6 +3596,16 @@
     "value": {
      "en": "68 / 63",
      "fa": "۶۸ / ۶۳"
+    }
+   },
+   {
+    "label": {
+     "en": "Second judge, 6,000: Hybrid / dense",
+     "fa": "داور دوم، ۶٬۰۰۰: ترکیبی / معنایی"
+    },
+    "value": {
+     "en": "59–61 / 45–49 of 90",
+     "fa": "۵۹–۶۱ / ۴۵–۴۹ از ۹۰"
     }
    }
   ],
@@ -3551,8 +3641,8 @@
  {
   "id": "g-chunk-2000",
   "claim": {
-   "en": "Use chunks of about 1,000 characters; 2,000-character chunks lose clearly at a 6,000-character budget because few large chunks fit the pack.",
-   "fa": "قطعه‌های حدود ۱٬۰۰۰ کاراکتری به کار ببرید؛ قطعه‌های ۲٬۰۰۰ کاراکتری در بودجهٔ ۶٬۰۰۰ کاراکتر آشکارا عقب می‌مانند، چون قطعهٔ بزرگ زیادی در بسته جا نمی‌شود."
+   "en": "Use chunks of about 1,000 characters; at a 6,000-character budget, 2,000-character chunks lose because few fit.",
+   "fa": "قطعه‌های حدود ۱٬۰۰۰ کاراکتری به کار ببرید؛ در بودجهٔ ۶٬۰۰۰ کاراکتر، قطعه‌های ۲٬۰۰۰ کاراکتری عقب می‌مانند، چون تعداد کمی از آن‌ها جا می‌شود."
   },
   "numbers": [
    {
@@ -3574,6 +3664,16 @@
      "en": "62–63 / 49",
      "fa": "۶۲–۶۳ / ۴۹"
     }
+   },
+   {
+    "label": {
+     "en": "Second judge: reranked / plain Hybrid, 1,000 / 2,000",
+     "fa": "داور دوم: با بازرتبه‌ساز / ترکیبیِ ساده، ۱٬۰۰۰ / ۲٬۰۰۰"
+    },
+    "value": {
+     "en": "63 / 52–55; 59–61 / 48–53",
+     "fa": "۶۳ / ۵۲–۵۵؛ ۵۹–۶۱ / ۴۸–۵۳"
+    }
    }
   ],
   "source": {
@@ -3581,13 +3681,13 @@
     "en": "Table “Practical recommendations with supporting evidence and confidence”; Sect. “Reliability of the rankings and practical guidance”; Table “Retrieval components varied one at a time”",
     "fa": "جدول «توصیه‌های عملی، دلیل‌های پشتیبان و میزان اطمینان»؛ بخش «اعتبار رتبه‌بندی‌ها و راهنمای عملی»؛ جدول «تغییر اجزای بازیابی، هر بار یک جزء»"
    },
-   "file": "work/posthoc_2026-11/S12_chunks/RESULTS.md (sec. 2)",
+   "file": "work/posthoc_2026-11/S12_chunks/RESULTS.md (sec. 2); work/posthoc_2026-11/S16_judge2/tables.md",
    "manuscript": "paper_journal/main.pdf (journal manuscript, in preparation)"
   },
-  "confidence": "strong",
+  "confidence": "tentative",
   "caveat": {
-   "en": "At a 6,000-character budget with this packer.",
-   "fa": "با بودجهٔ ۶٬۰۰۰ کاراکتر و همین بسته‌ساز."
+   "en": "6,000-character budget, this packer. Under the second judge the loss is 6 to 13, no longer clearly detectable.",
+   "fa": "بودجهٔ ۶٬۰۰۰ کاراکتر و همین بسته‌ساز. با داور دوم افت ۶ تا ۱۳ پاسخ است و دیگر با اطمینان آشکار نمی‌شود."
   },
   "tags": [
    "guide",
@@ -3603,7 +3703,7 @@
     "en": "About 1,000 characters.",
     "fa": "حدود ۱٬۰۰۰ کاراکتر."
    },
-   "confidence_text": "Strong against 2,000 at a 6,000-character budget with this packer; tentative against 500"
+   "confidence_text": "Tentative: strong against 2,000 under the first judge only (6,000-character budget, this packer); tentative against 500"
   }
  },
  {
@@ -3660,7 +3760,7 @@
     "en": "About 1,000 characters.",
     "fa": "حدود ۱٬۰۰۰ کاراکتر."
    },
-   "confidence_text": "Strong against 2,000 at a 6,000-character budget with this packer; tentative against 500"
+   "confidence_text": "Tentative: strong against 2,000 under the first judge only (6,000-character budget, this packer); tentative against 500"
   }
  },
  {
@@ -3746,6 +3846,16 @@
     "value": {
      "en": "58 / 62–63",
      "fa": "۵۸ / ۶۲–۶۳"
+    }
+   },
+   {
+    "label": {
+     "en": "Second judge, dense only: e5 / bge-m3",
+     "fa": "داور دوم، فقط معنایی: e5 / bge-m3"
+    },
+    "value": {
+     "en": "54–57 / 45–49",
+     "fa": "۵۴–۵۷ / ۴۵–۴۹"
     }
    }
   ],
@@ -3986,8 +4096,8 @@
  {
   "id": "g-xl-fusion",
   "claim": {
-   "en": "With cross-language questions, fusion with BM25 loses its lead over dense retrieval; put a reranker after the fusion. Even then the best pipeline answers 15 to 18 fewer questions.",
-   "fa": "با پرسش‌های بین‌زبانی، ادغام با BM25 برتری‌اش را بر جست‌وجوی معنایی از دست می‌دهد؛ پس از ادغام یک بازرتبه‌ساز بگذارید. حتی در این حالت، بهترین پایپ‌لاین به ۱۵ تا ۱۸ پرسش کمتر پاسخ درست می‌دهد."
+   "en": "Across languages, fusion with BM25 loses its lead over dense; add a reranker after fusion. Even then, 15 to 18 fewer answers are correct.",
+   "fa": "در پرسش‌های بین‌زبانی، ادغام با BM25 برتری‌اش را بر جست‌وجوی معنایی از دست می‌دهد؛ پس از ادغام، بازرتبه‌ساز اضافه کنید. حتی در این حالت ۱۵ تا ۱۸ پاسخ درست کمتر می‌شود."
   },
   "numbers": [
    {
@@ -4408,8 +4518,8 @@
  {
   "id": "g-agents",
   "claim": {
-   "en": "Treat the BM25 agent's lead over the reranker with caution: it lies in the questions the reader answers from memory. The hybrid-index agent keeps a lead without them.",
-   "fa": "برتری عامل BM25 بر بازرتبه‌ساز را با احتیاط تفسیر کنید: این برتری در پرسش‌هایی است که مدل پاسخ‌گو از حافظه پاسخ می‌دهد. عامل روی نمایهٔ ترکیبی بدون این پرسش‌ها هم برتری‌اش را حفظ می‌کند."
+   "en": "Treat the BM25 agent's lead over the reranker with caution: it lies in memory-answerable questions. The hybrid-index agent leads without them.",
+   "fa": "برتری عامل BM25 بر بازرتبه‌ساز را با احتیاط تفسیر کنید: این برتری در پرسش‌های پاسخ‌پذیر از حافظه است. عامل روی نمایهٔ ترکیبی بدون آن‌ها هم جلوتر است."
   },
   "numbers": [
    {
@@ -4476,8 +4586,8 @@
  {
   "id": "agent-bm25-nogpu",
   "claim": {
-   "en": "Without a GPU, the BM25 search agent had the highest point estimate of the tested options that need no GPU, all within the noise: 73 of 90 against 68–69 for an LLM selection call (Lex-RAG) and 62–63 for plain hybrid. Its gain lay in the English half.",
-   "fa": "در میان گزینه‌های آزموده‌ای که به GPU نیاز ندارند، بالاترین برآورد نقطه‌ای را عامل جست‌وجو با ابزار BM25 داشت: ۷۳ پاسخ درست از ۹۰. فراخوانی گزینش با LLM (Lex-RAG) به ۶۸–۶۹ و ترکیبیِ ساده به ۶۲–۶۳ رسید. این فاصله‌ها در حد نوسان‌اند و سود عامل در نیمهٔ انگلیسی بود."
+   "en": "Of the tested options that need no GPU, the BM25 search agent scored highest, within the noise: 73 of 90, against 68–69 for an LLM selection call (Lex-RAG) and 62–63 for plain hybrid. Its gain lay in the English half.",
+   "fa": "در میان گزینه‌های آزموده‌ای که GPU نمی‌خواهند، عامل جست‌وجو با ابزار BM25 بالاترین امتیاز را گرفت، در حد نوسان: ۷۳ از ۹۰، در برابر ۶۸–۶۹ برای فراخوانی گزینش با LLM (Lex-RAG) و ۶۲–۶۳ برای ترکیبیِ ساده. سودش در نیمهٔ انگلیسی بود."
   },
   "numbers": [
    {
@@ -4561,8 +4671,8 @@
   },
   "confidence": "tentative",
   "caveat": {
-   "en": "Post hoc, one run; latency measured in a separate session. Not graded in the guide table, whose no-GPU row names a larger budget or a selection call. Its lead over the reranked pipeline lay in the 26 memory-answerable questions (4 wins, 1 loss), and the difference between the halves does not survive Holm correction.",
-   "fa": "پسینی و یک اجرا؛ زمان پاسخ در نشستی جداگانه اندازه‌گیری شد. در جدول راهنما درجه‌بندی نشده است؛ ردیف «بدون GPU» آن جدول بودجهٔ بزرگ‌تر یا فراخوانی گزینش را پیشنهاد می‌کند. برتری این عامل بر پایپ‌لاین با بازرتبه‌ساز در ۲۶ پرسش پاسخ‌پذیر از حافظه بود (۴ برد، ۱ باخت)، و تفاوت دو نیمه پس از اصلاح Holm معنادار نمی‌ماند."
+   "en": "Post hoc, one run. Not graded in the guide table (its no-GPU row names a larger budget or a selection call). Its lead over the reranker lay in the 26 memory-answerable questions (4 wins, 1 loss); the half difference does not survive Holm correction.",
+   "fa": "پسینی و یک اجرا. در جدول راهنما درجه‌بندی نشده است (ردیف «بدون GPU» آن بودجهٔ بزرگ‌تر یا فراخوانی گزینش را پیشنهاد می‌کند). برتری‌اش بر بازرتبه‌ساز در ۲۶ پرسش پاسخ‌پذیر از حافظه بود (۴ برد، ۱ باخت)؛ تفاوت دو نیمه پس از اصلاح Holm معنادار نمی‌ماند."
   },
   "tags": [
    "agents",

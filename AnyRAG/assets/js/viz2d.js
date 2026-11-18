@@ -50,7 +50,7 @@
   var measureCtx = null;
   function textW(str, size) {
     if (!measureCtx) measureCtx = document.createElement('canvas').getContext('2d');
-    measureCtx.font = (size || 12) + 'px ' + (rtl() ? 'Vazirmatn, sans-serif' : '"Instrument Sans", system-ui, sans-serif');
+    measureCtx.font = (size || 12) + 'px ' + (rtl() ? 'Estedad, sans-serif' : 'Geist, system-ui, sans-serif');
     return measureCtx.measureText(str).width;
   }
   function wrap(str, maxW, size) {
