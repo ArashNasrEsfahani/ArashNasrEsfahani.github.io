@@ -175,3 +175,16 @@
   .ch-tools{width:100%}
   .ch-tools .ch-btn{flex:1 1 auto}
 }
+
+/* review of 2026-11-18: one-sentence summary, collapsed universal advice, key cards, "not tested" badge */
+.ch-summary{margin:4px 0 16px;max-width:72ch;font:400 18px/1.5 var(--ch-serif,Georgia,serif);color:var(--ch-ink)}
+.ch-summary .ch-k{display:block;margin-bottom:6px}
+:lang(fa) .ch-summary{font-family:var(--ch-fa);font-size:17px;line-height:1.85}
+.ch-universal{border-top:1px solid var(--ch-line);border-bottom:1px solid var(--ch-line)}
+.ch-universal>summary{cursor:pointer;margin:0;padding:11px 0}
+.ch-universal>summary:focus-visible{outline:2px solid var(--focus,var(--ch-acc));outline-offset:3px}
+.ch-universal[open]>summary{margin-bottom:4px}
+.ch-usub{margin:10px 0 4px;font-size:13.5px;color:var(--ch-ink2)}
+.ch-keynote{margin:0 0 12px;font-size:13.5px;line-height:1.5;color:var(--ch-ink2)}
+.ch-badge.untested{color:var(--ch-ink2);border-style:dotted}
+.ch-src .ch-k{font-style:normal;margin-inline-end:4px}

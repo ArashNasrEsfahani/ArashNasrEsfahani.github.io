@@ -8,6 +8,8 @@
   'use strict';
   var NS = 'http://www.w3.org/2000/svg';
   var SCRIPT = document.currentScript;
+  /* cache-busting: the ?v= of this script's own URL (set in index.html) is added to the files it loads */
+  var VQ = (function () { try { var v = new URL(document.currentScript.src).searchParams.get('v'); return v ? '?v=' + encodeURIComponent(v) : ''; } catch (e) { return ''; } })();
   var BASE = (function () {
     try { return new URL('../data/', SCRIPT && SCRIPT.src ? SCRIPT.src : location.href).href; }
     catch (e) { return 'assets/data/'; }
@@ -62,7 +64,7 @@
   }
   function fetchJSON(name) {
     if (!cache[name]) {
-      cache[name] = fetch(BASE + 'viz_' + name + '.json', { cache: 'no-cache' }).then(function (r) {
+      cache[name] = fetch(BASE + 'viz_' + name + '.json' + VQ, { cache: 'no-cache' }).then(function (r) {
         if (!r.ok) throw new Error('viz_' + name + '.json ' + r.status);
         return r.json();
       });
@@ -139,6 +141,7 @@
     var ctrls = opts && opts.controls ? h('div', { 'class': 'vz-ctrls' }, root) : null;
     var plot = h('div', { 'class': 'vz-plot' }, root);
     var note = h('p', { 'class': 'vz-note', dir: 'auto' }, root, S(d, 'note'));
+    if (opts && opts.noTable) return { root: root, ctrls: ctrls, plot: plot, note: note, table: null, titleId: hid, width: Math.max(280, plot.clientWidth || mount.clientWidth || 640) };
     var btn = h('button', { type: 'button', 'class': 'vz-tbtn', 'aria-expanded': 'false' }, root, C('show_table'));
     var tw = h('div', { 'class': 'vz-tablewrap', hidden: '' }, root);
     tw.id = 'vz-' + d.id + '-tbl' + uid;
@@ -200,77 +203,69 @@
       lx: rtl() ? W - 0 : 0, anchorStart: rtl() ? 'end' : 'start', anchorEnd: rtl() ? 'start' : 'end' };
   }
 
-  /* ================= Fig: funnel ================= */
+  /* ================= Fig: funnel =================
+     Plain funnel bars for one pipeline (Hybrid by default, as in the video): all answerable questions, complete
+     evidence in the top 40, complete evidence in the pack; then correct answers, against the gold-evidence reference.
+     What each stage loses is drawn as a dashed ghost and named under the bar. The other pipelines sit behind the
+     pipeline switch, and every number is in the table. HTML bars: text wraps and nothing can be clipped. */
+  var funnelPick = 'hybrid';
   function drawFunnel(mount, d) {
-    var F = frame(mount, d);
-    var W = F.width;
-    var labels = d.rows.map(function (r) { return T(r.label); }).concat([T(d.gold.label)]);
-    var L = rowLayout(W, Math.max.apply(null, labels.map(function (l) { return textW(l, 13); })));
-    var sc = lin(0, d.n, L.x0 + 8, L.x1);
-    var X = L.X(sc);
-    var ul = h('ul', { 'class': 'vz-legend', 'aria-label': 'Legend' }, F.plot);
-    F.plot.insertBefore(ul, F.plot.firstChild);
-    legendItem(ul, 'ring', 's-ctx2', S(d, 'k_top40'));
-    legendItem(ul, 'dot', 'f-acc', S(d, 'k_pack'));
-    legendItem(ul, 'dot', 'f-ink', S(d, 'k_correct'), 'diamond');
-    var rowH = L.narrow ? 50 : 38, top = 10;
-    var all = d.rows.concat([{ key: 'gold', label: d.gold.label, top40: null, pack: d.gold.pack, correct: d.gold.correct, src: d.gold.src, gold: true }]);
-    var H = top + all.length * rowH + 14 + 34;
-    var sv = svgRoot(F.plot, W, H, S(d, 'title'));
-    var tip = Tip(F.plot);
-    var axisY = top + all.length * rowH + 8;
-    [0, 30, 60, 90].forEach(function (t) {
-      s('line', { x1: X(t), x2: X(t), y1: top - 4, y2: axisY, 'class': 'vz-grid' }, sv);
-      s('text', { x: X(t), y: axisY + 15, 'text-anchor': 'middle', 'class': 'vz-t-muted num' }, sv, fmt(t));
+    var F = frame(mount, d, { controls: true });
+    var order = ['hybrid', 'hr', 'lex', 'fusion', 'bm25'];
+    var rows = order.map(function (k) { return d.rows.filter(function (r) { return r.key === k; })[0]; }).filter(Boolean);
+    var r = rows.filter(function (x) { return x.key === funnelPick; })[0] || rows[0];
+    seg(F.ctrls, S(d, 'pick'), rows.map(function (x) { return { k: x.key, l: T(x.label) }; }), r.key, function (k) {
+      funnelPick = k; drawFunnel(mount, d);
+      var b = mount.querySelector('.vz-seg button[aria-pressed="true"]'); if (b) b.focus();
     });
-    s('text', { x: (X(0) + X(d.n)) / 2, y: axisY + 31, 'text-anchor': 'middle', 'class': 'vz-t-muted' }, sv, S(d, 'axis'));
-    all.forEach(function (r, i) {
-      var y0 = top + i * rowH;
-      var cy = L.narrow ? y0 + 32 : y0 + rowH / 2;
-      if (r.gold) s('line', { x1: 0, x2: W, y1: y0 + 1, y2: y0 + 1, 'class': 'vz-grid' }, sv);
-      var g = s('g', { 'class': 'vz-row', tabindex: '0', role: 'img' }, sv);
-      var lab = T(r.label);
-      var aria = lab + ': ' + (r.top40 != null ? S(d, 'k_top40') + ' ' + fmt(r.top40) + ', ' : '') + S(d, 'k_pack') + ' ' + fmt(r.pack) + ', ' + S(d, 'k_correct') + ' ' + fmtR(r.correct) + ' ' + C('of') + ' ' + fmt(d.n);
-      g.setAttribute('aria-label', aria);
-      s('rect', { x: 0, y: y0 + 2, width: W, height: rowH - 4, 'class': 'vz-hit' }, g);
-      if (L.narrow) s('text', { x: rtl() ? W : 0, y: y0 + 14, 'text-anchor': rtl() ? 'end' : 'start', 'class': 'vz-t-ink' }, g, lab);
-      else s('text', { x: rtl() ? W : 0, y: cy + 4, 'text-anchor': rtl() ? 'end' : 'start', 'class': 'vz-t-ink' }, g, lab);
-      if (r.top40 != null) s('line', { x1: X(r.pack), x2: X(r.top40), y1: cy, y2: cy, 'class': 'vz-line s-ctx', 'stroke-width': 2 }, g);
-      if (r.correct[0] !== r.correct[1]) s('line', { x1: X(r.correct[0]), x2: X(r.correct[1]), y1: cy, y2: cy, 'class': 's-ink', 'stroke-width': 3, 'stroke-linecap': 'round' }, g);
-      marker('diamond', X(mid(r.correct)), cy, 4.6, 'f-ink s-surf', g).setAttribute('stroke-width', '2');
-      if (r.top40 != null) s('circle', { cx: X(r.top40), cy: cy, r: 5, 'class': 'f-surf s-ctx2', 'stroke-width': 2 }, g);
-      s('circle', { cx: X(r.pack), cy: cy, r: 6, 'class': 'f-acc s-surf', 'stroke-width': 2 }, g);
-      // direct label: the pack value (the series that matters), placed on the open side of the dot
-      var leftOfPack = Math.min(r.pack, mid(r.correct), r.top40 == null ? 999 : r.top40) === r.pack ? -1 : 1;
-      var lxv = X(r.pack) + leftOfPack * 11;
-      var anchorStart = leftOfPack === 1;
-      if (!(r.gold)) s('text', { x: lxv, y: cy - 9, 'text-anchor': anchorStart ? 'start' : 'end', 'class': 'vz-t-strong num' }, g, fmt(r.pack));
-      bindHit(g, tip, F.plot, function () {
-        var rows = [];
-        if (r.top40 != null) rows.push({ v: fmt(r.top40), l: S(d, 'k_top40'), color: '--viz-ctx2' });
-        rows.push({ v: fmt(r.pack), l: S(d, 'k_pack'), color: '--viz-accent' });
-        rows.push({ v: fmtR(r.correct), l: S(d, 'k_correct'), color: '--viz-ink' });
-        return { title: lab + ' · ' + S(d, 'axis'), rows: rows };
-      }, function () { return [X(r.pack), cy]; });
-    });
+    var n = d.n, pct = function (v) { return (100 * v / n).toFixed(2) + '%'; };
+    var box = h('div', { 'class': 'fn' }, F.plot);
+    function group(label) { h('p', { 'class': 'fn-g', dir: 'auto' }, box, label); }
+    function bar(o) {
+      var row = h('div', { 'class': 'fn-row ' + o.cls }, box);
+      var lab = h('div', { 'class': 'fn-lab' }, row);
+      h('span', { 'class': 'fn-name', dir: 'auto' }, lab, o.label);
+      var track = h('div', { 'class': 'fn-track', dir: 'ltr', 'aria-hidden': 'true' }, row);
+      var sc = h('div', { 'class': 'fn-scale' }, track);
+      var b = h('span', { 'class': 'fn-bar' }, sc); b.style.width = pct(o.v[0]);
+      if (o.v[1] > o.v[0]) { var rr = h('span', { 'class': 'fn-range' }, sc); rr.style.left = pct(o.v[0]); rr.style.width = pct(o.v[1] - o.v[0]); }
+      if (o.from != null && o.from > o.v[1]) { var g = h('span', { 'class': 'fn-ghost' }, sc); g.style.left = pct(o.v[1]); g.style.width = pct(o.from - o.v[1]); }
+      var num = h('span', { 'class': 'fn-num' }, sc, fmtR(o.v)); num.style.left = pct(Math.max(o.v[1], o.from || 0));
+      // the number again for screen readers, in reading order
+      h('span', { 'class': 'vz-sr' }, lab, ': ' + fmtR(o.v) + ' ' + C('of') + ' ' + fmt(n) + (o.loss ? '. ' + o.loss : ''));
+      if (o.loss) h('p', { 'class': 'fn-loss', dir: 'auto', 'aria-hidden': 'true' }, row, o.loss);
+    }
+    group(S(d, 'g_evidence'));
+    bar({ cls: 'fn-all', label: S(d, 'r_all'), v: [n, n] });
+    bar({ cls: 'fn-top', label: S(d, 'r_top40'), v: [r.top40, r.top40], from: n, loss: S(d, 'loss1').replace('{n}', fmt(n - r.top40)) });
+    bar({ cls: 'fn-pack', label: S(d, 'r_pack'), v: [r.pack, r.pack], from: r.top40, loss: S(d, 'loss2').replace('{n}', fmt(r.top40 - r.pack)) });
+    group(S(d, 'g_answers'));
+    bar({ cls: 'fn-ok', label: S(d, 'r_correct').replace('{p}', T(r.label)), v: r.correct });
+    bar({ cls: 'fn-gold', label: T(d.gold.label), v: d.gold.correct });
     table(F.table, S(d, 'title') + ' (' + C('of') + ' ' + fmt(d.n) + ')',
       [{ l: S(d, 'col_pipe') }, { l: S(d, 'k_top40'), num: 1 }, { l: S(d, 'k_pack'), num: 1 }, { l: S(d, 'k_correct'), num: 1 }, { l: C('source'), src: 1 }],
-      all.map(function (r) { return [T(r.label), r.top40 == null ? '–' : fmt(r.top40), fmt(r.pack), fmtR(r.correct), r.src]; }));
+      rows.map(function (x) { return [T(x.label), fmt(x.top40), fmt(x.pack), fmtR(x.correct), x.src]; })
+        .concat([[T(d.gold.label), '–', fmt(d.gold.pack), fmtR(d.gold.correct), d.gold.src]]));
   }
 
   /* ================= Fig: budget ================= */
   var budgetMode = 'chars';
   function drawBudget(mount, d) {
     var F = frame(mount, d, { controls: true });
-    var show = ['hybrid', 'hr', 'lex5b'];
-    var style = { hybrid: { c: 'ctx', shape: 'circle', v: '--viz-ctx' }, hr: { c: 'ctx2', shape: 'square', v: '--viz-ctx2' }, lex5b: { c: 'acc', shape: 'triangle', v: '--viz-accent' } };
+    // Lex-RAG with and without its selection call (the gap between the two is what the selection step is worth),
+    // against the two controls; a band of plus or minus 2 answers around Lex-RAG marks the reader's run-to-run noise
+    var show = ['hybrid', 'hr', 'fusion', 'lex5b'];
+    var style = { hybrid: { c: 'ctx', shape: 'circle', v: '--viz-ctx' }, hr: { c: 'ctx2', shape: 'square', v: '--viz-ctx2' },
+      fusion: { c: 'acc', shape: 'triangle', v: '--viz-accent', dash: true }, lex5b: { c: 'acc', shape: 'triangle', v: '--viz-accent' } };
     var ser = d.series.filter(function (x) { return show.indexOf(x.key) >= 0; });
     seg(F.ctrls, S(d, 'mode_label'), [{ k: 'chars', l: S(d, 'mode_chars') }, { k: 'tok', l: S(d, 'mode_tok') }], budgetMode, function (k) { budgetMode = k; drawBudget(mount, d); var b = mount.querySelector('.vz-seg button[aria-pressed="true"]'); if (b) b.focus(); });
-    var ul = h('ul', { 'class': 'vz-legend', 'aria-label': 'Legend' }, F.plot);
-    ser.forEach(function (x) { legendItem(ul, 'line', 'f-' + style[x.key].c, T(x.label), style[x.key].shape); });
     var W = F.width, narrow = W < 520;
-    var ends = ser.map(function (x) { return textW(T(x.label), 12); });
-    var padR = narrow ? 14 : Math.min(170, Math.max.apply(null, ends) + 26), padL = 40, padT = 12, padB = 46;
+    var ul = h('ul', { 'class': 'vz-legend', 'aria-label': S(d, 'legend') }, F.plot);
+    // the lines carry direct labels at their ends; the legend lists them only on phones, where there is no room for that
+    if (narrow) ser.forEach(function (x) { var li = legendItem(ul, 'line', 'f-' + style[x.key].c, T(x.label), style[x.key].shape); if (style[x.key].dash) li.classList.add('is-dash'); });
+    legendItem(ul, 'rect', 'f-band', S(d, 'band'));
+    var ends = ser.map(function (x) { return textW(T(x.label), 13); });
+    var padR = narrow ? 14 : Math.min(230, Math.max.apply(null, ends) + 28), padL = 40, padT = 12, padB = 46;
     var H = narrow ? 300 : 340;
     var tokMode = budgetMode === 'tok';
     var xMax = tokMode ? 11 : 25.5, xMin = tokMode ? 0.5 : 1;
@@ -286,17 +281,29 @@
     xt.forEach(function (t) { s('text', { x: xs(t), y: H - padB + 16, 'text-anchor': 'middle', 'class': 'vz-t-muted num' }, sv, fmt(t, t % 1 ? 1 : 0)); });
     s('text', { x: (padL + W - padR) / 2, y: H - 8, 'text-anchor': 'middle', 'class': 'vz-t-muted' }, sv, tokMode ? S(d, 'x_tok') : S(d, 'x_chars'));
     function px(p) { return xs(tokMode ? p.tok / 1000 : p.b / 1000); }
+    // the y axis starts at 40, not 0: draw the axis with a break mark
+    s('line', { x1: padL, x2: padL, y1: padT, y2: H - padB - 12, 'class': 'vz-axis' }, sv);
+    s('path', { d: 'M' + (padL - 5) + ',' + (H - padB - 6) + 'l10,-5M' + (padL - 5) + ',' + (H - padB - 1) + 'l10,-5', 'class': 'vz-axis f-none' }, sv);
     var cross = s('line', { x1: 0, x2: 0, y1: padT, y2: H - padB, 'class': 'vz-cross', visibility: 'hidden' }, sv);
-    var order = ser.slice().sort(function (a, b) { return a.key === 'lex5b' ? 1 : b.key === 'lex5b' ? -1 : 0; });
+    var lexS = ser.filter(function (x) { return x.key === 'lex5b'; })[0];
+    if (lexS) {
+      var up = lexS.points.map(function (p) { return px(p).toFixed(1) + ',' + ys(Math.min(76, mid(p.acc) + 2)).toFixed(1); });
+      var dn = lexS.points.slice().reverse().map(function (p) { return px(p).toFixed(1) + ',' + ys(mid(p.acc) - 2).toFixed(1); });
+      s('path', { d: 'M' + up.join('L') + 'L' + dn.join('L') + 'Z', 'class': 'f-band' }, sv);
+    }
+    var rank = { hybrid: 0, hr: 1, fusion: 2, lex5b: 3 };
+    var order = ser.slice().sort(function (a, b) { return rank[a.key] - rank[b.key]; });
     var ptsG = {};
     order.forEach(function (x) {
       var st = style[x.key];
       var path = x.points.map(function (p, i) { return (i ? 'L' : 'M') + px(p).toFixed(1) + ',' + ys(mid(p.acc)).toFixed(1); }).join('');
-      s('path', { d: path, 'class': 'vz-line s-' + st.c }, sv);
+      var ln = s('path', { d: path, 'class': 'vz-line s-' + st.c }, sv);
+      if (st.dash) ln.setAttribute('stroke-dasharray', '5 4');
       var g = s('g', null, sv); ptsG[x.key] = g;
       x.points.forEach(function (p) {
         if (p.acc[0] !== p.acc[1]) s('line', { x1: px(p), x2: px(p), y1: ys(p.acc[0]), y2: ys(p.acc[1]), 'class': 's-' + st.c, 'stroke-width': 2 }, g);
-        var m = marker(st.shape, px(p), ys(mid(p.acc)), 4.2, (tokMode && p.approx ? 'f-surf s-' + st.c : 'f-' + st.c + ' s-surf'), g);
+        var hollow = st.dash || (tokMode && p.approx);
+        var m = marker(st.shape, px(p), ys(mid(p.acc)), 4.2, (hollow ? 'f-surf s-' + st.c : 'f-' + st.c + ' s-surf'), g);
         m.setAttribute('stroke-width', '2');
       });
     });
@@ -310,7 +317,7 @@
       lab.forEach(function (l, i) {
         var tx = W - padR + 14;
         if (Math.abs(ly[i] - l.y) > 2) s('path', { d: 'M' + (l.x + 6) + ',' + l.y + 'L' + (tx - 4) + ',' + ly[i], 'class': 'vz-axis f-none' }, sv);
-        s('text', { x: tx, y: ly[i] + 4, 'class': l.k === 'lex5b' ? 'vz-t-strong' : 'vz-t-ink' }, sv, l.t);
+        s('text', { x: tx, y: ly[i] + 4, 'class': l.k === 'lex5b' || l.k === 'fusion' ? 'vz-t-strong' : 'vz-t-ink' }, sv, l.t);
       });
     }
     // crosshair layer (keyboard: arrow keys)
@@ -364,9 +371,13 @@
     var F = frame(mount, d);
     var W = F.width;
     var L = rowLayout(W, Math.max.apply(null, d.rows.map(function (r) { return textW(T(r.label), 13); })));
-    var sc = lin(-16, 10, L.x0 + 4, L.x1 - 20);
+    function farOf(r) { return r.net[0] >= 0 ? Math.max(r.net[0], r.net[1]) : Math.min(r.net[0], r.net[1]); }
+    var lo = d.rows.reduce(function (a, r) { return farOf(r) < farOf(a) ? r : a; }), hi = d.rows.reduce(function (a, r) { return farOf(r) > farOf(a) ? r : a; });
+    var padLo = farOf(lo) < 0 ? textW(fmtRS(lo.net), 14) + 20 : 4, padHi = farOf(hi) > 0 ? textW(fmtRS(hi.net), 14) + 20 : 20;
+    // the scale ends at -16 and +10; the value labels sit beyond the bar ends, so the plot band leaves room for them
+    var sc = lin(-16, 10, L.x0 + Math.max(4, padLo - 8), L.x1 - Math.max(8, padHi - 24));
     var X = L.X(sc);
-    var rowH = L.narrow ? 46 : 30, gH = 26, top = 24;
+    var rowH = L.narrow ? 48 : 32, gH = 28, top = 24;
     var y = top, pos = [], lastG = null;
     d.rows.forEach(function (r) { if (r.group !== lastG) { y += gH; lastG = r.group; } pos.push(y); y += rowH; });
     var axisY = y + 6, H = axisY + 40;
@@ -377,20 +388,20 @@
       s('text', { x: X(t), y: axisY + 15, 'text-anchor': 'middle', 'class': 'vz-t-muted num' }, sv, t === 0 ? fmt(0) : fmtS(t));
     });
     s('text', { x: X(0), y: top - 8, 'text-anchor': 'middle', 'class': 'vz-t-muted' }, sv, S(d, 'zero'));
-    s('text', { x: rtl() ? W : 0, y: axisY + 32, 'text-anchor': rtl() ? 'end' : 'start', 'class': 'vz-t-muted' }, sv, S(d, 'axis'));
+    s('text', { x: rtl() ? W - 3 : 0, y: axisY + 32, 'text-anchor': rtl() ? 'end' : 'start', 'class': 'vz-t-muted' }, sv, S(d, 'axis'));
     lastG = null;
     d.rows.forEach(function (r, i) {
       var y0 = pos[i];
       if (r.group !== lastG) {
         lastG = r.group;
-        s('text', { x: rtl() ? W : 0, y: y0 - 8, 'text-anchor': rtl() ? 'end' : 'start', 'class': 'vz-t-muted', 'font-weight': 500 }, sv, T(d.groups[r.group]));
+        s('text', { x: rtl() ? W - 3 : 0, y: y0 - 8, 'text-anchor': rtl() ? 'end' : 'start', 'class': 'vz-t-muted', 'font-weight': 500 }, sv, T(d.groups[r.group]));
       }
       var cy = L.narrow ? y0 + 30 : y0 + rowH / 2;
       var g = s('g', { 'class': 'vz-row', tabindex: '0', role: 'img' }, sv);
       var lab = T(r.label);
       g.setAttribute('aria-label', lab + ': ' + fmtRS(r.net) + ' (' + fmt(r.wl[0]) + '/' + fmt(r.wl[1]) + '), ' + fmtR(r.correct) + ' ' + C('of') + ' ' + fmt(d.n));
       s('rect', { x: 0, y: y0 + 1, width: W, height: rowH - 2, 'class': 'vz-hit' }, g);
-      s('text', { x: rtl() ? W : 0, y: L.narrow ? y0 + 13 : cy + 4, 'text-anchor': rtl() ? 'end' : 'start', 'class': 'vz-t-ink' }, g, lab);
+      s('text', { x: rtl() ? W - 3 : 0, y: L.narrow ? y0 + 13 : cy + 4, 'text-anchor': rtl() ? 'end' : 'start', 'class': 'vz-t-ink' }, g, lab);
       var pos2 = r.net[0] >= 0;
       var near = pos2 ? Math.min(r.net[0], r.net[1]) : Math.max(r.net[0], r.net[1]);
       var far = pos2 ? Math.max(r.net[0], r.net[1]) : Math.min(r.net[0], r.net[1]);
@@ -400,7 +411,7 @@
       s('rect', { x: Math.min(a, b), y: cy - bh / 2, width: Math.abs(b - a), height: bh, 'class': cls }, g);
       if (far !== near) { var wr = s('rect', { x: Math.min(b, c), y: cy - bh / 2, width: Math.abs(c - b), height: bh, 'class': cls }, g); wr.setAttribute('opacity', '.4'); }
       var outward = far < 0 ? -1 : 1;
-      s('text', { x: c + outward * 6, y: cy + 4, 'text-anchor': outward < 0 ? 'end' : 'start', 'class': 'vz-t-strong num' }, g, fmtRS(r.net).replace(' to ', '…'));
+      s('text', { x: c + outward * 6, y: cy + 4, 'text-anchor': outward < 0 ? 'end' : 'start', 'class': 'vz-t-strong num' }, g, fmtRS(r.net));
       bindHit(g, tip, F.plot, function () {
         return { title: lab, rows: [
           { v: fmtRS(r.net), l: S(d, 'col_net'), color: r.key === 'hr' ? '--viz-accent' : '--viz-ctx2' },
@@ -422,7 +433,7 @@
     // panel a: token ratio
     h('p', { 'class': 'vz-sub', dir: 'auto' }, F.plot, S(d, 'a_title'));
     var L = rowLayout(W, Math.max.apply(null, d.tokens.map(function (r) { return textW(T(r.label), 13); })));
-    var sc = lin(0, 3.2, L.x0 + 4, L.x1 - 10), X = L.X(sc);
+    var sc = lin(0, 3.2, L.x0 + 14, L.x1 - 10), X = L.X(sc);
     var rowH = L.narrow ? 46 : 28, top = 18; // phones: the name sits on its own line above the bar
     var H = top + d.tokens.length * rowH + 40;
     var sv = svgRoot(F.plot, W, H, S(d, 'a_title'));
@@ -432,14 +443,14 @@
       s('text', { x: X(t), y: axisY + 15, 'text-anchor': 'middle', 'class': 'vz-t-muted num' }, sv, fmt(t) + '×');
     });
     s('text', { x: X(1), y: top - 8, 'text-anchor': 'middle', 'class': 'vz-t-muted' }, sv, S(d, 'a_even'));
-    s('text', { x: rtl() ? W : 0, y: axisY + 32, 'text-anchor': rtl() ? 'end' : 'start', 'class': 'vz-t-muted' }, sv, S(d, 'a_axis'));
+    s('text', { x: rtl() ? W - 3 : 0, y: axisY + 32, 'text-anchor': rtl() ? 'end' : 'start', 'class': 'vz-t-muted' }, sv, S(d, 'a_axis'));
     d.tokens.forEach(function (r, i) {
       var y0 = top + i * rowH, cy = L.narrow ? y0 + 31 : y0 + rowH / 2;
       var g = s('g', { 'class': 'vz-row', tabindex: '0', role: 'img' }, sv);
       var lab = T(r.label);
       g.setAttribute('aria-label', lab + ': ' + fmt(r.ratio, 2) + '× (' + fmt(r.fa, 3) + ' / ' + fmt(r.en, 3) + ')');
       s('rect', { x: 0, y: y0 + 1, width: W, height: rowH - 2, 'class': 'vz-hit' }, g);
-      s('text', { x: rtl() ? W : 0, y: L.narrow ? y0 + 12 : cy + 4, 'text-anchor': rtl() ? 'end' : 'start', 'class': r.primary ? 'vz-t-strong' : 'vz-t-ink' }, g, lab);
+      s('text', { x: rtl() ? W - 3 : 0, y: L.narrow ? y0 + 12 : cy + 4, 'text-anchor': rtl() ? 'end' : 'start', 'class': r.primary ? 'vz-t-strong' : 'vz-t-ink' }, g, lab);
       var a = X(0), b = X(r.ratio);
       s('rect', { x: Math.min(a, b), y: cy - 6, width: Math.abs(b - a), height: 12, 'class': r.primary ? 'f-acc' : 'f-ctx' }, g);
       s('text', { x: b + 6, y: cy + 4, 'text-anchor': 'start', 'class': (r.primary ? 'vz-t-strong' : 'vz-t-ink') + ' num' }, g, fmt(r.ratio, 2) + '×');
@@ -459,8 +470,8 @@
     legendItem(ul, 'ring', 's-ctx2', S(d, 'orig'));
     legendItem(ul, 'dot', 'f-ink', S(d, 'trans'));
     var L2 = rowLayout(W, Math.max.apply(null, d.crossling.map(function (r) { return textW(T(r.label), 13); })));
-    var sc2 = lin(0, d.per_pool, L2.x0 + 8, L2.x1), X2 = L2.X(sc2);
-    var rh = L2.narrow ? 44 : 30, t2 = 8;
+    var sc2 = lin(0, d.per_pool, L2.x0 + 30, L2.x1 - 6), X2 = L2.X(sc2);
+    var rh = L2.narrow ? 46 : 32, t2 = 8;
     var H2 = t2 + d.crossling.length * rh + 40;
     var sv2 = svgRoot(F.plot, W, H2, S(d, 'b_title'));
     var ay = t2 + d.crossling.length * rh + 4;
@@ -468,20 +479,20 @@
       s('line', { x1: X2(t), x2: X2(t), y1: t2, y2: ay, 'class': 'vz-grid' }, sv2);
       s('text', { x: X2(t), y: ay + 15, 'text-anchor': 'middle', 'class': 'vz-t-muted num' }, sv2, fmt(t));
     });
-    s('text', { x: rtl() ? W : 0, y: ay + 32, 'text-anchor': rtl() ? 'end' : 'start', 'class': 'vz-t-muted' }, sv2, S(d, 'b_axis'));
+    s('text', { x: rtl() ? W - 3 : 0, y: ay + 32, 'text-anchor': rtl() ? 'end' : 'start', 'class': 'vz-t-muted' }, sv2, S(d, 'b_axis'));
     d.crossling.forEach(function (r, i) {
       var v = r[langPool], y0 = t2 + i * rh, cy = L2.narrow ? y0 + 30 : y0 + rh / 2;
       var g = s('g', { 'class': 'vz-row', tabindex: '0', role: 'img' }, sv2);
       var lab = T(r.label), acc = r.key === 'bm25';
       g.setAttribute('aria-label', lab + ': ' + fmt(v[0]) + ' → ' + fmt(v[1]) + ' ' + C('of') + ' ' + fmt(d.per_pool));
       s('rect', { x: 0, y: y0 + 1, width: W, height: rh - 2, 'class': 'vz-hit' }, g);
-      s('text', { x: rtl() ? W : 0, y: L2.narrow ? y0 + 13 : cy + 4, 'text-anchor': rtl() ? 'end' : 'start', 'class': acc ? 'vz-t-strong' : 'vz-t-ink' }, g, lab);
+      s('text', { x: rtl() ? W - 3 : 0, y: L2.narrow ? y0 + 13 : cy + 4, 'text-anchor': rtl() ? 'end' : 'start', 'class': acc ? 'vz-t-strong' : 'vz-t-ink' }, g, lab);
       s('line', { x1: X2(v[0]), x2: X2(v[1]), y1: cy, y2: cy, 'class': 'vz-line ' + (acc ? 's-acc' : 's-ctx'), 'stroke-width': acc ? 3 : 2 }, g);
       s('circle', { cx: X2(v[0]), cy: cy, r: 5, 'class': 'f-surf s-ctx2', 'stroke-width': 2 }, g);
       s('circle', { cx: X2(v[1]), cy: cy, r: 5.5, 'class': (acc ? 'f-acc' : 'f-ink') + ' s-surf', 'stroke-width': 2 }, g);
       var lft = v[1] < v[0];
-      var outx = X2(v[1]) + (lft ? -10 : 10);
-      s('text', { x: outx, y: cy + 4, 'text-anchor': lft ? 'end' : 'start', 'class': 'vz-t-strong num' }, g, fmt(v[1]));
+      s('text', { x: X2(v[1]) + (lft ? -10 : 10), y: cy + 4, 'text-anchor': lft ? 'end' : 'start', 'class': 'vz-t-strong num' }, g, fmt(v[1]));
+      s('text', { x: X2(v[0]) + (lft ? 10 : -10), y: cy + 4, 'text-anchor': lft ? 'start' : 'end', 'class': 'vz-t-muted num' }, g, fmt(v[0]));
       bindHit(g, tip, F.plot, function () {
         return { title: lab + ' · ' + (langPool === 'fa' ? S(d, 'pool_fa') : S(d, 'pool_en')), rows: [
           { v: fmt(v[0]), l: S(d, 'orig'), color: '--viz-ctx2' }, { v: fmt(v[1]), l: S(d, 'trans'), color: acc ? '--viz-accent' : '--viz-ink' }] };
@@ -495,77 +506,42 @@
       d.crossling.map(function (r) { return [T(r.label), fmt(r.fa[0]) + ' → ' + fmt(r.fa[1]), fmt(r.en[0]) + ' → ' + fmt(r.en[1]), r.src]; }));
   }
 
-  /* ================= Fig: stability ================= */
+  /* ================= Fig: stability =================
+     A rank table: one row per condition, the four pipelines in order of their score, highest first. The highlighted
+     pipeline is filled, so its rank can be followed down the rows. No lines join the conditions: they are not a
+     sequence. Equal scores are marked as ties. */
   var stabPick = 'lex5b';
   function drawStability(mount, d) {
-    var F = frame(mount, d, { controls: true });
-    var shapes = { hybrid: 'circle', hr: 'square', lex5b: 'triangle', setr: 'diamond' };
+    var F = frame(mount, d, { controls: true, noTable: true });
     seg(F.ctrls, S(d, 'pick'), d.series.map(function (x) { return { k: x.key, l: T(x.label) }; }), stabPick, function (k) {
       stabPick = k; drawStability(mount, d); var b = mount.querySelector('.vz-seg button[aria-pressed="true"]'); if (b) b.focus();
     });
-    var ul = h('ul', { 'class': 'vz-legend', 'aria-label': 'Legend' }, F.plot);
-    d.series.forEach(function (x) { legendItem(ul, 'dot', x.key === stabPick ? 'f-acc' : 'f-ctx2', T(x.label), shapes[x.key]); });
-    var W = F.width, narrow = W < 560;
-    var padL = 38, padR = 10, padT = narrow ? 56 : 40, padB = narrow ? 48 : 40, H = narrow ? 336 : 330;
-    var nC = d.conditions.length;
-    // column centres with a gap between groups
-    var gaps = [], gx = 0, prev = null;
-    d.conditions.forEach(function (c) { if (prev && c.group !== prev) gx += 0.6; gaps.push(gx); gx += 1; prev = c.group; });
-    var xs = lin(-0.5, gx - 0.5, padL + 6, W - padR - 6), ys = lin(55, 80, H - padB, padT);
-    var sv = svgRoot(F.plot, W, H, S(d, 'title'), true);
-    var tip = Tip(F.plot);
-    [55, 60, 65, 70, 75, 80].forEach(function (t) {
-      s('line', { x1: padL, x2: W - padR, y1: ys(t), y2: ys(t), 'class': 'vz-grid' }, sv);
-      s('text', { x: padL - 8, y: ys(t) + 4, 'text-anchor': 'end', 'class': 'vz-t-muted num' }, sv, fmt(t));
-    });
-    // group bands + labels
-    var grpKeys = []; d.conditions.forEach(function (c) { if (grpKeys.indexOf(c.group) < 0) grpKeys.push(c.group); });
-    grpKeys.forEach(function (gk) {
-      var idx = []; d.conditions.forEach(function (c, i) { if (c.group === gk) idx.push(i); });
-      var a = xs(gaps[idx[0]] - 0.45), b = xs(gaps[idx[idx.length - 1]] + 0.45);
-      s('line', { x1: a, x2: b, y1: padT - 14, y2: padT - 14, 'class': 'vz-axis' }, sv);
-      var ls = wrap(T(d.groups[gk]), b - a, 11.5);
-      ls.forEach(function (ln, j) { s('text', { x: (a + b) / 2, y: padT - 20 - (ls.length - 1 - j) * (rtl() ? 15 : 13), 'text-anchor': 'middle', 'class': 'vz-t-muted' }, sv, ln); });
-    });
-    var colW = (xs(1) - xs(0)) * 0.94;
+    var narrow = F.width < 560;
+    var name = function (x) { return narrow && x.short ? T(x.short) : T(x.label); };
+    var t = h('table', { 'class': 'rk' + (narrow ? ' is-narrow' : '') }, F.plot);
+    h('caption', { dir: 'auto' }, t, S(d, 'rk_caption'));
+    var hr = h('tr', null, h('thead', null, t));
+    h('th', { scope: 'col', 'class': 'rk-cond' }, hr, S(d, 'col_cond'));
+    [1, 2, 3, 4].forEach(function (k) { h('th', { scope: 'col' }, hr, S(d, 'rk_' + k)); });
+    var tb = h('tbody', null, t), lastG = null;
     d.conditions.forEach(function (c, i) {
-      var cx = xs(gaps[i]);
-      var full = T(c.label), lbl = (textW(full, 11.5) > colW * 2 - 4 || narrow) && c.short ? T(c.short) : full;
-      wrap(lbl, colW, 11.5).slice(0, 2).forEach(function (ln, j) { s('text', { x: cx, y: H - padB + 16 + j * (rtl() ? 16 : 14), 'text-anchor': 'middle', 'class': 'vz-t-muted' }, sv, ln); });
-    });
-    var offs = { hybrid: -1.5, hr: -0.5, lex5b: 0.5, setr: 1.5 };
-    var dx = Math.min(7, (xs(1) - xs(0)) / 9);
-    var order = d.series.slice().sort(function (a, b) { return (a.key === stabPick) - (b.key === stabPick); });
-    order.forEach(function (x) {
-      var on = x.key === stabPick, cls = on ? 'acc' : 'ctx2';
-      var g = s('g', { 'class': on ? '' : 'is-dim' }, sv);
-      if (on) {
-        // connect within each group only
-        grpKeys.forEach(function (gk) {
-          var pts = []; d.conditions.forEach(function (c, i) { if (c.group === gk) pts.push(i); });
-          if (pts.length > 1) s('path', { d: pts.map(function (i, j) { return (j ? 'L' : 'M') + (xs(gaps[i]) + offs[x.key] * dx) + ',' + ys(mid(x.values[i])); }).join(''), 'class': 'vz-line s-acc', 'stroke-width': 1.5 }, g);
-        });
+      if (c.group !== lastG) {
+        lastG = c.group;
+        var gr = h('tr', { 'class': 'rk-g' }, tb);
+        h('th', { scope: 'colgroup', colspan: '5' }, gr, T(d.groups[c.group]));
       }
-      x.values.forEach(function (v, i) {
-        var cx = xs(gaps[i]) + offs[x.key] * dx;
-        if (v[0] !== v[1]) s('line', { x1: cx, x2: cx, y1: ys(v[0]), y2: ys(v[1]), 'class': 's-' + cls, 'stroke-width': 2 }, g);
-        marker(shapes[x.key], cx, ys(mid(v)), on ? 4.6 : 3.8, 'f-' + cls + ' s-surf', g).setAttribute('stroke-width', '2');
+      var tr = h('tr', null, tb);
+      h('th', { scope: 'row', 'class': 'rk-cond' }, tr, T(c.label));
+      var ord = d.series.map(function (x) { return { x: x, v: x.values[i], m: mid(x.values[i]) }; })
+        .sort(function (a, b) { return b.m - a.m; });
+      ord.forEach(function (o, j) {
+        var tie = ord.some(function (q, k) { return k !== j && q.m === o.m; });
+        var td = h('td', { 'class': 'rk-c' + (o.x.key === stabPick ? ' is-on' : '') + (tie ? ' is-tie' : '') }, tr);
+        td.addEventListener('click', function () { stabPick = o.x.key; drawStability(mount, d); });
+        h('span', { 'class': 'rk-n', dir: 'auto' }, td, name(o.x));
+        h('span', { 'class': 'rk-v' }, td, fmtR(o.v) + (tie ? ' ' + S(d, 'tie') : ''));
       });
     });
-    // per-column hit areas (all four values)
-    d.conditions.forEach(function (c, i) {
-      var cx = xs(gaps[i]), w = (xs(1) - xs(0)) * 0.96;
-      var g = s('g', { 'class': 'vz-row', tabindex: '0', role: 'img' }, sv);
-      g.setAttribute('aria-label', T(c.label) + ': ' + d.series.map(function (x) { return T(x.label) + ' ' + fmtR(x.values[i]); }).join(', '));
-      s('rect', { x: cx - w / 2, y: padT - 6, width: w, height: H - padB - padT + 12, 'class': 'vz-hit' }, g);
-      bindHit(g, tip, F.plot, function () {
-        return { title: T(d.groups[c.group]) + ' · ' + T(c.label), rows: d.series.slice().sort(function (a, b) { return mid(b.values[i]) - mid(a.values[i]); }).map(function (x) {
-          return { v: fmtR(x.values[i]), l: T(x.label), color: x.key === stabPick ? '--viz-accent' : '--viz-ctx2' }; }) };
-      }, function () { var k = sv.getBoundingClientRect().width / W; return [cx * k, ys(70) * k]; });
-    });
-    var head = [{ l: S(d, 'col_cond') }].concat(d.series.map(function (x) { return { l: T(x.label), num: 1 }; }));
-    table(F.table, S(d, 'y'), head, d.conditions.map(function (c, i) { return [T(d.groups[c.group]) + ': ' + T(c.label)].concat(d.series.map(function (x) { return fmtR(x.values[i]); })); }));
-    h('p', { 'class': 'vz-note' }, F.table, C('source') + ': ' + d.series[0].src.replace(/\[[A-Z0-9_]+\]/, '[arm]'));
   }
 
   var DRAW = { funnel: drawFunnel, budget: drawBudget, components: drawComponents, language: drawLanguage, stability: drawStability };

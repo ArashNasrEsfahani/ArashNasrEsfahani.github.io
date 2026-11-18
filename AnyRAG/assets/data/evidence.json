@@ -89,10 +89,11 @@
   ],
   "source": {
    "paper": {
-    "en": "Table 2 (Search pools, sources and question counts) / Sect. 3.1 Benchmark",
-    "fa": "جدول ۲ (مخزن‌های جست‌وجو، منابع و تعداد پرسش‌ها) / بخش ۳٫۱ (بنچمارک)"
+    "en": "Table “Search pools, sources and question counts”; Sect. “Benchmark”",
+    "fa": "جدول «مخزن‌های جست‌وجو، منابع و تعداد پرسش‌ها»؛ بخش «بنچمارک»"
    },
-   "file": "paper/tables/pools.tex (src: work/multidoc/pools/*.json, work/datasets_v2/questions/*.jsonl)"
+   "file": "paper/tables/pools.tex (src: work/multidoc/pools/*.json, work/datasets_v2/questions/*.jsonl)",
+   "manuscript": "paper_journal/main.pdf (journal manuscript, in preparation)"
   },
   "confidence": "measured",
   "caveat": {
@@ -164,10 +165,11 @@
   ],
   "source": {
    "paper": {
-    "en": "Table 1 (The three question tiers) / Sect. 3.1 Benchmark",
-    "fa": "جدول ۱ (سه سطح پرسش) / بخش ۳٫۱ (بنچمارک)"
+    "en": "Table “Definition and examples of the three question tiers”; Sect. “Benchmark”",
+    "fa": "جدول «تعریف و نمونه‌های سه سطح پرسش»؛ بخش «بنچمارک»"
    },
-   "file": "paper/tables/tiers.tex (src: work/datasets_v2/DESIGN.md, questions/*_{dev,test}.jsonl)"
+   "file": "paper/tables/tiers.tex (src: work/datasets_v2/DESIGN.md, questions/*_{dev,test}.jsonl)",
+   "manuscript": "paper_journal/main.pdf (journal manuscript, in preparation)"
   },
   "confidence": "measured",
   "caveat": {
@@ -250,10 +252,11 @@
   ],
   "source": {
    "paper": {
-    "en": "Table 2 (Search pools, sources and question counts)",
-    "fa": "جدول ۲ (مخزن‌های جست‌وجو، منابع و تعداد پرسش‌ها)"
+    "en": "Table “Search pools, sources and question counts”",
+    "fa": "جدول «مخزن‌های جست‌وجو، منابع و تعداد پرسش‌ها»"
    },
-   "file": "paper/tables/pools.tex (src: work/multidoc/pools/*.json)"
+   "file": "paper/tables/pools.tex (src: work/multidoc/pools/*.json)",
+   "manuscript": "paper_journal/main.pdf (journal manuscript, in preparation)"
   },
   "confidence": "measured",
   "caveat": {
@@ -304,10 +307,11 @@
   ],
   "source": {
    "paper": {
-    "en": "Sect. 3.1 Benchmark",
-    "fa": "بخش ۳٫۱ (بنچمارک)"
+    "en": "Sect. “Benchmark”; App. “Annotation and construction”",
+    "fa": "بخش «بنچمارک»؛ پیوست «برچسب‌گذاری و ساخت بنچمارک»"
    },
-   "file": "paper/sections/03_benchmark.tex"
+   "file": "paper/sections/03_benchmark.tex",
+   "manuscript": "paper_journal/main.pdf (journal manuscript, in preparation)"
   },
   "confidence": "measured",
   "caveat": {
@@ -332,7 +336,7 @@
     },
     "value": {
      "en": "BM25 and dense bge-m3 retrieval, merged by reciprocal rank fusion",
-     "fa": "BM25 و جست‌وجوی معنایی با bge-m3، ادغام‌شده با ادغام رتبه‌ای متقابل (RRF)"
+     "fa": "BM25 و جست‌وجوی معنایی با bge-m3؛ دو فهرست با ادغام رتبه‌ای متقابل (RRF) یکی می‌شوند"
     }
    },
    {
@@ -352,7 +356,7 @@
     },
     "value": {
      "en": "three-signal score fusion plus one LLM selection call (3 s deadline) that names evidence bundles",
-     "fa": "ادغام امتیاز سه سیگنال به‌علاوهٔ یک فراخوانی گزینش با LLM (مهلت ۳ ثانیه) که مجموعه‌های شواهد را نام می‌برد"
+     "fa": "ادغام امتیاز سه سیگنال به‌علاوهٔ یک فراخوانی گزینش با LLM (مهلت ۳ ثانیه) که مجموعه‌های شواهد را مشخص می‌کند"
     }
    },
    {
@@ -362,13 +366,13 @@
     },
     "value": {
      "en": "one chain-of-thought selection call with the SetR prompt, filled from Hybrid's list",
-     "fa": "یک فراخوانی گزینش با زنجیرهٔ استدلال و پرامپت SetR، که باقی بودجه از فهرست ترکیبی پر می‌شود"
+     "fa": "یک فراخوانی گزینش با زنجیرهٔ استدلال و پرامپت SetR؛ باقی بودجه از فهرست پایپ‌لاین ترکیبی پر می‌شود"
     }
    },
    {
     "label": {
      "en": "Budgets in the frozen test",
-     "fa": "بودجه‌ها در آزمون ازپیش‌ثبت‌شده"
+     "fa": "بودجه‌ها در آزمون ازپیش‌تعیین‌شده"
     },
     "value": {
      "en": "6,000 and 15,500 characters",
@@ -378,10 +382,11 @@
   ],
   "source": {
    "paper": {
-    "en": "Table 3 (The four pipelines and their settings) / Sect. 3.2 Pipelines",
-    "fa": "جدول ۳ (چهار پایپ‌لاین و تنظیمات آن‌ها) / بخش ۳٫۲ (پایپ‌لاین‌ها)"
+    "en": "Table “The four pipelines and their settings”; Sect. “Retrieval and selection pipelines”",
+    "fa": "جدول «چهار پایپ‌لاین و تنظیمات آن‌ها»؛ بخش «پایپ‌لاین‌های بازیابی و گزینش»"
    },
-   "file": "paper/tables/settings.tex"
+   "file": "paper/tables/settings.tex",
+   "manuscript": "paper_journal/main.pdf (journal manuscript, in preparation)"
   },
   "confidence": "measured",
   "caveat": {
@@ -396,8 +401,8 @@
  {
   "id": "frozen-gate",
   "claim": {
-   "en": "The one pre-registered test was inconclusive. The gate required Lex-RAG to beat both Hybrid and HR by at least 5 of 90 answers; it beat Hybrid by 5 to 7 and trailed HR by 0 to 3, and neither primary test was significant.",
-   "fa": "تنها آزمون ازپیش‌ثبت‌شده به نتیجهٔ قطعی نرسید. معیار، برتری دست‌کم ۵ پاسخ از ۹۰ برای Lex-RAG هم بر ترکیبی و هم بر HR بود. Lex-RAG از ترکیبی ۵ تا ۷ پاسخ جلو افتاد و از HR ۰ تا ۳ پاسخ عقب ماند، و هیچ‌یک از دو آزمون اصلی معنادار نبود."
+   "en": "The one test fixed in advance was inconclusive. The gate required Lex-RAG to beat both Hybrid and HR by at least 5 of 90 answers; it beat Hybrid by 5 to 7 and trailed HR by 0 to 3, and neither primary test was significant.",
+   "fa": "تنها آزمون ازپیش‌تعیین‌شده به نتیجهٔ قطعی نرسید. معیار، برتری دست‌کم ۵ پاسخ از ۹۰ برای Lex-RAG هم بر ترکیبی و هم بر HR بود. Lex-RAG از ترکیبی ۵ تا ۷ پاسخ جلو افتاد و از HR ۰ تا ۳ پاسخ عقب ماند، و هیچ‌یک از دو آزمون اصلی معنادار نبود."
   },
   "numbers": [
    {
@@ -433,7 +438,7 @@
    {
     "label": {
      "en": "Holm-adjusted p against Hybrid",
-     "fa": "مقدار p اصلاح‌شده به روش Holm در برابر ترکیبی"
+     "fa": "p اصلاح‌شده (Holm) در برابر ترکیبی"
     },
     "value": {
      "en": ".237",
@@ -447,16 +452,17 @@
     },
     "value": {
      "en": "passed at 2.04–2.32×, only under a limit relaxed during development",
-     "fa": "با ۲٫۰۴ تا ۲٫۳۲ برابر پذیرفته شد، آن هم فقط با حدی که در مرحلهٔ توسعه آسان‌تر شده بود"
+     "fa": "با ۲٫۰۴ تا ۲٫۳۲ برابر برآورده شد، آن هم فقط با حدی که در مرحلهٔ توسعه سهل‌گیرانه‌تر شده بود"
     }
    }
   ],
   "source": {
    "paper": {
-    "en": "Table 5 (Test accuracy with the primary reader) / Sect. 4.1 Confirmatory Test",
-    "fa": "جدول ۵ (دقت آزمون با مدل پاسخ‌گوی اصلی) / بخش ۴٫۱ (آزمون تأییدی)"
+    "en": "Table “Test accuracy of four pipelines at two evidence budgets”; Sect. “Confirmatory test”",
+    "fa": "جدول «دقت چهار پایپ‌لاین در پرسش‌های آزمون با دو بودجهٔ شواهد»؛ بخش «آزمون تأییدی»"
    },
-   "file": "work/datasets_v2/test_run/TEST_RESULTS.md (sec. 1)"
+   "file": "work/datasets_v2/test_run/TEST_RESULTS.md (sec. 1)",
+   "manuscript": "paper_journal/main.pdf (journal manuscript, in preparation)"
   },
   "confidence": "measured",
   "caveat": {
@@ -473,7 +479,7 @@
   "id": "frozen-scores",
   "claim": {
    "en": "Correct answers of 90 in the frozen test, machine judge. At 6,000 characters the reranked pipeline and Lex-RAG lead plain hybrid retrieval; at 15,500 characters the four pipelines are close.",
-   "fa": "پاسخ‌های درست از ۹۰ در آزمون ازپیش‌ثبت‌شده، با داور ماشینی. در ۶٬۰۰۰ کاراکتر، پایپ‌لاین با بازرتبه‌ساز و Lex-RAG از بازیابی ترکیبیِ ساده جلوترند؛ در ۱۵٬۵۰۰ کاراکتر چهار پایپ‌لاین به هم نزدیک‌اند."
+   "fa": "پاسخ‌های درست از ۹۰ در آزمون ازپیش‌تعیین‌شده، با داور ماشینی. در ۶٬۰۰۰ کاراکتر، پایپ‌لاین با بازرتبه‌ساز و Lex-RAG از بازیابی ترکیبیِ ساده جلوترند؛ در ۱۵٬۵۰۰ کاراکتر چهار پایپ‌لاین به هم نزدیک‌اند."
   },
   "numbers": [
    {
@@ -559,10 +565,11 @@
   ],
   "source": {
    "paper": {
-    "en": "Table 5 (Test accuracy with the primary reader) / Sect. 4.1 Confirmatory Test",
-    "fa": "جدول ۵ (دقت آزمون با مدل پاسخ‌گوی اصلی) / بخش ۴٫۱ (آزمون تأییدی)"
+    "en": "Table “Test accuracy of four pipelines at two evidence budgets”; Sect. “Confirmatory test”",
+    "fa": "جدول «دقت چهار پایپ‌لاین در پرسش‌های آزمون با دو بودجهٔ شواهد»؛ بخش «آزمون تأییدی»"
    },
-   "file": "work/datasets_v2/test_run/TEST_RESULTS.md (sec. 2)"
+   "file": "work/datasets_v2/test_run/TEST_RESULTS.md (sec. 2)",
+   "manuscript": "paper_journal/main.pdf (journal manuscript, in preparation)"
   },
   "confidence": "measured",
   "caveat": {
@@ -615,10 +622,11 @@
   ],
   "source": {
    "paper": {
-    "en": "Table 5 (Test accuracy with the primary reader)",
-    "fa": "جدول ۵ (دقت آزمون با مدل پاسخ‌گوی اصلی)"
+    "en": "Table “Test accuracy of four pipelines at two evidence budgets”",
+    "fa": "جدول «دقت چهار پایپ‌لاین در پرسش‌های آزمون با دو بودجهٔ شواهد»"
    },
-   "file": "work/datasets_v2/test_run/TEST_RESULTS.md (sec. 2)"
+   "file": "work/datasets_v2/test_run/TEST_RESULTS.md (sec. 2)",
+   "manuscript": "paper_journal/main.pdf (journal manuscript, in preparation)"
   },
   "confidence": "measured",
   "caveat": {
@@ -654,7 +662,7 @@
     },
     "value": {
      "en": "+5 (7 wins, 2 losses), Holm p .359",
-     "fa": "‎+۵ (۷ برد، ۲ باخت)، p (Holm) = ۰٫۳۵۹"
+     "fa": "‎+۵ (۷ برد، ۲ باخت)، p اصلاح‌شده (Holm) = ۰٫۳۵۹"
     }
    },
    {
@@ -664,16 +672,17 @@
     },
     "value": {
      "en": "+7 (7 wins, 0 losses), p .016, one of six uncorrected comparisons",
-     "fa": "‎+۷ (۷ برد، ۰ باخت)، p = ۰٫۰۱۶، یکی از شش مقایسهٔ اصلاح‌نشده"
+     "fa": "‎+۷ (۷ برد، ۰ باخت)، p = ۰٫۰۱۶ بدون اصلاح، یکی از شش مقایسه"
     }
    }
   ],
   "source": {
    "paper": {
-    "en": "Table 5 (Sym. merge column) / Sect. 4.1 Confirmatory Test",
-    "fa": "جدول ۵ (ستون جایگزینی متقارن) / بخش ۴٫۱ (آزمون تأییدی)"
+    "en": "Table “Test accuracy of four pipelines at two evidence budgets”; Sect. “Confirmatory test”; App. “Extended results of the frozen test”",
+    "fa": "جدول «دقت چهار پایپ‌لاین در پرسش‌های آزمون با دو بودجهٔ شواهد»؛ بخش «آزمون تأییدی»؛ پیوست «نتایج تکمیلی آزمون ازپیش‌تعیین‌شده»"
    },
-   "file": "work/datasets_v2/test_run/TEST_RESULTS_HUMAN_SYM.md (sec. 1–2)"
+   "file": "work/datasets_v2/test_run/TEST_RESULTS_HUMAN_SYM.md (sec. 1–2)",
+   "manuscript": "paper_journal/main.pdf (journal manuscript, in preparation)"
   },
   "confidence": "measured",
   "caveat": {
@@ -716,10 +725,11 @@
   ],
   "source": {
    "paper": {
-    "en": "Sect. 4.1 Confirmatory Test",
-    "fa": "بخش ۴٫۱ (آزمون تأییدی)"
+    "en": "Sect. “Confirmatory test”; Sect. “Experimental setup”",
+    "fa": "بخش «آزمون تأییدی»؛ بخش «طرح آزمایش»"
    },
-   "file": "work/posthoc_2026-11/S5_stats/RESULTS.md (sec. 2.2)"
+   "file": "work/posthoc_2026-11/S5_stats/RESULTS.md (sec. 2.2)",
+   "manuscript": "paper_journal/main.pdf (journal manuscript, in preparation)"
   },
   "confidence": "measured",
   "caveat": {
@@ -792,10 +802,11 @@
   ],
   "source": {
    "paper": {
-    "en": "Table 14 (Detectable with 90 questions) / Sect. 4.1 Confirmatory Test",
-    "fa": "جدول ۱۴ (تفاوت قابل‌تشخیص با ۹۰ پرسش) / بخش ۴٫۱ (آزمون تأییدی)"
+    "en": "Sect. “Confirmatory test”; Sect. “Experimental setup”; App. “Statistical definitions and variance”",
+    "fa": "بخش «آزمون تأییدی»؛ بخش «طرح آزمایش»؛ پیوست «تعریف‌های آماری و واریانس»"
    },
-   "file": "work/posthoc_2026-11/S5_stats/RESULTS.md (sec. 2.3)"
+   "file": "work/posthoc_2026-11/S5_stats/RESULTS.md (sec. 2.3)",
+   "manuscript": "paper_journal/main.pdf (journal manuscript, in preparation)"
   },
   "confidence": "measured",
   "caveat": {
@@ -832,7 +843,7 @@
     },
     "value": {
      "en": "83 of 90 (all 30 within-document questions)",
-     "fa": "۸۳ از ۹۰ (هر ۳۰ پرسش درون‌سندی)"
+     "fa": "۸۳ از ۹۰ (همهٔ ۳۰ پرسش درون‌سندی درست)"
     }
    },
    {
@@ -858,10 +869,11 @@
   ],
   "source": {
    "paper": {
-    "en": "Table 8 (Effect of the selection step) / Sect. 4.3 Where Answers Are Lost",
-    "fa": "جدول ۸ (اثر گام گزینش) / بخش ۴٫۳ (پاسخ‌ها کجا از دست می‌روند)"
+    "en": "Table “Effect of the selection step at 6,000 characters”; Sect. “Retrieval components and where answers are lost”",
+    "fa": "جدول «اثر گام گزینش در بودجهٔ ۶٬۰۰۰ کاراکتر»؛ بخش «اجزای بازیابی و مرحله‌ای که پاسخ‌ها در آن از دست می‌روند»"
    },
-   "file": "work/posthoc_2026-11/S6_baselines/RESULTS.md (sec. 2); work/posthoc_2026-11/S2a_packs/RESULTS.md; work/posthoc_2026-11/S7_analysis/contam_tables.md"
+   "file": "work/posthoc_2026-11/S6_baselines/RESULTS.md (sec. 2); work/posthoc_2026-11/S2a_packs/RESULTS.md; work/posthoc_2026-11/S7_analysis/contam_tables.md",
+   "manuscript": "paper_journal/main.pdf (journal manuscript, in preparation)"
   },
   "confidence": "measured",
   "caveat": {
@@ -974,10 +986,11 @@
   ],
   "source": {
    "paper": {
-    "en": "Table 7 (complete bundle in top 40, pack, correct) / Sect. 4.3 Where Answers Are Lost",
-    "fa": "جدول ۷ (مجموعهٔ کامل در ۴۰ نامزد برتر، بسته، پاسخ درست) / بخش ۴٫۳ (پاسخ‌ها کجا از دست می‌روند)"
+    "en": "Table “Complete evidence bundles in the candidate list and in the pack, with accuracy under two judges”; Sect. “Retrieval components and where answers are lost”",
+    "fa": "جدول «مجموعه‌های کامل شواهد در فهرست نامزدها و در بسته، و دقت با دو داور»؛ بخش «اجزای بازیابی و مرحله‌ای که پاسخ‌ها در آن از دست می‌روند»"
    },
-   "file": "work/posthoc_2026-11/S10_retrieval/RESULTS.md (sec. 2.4); work/posthoc_2026-11/S7_analysis/RESULTS.md (sec. 1, 5)"
+   "file": "work/posthoc_2026-11/S10_retrieval/RESULTS.md (sec. 2.4); work/posthoc_2026-11/S7_analysis/RESULTS.md (sec. 1, 5)",
+   "manuscript": "paper_journal/main.pdf (journal manuscript, in preparation)"
   },
   "confidence": "measured",
   "caveat": {
@@ -1030,7 +1043,7 @@
    {
     "label": {
      "en": "Questions no single-pass pipeline packed completely (6,000)",
-     "fa": "پرسش‌هایی که هیچ پایپ‌لاین تک‌مرحله‌ایی شواهدشان را کامل در بسته نگذاشت (۶٬۰۰۰)"
+     "fa": "پرسش‌هایی که هیچ پایپ‌لاین تک‌مرحله‌ای شواهدشان را کامل در بسته نگذاشت (۶٬۰۰۰)"
     },
     "value": {
      "en": "22 (mostly cross-document)",
@@ -1050,10 +1063,11 @@
   ],
   "source": {
    "paper": {
-    "en": "Figure 2 (Where the answers are lost) / Sect. 4.3",
-    "fa": "شکل ۲ (پاسخ‌ها کجا از دست می‌روند) / بخش ۴٫۳"
+    "en": "Fig. “Evidence in the pack for correct and wrong answers”; Sect. “Retrieval components and where answers are lost”",
+    "fa": "شکل «شواهد درون بسته در پاسخ‌های درست و نادرست»؛ بخش «اجزای بازیابی و مرحله‌ای که پاسخ‌ها در آن از دست می‌روند»"
    },
-   "file": "work/posthoc_2026-11/S7_analysis/RESULTS.md (sec. 1)"
+   "file": "work/posthoc_2026-11/S7_analysis/RESULTS.md (sec. 1)",
+   "manuscript": "paper_journal/main.pdf (journal manuscript, in preparation)"
   },
   "confidence": "measured",
   "caveat": {
@@ -1124,10 +1138,11 @@
   ],
   "source": {
    "paper": {
-    "en": "Table 8 (Effect of the selection step) / Sect. 4.3 Role of the Selection Call",
-    "fa": "جدول ۸ (اثر گام گزینش) / بخش ۴٫۳ (نقش فراخوانی گزینش)"
+    "en": "Table “Effect of the selection step at 6,000 characters”; Sect. “Retrieval components and where answers are lost”",
+    "fa": "جدول «اثر گام گزینش در بودجهٔ ۶٬۰۰۰ کاراکتر»؛ بخش «اجزای بازیابی و مرحله‌ای که پاسخ‌ها در آن از دست می‌روند»"
    },
-   "file": "work/posthoc_2026-11/S8_factorial/tables.md; work/posthoc_2026-11/S14_bilingual/RESULTS.md (sec. 2.1)"
+   "file": "work/posthoc_2026-11/S8_factorial/tables.md; work/posthoc_2026-11/S14_bilingual/RESULTS.md (sec. 2.1)",
+   "manuscript": "paper_journal/main.pdf (journal manuscript, in preparation)"
   },
   "confidence": "tentative",
   "caveat": {
@@ -1209,10 +1224,11 @@
   ],
   "source": {
    "paper": {
-    "en": "Figure 3 (Accuracy at five evidence budgets) / Sect. 4.4 Effect of the Evidence Budget",
-    "fa": "شکل ۳ (دقت در پنج بودجهٔ شواهد) / بخش ۴٫۴ (اثر بودجهٔ شواهد)"
+    "en": "Fig. “Accuracy at five evidence budgets”; Sect. “Evidence budget and iterative or long-context retrieval”",
+    "fa": "شکل «دقت در پنج بودجهٔ شواهد»؛ بخش «بودجهٔ شواهد و بازیابی تکرارشونده یا با پنجرهٔ متنی بلند»"
    },
-   "file": "work/posthoc_2026-11/S8_factorial/tables.md (paired comparisons)"
+   "file": "work/posthoc_2026-11/S8_factorial/tables.md (paired comparisons)",
+   "manuscript": "paper_journal/main.pdf (journal manuscript, in preparation)"
   },
   "confidence": "measured",
   "caveat": {
@@ -1264,10 +1280,11 @@
   ],
   "source": {
    "paper": {
-    "en": "Table 8 (Effect of the selection step) / Sect. 4.3",
-    "fa": "جدول ۸ (اثر گام گزینش) / بخش ۴٫۳"
+    "en": "Table “Effect of the selection step at 6,000 characters”; Sect. “Retrieval components and where answers are lost”",
+    "fa": "جدول «اثر گام گزینش در بودجهٔ ۶٬۰۰۰ کاراکتر»؛ بخش «اجزای بازیابی و مرحله‌ای که پاسخ‌ها در آن از دست می‌روند»"
    },
-   "file": "work/posthoc_2026-11/S8_factorial/RESULTS.md (sec. 2.3–2.4), tables.md"
+   "file": "work/posthoc_2026-11/S8_factorial/RESULTS.md (sec. 2.3–2.4), tables.md",
+   "manuscript": "paper_journal/main.pdf (journal manuscript, in preparation)"
   },
   "confidence": "tentative",
   "caveat": {
@@ -1344,16 +1361,17 @@
     },
     "value": {
      "en": "63 of 90, same as with fill",
-     "fa": "۶۳ از ۹۰، برابر با حالت با پرکردن"
+     "fa": "۶۳ از ۹۰، برابر با حالتی که باقی بودجه پر می‌شود"
     }
    }
   ],
   "source": {
    "paper": {
-    "en": "Table 8 (Effect of the selection step) / Sect. 4.3",
-    "fa": "جدول ۸ (اثر گام گزینش) / بخش ۴٫۳"
+    "en": "Table “Effect of the selection step at 6,000 characters”; Sect. “Retrieval components and where answers are lost”",
+    "fa": "جدول «اثر گام گزینش در بودجهٔ ۶٬۰۰۰ کاراکتر»؛ بخش «اجزای بازیابی و مرحله‌ای که پاسخ‌ها در آن از دست می‌روند»"
    },
-   "file": "work/posthoc_2026-11/S2a_packs/RESULTS.md; work/posthoc_2026-11/S6_baselines/RESULTS.md; work/posthoc_2026-11/S2b_variance/RESULTS.md"
+   "file": "work/posthoc_2026-11/S2a_packs/RESULTS.md; work/posthoc_2026-11/S6_baselines/RESULTS.md; work/posthoc_2026-11/S2b_variance/RESULTS.md",
+   "manuscript": "paper_journal/main.pdf (journal manuscript, in preparation)"
   },
   "confidence": "measured",
   "caveat": {
@@ -1378,7 +1396,7 @@
     },
     "value": {
      "en": "+6 to +9 (10 wins, 4 losses), sign p .049–.18",
-     "fa": "‎+۶ تا ‎+۹ (۱۰ برد، ۴ باخت)، p آزمون علامت = ۰٫۰۴۹ تا ۰٫۱۸"
+     "fa": "‎+۶ تا ‎+۹ (۱۰ برد، ۴ باخت)، p در آزمون علامت: ۰٫۰۴۹ تا ۰٫۱۸"
     }
    },
    {
@@ -1424,10 +1442,11 @@
   ],
   "source": {
    "paper": {
-    "en": "Table 13 (guide) / Sect. 4.7 Practical Recommendations; Table 33; Table 14",
-    "fa": "جدول ۱۳ (جدول راهنما) / بخش ۴٫۷ (توصیه‌های عملی)؛ جدول ۳۳؛ جدول ۱۴"
+    "en": "Table “Practical recommendations with supporting evidence and confidence”; Sect. “Reliability of the rankings and practical guidance”; Table “Run-to-run noise of the reader and the selection call”; Table “Mixed-effects logistic model pooling six readers”",
+    "fa": "جدول «توصیه‌های عملی، دلیل‌های پشتیبان و میزان اطمینان»؛ بخش «اعتبار رتبه‌بندی‌ها و راهنمای عملی»؛ جدول «نوسان میان اجراها در مدل پاسخ‌گو و فراخوانی گزینش»؛ جدول «مدل لجستیک اثرهای آمیخته با دادهٔ تجمیع‌شدهٔ شش مدل پاسخ‌گو»"
    },
-   "file": "work/posthoc_2026-11/S2b_variance/RESULTS.md (sec. 2.3); work/posthoc_2026-11/S8_factorial/tables.md; work/posthoc_2026-11/S5_stats/tables.md"
+   "file": "work/posthoc_2026-11/S2b_variance/RESULTS.md (sec. 2.3); work/posthoc_2026-11/S8_factorial/tables.md; work/posthoc_2026-11/S5_stats/tables.md",
+   "manuscript": "paper_journal/main.pdf (journal manuscript, in preparation)"
   },
   "confidence": "tentative",
   "caveat": {
@@ -1499,15 +1518,16 @@
   ],
   "source": {
    "paper": {
-    "en": "Figure 3 (Accuracy at five evidence budgets) / Sect. 4.4 Effect of the Evidence Budget",
-    "fa": "شکل ۳ (دقت در پنج بودجهٔ شواهد) / بخش ۴٫۴ (اثر بودجهٔ شواهد)"
+    "en": "Fig. “Accuracy at five evidence budgets”; Sect. “Evidence budget and iterative or long-context retrieval”",
+    "fa": "شکل «دقت در پنج بودجهٔ شواهد»؛ بخش «بودجهٔ شواهد و بازیابی تکرارشونده یا با پنجرهٔ متنی بلند»"
    },
-   "file": "paper/figures/data/budget.dat (src: work/posthoc_2026-11/S2a_packs/results.json, work/posthoc_2026-11/S8_factorial/results.json)"
+   "file": "paper/figures/data/budget.dat (src: work/posthoc_2026-11/S2a_packs/results.json, work/posthoc_2026-11/S8_factorial/results.json)",
+   "manuscript": "paper_journal/main.pdf (journal manuscript, in preparation)"
   },
   "confidence": "measured",
   "caveat": {
    "en": "Only 6,000 and 15,500 are frozen cells; Lex-RAG at 3,000, 10,000 and 24,000 reuses the selection made at 6,000. First judge only. Post hoc: the 90 test questions had already been answered and seen.",
-   "fa": "فقط ۶٬۰۰۰ و ۱۵٬۵۰۰ از خانه‌های آزمون ازپیش‌ثبت‌شده‌اند؛ Lex-RAG در ۳٬۰۰۰، ۱۰٬۰۰۰ و ۲۴٬۰۰۰ از همان گزینشِ انجام‌شده در ۶٬۰۰۰ استفاده می‌کند. فقط داور اول. پسینی: پاسخ ۹۰ پرسش آزمون پیش‌تر گرفته و دیده شده بود."
+   "fa": "فقط ۶٬۰۰۰ و ۱۵٬۵۰۰ از خانه‌های آزمون ازپیش‌تعیین‌شده‌اند؛ Lex-RAG در ۳٬۰۰۰، ۱۰٬۰۰۰ و ۲۴٬۰۰۰ از همان گزینشِ انجام‌شده در ۶٬۰۰۰ استفاده می‌کند. فقط داور اول. پسینی: پاسخ ۹۰ پرسش آزمون پیش‌تر گرفته و دیده شده بود."
   },
   "tags": [
    "budget",
@@ -1575,10 +1595,11 @@
   ],
   "source": {
    "paper": {
-    "en": "Sect. 4.4 Effect of the Evidence Budget; Table 14; Table 19",
-    "fa": "بخش ۴٫۴ (اثر بودجهٔ شواهد)؛ جدول ۱۴؛ جدول ۱۹"
+    "en": "Sect. “Evidence budget and iterative or long-context retrieval”; Table “Mixed-effects logistic model pooling six readers”; Table “Per-reader contrasts for six readers”",
+    "fa": "بخش «بودجهٔ شواهد و بازیابی تکرارشونده یا با پنجرهٔ متنی بلند»؛ جدول «مدل لجستیک اثرهای آمیخته با دادهٔ تجمیع‌شدهٔ شش مدل پاسخ‌گو»؛ جدول «مقایسه‌ها برای هر یک از شش مدل پاسخ‌گو»"
    },
-   "file": "work/posthoc_2026-11/S2b_variance/RESULTS.md (sec. 2.1); work/posthoc_2026-11/S5_stats/tables.md"
+   "file": "work/posthoc_2026-11/S2b_variance/RESULTS.md (sec. 2.1); work/posthoc_2026-11/S5_stats/tables.md",
+   "manuscript": "paper_journal/main.pdf (journal manuscript, in preparation)"
   },
   "confidence": "tentative",
   "caveat": {
@@ -1630,10 +1651,11 @@
   ],
   "source": {
    "paper": {
-    "en": "Table 18 (Paired comparisons) / Table 20 (Cost) / Sect. 4.4",
-    "fa": "جدول ۱۸ (مقایسه‌های جفتی) / جدول ۲۰ (هزینه) / بخش ۴٫۴"
+    "en": "Table “Paired comparisons on the 90 answerable test questions”; Table “Query-time cost of each pipeline with the primary reader”; Sect. “Evidence budget and iterative or long-context retrieval”",
+    "fa": "جدول «مقایسه‌های زوجی روی ۹۰ پرسش پاسخ‌پذیر آزمون»؛ جدول «هزینهٔ هر پایپ‌لاین هنگام پاسخ به پرسش، با مدل پاسخ‌گوی اصلی»؛ بخش «بودجهٔ شواهد و بازیابی تکرارشونده یا با پنجرهٔ متنی بلند»"
    },
-   "file": "paper/analysis/revision_stats.md; work/datasets_v2/test_run/TEST_RESULTS.md (sec. 4)"
+   "file": "paper/analysis/revision_stats.md; work/datasets_v2/test_run/TEST_RESULTS.md (sec. 4)",
+   "manuscript": "paper_journal/main.pdf (journal manuscript, in preparation)"
   },
   "confidence": "measured",
   "caveat": {
@@ -1649,7 +1671,7 @@
   "id": "cost-latency",
   "claim": {
    "en": "Query-time cost and speed of the frozen pipelines. Selection calls double or triple the tokens; latencies were measured under contention, so only their order is informative.",
-   "fa": "هزینه و سرعت پایپ‌لاین‌های آزمون ازپیش‌ثبت‌شده هنگام پرسش. فراخوانی‌های گزینش توکن را دو یا سه برابر می‌کنند؛ زمان پاسخ در شرایط رقابت بر سر منابع اندازه‌گیری شد، پس فقط ترتیب این اعداد معنا دارد."
+   "fa": "هزینه و سرعت پایپ‌لاین‌های آزمون ازپیش‌تعیین‌شده هنگام پرسش. فراخوانی‌های گزینش توکن را دو یا سه برابر می‌کنند؛ زمان پاسخ در شرایط رقابت بر سر منابع اندازه‌گیری شد، پس فقط ترتیب این اعداد معنا دارد."
   },
   "numbers": [
    {
@@ -1705,10 +1727,11 @@
   ],
   "source": {
    "paper": {
-    "en": "Table 20 (Cost with the primary reader) / Table 9",
-    "fa": "جدول ۲۰ (هزینه با مدل پاسخ‌گوی اصلی) / جدول ۹"
+    "en": "Table “Query-time cost of each pipeline with the primary reader”; Table “Search agents, long-context reading and routing”",
+    "fa": "جدول «هزینهٔ هر پایپ‌لاین هنگام پاسخ به پرسش، با مدل پاسخ‌گوی اصلی»؛ جدول «عامل‌های جست‌وجو، خواندن با پنجرهٔ متنی بلند و مسیریابی»"
    },
-   "file": "work/datasets_v2/test_run/TEST_RESULTS.md (sec. 2, 4); work/posthoc_2026-11/S9_gpu/RESULTS.md (sec. 2)"
+   "file": "work/datasets_v2/test_run/TEST_RESULTS.md (sec. 2, 4); work/posthoc_2026-11/S9_gpu/RESULTS.md (sec. 2)",
+   "manuscript": "paper_journal/main.pdf (journal manuscript, in preparation)"
   },
   "confidence": "measured",
   "caveat": {
@@ -1730,11 +1753,11 @@
    {
     "label": {
      "en": "Persian, complete/partial/none (items of 106): BM25",
-     "fa": "فارسی، کامل/ناقص/هیچ (از ۱۰۶ مورد): BM25"
+     "fa": "فارسی، پرسش‌های با مجموعهٔ کامل / ناقص / بدون شاهد: BM25"
     },
     "value": {
      "en": "37/6/2 (85)",
-     "fa": "کامل ۳۷، ناقص ۶، هیچ ۲ (۸۵ مورد)"
+     "fa": "کامل ۳۷، ناقص ۶، بدون شاهد ۲ (۸۵ بخش شاهد از ۱۰۶)"
     }
    },
    {
@@ -1744,7 +1767,7 @@
     },
     "value": {
      "en": "38/6/1 (98)",
-     "fa": "کامل ۳۸، ناقص ۶، هیچ ۱ (۹۸ مورد)"
+     "fa": "کامل ۳۸، ناقص ۶، بدون شاهد ۱ (۹۸ بخش شاهد از ۱۰۶)"
     }
    },
    {
@@ -1754,17 +1777,17 @@
     },
     "value": {
      "en": "39/6/0 (98)",
-     "fa": "کامل ۳۹، ناقص ۶، هیچ ۰ (۹۸ مورد)"
+     "fa": "کامل ۳۹، ناقص ۶، بدون شاهد ۰ (۹۸ بخش شاهد از ۱۰۶)"
     }
    },
    {
     "label": {
      "en": "English (items of 124): BM25",
-     "fa": "انگلیسی (از ۱۲۴ مورد): BM25"
+     "fa": "انگلیسی: BM25"
     },
     "value": {
      "en": "29/14/2 (88)",
-     "fa": "کامل ۲۹، ناقص ۱۴، هیچ ۲ (۸۸ مورد)"
+     "fa": "کامل ۲۹، ناقص ۱۴، بدون شاهد ۲ (۸۸ بخش شاهد از ۱۲۴)"
     }
    },
    {
@@ -1774,7 +1797,7 @@
     },
     "value": {
      "en": "33/11/1 (104)",
-     "fa": "کامل ۳۳، ناقص ۱۱، هیچ ۱ (۱۰۴ مورد)"
+     "fa": "کامل ۳۳، ناقص ۱۱، بدون شاهد ۱ (۱۰۴ بخش شاهد از ۱۲۴)"
     }
    },
    {
@@ -1784,7 +1807,7 @@
     },
     "value": {
      "en": "33/11/1 (98)",
-     "fa": "کامل ۳۳، ناقص ۱۱، هیچ ۱ (۹۸ مورد)"
+     "fa": "کامل ۳۳، ناقص ۱۱، بدون شاهد ۱ (۹۸ بخش شاهد از ۱۲۴)"
     }
    },
    {
@@ -1800,10 +1823,11 @@
   ],
   "source": {
    "paper": {
-    "en": "Table 31 (Gold evidence found by each retrieval channel) / Sect. 4.2",
-    "fa": "جدول ۳۱ (شواهد مرجعی که هر کانال بازیابی پیدا می‌کند) / بخش ۴٫۲"
+    "en": "Table “Gold evidence found by each retrieval channel in the top 40”; Sect. “Retrieval components and where answers are lost”",
+    "fa": "جدول «شواهد مرجعی که هر کانال بازیابی در ۴۰ نامزد برتر پیدا می‌کند»؛ بخش «اجزای بازیابی و مرحله‌ای که پاسخ‌ها در آن از دست می‌روند»"
    },
-   "file": "work/posthoc_2026-11/S10_retrieval/RESULTS.md (sec. 2.4); work/posthoc_2026-11/S7_analysis/channels_tables.md"
+   "file": "work/posthoc_2026-11/S10_retrieval/RESULTS.md (sec. 2.4); work/posthoc_2026-11/S7_analysis/channels_tables.md",
+   "manuscript": "paper_journal/main.pdf (journal manuscript, in preparation)"
   },
   "confidence": "measured",
   "caveat": {
@@ -1884,10 +1908,11 @@
   ],
   "source": {
    "paper": {
-    "en": "Sect. 4.2 Retrieval Components",
-    "fa": "بخش ۴٫۲ (اجزای بازیابی)"
+    "en": "Sect. “Retrieval components and where answers are lost”",
+    "fa": "بخش «اجزای بازیابی و مرحله‌ای که پاسخ‌ها در آن از دست می‌روند»"
    },
-   "file": "work/posthoc_2026-11/S10_retrieval/RESULTS.md (sec. 2.3, 2.4, 3)"
+   "file": "work/posthoc_2026-11/S10_retrieval/RESULTS.md (sec. 2.3, 2.4, 3)",
+   "manuscript": "paper_journal/main.pdf (journal manuscript, in preparation)"
   },
   "confidence": "measured",
   "caveat": {
@@ -1958,10 +1983,11 @@
   ],
   "source": {
    "paper": {
-    "en": "Table 6 (Retrieval components) / Sect. 4.2",
-    "fa": "جدول ۶ (اجزای بازیابی) / بخش ۴٫۲"
+    "en": "Table “Retrieval components varied one at a time”; Sect. “Retrieval components and where answers are lost”",
+    "fa": "جدول «تغییر اجزای بازیابی، هر بار یک جزء»؛ بخش «اجزای بازیابی و مرحله‌ای که پاسخ‌ها در آن از دست می‌روند»"
    },
-   "file": "work/posthoc_2026-11/S12_chunks/RESULTS.md (sec. 2)"
+   "file": "work/posthoc_2026-11/S12_chunks/RESULTS.md (sec. 2)",
+   "manuscript": "paper_journal/main.pdf (journal manuscript, in preparation)"
   },
   "confidence": "measured",
   "caveat": {
@@ -2016,16 +2042,17 @@
     },
     "value": {
      "en": "2,551 / 2,438 / 2,216 (one extra LLM call)",
-     "fa": "۲٬۵۵۱ / ۲٬۴۳۸ / ۲٬۲۱۶ (یک فراخوانی LLM اضافه)"
+     "fa": "۲٬۵۵۱ / ۲٬۴۳۸ / ۲٬۲۱۶ (یک فراخوانی LLM اضافی)"
     }
    }
   ],
   "source": {
    "paper": {
-    "en": "Table 6 (Retrieval components) / Sect. 4.2",
-    "fa": "جدول ۶ (اجزای بازیابی) / بخش ۴٫۲"
+    "en": "Table “Retrieval components varied one at a time”; Sect. “Retrieval components and where answers are lost”",
+    "fa": "جدول «تغییر اجزای بازیابی، هر بار یک جزء»؛ بخش «اجزای بازیابی و مرحله‌ای که پاسخ‌ها در آن از دست می‌روند»"
    },
-   "file": "work/posthoc_2026-11/S11_rewrite/RESULTS.md (sec. 2)"
+   "file": "work/posthoc_2026-11/S11_rewrite/RESULTS.md (sec. 2)",
+   "manuscript": "paper_journal/main.pdf (journal manuscript, in preparation)"
   },
   "confidence": "measured",
   "caveat": {
@@ -2070,7 +2097,7 @@
     },
     "value": {
      "en": "−5 to −4, p .18–.34",
-     "fa": "‎−۵ تا ‎−۴، p = ۰٫۱۸ تا ۰٫۳۴"
+     "fa": "‎−۵ تا ‎−۴، p در آزمون علامت: ۰٫۱۸ تا ۰٫۳۴"
     }
    },
    {
@@ -2086,10 +2113,11 @@
   ],
   "source": {
    "paper": {
-    "en": "Table 6 (Retrieval components) / Sect. 4.2",
-    "fa": "جدول ۶ (اجزای بازیابی) / بخش ۴٫۲"
+    "en": "Table “Retrieval components varied one at a time”; Sect. “Retrieval components and where answers are lost”",
+    "fa": "جدول «تغییر اجزای بازیابی، هر بار یک جزء»؛ بخش «اجزای بازیابی و مرحله‌ای که پاسخ‌ها در آن از دست می‌روند»"
    },
-   "file": "work/posthoc_2026-11/S13_embed/RESULTS.md (sec. 2)"
+   "file": "work/posthoc_2026-11/S13_embed/RESULTS.md (sec. 2)",
+   "manuscript": "paper_journal/main.pdf (journal manuscript, in preparation)"
   },
   "confidence": "measured",
   "caveat": {
@@ -2190,10 +2218,11 @@
   ],
   "source": {
    "paper": {
-    "en": "Table 9 (Search agents, long context and routing) / Sect. 4.5",
-    "fa": "جدول ۹ (عامل‌های جست‌وجو، پنجرهٔ متنی بلند و مسیریابی) / بخش ۴٫۵"
+    "en": "Table “Search agents, long-context reading and routing”; Sect. “Evidence budget and iterative or long-context retrieval”",
+    "fa": "جدول «عامل‌های جست‌وجو، خواندن با پنجرهٔ متنی بلند و مسیریابی»؛ بخش «بودجهٔ شواهد و بازیابی تکرارشونده یا با پنجرهٔ متنی بلند»"
    },
-   "file": "work/posthoc_2026-11/S3_agentic/RESULTS.md; work/posthoc_2026-11/S9_gpu/RESULTS.md (sec. 2)"
+   "file": "work/posthoc_2026-11/S3_agentic/RESULTS.md; work/posthoc_2026-11/S9_gpu/RESULTS.md (sec. 2)",
+   "manuscript": "paper_journal/main.pdf (journal manuscript, in preparation)"
   },
   "confidence": "measured",
   "caveat": {
@@ -2220,7 +2249,7 @@
     },
     "value": {
      "en": "−7 to −6 / +12 (halves differ, adjusted p .02)",
-     "fa": "‎−۷ تا ‎−۶ / ‎+۱۲ (دو نیمه متفاوت‌اند، p تعدیل‌شده = ۰٫۰۲)"
+     "fa": "‎−۷ تا ‎−۶ / ‎+۱۲ (دو نیمه متفاوت‌اند، p اصلاح‌شده (Holm) = ۰٫۰۲)"
     }
    },
    {
@@ -2246,10 +2275,11 @@
   ],
   "source": {
    "paper": {
-    "en": "Table 12 (Contrasts split by language half) / Sect. 4.6 Persian and English",
-    "fa": "جدول ۱۲ (مقایسه‌ها به تفکیک نیمهٔ زبانی) / بخش ۴٫۶ (فارسی و انگلیسی)"
+    "en": "Table “Contrasts split by language half”; Sect. “Persian and English”",
+    "fa": "جدول «مقایسه‌ها به تفکیک نیمهٔ زبانی»؛ بخش «فارسی و انگلیسی»"
    },
-   "file": "work/posthoc_2026-11/S14_bilingual/RESULTS.md, compact_table.md"
+   "file": "work/posthoc_2026-11/S14_bilingual/RESULTS.md, compact_table.md",
+   "manuscript": "paper_journal/main.pdf (journal manuscript, in preparation)"
   },
   "confidence": "measured",
   "caveat": {
@@ -2276,7 +2306,7 @@
     },
     "value": {
      "en": "79 of 90 (uses the annotation)",
-     "fa": "۷۹ از ۹۰ (از برچسب‌گذاری استفاده می‌کند)"
+     "fa": "۷۹ از ۹۰ (با تکیه بر برچسب‌گذاری)"
     }
    },
    {
@@ -2312,10 +2342,11 @@
   ],
   "source": {
    "paper": {
-    "en": "Table 9 / Sect. 4.5 Iterative Retrieval, Long Context and Routing",
-    "fa": "جدول ۹ / بخش ۴٫۵ (بازیابی تکرارشونده، پنجرهٔ متنی بلند و مسیریابی)"
+    "en": "Table “Search agents, long-context reading and routing”; Sect. “Evidence budget and iterative or long-context retrieval”",
+    "fa": "جدول «عامل‌های جست‌وجو، خواندن با پنجرهٔ متنی بلند و مسیریابی»؛ بخش «بودجهٔ شواهد و بازیابی تکرارشونده یا با پنجرهٔ متنی بلند»"
    },
-   "file": "work/posthoc_2026-11/S4_route_long/RESULTS.md"
+   "file": "work/posthoc_2026-11/S4_route_long/RESULTS.md",
+   "manuscript": "paper_journal/main.pdf (journal manuscript, in preparation)"
   },
   "confidence": "measured",
   "caveat": {
@@ -2371,16 +2402,17 @@
     },
     "value": {
      "en": "sent 8 of 30 single-fact questions to the cheap path; saved 4%",
-     "fa": "۸ پرسش از ۳۰ پرسش تک‌واقعیتی را به مسیر ارزان فرستاد؛ ۴٪ صرفه‌جویی"
+     "fa": "۸ از ۳۰ پرسش تک‌واقعیتی را به مسیر ارزان فرستاد و ۴٪ صرفه‌جویی کرد"
     }
    }
   ],
   "source": {
    "paper": {
-    "en": "Table 9 / Sect. 4.5",
-    "fa": "جدول ۹ / بخش ۴٫۵"
+    "en": "Table “Search agents, long-context reading and routing”; Sect. “Evidence budget and iterative or long-context retrieval”",
+    "fa": "جدول «عامل‌های جست‌وجو، خواندن با پنجرهٔ متنی بلند و مسیریابی»؛ بخش «بودجهٔ شواهد و بازیابی تکرارشونده یا با پنجرهٔ متنی بلند»"
    },
-   "file": "work/posthoc_2026-11/S4_route_long/RESULTS.md"
+   "file": "work/posthoc_2026-11/S4_route_long/RESULTS.md",
+   "manuscript": "paper_journal/main.pdf (journal manuscript, in preparation)"
   },
   "confidence": "measured",
   "caveat": {
@@ -2446,16 +2478,17 @@
     },
     "value": {
      "en": "2 to 5 / none",
-     "fa": "۲ تا ۵ / هیچ"
+     "fa": "۲ تا ۵ / بدون سود"
     }
    }
   ],
   "source": {
    "paper": {
-    "en": "Table 29 (Persian-to-English token ratio) / Sect. 4.4",
-    "fa": "جدول ۲۹ (نسبت توکن فارسی به انگلیسی) / بخش ۴٫۴"
+    "en": "Table “Persian-to-English token ratio and tokens at equal budgets”; Sect. “Persian and English”",
+    "fa": "جدول «نسبت توکن فارسی به انگلیسی و توکن‌ها در بودجه‌های برابر»؛ بخش «فارسی و انگلیسی»"
    },
-   "file": "work/posthoc_2026-11/S7_analysis/RESULTS.md (sec. 3), tokens_tables.md"
+   "file": "work/posthoc_2026-11/S7_analysis/RESULTS.md (sec. 3), tokens_tables.md",
+   "manuscript": "paper_journal/main.pdf (journal manuscript, in preparation)"
   },
   "confidence": "measured",
   "caveat": {
@@ -2502,7 +2535,7 @@
     },
     "value": {
      "en": "BOOK-en 9, LAW-en 11, BOOK-fa 3, LAW-fa 3",
-     "fa": "BOOK-en: ۹، LAW-en: ۱۱، BOOK-fa: ۳، LAW-fa: ۳"
+     "fa": "BOOK-en: ۹ پرسش، LAW-en: ۱۱ پرسش، BOOK-fa: ۳ پرسش، LAW-fa: ۳ پرسش"
     }
    },
    {
@@ -2528,10 +2561,11 @@
   ],
   "source": {
    "paper": {
-    "en": "Sect. 4.6 Persian and English (Memory); Table 30",
-    "fa": "بخش ۴٫۶ (فارسی و انگلیسی: حافظه)؛ جدول ۳۰"
+    "en": "Sect. “Persian and English”; Table “Main contrasts with and without questions answerable from memory”",
+    "fa": "بخش «فارسی و انگلیسی»؛ جدول «مقایسه‌های اصلی با پرسش‌های پاسخ‌پذیر از حافظه و بدون آن‌ها»"
    },
-   "file": "work/posthoc_2026-11/S6_baselines/RESULTS.md; work/posthoc_2026-11/S7_analysis/RESULTS.md (sec. 2); work/posthoc_2026-11/S15_crossling/RESULTS.md (sec. 2)"
+   "file": "work/posthoc_2026-11/S6_baselines/RESULTS.md; work/posthoc_2026-11/S7_analysis/RESULTS.md (sec. 2); work/posthoc_2026-11/S15_crossling/RESULTS.md (sec. 2)",
+   "manuscript": "paper_journal/main.pdf (journal manuscript, in preparation)"
   },
   "confidence": "measured",
   "caveat": {
@@ -2624,10 +2658,11 @@
   ],
   "source": {
    "paper": {
-    "en": "Table 11 (Question language swapped) / Sect. 4.6",
-    "fa": "جدول ۱۱ (زبان پرسش جابه‌جا شده) / بخش ۴٫۶"
+    "en": "Table “Retrieval when each question is asked in the other language”; Sect. “Persian and English”",
+    "fa": "جدول «بازیابی وقتی هر پرسش به زبان دیگر پرسیده می‌شود»؛ بخش «فارسی و انگلیسی»"
    },
-   "file": "work/posthoc_2026-11/S15_crossling/RESULTS.md (sec. 2), results_tables.md"
+   "file": "work/posthoc_2026-11/S15_crossling/RESULTS.md (sec. 2), results_tables.md",
+   "manuscript": "paper_journal/main.pdf (journal manuscript, in preparation)"
   },
   "confidence": "measured",
   "caveat": {
@@ -2654,7 +2689,7 @@
     },
     "value": {
      "en": "loses 5–7 complete bundles of 45",
-     "fa": "۵ تا ۷ مجموعهٔ کامل شواهد از ۴۵ از دست می‌رود"
+     "fa": "۵ تا ۷ مجموعهٔ کامل شواهد (از ۴۵) از دست می‌رود"
     }
    },
    {
@@ -2663,8 +2698,8 @@
      "fa": "BM25 بدون نرمال‌سازی، همهٔ تغییرها با هم"
     },
     "value": {
-     "en": "loses 8",
-     "fa": "۸ مورد از دست می‌رود"
+     "en": "loses 6–8",
+     "fa": "۶ تا ۸ مجموعهٔ کامل شواهد از دست می‌رود"
     }
    },
    {
@@ -2674,7 +2709,7 @@
     },
     "value": {
      "en": "loses at most 1",
-     "fa": "حداکثر ۱ مورد از دست می‌رود"
+     "fa": "حداکثر ۱ مجموعهٔ کامل شواهد از دست می‌رود"
     }
    },
    {
@@ -2684,7 +2719,7 @@
     },
     "value": {
      "en": "loses 3",
-     "fa": "۳ مورد از دست می‌رود"
+     "fa": "۳ مجموعهٔ کامل شواهد از دست می‌رود"
     }
    },
    {
@@ -2710,10 +2745,11 @@
   ],
   "source": {
    "paper": {
-    "en": "Sect. 4.6 Persian and English (Spelling variants); Table 31",
-    "fa": "بخش ۴٫۶ (فارسی و انگلیسی: گونه‌های املایی)؛ جدول ۳۱"
+    "en": "Sect. “Persian and English”; Table “Gold evidence found by each retrieval channel in the top 40”",
+    "fa": "بخش «فارسی و انگلیسی»؛ جدول «شواهد مرجعی که هر کانال بازیابی در ۴۰ نامزد برتر پیدا می‌کند»"
    },
-   "file": "work/posthoc_2026-11/S15_crossling/RESULTS.md (sec. 2, orthography); work/posthoc_2026-11/S7_analysis/RESULTS.md (sec. 5)"
+   "file": "work/posthoc_2026-11/S15_crossling/RESULTS.md (sec. 2, orthography); work/posthoc_2026-11/S7_analysis/RESULTS.md (sec. 5)",
+   "manuscript": "paper_journal/main.pdf (journal manuscript, in preparation)"
   },
   "confidence": "measured",
   "caveat": {
@@ -2775,10 +2811,11 @@
   ],
   "source": {
    "paper": {
-    "en": "Table 12 (Contrasts split by language half) / Sect. 4.6",
-    "fa": "جدول ۱۲ (مقایسه‌ها به تفکیک نیمهٔ زبانی) / بخش ۴٫۶"
+    "en": "Table “Contrasts split by language half”; Sect. “Persian and English”",
+    "fa": "جدول «مقایسه‌ها به تفکیک نیمهٔ زبانی»؛ بخش «فارسی و انگلیسی»"
    },
-   "file": "work/posthoc_2026-11/S14_bilingual/RESULTS.md, compact_table.md"
+   "file": "work/posthoc_2026-11/S14_bilingual/RESULTS.md, compact_table.md",
+   "manuscript": "paper_journal/main.pdf (journal manuscript, in preparation)"
   },
   "confidence": "measured",
   "caveat": {
@@ -2850,10 +2887,11 @@
   ],
   "source": {
    "paper": {
-    "en": "Table 33 (Noise from re-running the reader) / Sect. 5 Run-to-Run Variance",
-    "fa": "جدول ۳۳ (نوسان ناشی از اجرای دوبارهٔ مدل پاسخ‌گو) / بخش ۵ (واریانس میان اجراها)"
+    "en": "Table “Run-to-run noise of the reader and the selection call”; Sect. “Reliability of the rankings and practical guidance”",
+    "fa": "جدول «نوسان میان اجراها در مدل پاسخ‌گو و فراخوانی گزینش»؛ بخش «اعتبار رتبه‌بندی‌ها و راهنمای عملی»"
    },
-   "file": "work/posthoc_2026-11/S2b_variance/RESULTS.md (sec. 2.1)"
+   "file": "work/posthoc_2026-11/S2b_variance/RESULTS.md (sec. 2.1)",
+   "manuscript": "paper_journal/main.pdf (journal manuscript, in preparation)"
   },
   "confidence": "measured",
   "caveat": {
@@ -2906,10 +2944,11 @@
   ],
   "source": {
    "paper": {
-    "en": "Table 33 / Sect. 5",
-    "fa": "جدول ۳۳ / بخش ۵"
+    "en": "Table “Run-to-run noise of the reader and the selection call”; Sect. “Reliability of the rankings and practical guidance”",
+    "fa": "جدول «نوسان میان اجراها در مدل پاسخ‌گو و فراخوانی گزینش»؛ بخش «اعتبار رتبه‌بندی‌ها و راهنمای عملی»"
    },
-   "file": "work/posthoc_2026-11/S2b_variance/RESULTS.md (sec. 2.2)"
+   "file": "work/posthoc_2026-11/S2b_variance/RESULTS.md (sec. 2.2)",
+   "manuscript": "paper_journal/main.pdf (journal manuscript, in preparation)"
   },
   "confidence": "measured",
   "caveat": {
@@ -2990,10 +3029,11 @@
   ],
   "source": {
    "paper": {
-    "en": "Table 24 (A second judge) / Sect. 5 Judge Agreement",
-    "fa": "جدول ۲۴ (داور دوم) / بخش ۵ (توافق داورها)"
+    "en": "Table “A second judge against the first judge and the human”; Sect. “Reliability of the rankings and practical guidance”",
+    "fa": "جدول «داور دوم در برابر داور اول و بازبین انسانی»؛ بخش «اعتبار رتبه‌بندی‌ها و راهنمای عملی»"
    },
-   "file": "work/posthoc_2026-11/S1_evaluator/RESULTS.md; work/posthoc_2026-11/S8_factorial/tables.md; work/posthoc_2026-11/S14_bilingual/RESULTS.md (sec. 2.5)"
+   "file": "work/posthoc_2026-11/S1_evaluator/RESULTS.md; work/posthoc_2026-11/S8_factorial/tables.md; work/posthoc_2026-11/S14_bilingual/RESULTS.md (sec. 2.5)",
+   "manuscript": "paper_journal/main.pdf (journal manuscript, in preparation)"
   },
   "confidence": "measured",
   "caveat": {
@@ -3046,10 +3086,11 @@
   ],
   "source": {
    "paper": {
-    "en": "Table 23 / Table 24 / Sect. 5",
-    "fa": "جدول ۲۳ / جدول ۲۴ / بخش ۵"
+    "en": "Table “First judge against human review on reviewed answers”; Table “A second judge against the first judge and the human”; App. “Human review and judges”",
+    "fa": "جدول «داور اول در برابر بازبینی انسانی، روی پاسخ‌های بازبینی‌شده»؛ جدول «داور دوم در برابر داور اول و بازبین انسانی»؛ پیوست «بازبینی انسانی و داورها»"
    },
-   "file": "work/datasets_v2/test_run/TEST_RESULTS_HUMAN_SYM.md (sec. 4); work/posthoc_2026-11/S1_evaluator/RESULTS.md"
+   "file": "work/datasets_v2/test_run/TEST_RESULTS_HUMAN_SYM.md (sec. 4); work/posthoc_2026-11/S1_evaluator/RESULTS.md",
+   "manuscript": "paper_journal/main.pdf (journal manuscript, in preparation)"
   },
   "confidence": "measured",
   "caveat": {
@@ -3076,7 +3117,7 @@
     },
     "value": {
      "en": "+8 (9 wins, 1 loss), corrected p .043",
-     "fa": "‎+۸ (۹ برد، ۱ باخت)، p اصلاح‌شده = ۰٫۰۴۳"
+     "fa": "‎+۸ (۹ برد، ۱ باخت)، p اصلاح‌شده (Holm) = ۰٫۰۴۳"
     }
    },
    {
@@ -3086,7 +3127,7 @@
     },
     "value": {
      "en": "+5 (7 wins, 2 losses), corrected p .36",
-     "fa": "‎+۵ (۷ برد، ۲ باخت)، p اصلاح‌شده = ۰٫۳۶"
+     "fa": "‎+۵ (۷ برد، ۲ باخت)، p اصلاح‌شده (Holm) = ۰٫۳۶"
     }
    },
    {
@@ -3096,16 +3137,17 @@
     },
     "value": {
      "en": "almost half (8 of 17)",
-     "fa": "تقریباً نیمی (۸ از ۱۷)"
+     "fa": "تقریباً نیمی از بردها (۸ از ۱۷)"
     }
    }
   ],
   "source": {
    "paper": {
-    "en": "Sect. 5 Human Review",
-    "fa": "بخش ۵ (بازبینی انسانی)"
+    "en": "Sect. “Reliability of the rankings and practical guidance”; App. “Human review and judges”",
+    "fa": "بخش «اعتبار رتبه‌بندی‌ها و راهنمای عملی»؛ پیوست «بازبینی انسانی و داورها»"
    },
-   "file": "work/datasets_v2/test_run/TEST_RESULTS_HUMAN_SYM.md; work/datasets_v2/test_run/TEST_RESULTS_HUMAN.md (sec. 2)"
+   "file": "work/datasets_v2/test_run/TEST_RESULTS_HUMAN_SYM.md; work/datasets_v2/test_run/TEST_RESULTS_HUMAN.md (sec. 2)",
+   "manuscript": "paper_journal/main.pdf (journal manuscript, in preparation)"
   },
   "confidence": "measured",
   "caveat": {
@@ -3178,15 +3220,16 @@
   ],
   "source": {
    "paper": {
-    "en": "Table 14 (Six readers pooled) / Sect. 5 Pooled Model",
-    "fa": "جدول ۱۴ (شش مدل پاسخ‌گو با هم) / بخش ۵ (مدل تجمیعی)"
+    "en": "Table “Mixed-effects logistic model pooling six readers”; Sect. “Reliability of the rankings and practical guidance”",
+    "fa": "جدول «مدل لجستیک اثرهای آمیخته با دادهٔ تجمیع‌شدهٔ شش مدل پاسخ‌گو»؛ بخش «اعتبار رتبه‌بندی‌ها و راهنمای عملی»"
    },
-   "file": "work/posthoc_2026-11/S5_stats/tables.md"
+   "file": "work/posthoc_2026-11/S5_stats/tables.md",
+   "manuscript": "paper_journal/main.pdf (journal manuscript, in preparation)"
   },
   "confidence": "measured",
   "caveat": {
    "en": "Uncorrected, post hoc; answers a different question from the frozen test and does not rescue the failed gate.",
-   "fa": "اصلاح‌نشده و پسینی؛ به پرسشی جز پرسش آزمون ازپیش‌ثبت‌شده پاسخ می‌دهد و برآورده نشدن معیار را جبران نمی‌کند."
+   "fa": "اصلاح‌نشده و پسینی؛ به پرسشی جز پرسش آزمون ازپیش‌تعیین‌شده پاسخ می‌دهد و برآورده نشدن معیار را جبران نمی‌کند."
   },
   "tags": [
    "stability",
@@ -3213,15 +3256,16 @@
   ],
   "source": {
    "paper": {
-    "en": "Table 13 (Recommendations for choosing a setup) / Sect. 4.7 Practical Recommendations; Table 5",
-    "fa": "جدول ۱۳ (توصیه‌ها برای انتخاب چیدمان) / بخش ۴٫۷ (توصیه‌های عملی)؛ جدول ۵"
+    "en": "Table “Practical recommendations with supporting evidence and confidence”; Sect. “Reliability of the rankings and practical guidance”; Table “Test accuracy of four pipelines at two evidence budgets”",
+    "fa": "جدول «توصیه‌های عملی، دلیل‌های پشتیبان و میزان اطمینان»؛ بخش «اعتبار رتبه‌بندی‌ها و راهنمای عملی»؛ جدول «دقت چهار پایپ‌لاین در پرسش‌های آزمون با دو بودجهٔ شواهد»"
    },
-   "file": "work/datasets_v2/test_run/TEST_RESULTS.md (sec. 2)"
+   "file": "work/datasets_v2/test_run/TEST_RESULTS.md (sec. 2)",
+   "manuscript": "paper_journal/main.pdf (journal manuscript, in preparation)"
   },
   "confidence": "strong",
   "caveat": {
    "en": "Frozen test, 6,000 and 15,500 characters; the tier leaves no room for a difference.",
-   "fa": "آزمون ازپیش‌ثبت‌شده، ۶٬۰۰۰ و ۱۵٬۵۰۰ کاراکتر؛ این سطح جایی برای تفاوت نمی‌گذارد."
+   "fa": "آزمون ازپیش‌تعیین‌شده، ۶٬۰۰۰ و ۱۵٬۵۰۰ کاراکتر؛ این سطح جایی برای تفاوت نمی‌گذارد."
   },
   "tags": [
    "guide",
@@ -3270,10 +3314,11 @@
   ],
   "source": {
    "paper": {
-    "en": "Table 13 (Recommendations for choosing a setup) / Sect. 4.7 Practical Recommendations; Table 5",
-    "fa": "جدول ۱۳ (توصیه‌ها برای انتخاب چیدمان) / بخش ۴٫۷ (توصیه‌های عملی)؛ جدول ۵"
+    "en": "Table “Practical recommendations with supporting evidence and confidence”; Sect. “Reliability of the rankings and practical guidance”; Table “Test accuracy of four pipelines at two evidence budgets”",
+    "fa": "جدول «توصیه‌های عملی، دلیل‌های پشتیبان و میزان اطمینان»؛ بخش «اعتبار رتبه‌بندی‌ها و راهنمای عملی»؛ جدول «دقت چهار پایپ‌لاین در پرسش‌های آزمون با دو بودجهٔ شواهد»"
    },
-   "file": "work/datasets_v2/test_run/TEST_RESULTS.md (sec. 2)"
+   "file": "work/datasets_v2/test_run/TEST_RESULTS.md (sec. 2)",
+   "manuscript": "paper_journal/main.pdf (journal manuscript, in preparation)"
   },
   "confidence": "tentative",
   "caveat": {
@@ -3348,10 +3393,11 @@
   ],
   "source": {
    "paper": {
-    "en": "Table 13 (Recommendations for choosing a setup) / Sect. 4.7 Practical Recommendations; Tables 5 and 9",
-    "fa": "جدول ۱۳ (توصیه‌ها برای انتخاب چیدمان) / بخش ۴٫۷ (توصیه‌های عملی)؛ جدول‌های ۵ و ۹"
+    "en": "Table “Practical recommendations with supporting evidence and confidence”; Sect. “Reliability of the rankings and practical guidance”; Table “Test accuracy of four pipelines at two evidence budgets”; Table “Search agents, long-context reading and routing”",
+    "fa": "جدول «توصیه‌های عملی، دلیل‌های پشتیبان و میزان اطمینان»؛ بخش «اعتبار رتبه‌بندی‌ها و راهنمای عملی»؛ جدول «دقت چهار پایپ‌لاین در پرسش‌های آزمون با دو بودجهٔ شواهد»؛ جدول «عامل‌های جست‌وجو، خواندن با پنجرهٔ متنی بلند و مسیریابی»"
    },
-   "file": "work/datasets_v2/test_run/TEST_RESULTS.md; work/posthoc_2026-11/S9_gpu/RESULTS.md (sec. 2)"
+   "file": "work/datasets_v2/test_run/TEST_RESULTS.md; work/posthoc_2026-11/S9_gpu/RESULTS.md (sec. 2)",
+   "manuscript": "paper_journal/main.pdf (journal manuscript, in preparation)"
   },
   "confidence": "tentative",
   "caveat": {
@@ -3417,10 +3463,11 @@
   ],
   "source": {
    "paper": {
-    "en": "Table 13 (Recommendations for choosing a setup) / Sect. 4.7 Practical Recommendations; Table 6",
-    "fa": "جدول ۱۳ (توصیه‌ها برای انتخاب چیدمان) / بخش ۴٫۷ (توصیه‌های عملی)؛ جدول ۶"
+    "en": "Table “Practical recommendations with supporting evidence and confidence”; Sect. “Reliability of the rankings and practical guidance”; Table “Retrieval components varied one at a time”",
+    "fa": "جدول «توصیه‌های عملی، دلیل‌های پشتیبان و میزان اطمینان»؛ بخش «اعتبار رتبه‌بندی‌ها و راهنمای عملی»؛ جدول «تغییر اجزای بازیابی، هر بار یک جزء»"
    },
-   "file": "work/posthoc_2026-11/S10_retrieval/RESULTS.md (sec. 2.1–2.2)"
+   "file": "work/posthoc_2026-11/S10_retrieval/RESULTS.md (sec. 2.1–2.2)",
+   "manuscript": "paper_journal/main.pdf (journal manuscript, in preparation)"
   },
   "confidence": "strong",
   "caveat": {
@@ -3474,10 +3521,11 @@
   ],
   "source": {
    "paper": {
-    "en": "Table 13 (Recommendations for choosing a setup) / Sect. 4.7 Practical Recommendations; Table 6",
-    "fa": "جدول ۱۳ (توصیه‌ها برای انتخاب چیدمان) / بخش ۴٫۷ (توصیه‌های عملی)؛ جدول ۶"
+    "en": "Table “Practical recommendations with supporting evidence and confidence”; Sect. “Reliability of the rankings and practical guidance”; Table “Retrieval components varied one at a time”",
+    "fa": "جدول «توصیه‌های عملی، دلیل‌های پشتیبان و میزان اطمینان»؛ بخش «اعتبار رتبه‌بندی‌ها و راهنمای عملی»؛ جدول «تغییر اجزای بازیابی، هر بار یک جزء»"
    },
-   "file": "work/posthoc_2026-11/S10_retrieval/RESULTS.md (sec. 2.1–2.2)"
+   "file": "work/posthoc_2026-11/S10_retrieval/RESULTS.md (sec. 2.1–2.2)",
+   "manuscript": "paper_journal/main.pdf (journal manuscript, in preparation)"
   },
   "confidence": "tentative",
   "caveat": {
@@ -3530,10 +3578,11 @@
   ],
   "source": {
    "paper": {
-    "en": "Table 13 (Recommendations for choosing a setup) / Sect. 4.7 Practical Recommendations; Table 6",
-    "fa": "جدول ۱۳ (توصیه‌ها برای انتخاب چیدمان) / بخش ۴٫۷ (توصیه‌های عملی)؛ جدول ۶"
+    "en": "Table “Practical recommendations with supporting evidence and confidence”; Sect. “Reliability of the rankings and practical guidance”; Table “Retrieval components varied one at a time”",
+    "fa": "جدول «توصیه‌های عملی، دلیل‌های پشتیبان و میزان اطمینان»؛ بخش «اعتبار رتبه‌بندی‌ها و راهنمای عملی»؛ جدول «تغییر اجزای بازیابی، هر بار یک جزء»"
    },
-   "file": "work/posthoc_2026-11/S12_chunks/RESULTS.md (sec. 2)"
+   "file": "work/posthoc_2026-11/S12_chunks/RESULTS.md (sec. 2)",
+   "manuscript": "paper_journal/main.pdf (journal manuscript, in preparation)"
   },
   "confidence": "strong",
   "caveat": {
@@ -3587,10 +3636,11 @@
   ],
   "source": {
    "paper": {
-    "en": "Table 13 (Recommendations for choosing a setup) / Sect. 4.7 Practical Recommendations; Table 6",
-    "fa": "جدول ۱۳ (توصیه‌ها برای انتخاب چیدمان) / بخش ۴٫۷ (توصیه‌های عملی)؛ جدول ۶"
+    "en": "Table “Practical recommendations with supporting evidence and confidence”; Sect. “Reliability of the rankings and practical guidance”; Table “Retrieval components varied one at a time”",
+    "fa": "جدول «توصیه‌های عملی، دلیل‌های پشتیبان و میزان اطمینان»؛ بخش «اعتبار رتبه‌بندی‌ها و راهنمای عملی»؛ جدول «تغییر اجزای بازیابی، هر بار یک جزء»"
    },
-   "file": "work/posthoc_2026-11/S12_chunks/RESULTS.md (sec. 2)"
+   "file": "work/posthoc_2026-11/S12_chunks/RESULTS.md (sec. 2)",
+   "manuscript": "paper_journal/main.pdf (journal manuscript, in preparation)"
   },
   "confidence": "tentative",
   "caveat": {
@@ -3643,10 +3693,11 @@
   ],
   "source": {
    "paper": {
-    "en": "Table 13 (Recommendations for choosing a setup) / Sect. 4.7 Practical Recommendations; Sect. 4.2",
-    "fa": "جدول ۱۳ (توصیه‌ها برای انتخاب چیدمان) / بخش ۴٫۷ (توصیه‌های عملی)؛ بخش ۴٫۲"
+    "en": "Table “Practical recommendations with supporting evidence and confidence”; Sect. “Reliability of the rankings and practical guidance”; Sect. “Retrieval components and where answers are lost”",
+    "fa": "جدول «توصیه‌های عملی، دلیل‌های پشتیبان و میزان اطمینان»؛ بخش «اعتبار رتبه‌بندی‌ها و راهنمای عملی»؛ بخش «اجزای بازیابی و مرحله‌ای که پاسخ‌ها در آن از دست می‌روند»"
    },
-   "file": "work/posthoc_2026-11/S11_rewrite/RESULTS.md (sec. 2)"
+   "file": "work/posthoc_2026-11/S11_rewrite/RESULTS.md (sec. 2)",
+   "manuscript": "paper_journal/main.pdf (journal manuscript, in preparation)"
   },
   "confidence": "tentative",
   "caveat": {
@@ -3700,10 +3751,11 @@
   ],
   "source": {
    "paper": {
-    "en": "Table 13 (Recommendations for choosing a setup) / Sect. 4.7 Practical Recommendations; Table 6",
-    "fa": "جدول ۱۳ (توصیه‌ها برای انتخاب چیدمان) / بخش ۴٫۷ (توصیه‌های عملی)؛ جدول ۶"
+    "en": "Table “Practical recommendations with supporting evidence and confidence”; Sect. “Reliability of the rankings and practical guidance”; Table “Retrieval components varied one at a time”",
+    "fa": "جدول «توصیه‌های عملی، دلیل‌های پشتیبان و میزان اطمینان»؛ بخش «اعتبار رتبه‌بندی‌ها و راهنمای عملی»؛ جدول «تغییر اجزای بازیابی، هر بار یک جزء»"
    },
-   "file": "work/posthoc_2026-11/S13_embed/RESULTS.md (sec. 2)"
+   "file": "work/posthoc_2026-11/S13_embed/RESULTS.md (sec. 2)",
+   "manuscript": "paper_journal/main.pdf (journal manuscript, in preparation)"
   },
   "confidence": "tentative",
   "caveat": {
@@ -3796,10 +3848,11 @@
   ],
   "source": {
    "paper": {
-    "en": "Table 13 (Recommendations for choosing a setup) / Sect. 4.7 Practical Recommendations; Table 10 (Reader prompt tokens per character of evidence)",
-    "fa": "جدول ۱۳ (توصیه‌ها برای انتخاب چیدمان) / بخش ۴٫۷ (توصیه‌های عملی)؛ جدول ۱۰ (توکن پرامپت مدل پاسخ‌گو برای هر کاراکتر شواهد)"
+    "en": "Table “Practical recommendations with supporting evidence and confidence”; Sect. “Reliability of the rankings and practical guidance”; Table “Reader prompt tokens per character of evidence in Persian and English”",
+    "fa": "جدول «توصیه‌های عملی، دلیل‌های پشتیبان و میزان اطمینان»؛ بخش «اعتبار رتبه‌بندی‌ها و راهنمای عملی»؛ جدول «توکن پرامپت مدل پاسخ‌گو برای هر کاراکتر شواهد در فارسی و انگلیسی»"
    },
-   "file": "work/posthoc_2026-11/S14_bilingual/RESULTS.md (sec. 2.4), tokjudge.json"
+   "file": "work/posthoc_2026-11/S14_bilingual/RESULTS.md (sec. 2.4), tokjudge.json",
+   "manuscript": "paper_journal/main.pdf (journal manuscript, in preparation)"
   },
   "confidence": "strong",
   "caveat": {
@@ -3838,16 +3891,17 @@
     },
     "value": {
      "en": "loses 5–8 of 45 complete bundles",
-     "fa": "۵ تا ۸ مجموعهٔ کامل شواهد از ۴۵ از دست می‌رود"
+     "fa": "۵ تا ۸ مجموعهٔ کامل شواهد (از ۴۵) از دست می‌رود"
     }
    }
   ],
   "source": {
    "paper": {
-    "en": "Table 13 (Recommendations for choosing a setup) / Sect. 4.7 Practical Recommendations; Sect. 4.6",
-    "fa": "جدول ۱۳ (توصیه‌ها برای انتخاب چیدمان) / بخش ۴٫۷ (توصیه‌های عملی)؛ بخش ۴٫۶"
+    "en": "Table “Practical recommendations with supporting evidence and confidence”; Sect. “Reliability of the rankings and practical guidance”; Sect. “Persian and English”",
+    "fa": "جدول «توصیه‌های عملی، دلیل‌های پشتیبان و میزان اطمینان»؛ بخش «اعتبار رتبه‌بندی‌ها و راهنمای عملی»؛ بخش «فارسی و انگلیسی»"
    },
-   "file": "work/posthoc_2026-11/S15_crossling/RESULTS.md (sec. 2)"
+   "file": "work/posthoc_2026-11/S15_crossling/RESULTS.md (sec. 2)",
+   "manuscript": "paper_journal/main.pdf (journal manuscript, in preparation)"
   },
   "confidence": "tentative",
   "caveat": {
@@ -3901,10 +3955,11 @@
   ],
   "source": {
    "paper": {
-    "en": "Table 13 (Recommendations for choosing a setup) / Sect. 4.7 Practical Recommendations; Table 11",
-    "fa": "جدول ۱۳ (توصیه‌ها برای انتخاب چیدمان) / بخش ۴٫۷ (توصیه‌های عملی)؛ جدول ۱۱"
+    "en": "Table “Practical recommendations with supporting evidence and confidence”; Sect. “Reliability of the rankings and practical guidance”; Table “Retrieval when each question is asked in the other language”",
+    "fa": "جدول «توصیه‌های عملی، دلیل‌های پشتیبان و میزان اطمینان»؛ بخش «اعتبار رتبه‌بندی‌ها و راهنمای عملی»؛ جدول «بازیابی وقتی هر پرسش به زبان دیگر پرسیده می‌شود»"
    },
-   "file": "work/posthoc_2026-11/S15_crossling/RESULTS.md (sec. 2)"
+   "file": "work/posthoc_2026-11/S15_crossling/RESULTS.md (sec. 2)",
+   "manuscript": "paper_journal/main.pdf (journal manuscript, in preparation)"
   },
   "confidence": "strong",
   "caveat": {
@@ -3942,7 +3997,7 @@
     },
     "value": {
      "en": "19 / 21 of 45 (were 33 / 26)",
-     "fa": "۱۹ / ۲۱ از ۴۵ (پیش‌تر ۳۳ / ۲۶)"
+     "fa": "۱۹ / ۲۱ از ۴۵ (با پرسش‌های اصلی ۳۳ / ۲۶)"
     }
    },
    {
@@ -3958,10 +4013,11 @@
   ],
   "source": {
    "paper": {
-    "en": "Table 13 (Recommendations for choosing a setup) / Sect. 4.7 Practical Recommendations; Table 11",
-    "fa": "جدول ۱۳ (توصیه‌ها برای انتخاب چیدمان) / بخش ۴٫۷ (توصیه‌های عملی)؛ جدول ۱۱"
+    "en": "Table “Practical recommendations with supporting evidence and confidence”; Sect. “Reliability of the rankings and practical guidance”; Table “Retrieval when each question is asked in the other language”",
+    "fa": "جدول «توصیه‌های عملی، دلیل‌های پشتیبان و میزان اطمینان»؛ بخش «اعتبار رتبه‌بندی‌ها و راهنمای عملی»؛ جدول «بازیابی وقتی هر پرسش به زبان دیگر پرسیده می‌شود»"
    },
-   "file": "work/posthoc_2026-11/S15_crossling/RESULTS.md (sec. 2)"
+   "file": "work/posthoc_2026-11/S15_crossling/RESULTS.md (sec. 2)",
+   "manuscript": "paper_journal/main.pdf (journal manuscript, in preparation)"
   },
   "confidence": "tentative",
   "caveat": {
@@ -4005,10 +4061,11 @@
   ],
   "source": {
    "paper": {
-    "en": "Table 13 (Recommendations for choosing a setup) / Sect. 4.7 Practical Recommendations; Table 8, Figure 3",
-    "fa": "جدول ۱۳ (توصیه‌ها برای انتخاب چیدمان) / بخش ۴٫۷ (توصیه‌های عملی)؛ جدول ۸، شکل ۳"
+    "en": "Table “Practical recommendations with supporting evidence and confidence”; Sect. “Reliability of the rankings and practical guidance”; Table “Effect of the selection step at 6,000 characters”; Fig. “Accuracy at five evidence budgets”",
+    "fa": "جدول «توصیه‌های عملی، دلیل‌های پشتیبان و میزان اطمینان»؛ بخش «اعتبار رتبه‌بندی‌ها و راهنمای عملی»؛ جدول «اثر گام گزینش در بودجهٔ ۶٬۰۰۰ کاراکتر»؛ شکل «دقت در پنج بودجهٔ شواهد»"
    },
-   "file": "work/posthoc_2026-11/S8_factorial/tables.md"
+   "file": "work/posthoc_2026-11/S8_factorial/tables.md",
+   "manuscript": "paper_journal/main.pdf (journal manuscript, in preparation)"
   },
   "confidence": "strong",
   "caveat": {
@@ -4052,10 +4109,11 @@
   ],
   "source": {
    "paper": {
-    "en": "Table 13 (Recommendations for choosing a setup) / Sect. 4.7 Practical Recommendations; Table 8",
-    "fa": "جدول ۱۳ (توصیه‌ها برای انتخاب چیدمان) / بخش ۴٫۷ (توصیه‌های عملی)؛ جدول ۸"
+    "en": "Table “Practical recommendations with supporting evidence and confidence”; Sect. “Reliability of the rankings and practical guidance”; Table “Effect of the selection step at 6,000 characters”",
+    "fa": "جدول «توصیه‌های عملی، دلیل‌های پشتیبان و میزان اطمینان»؛ بخش «اعتبار رتبه‌بندی‌ها و راهنمای عملی»؛ جدول «اثر گام گزینش در بودجهٔ ۶٬۰۰۰ کاراکتر»"
    },
-   "file": "work/posthoc_2026-11/S8_factorial/tables.md; work/posthoc_2026-11/S14_bilingual/RESULTS.md (sec. 2.1)"
+   "file": "work/posthoc_2026-11/S8_factorial/tables.md; work/posthoc_2026-11/S14_bilingual/RESULTS.md (sec. 2.1)",
+   "manuscript": "paper_journal/main.pdf (journal manuscript, in preparation)"
   },
   "confidence": "tentative",
   "caveat": {
@@ -4119,10 +4177,11 @@
   ],
   "source": {
    "paper": {
-    "en": "Table 13 (Recommendations for choosing a setup) / Sect. 4.7 Practical Recommendations; Table 14; Table 24",
-    "fa": "جدول ۱۳ (توصیه‌ها برای انتخاب چیدمان) / بخش ۴٫۷ (توصیه‌های عملی)؛ جدول ۱۴؛ جدول ۲۴"
+    "en": "Table “Practical recommendations with supporting evidence and confidence”; Sect. “Reliability of the rankings and practical guidance”; Table “Mixed-effects logistic model pooling six readers”; Table “A second judge against the first judge and the human”",
+    "fa": "جدول «توصیه‌های عملی، دلیل‌های پشتیبان و میزان اطمینان»؛ بخش «اعتبار رتبه‌بندی‌ها و راهنمای عملی»؛ جدول «مدل لجستیک اثرهای آمیخته با دادهٔ تجمیع‌شدهٔ شش مدل پاسخ‌گو»؛ جدول «داور دوم در برابر داور اول و بازبین انسانی»"
    },
-   "file": "work/posthoc_2026-11/S5_stats/tables.md; work/posthoc_2026-11/S8_factorial/tables.md"
+   "file": "work/posthoc_2026-11/S5_stats/tables.md; work/posthoc_2026-11/S8_factorial/tables.md",
+   "manuscript": "paper_journal/main.pdf (journal manuscript, in preparation)"
   },
   "confidence": "tentative",
   "caveat": {
@@ -4176,10 +4235,11 @@
   ],
   "source": {
    "paper": {
-    "en": "Table 13 (Recommendations for choosing a setup) / Sect. 4.7 Practical Recommendations; Figure 3",
-    "fa": "جدول ۱۳ (توصیه‌ها برای انتخاب چیدمان) / بخش ۴٫۷ (توصیه‌های عملی)؛ شکل ۳"
+    "en": "Table “Practical recommendations with supporting evidence and confidence”; Sect. “Reliability of the rankings and practical guidance”; Fig. “Accuracy at five evidence budgets”",
+    "fa": "جدول «توصیه‌های عملی، دلیل‌های پشتیبان و میزان اطمینان»؛ بخش «اعتبار رتبه‌بندی‌ها و راهنمای عملی»؛ شکل «دقت در پنج بودجهٔ شواهد»"
    },
-   "file": "paper/figures/data/budget.dat; work/posthoc_2026-11/S2b_variance/RESULTS.md"
+   "file": "paper/figures/data/budget.dat; work/posthoc_2026-11/S2b_variance/RESULTS.md",
+   "manuscript": "paper_journal/main.pdf (journal manuscript, in preparation)"
   },
   "confidence": "tentative",
   "caveat": {
@@ -4222,10 +4282,11 @@
   ],
   "source": {
    "paper": {
-    "en": "Table 13 (Recommendations for choosing a setup) / Sect. 4.7 Practical Recommendations; Tables 9 and 20",
-    "fa": "جدول ۱۳ (توصیه‌ها برای انتخاب چیدمان) / بخش ۴٫۷ (توصیه‌های عملی)؛ جدول‌های ۹ و ۲۰"
+    "en": "Table “Practical recommendations with supporting evidence and confidence”; Sect. “Reliability of the rankings and practical guidance”; Table “Query-time cost of each pipeline with the primary reader”; Table “Search agents, long-context reading and routing”",
+    "fa": "جدول «توصیه‌های عملی، دلیل‌های پشتیبان و میزان اطمینان»؛ بخش «اعتبار رتبه‌بندی‌ها و راهنمای عملی»؛ جدول «هزینهٔ هر پایپ‌لاین هنگام پاسخ به پرسش، با مدل پاسخ‌گوی اصلی»؛ جدول «عامل‌های جست‌وجو، خواندن با پنجرهٔ متنی بلند و مسیریابی»"
    },
-   "file": "work/datasets_v2/test_run/TEST_RESULTS.md (sec. 4); work/posthoc_2026-11/S9_gpu/RESULTS.md"
+   "file": "work/datasets_v2/test_run/TEST_RESULTS.md (sec. 4); work/posthoc_2026-11/S9_gpu/RESULTS.md",
+   "manuscript": "paper_journal/main.pdf (journal manuscript, in preparation)"
   },
   "confidence": "tentative",
   "caveat": {
@@ -4268,10 +4329,11 @@
   ],
   "source": {
    "paper": {
-    "en": "Table 13 (Recommendations for choosing a setup) / Sect. 4.7 Practical Recommendations; Figure 3",
-    "fa": "جدول ۱۳ (توصیه‌ها برای انتخاب چیدمان) / بخش ۴٫۷ (توصیه‌های عملی)؛ شکل ۳"
+    "en": "Table “Practical recommendations with supporting evidence and confidence”; Sect. “Reliability of the rankings and practical guidance”; Fig. “Accuracy at five evidence budgets”",
+    "fa": "جدول «توصیه‌های عملی، دلیل‌های پشتیبان و میزان اطمینان»؛ بخش «اعتبار رتبه‌بندی‌ها و راهنمای عملی»؛ شکل «دقت در پنج بودجهٔ شواهد»"
    },
-   "file": "paper/figures/data/budget.dat"
+   "file": "paper/figures/data/budget.dat",
+   "manuscript": "paper_journal/main.pdf (journal manuscript, in preparation)"
   },
   "confidence": "tentative",
   "caveat": {
@@ -4316,10 +4378,11 @@
   ],
   "source": {
    "paper": {
-    "en": "Table 13 (Recommendations for choosing a setup) / Sect. 4.7 Practical Recommendations; Table 30",
-    "fa": "جدول ۱۳ (توصیه‌ها برای انتخاب چیدمان) / بخش ۴٫۷ (توصیه‌های عملی)؛ جدول ۳۰"
+    "en": "Table “Practical recommendations with supporting evidence and confidence”; Sect. “Reliability of the rankings and practical guidance”; Table “Main contrasts with and without questions answerable from memory”",
+    "fa": "جدول «توصیه‌های عملی، دلیل‌های پشتیبان و میزان اطمینان»؛ بخش «اعتبار رتبه‌بندی‌ها و راهنمای عملی»؛ جدول «مقایسه‌های اصلی با پرسش‌های پاسخ‌پذیر از حافظه و بدون آن‌ها»"
    },
-   "file": "work/posthoc_2026-11/S6_baselines/RESULTS.md; work/posthoc_2026-11/S7_analysis/RESULTS.md (sec. 2)"
+   "file": "work/posthoc_2026-11/S6_baselines/RESULTS.md; work/posthoc_2026-11/S7_analysis/RESULTS.md (sec. 2)",
+   "manuscript": "paper_journal/main.pdf (journal manuscript, in preparation)"
   },
   "confidence": "strong",
   "caveat": {
@@ -4382,10 +4445,11 @@
   ],
   "source": {
    "paper": {
-    "en": "Table 13 (Recommendations for choosing a setup) / Sect. 4.7 Practical Recommendations; Table 30",
-    "fa": "جدول ۱۳ (توصیه‌ها برای انتخاب چیدمان) / بخش ۴٫۷ (توصیه‌های عملی)؛ جدول ۳۰"
+    "en": "Table “Practical recommendations with supporting evidence and confidence”; Sect. “Reliability of the rankings and practical guidance”; Table “Main contrasts with and without questions answerable from memory”; Table “Search agents, long-context reading and routing”",
+    "fa": "جدول «توصیه‌های عملی، دلیل‌های پشتیبان و میزان اطمینان»؛ بخش «اعتبار رتبه‌بندی‌ها و راهنمای عملی»؛ جدول «مقایسه‌های اصلی با پرسش‌های پاسخ‌پذیر از حافظه و بدون آن‌ها»؛ جدول «عامل‌های جست‌وجو، خواندن با پنجرهٔ متنی بلند و مسیریابی»"
    },
-   "file": "work/posthoc_2026-11/S7_analysis/contam_tables.md; work/posthoc_2026-11/S9_gpu/RESULTS.md (sec. 2)"
+   "file": "work/posthoc_2026-11/S7_analysis/contam_tables.md; work/posthoc_2026-11/S9_gpu/RESULTS.md (sec. 2)",
+   "manuscript": "paper_journal/main.pdf (journal manuscript, in preparation)"
   },
   "confidence": "tentative",
   "caveat": {
@@ -4408,5 +4472,101 @@
    },
    "confidence_text": "Tentative"
   }
+ },
+ {
+  "id": "agent-bm25-nogpu",
+  "claim": {
+   "en": "Without a GPU, the BM25 search agent had the highest point estimate of the tested options that need no GPU, all within the noise: 73 of 90 against 68–69 for an LLM selection call (Lex-RAG) and 62–63 for plain hybrid. Its gain lay in the English half.",
+   "fa": "در میان گزینه‌های آزموده‌ای که به GPU نیاز ندارند، بالاترین برآورد نقطه‌ای را عامل جست‌وجو با ابزار BM25 داشت: ۷۳ پاسخ درست از ۹۰. فراخوانی گزینش با LLM (Lex-RAG) به ۶۸–۶۹ و ترکیبیِ ساده به ۶۲–۶۳ رسید. این فاصله‌ها در حد نوسان‌اند و سود عامل در نیمهٔ انگلیسی بود."
+  },
+  "numbers": [
+   {
+    "label": {
+     "en": "All 90, first judge: BM25 agent / Lex-RAG / Hybrid",
+     "fa": "همهٔ ۹۰ پرسش، داور اول: عامل BM25 / Lex-RAG / ترکیبی"
+    },
+    "value": {
+     "en": "73 / 68–69 / 62–63",
+     "fa": "۷۳ / ۶۸–۶۹ / ۶۲–۶۳"
+    }
+   },
+   {
+    "label": {
+     "en": "Same, second judge",
+     "fa": "همین، داور دوم"
+    },
+    "value": {
+     "en": "66–68 / 65–67 / 59–61",
+     "fa": "۶۶–۶۸ / ۶۵–۶۷ / ۵۹–۶۱"
+    }
+   },
+   {
+    "label": {
+     "en": "Cross-document (T3, of 30): BM25 agent / Lex-RAG / Hybrid",
+     "fa": "پرسش‌های میان‌سندی (T3، از ۳۰): عامل BM25 / Lex-RAG / ترکیبی"
+    },
+    "value": {
+     "en": "23 / 16 / 14",
+     "fa": "۲۳ / ۱۶ / ۱۴"
+    }
+   },
+   {
+    "label": {
+     "en": "English half (of 45): BM25 agent / Lex-RAG",
+     "fa": "نیمهٔ انگلیسی (از ۴۵): عامل BM25 / Lex-RAG"
+    },
+    "value": {
+     "en": "39 / 32",
+     "fa": "۳۹ / ۳۲"
+    }
+   },
+   {
+    "label": {
+     "en": "BM25 agent minus Hybrid: Persian / English half",
+     "fa": "عامل BM25 منهای ترکیبی: نیمهٔ فارسی / انگلیسی"
+    },
+    "value": {
+     "en": "−2 to −1 / +12",
+     "fa": "‎−۲ تا ‎−۱ / ‎+۱۲"
+    }
+   },
+   {
+    "label": {
+     "en": "Against HR, without the 26 memory-answerable questions",
+     "fa": "در برابر HR، بدون ۲۶ پرسش پاسخ‌پذیر از حافظه"
+    },
+    "value": {
+     "en": "−1 to 0 (7 wins, 7 losses)",
+     "fa": "‎−۱ تا ۰ (۷ برد، ۷ باخت)"
+    }
+   },
+   {
+    "label": {
+     "en": "Tokens per question / LLM calls / median latency",
+     "fa": "توکن هر پرسش / فراخوانی LLM / میانهٔ زمان پاسخ"
+    },
+    "value": {
+     "en": "9,285 / 3.6 / 8.8 s",
+     "fa": "۹٬۲۸۵ / ۳٫۶ / ۸٫۸ ثانیه"
+    }
+   }
+  ],
+  "source": {
+   "paper": {
+    "en": "Table “Search agents, long-context reading and routing”; Table “Main contrasts with and without questions answerable from memory”; Table “Contrasts split by language half”; Sect. “Evidence budget and iterative or long-context retrieval”",
+    "fa": "جدول «عامل‌های جست‌وجو، خواندن با پنجرهٔ متنی بلند و مسیریابی»؛ جدول «مقایسه‌های اصلی با پرسش‌های پاسخ‌پذیر از حافظه و بدون آن‌ها»؛ جدول «مقایسه‌ها به تفکیک نیمهٔ زبانی»؛ بخش «بودجهٔ شواهد و بازیابی تکرارشونده یا با پنجرهٔ متنی بلند»"
+   },
+   "file": "work/posthoc_2026-11/S3_agentic/RESULTS.md (cost); work/posthoc_2026-11/S7_analysis/contam_tables.md; work/posthoc_2026-11/S14_bilingual/RESULTS.md (sec. 2)",
+   "manuscript": "paper_journal/main.pdf (journal manuscript, in preparation)"
+  },
+  "confidence": "tentative",
+  "caveat": {
+   "en": "Post hoc, one run; latency measured in a separate session. Not graded in the guide table, whose no-GPU row names a larger budget or a selection call. Its lead over the reranked pipeline lay in the 26 memory-answerable questions (4 wins, 1 loss), and the difference between the halves does not survive Holm correction.",
+   "fa": "پسینی و یک اجرا؛ زمان پاسخ در نشستی جداگانه اندازه‌گیری شد. در جدول راهنما درجه‌بندی نشده است؛ ردیف «بدون GPU» آن جدول بودجهٔ بزرگ‌تر یا فراخوانی گزینش را پیشنهاد می‌کند. برتری این عامل بر پایپ‌لاین با بازرتبه‌ساز در ۲۶ پرسش پاسخ‌پذیر از حافظه بود (۴ برد، ۱ باخت)، و تفاوت دو نیمه پس از اصلاح Holm معنادار نمی‌ماند."
+  },
+  "tags": [
+   "agents",
+   "no-gpu"
+  ]
  }
 ]

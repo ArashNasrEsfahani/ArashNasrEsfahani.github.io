@@ -8,6 +8,8 @@
    Unanswered questions count as 'unsure'; a hidden question counts as 'na'. Nothing here adds claims. */
 (function (G) {
   'use strict';
+  /* cache-busting: the ?v= of this script's own URL (set in index.html) is added to the files it loads */
+  var VQ = (function () { try { var v = new URL(document.currentScript.src).searchParams.get('v'); return v ? '?v=' + encodeURIComponent(v) : ''; } catch (e) { return ''; } })();
 
   /* ================= core (no DOM) ================= */
 
@@ -98,14 +100,48 @@
     return { answers: full, slots: slots, extras: lists.extras, avoid: lists.avoid, tradeoffs: lists.tradeoffs, fired: fired, unsure: unsure };
   }
 
-  // Evidence ids in display order (slots, extras, avoid, tradeoffs), first reference wins.
+  // List items that hold for every setup (notes.universal) are shown collapsed, after the profile-specific ones.
+  function universalSet(d) { return arr(d.notes && d.notes.universal); }
+  function splitList(d, ids) {
+    var u = universalSet(d);
+    return { own: arr(ids).filter(function (x) { return u.indexOf(x) < 0; }), all: arr(ids).filter(function (x) { return u.indexOf(x) >= 0; }) };
+  }
+  // Option ids in display order: slots, trade-offs, avoid, extras, then the universal avoid and extras items.
+  function displayOrder(d, res) {
+    var av = splitList(d, res.avoid), ex = splitList(d, res.extras);
+    return SLOTS.map(function (k) { return res.slots[k]; }).concat(res.tradeoffs, av.own, ex.own, av.all, ex.all);
+  }
+  // Evidence ids in display order, first reference wins, so card numbers follow their first appearance.
   function evidenceOrder(d, res) {
     var ids = [];
-    SLOTS.map(function (k) { return res.slots[k]; }).concat(res.extras, res.avoid, res.tradeoffs).forEach(function (oid) {
+    displayOrder(d, res).forEach(function (oid) {
       var o = d.options[oid];
       if (o) arr(o.evidence).forEach(function (e) { if (ids.indexOf(e) < 0) ids.push(e); });
     });
     return ids;
+  }
+  // The (at most) three cards shown by default: each slot option's "key" card, in the order of the decisions that
+  // differ most between setups, then the first card of each trade-off, then display order.
+  var KEY_SLOTS = ['reranking_or_selection', 'agent', 'channels', 'budget', 'normalisation', 'chunking'];
+  function keyEvidence(d, res, n) {
+    n = n || 3;
+    var out = [], push = function (e) { if (e && d.evidence[e] && out.indexOf(e) < 0 && out.length < n) out.push(e); };
+    KEY_SLOTS.forEach(function (k) { var o = d.options[res.slots[k]]; if (o) push(o.key === undefined ? arr(o.evidence)[0] : o.key); });
+    res.tradeoffs.forEach(function (oid) { var o = d.options[oid]; if (o) push(arr(o.evidence)[0]); });
+    evidenceOrder(d, res).forEach(push);
+    return out;
+  }
+  // notes.no_default_when: a list of 'when' objects; the "no single default" note shows if any of them holds.
+  function showNoDefault(d, res) {
+    var w = d.notes && d.notes.no_default_when;
+    if (!w) return res.slots.reranking_or_selection === 'rr.ce';
+    return arr(w).some(function (c) { return whenHolds(c, res.answers, res.slots); });
+  }
+  // The one-sentence recommendation: notes.summary filled with each slot option's "summary" phrase ({en, fa}).
+  function summaryParts(d, res) {
+    var p = {};
+    SLOTS.forEach(function (k) { var o = d.options[res.slots[k]]; p[k] = o && o.summary ? o.summary : null; });
+    return p;
   }
 
   function sameList(a, b) { return JSON.stringify(arr(a)) === JSON.stringify(arr(b)); }
@@ -144,7 +180,8 @@
   }
 
   var Core = { normalize: normalize, evaluate: evaluate, visibleQuestions: visibleQuestions, fullAnswers: fullAnswers,
-    cleanAnswers: cleanAnswers, evidenceOrder: evidenceOrder, checkTest: checkTest, parseHash: parseHash, buildHash: buildHash,
+    cleanAnswers: cleanAnswers, evidenceOrder: evidenceOrder, displayOrder: displayOrder, splitList: splitList, keyEvidence: keyEvidence,
+    showNoDefault: showNoDefault, summaryParts: summaryParts, checkTest: checkTest, parseHash: parseHash, buildHash: buildHash,
     SLOTS: SLOTS, LISTS: LISTS, UNSURE: UNSURE, NA: NA };
   G.AnyRAGChooserCore = Core;
   if (typeof module !== 'undefined' && module.exports) module.exports = Core;
@@ -167,7 +204,10 @@
     show_all: 'Show all {n} evidence cards', show_less: 'Show fewer',
     unsure_note: 'You answered "not sure" to {n} of {m} questions; the defaults stand there.',
     caveat: 'Caveat', refs: 'Evidence',
-    strong: 'Strong', tentative: 'Tentative', measured: 'Measured',
+    strong: 'Strong', tentative: 'Tentative', measured: 'Measured', untested: 'Not tested',
+    summary_label: 'In one sentence', universal_title: 'Holds for every setup ({n})', src: 'In the paper',
+    key_note: 'The three cards that bear most on this recommendation are shown; the rest are one click away.',
+    st_agent_tool: "agent's tool", st_agent_bm25: 'Agent: search again with BM25',
     legend_title: 'Confidence labels',
     note: 'Based on 90 test questions; post hoc analyses; your data may differ, so test on your own questions.',
     loading: 'Loading the chooser.', failed: 'The chooser data could not be loaded.',
@@ -349,22 +389,27 @@
   /* --- pipeline diagram --- */
   // Diagram stages from option ids; ids not listed here fall back to their prefix.
   var STAGE = {
-    'rr.ce': 'rerank', 'rr.ce_xl': 'rerank', 'rr.ce_fast': 'rerank', 'rr.sel': 'select',
-    'ag.hybrid': 'agent', 'nm.fa': 'norm', 'nm.fa_mixed': 'norm'
+    'rr.ce': 'rerank', 'rr.ce_xl': 'rerank', 'rr.ce_fast': 'rerank', 'rr.sel': 'select', 'rr.sel_6000': 'select',
+    'ag.hybrid': 'agent', 'ag.hybrid_tool': 'agent', 'ag.hybrid_mix': 'agent',
+    'ag.bm25_en': 'agent_bm25', 'ag.bm25_en_mix': 'agent_bm25', 'ag.bm25_lang': 'agent_bm25',
+    'nm.fa': 'norm', 'nm.fa_mixed': 'norm'
   };
-  var BUDGET = { 'bd.tight': '3,000', 'bd.tight_t1': '3,000', 'bd.moderate': '6,000', 'bd.generous': '≥15,500', 'bd.raise': '→15,500' };
-  var BUDGET_FA = { 'bd.tight': '۳٬۰۰۰', 'bd.tight_t1': '۳٬۰۰۰', 'bd.moderate': '۶٬۰۰۰', 'bd.generous': 'حداقل ۱۵٬۵۰۰', 'bd.raise': 'افزایش تا ۱۵٬۵۰۰' };
+  var BUDGET = { 'bd.tight': '3,000', 'bd.tight_ce': '3,000', 'bd.tight_t1': '3,000', 'bd.moderate': '6,000', 'bd.generous': '≥15,500', 'bd.raise': '→15,500' };
+  var BUDGET_FA = { 'bd.tight': '۳٬۰۰۰', 'bd.tight_ce': '۳٬۰۰۰', 'bd.tight_t1': '۳٬۰۰۰', 'bd.moderate': '۶٬۰۰۰', 'bd.generous': 'حداقل ۱۵٬۵۰۰', 'bd.raise': 'افزایش تا ۱۵٬۵۰۰' };
   function stagesFor(slots) {
     var st = [{ k: 'query' }];
     if (STAGE[slots.normalisation] === 'norm') st.push({ k: 'norm' });
     st.push({ k: 'retrieve', par: ['bm25', 'dense'], dashed: slots.channels === 'ch.cross' ? 'bm25' : null });
     st.push({ k: 'fuse' });
     var rr = STAGE[slots.reranking_or_selection];
-    if (rr) st.push({ k: rr, sub: slots.reranking_or_selection === 'rr.ce_fast' ? U('st_if_fast') : null });
+    // at a generous budget the pack needs no reranker, but the hybrid-index agent uses one as its search tool
+    if (!rr && slots.agent === 'ag.hybrid_tool') st.push({ k: 'rerank', sub: U('st_agent_tool') });
+    else if (rr) st.push({ k: rr, sub: slots.reranking_or_selection === 'rr.ce_fast' ? U('st_if_fast') : null });
     var b = (lang === 'fa' && AR.test(U('st_chars')) ? BUDGET_FA : BUDGET)[slots.budget];
     st.push({ k: 'pack', sub: b ? b + ' ' + U('st_chars') : (slots.budget === 'bd.modest_t1' ? U('st_modest') : null) });
     st.push({ k: 'reader' });
-    return { stages: st, agent: STAGE[slots.agent] === 'agent' };
+    var ag = STAGE[slots.agent];
+    return { stages: st, agent: !!ag, agentLabel: ag === 'agent_bm25' ? U('st_agent_bm25') : U('st_agent') };
   }
 
   var NS = 'http://www.w3.org/2000/svg';
@@ -401,7 +446,7 @@
     var desc = sv('desc', { id: 'ch-svg-d' });
     desc.textContent = st.map(function (s) {
       return s.par ? s.par.map(function (p) { return U('st_' + p); }).join(' + ') : U('st_' + s.k) + (s.sub ? ' (' + s.sub + ')' : '');
-    }).join(' → ') + (P.agent ? '; ' + U('st_agent') : '');
+    }).join(' → ') + (P.agent ? '; ' + P.agentLabel : '');
     svg.appendChild(desc);
     var defs = sv('defs'), mk = sv('marker', { id: 'ch-arrow', viewBox: '0 0 8 8', refX: '7.5', refY: '4', markerWidth: '6', markerHeight: '6', orient: 'auto-start-reverse' });
     mk.appendChild(sv('path', { d: 'M0,0 L8,4 L0,8 z', class: 'ch-ah' })); defs.appendChild(mk); svg.appendChild(defs);
@@ -442,13 +487,13 @@
         d = 'M' + (rtl ? R.x : R.x + R.w) + ',' + (R.y + R.h / 2) + ' H' + xr + ' V' + (Q.y + Q.h / 2) + ' H' + (rtl ? Q.x - 1 : Q.x + Q.w + 1);
         svg.appendChild(sv('path', { d: d, class: 'ch-edge loop', 'marker-end': 'url(#ch-arrow)' }));
         lx = xr + (rtl ? -6 : 6); ly2 = (R.y + Q.y + Q.h) / 2;
-        var lt = label(U('st_agent'), lx, ly2, 'ch-sub'); lt.setAttribute('transform', 'rotate(-90 ' + lx + ' ' + ly2 + ')');
+        var lt = label(P.agentLabel, lx, ly2, 'ch-sub'); lt.setAttribute('transform', 'rotate(-90 ' + lx + ' ' + ly2 + ')');
         svg.appendChild(lt);
       } else {
         var yb = 6 + 92 + 26, x1 = R.x + R.w / 2, x2 = Q.x + Q.w / 2;
         d = 'M' + x1 + ',' + (R.y + R.h) + ' V' + yb + ' H' + x2 + ' V' + (Q.y + Q.h + 1);
         svg.appendChild(sv('path', { d: d, class: 'ch-edge loop', 'marker-end': 'url(#ch-arrow)' }));
-        svg.appendChild(label(U('st_agent'), (x1 + x2) / 2, yb - 6, 'ch-sub'));
+        svg.appendChild(label(P.agentLabel, (x1 + x2) / 2, yb - 6, 'ch-sub'));
       }
     }
     return svg;
@@ -456,7 +501,7 @@
 
   /* --- result --- */
   function badge(level, scope) {
-    var lv = /strong|tentative|measured/.test(level) ? level : 'tentative';
+    var lv = /^(strong|tentative|measured|untested)$/.test(level) ? level : 'tentative';
     var w = el('span', { class: 'ch-conf' }, [el('span', { class: 'ch-badge ' + lv, text: U(lv) })]);
     if (hasText(scope)) w.appendChild(T('span', 'ch-scope', scope));
     return w;
@@ -513,14 +558,26 @@
     }
     if (hasText(e.caveat)) art.appendChild(el('p', { class: 'ch-cav' }, [el('span', { class: 'ch-k', text: U('caveat') }), ' ', T('span', '', e.caveat)]));
     var src = e.source && (isObj(e.source) && !('en' in e.source) ? e.source.paper : e.source);
-    if (src && (typeof src === 'string' || isObj(src)) && hasText(src)) art.appendChild(el('p', { class: 'ch-src', text: LN(src) }));
+    if (src && (typeof src === 'string' || isObj(src)) && hasText(src)) art.appendChild(el('p', { class: 'ch-src' }, [el('span', { class: 'ch-k', text: U('src') }), ' ', el('span', { text: LN(src) })]));
     return art;
+  }
+
+  function summaryLine(res) {
+    var tpl = D.notes.summary, parts = Core.summaryParts(D, res);
+    if (!tpl || !parts.channels || !parts.reranking_or_selection || !parts.budget) return null;
+    var s = L(tpl);
+    ['channels', 'reranking_or_selection', 'budget', 'agent'].forEach(function (k) { s = s.split('{' + k + '}').join(parts[k] ? L(parts[k]) : ''); });
+    s = s.replace(/\s+([,.،؛])/g, '$1').replace(/\s{2,}/g, ' ').trim();
+    s = s.charAt(0).toUpperCase() + s.slice(1);
+    if (lang === 'fa' && NUM()) s = NUM().local(s, 'fa');
+    return s;
   }
 
   function renderResult() {
     var res = Core.evaluate(D, state.ans);
     var order = Core.evidenceOrder(D, res).filter(function (e) { return D.evidence[e]; });
     refNo = {}; order.forEach(function (e, i) { refNo[e] = i + 1; });
+    var keys = Core.keyEvidence(D, res, 3);
     var wrap = el('div', { class: 'ch-res' });
 
     var head = el('div', { class: 'ch-rhead' });
@@ -533,8 +590,12 @@
     head.appendChild(tools);
     wrap.appendChild(head);
 
+    // the recommendation in one sentence (review item 9)
+    var line = summaryLine(res);
+    if (line) wrap.appendChild(el('p', { class: 'ch-summary', id: 'ch-summary' }, [el('span', { class: 'ch-k', text: U('summary_label') }), ' ', el('span', { text: line })]));
+
     // pipeline card
-    var card = el('div', { class: 'ch-card', role: 'group', 'aria-label': U('result_title') });
+    var card = el('div', { class: 'ch-card', role: 'group', 'aria-label': U('result_title'), 'aria-describedby': line ? 'ch-summary' : null });
     var fig = el('figure', { class: 'ch-fig' });
     var holder = el('div', { class: 'ch-diag' });
     fig.appendChild(holder);
@@ -549,7 +610,8 @@
     wrap.appendChild(card);
     pendingDiag = function () { drawDiag(holder, res.slots); };
 
-    if (res.slots.reranking_or_selection === 'rr.ce' && hasText(D.notes.no_default)) wrap.appendChild(T('p', 'ch-default', D.notes.no_default));
+    // only when the reranker came from the default rather than from an answer
+    if (Core.showNoDefault(D, res) && hasText(D.notes.no_default)) wrap.appendChild(T('p', 'ch-default', D.notes.no_default));
 
     // your answers
     var sum = el('details', { class: 'ch-sum' });
@@ -571,29 +633,43 @@
     wrap.appendChild(sum);
     if (nUnsure) { sum.open = nUnsure > 0 && nUnsure >= 3; }
 
-    function block(key, cls) {
-      var ids = res[key];
+    function list(ids) {
+      var ul = el('ul', { class: 'ch-list' });
+      ids.forEach(function (oid) { ul.appendChild(optionItem(oid)); });
+      return ul;
+    }
+    function block(key, cls, ids) {
       if (!ids.length) return;
       var hid = 'ch-h-' + key;
       var sec = el('div', { class: 'ch-block ' + cls, role: 'group', 'aria-labelledby': hid });
       sec.appendChild(el('h4', { class: 'ch-h', id: hid, text: U(key + '_title') }));
-      var ul = el('ul', { class: 'ch-list' });
-      ids.forEach(function (oid) { ul.appendChild(optionItem(oid)); });
-      sec.appendChild(ul);
+      sec.appendChild(list(ids));
       wrap.appendChild(sec);
     }
-    block('tradeoffs', 'ch-trade');
-    block('avoid', 'ch-avoid');
-    block('extras', 'ch-extra');
+    var av = Core.splitList(D, res.avoid), ex = Core.splitList(D, res.extras);
+    block('tradeoffs', 'ch-trade', res.tradeoffs);
+    block('avoid', 'ch-avoid', av.own);
+    block('extras', 'ch-extra', ex.own);
+    // advice that holds for every setup: one line, opened on demand (native details/summary: keyboard and aria built in)
+    var uni = av.all.concat(ex.all);
+    if (uni.length) {
+      var ud = el('details', { class: 'ch-block ch-universal' });
+      ud.appendChild(el('summary', { class: 'ch-h', text: U('universal_title', { n: nf(uni.length, U('universal_title')) }) }));
+      if (av.all.length) { ud.appendChild(el('p', { class: 'ch-usub', text: U('avoid_title') })); ud.appendChild(list(av.all)); }
+      if (ex.all.length) { ud.appendChild(el('p', { class: 'ch-usub', text: U('extras_title') })); ud.appendChild(list(ex.all)); }
+      wrap.appendChild(ud);
+    }
 
     if (order.length) {
       var es = el('div', { class: 'ch-block ch-evs', role: 'group', 'aria-labelledby': 'ch-h-ev' });
       es.appendChild(el('h4', { class: 'ch-h', id: 'ch-h-ev', text: U('evidence_title') }));
+      var hidden = order.filter(function (id) { return keys.indexOf(id) < 0; });
+      if (hidden.length) es.appendChild(el('p', { class: 'ch-keynote', text: U('key_note') }));
       var grid = el('div', { class: 'ch-grid', id: 'ch-grid' });
-      var FIRST = 6, expanded = false;
-      order.forEach(function (id, i) { var c = evidenceCard(id); if (c) { if (i >= FIRST) { c.hidden = true; c.classList.add('ch-extra-card'); } grid.appendChild(c); } });
+      var expanded = false;
+      order.forEach(function (id) { var c = evidenceCard(id); if (c) { if (keys.indexOf(id) < 0) { c.hidden = true; c.classList.add('ch-extra-card'); } grid.appendChild(c); } });
       es.appendChild(grid);
-      if (order.length > FIRST) {
+      if (hidden.length) {
         var mb = el('button', { type: 'button', class: 'ch-btn ghost ch-more', 'data-more': '', 'aria-expanded': 'false', 'aria-controls': 'ch-grid',
           onclick: function () {
             expanded = !expanded;
@@ -607,8 +683,10 @@
       var lg = D.notes.confidence_legend || {};
       var leg = el('div', { class: 'ch-legend', role: 'note', 'aria-label': U('legend_title') });
       ['strong', 'tentative', 'measured'].forEach(function (k) { if (hasText(lg[k])) leg.appendChild(T('p', '', lg[k])); });
+      if (hasText(D.notes.untested)) leg.appendChild(T('p', '', D.notes.untested));
       if (hasText(D.notes.ranges)) leg.appendChild(T('p', '', D.notes.ranges));
       if (hasText(D.notes.scope)) leg.appendChild(T('p', '', D.notes.scope));
+      if (hasText(D.notes.source)) leg.appendChild(T('p', '', D.notes.source));
       es.appendChild(leg);
       wrap.appendChild(es);
     }
@@ -634,7 +712,7 @@
     var base = mount.getAttribute('data-src') || 'assets/data/';
     mount.classList.add('ch');
     mount.setAttribute('aria-busy', 'true');
-    Promise.all([fetchJSON(base + 'chooser.json'), fetchJSON(base + 'evidence.json')]).then(function (r) {
+    Promise.all([fetchJSON(base + 'chooser.json' + VQ), fetchJSON(base + 'evidence.json' + VQ)]).then(function (r) {
       D = Core.normalize(r[0], r[1]);
       G.AnyRAGChooser = { data: D, state: function () { return state; } };
       var fromHash = readHash();

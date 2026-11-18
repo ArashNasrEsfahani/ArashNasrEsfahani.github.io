@@ -8,8 +8,8 @@
     "fa": "کاربران چه نوع پرسش‌هایی مطرح خواهند کرد؟"
    },
    "help": {
-    "en": "T1: the answer sits in one passage. T2: several parts of one document must be combined. T3: at least two documents must be combined.",
-    "fa": "T1: پاسخ در یک بخش متن است. T2: باید چند بخش از یک سند را کنار هم گذاشت. T3: باید دست‌کم دو سند را کنار هم گذاشت."
+    "en": "Pick the kind that most of your questions are: is the answer in one passage, spread over one document, or spread over several documents?",
+    "fa": "نوعی را انتخاب کنید که بیشتر پرسش‌هایتان از آن نوع‌اند: پاسخ در یک بخش متن است، در چند جای یک سند، یا در چند سند؟"
    },
    "options": [
     {
@@ -77,8 +77,8 @@
     {
      "id": "both",
      "label": {
-      "en": "Both languages, each question in its documents' language",
-      "fa": "هر دو زبان، هر پرسش به زبان اسناد خودش"
+      "en": "Persian and English collections, each asked in its own language",
+      "fa": "اسناد فارسی و اسناد انگلیسی، هر کدام با پرسش‌هایی به زبان خودش"
      }
     },
     {
@@ -100,33 +100,45 @@
   {
    "id": "q3",
    "prompt": {
-    "en": "How much evidence text may the reader see per question?",
-    "fa": "مدل پاسخ‌گو برای هر پرسش چه مقدار از متن شواهد را می‌تواند ببیند؟"
+    "en": "How much evidence text may the answering model see per question?",
+    "fa": "مدل پاسخ‌گو برای هر پرسش چه مقدار متن شواهد را می‌تواند ببیند؟"
    },
    "help": {
-    "en": "Token figures are the mean prompt of plain hybrid retrieval for the paper's primary reader; Persian costs about 1.8 times as many tokens per character.",
-    "fa": "عددهای توکن میانگین طول پرامپت در بازیابی ترکیبیِ ساده برای مدل پاسخ‌گوی اصلی مقاله است. هر کاراکتر فارسی حدود ۱٫۸ برابر کاراکتر انگلیسی توکن مصرف می‌کند."
+    "en": "The answering model is the LLM that writes the answer. Token figures are the mean prompt of plain hybrid retrieval for the paper's primary reader; Persian costs about 1.8 times as many tokens per character.",
+    "fa": "مدل پاسخ‌گو همان LLM است که پاسخ را می‌نویسد. عددهای توکن میانگین طول پرامپت در بازیابی ترکیبیِ ساده برای مدل پاسخ‌گوی اصلی مقاله است. هر کاراکتر فارسی حدود ۱٫۸ برابر کاراکتر انگلیسی توکن مصرف می‌کند."
    },
    "options": [
     {
      "id": "tight",
      "label": {
-      "en": "Tight: about 3,000 characters (about 860 tokens in English, 1,420 in Persian)",
-      "fa": "کم: حدود ۳٬۰۰۰ کاراکتر (حدود ۸۶۰ توکن در انگلیسی و ۱٬۴۲۰ در فارسی)"
+      "en": "Tight: about 3,000 characters",
+      "fa": "کم: حدود ۳٬۰۰۰ کاراکتر"
+     },
+     "hint": {
+      "en": "About 860 tokens in English, 1,420 in Persian",
+      "fa": "حدود ۸۶۰ توکن در انگلیسی و ۱٬۴۲۰ توکن در فارسی"
      }
     },
     {
      "id": "moderate",
      "label": {
-      "en": "Moderate: about 6,000 characters (about 1,530 tokens in English, 2,660 in Persian)",
-      "fa": "متوسط: حدود ۶٬۰۰۰ کاراکتر (حدود ۱٬۵۳۰ توکن در انگلیسی و ۲٬۶۶۰ در فارسی)"
+      "en": "Moderate: about 6,000 characters",
+      "fa": "متوسط: حدود ۶٬۰۰۰ کاراکتر"
+     },
+     "hint": {
+      "en": "About 1,530 tokens in English, 2,660 in Persian",
+      "fa": "حدود ۱٬۵۳۰ توکن در انگلیسی و ۲٬۶۶۰ توکن در فارسی"
      }
     },
     {
      "id": "generous",
      "label": {
-      "en": "Generous: 15,500 characters or more (about 3,680 tokens in English, 6,530 in Persian)",
-      "fa": "زیاد: ۱۵٬۵۰۰ کاراکتر یا بیشتر (حدود ۳٬۶۸۰ توکن در انگلیسی و ۶٬۵۳۰ در فارسی)"
+      "en": "Generous: 15,500 characters or more",
+      "fa": "زیاد: ۱۵٬۵۰۰ کاراکتر یا بیشتر"
+     },
+     "hint": {
+      "en": "About 3,680 tokens in English, 6,530 in Persian",
+      "fa": "حدود ۳٬۶۸۰ توکن در انگلیسی و ۶٬۵۳۰ توکن در فارسی"
      }
     },
     {
@@ -146,7 +158,7 @@
    },
    "help": {
     "en": "Median latencies in the paper: hybrid 1.8 s, with reranker 3.2 s, with an LLM selection call 4.0 s, search agent 10.5 s (measured under load; only the order is reliable).",
-    "fa": "میانهٔ زمان پاسخ در مقاله: ترکیبی ۱٫۸ ثانیه، با بازرتبه‌ساز ۳٫۲ ثانیه، با فراخوانی گزینش با LLM ۴٫۰ ثانیه، عامل جست‌وجو ۱۰٫۵ ثانیه (اندازه‌گیری زیر بار؛ فقط ترتیب این اعداد قابل اتکاست)."
+    "fa": "میانهٔ زمان پاسخ در مقاله: ترکیبی ۱٫۸ ثانیه، با بازرتبه‌ساز ۳٫۲ ثانیه، با فراخوانی گزینش با LLM ۴٫۰ ثانیه، عامل جست‌وجو ۱۰٫۵ ثانیه (اندازه‌گیری در شرایط بار همزمان؛ فقط ترتیب این اعداد قابل اتکاست)."
    },
    "options": [
     {
@@ -186,8 +198,8 @@
     "fa": "می‌توانید بازرتبه‌ساز cross-encoder را روی GPU اجرا کنید؟"
    },
    "help": {
-    "en": "The paper's reranker (bge-reranker-v2-m3) runs locally and uses no LLM tokens.",
-    "fa": "بازرتبه‌ساز مقاله (bge-reranker-v2-m3) به‌صورت محلی اجرا می‌شود و توکن LLM مصرف نمی‌کند."
+    "en": "A cross-encoder reranker is a small model that re-scores the top 50 candidate passages for each question. The paper's (bge-reranker-v2-m3) took about 0.6 s per search on a laptop GPU and uses no LLM tokens.",
+    "fa": "بازرتبه‌ساز cross-encoder مدل کوچکی است که به ۵۰ نامزد برتر هر پرسش دوباره امتیاز می‌دهد. بازرتبه‌ساز مقاله (bge-reranker-v2-m3) روی GPU لپ‌تاپ برای هر جست‌وجو حدود ۰٫۶ ثانیه زمان برد و توکن LLM مصرف نمی‌کند."
    },
    "options": [
     {
@@ -220,8 +232,8 @@
     "fa": "فراخوانی‌های اضافی LLM برای هر پرسش قابل قبول است؟"
    },
    "help": {
-    "en": "A selection call roughly doubles the tokens per question; a search agent uses about four times as many.",
-    "fa": "فراخوانی گزینش توکن هر پرسش را تقریباً دو برابر می‌کند؛ عامل جست‌وجو حدود چهار برابر ترکیبیِ ساده توکن مصرف می‌کند."
+    "en": "One extra call means an LLM selection call that picks the passages for the answer; it roughly doubles the tokens per question. Several calls means a search agent that searches again; it uses about four times as many.",
+    "fa": "یک فراخوانی اضافه یعنی فراخوانی گزینش با LLM که بخش‌های لازم برای پاسخ را انتخاب می‌کند؛ توکن هر پرسش را تقریباً دو برابر می‌کند. چند فراخوانی یعنی عاملی که چند دور جست‌وجو می‌کند؛ حدود چهار برابر ترکیبیِ ساده توکن مصرف می‌کند."
    },
    "options": [
     {
@@ -359,7 +371,12 @@
       "fa": "در برابر جست‌وجوی معنایی به‌تنهایی"
      }
     }
-   ]
+   ],
+   "key": null,
+   "summary": {
+    "en": "Hybrid retrieval (BM25 plus dense)",
+    "fa": "بازیابی ترکیبی (BM25 و جست‌وجوی معنایی)"
+   }
   },
   "ch.cross": {
    "slot": "channels",
@@ -387,7 +404,12 @@
       "fa": "ادغام در برابر جست‌وجوی معنایی به‌تنهایی"
      }
     }
-   ]
+   ],
+   "key": "g-xl-bm25",
+   "summary": {
+    "en": "Dense retrieval, with BM25 only fused into it,",
+    "fa": "جست‌وجوی معنایی همراه با BM25 که فقط در ادغام به کار می‌رود،"
+   }
   },
   "ck.1000": {
    "slot": "chunking",
@@ -415,7 +437,8 @@
       "fa": "در برابر قطعه‌های ۵۰۰ کاراکتری"
      }
     }
-   ]
+   ],
+   "key": null
   },
   "rr.none_t1": {
    "slot": "reranking_or_selection",
@@ -435,7 +458,12 @@
       "fa": ""
      }
     }
-   ]
+   ],
+   "key": "g-t1",
+   "summary": {
+    "en": "with no reranker or selection call",
+    "fa": "بدون بازرتبه‌ساز و فراخوانی گزینش،"
+   }
   },
   "rr.ce": {
    "slot": "reranking_or_selection",
@@ -462,6 +490,11 @@
    "note": {
     "en": "The suggested default: no LLM tokens, and ahead of plain hybrid in all nine pairings of reader draws.",
     "fa": "گزینهٔ پیش‌فرض پیشنهادی: توکن LLM مصرف نمی‌کند و در هر نُه جفت از اجراهای مدل پاسخ‌گو از ترکیبیِ ساده جلوتر بود."
+   },
+   "key": "ce-vs-hybrid",
+   "summary": {
+    "en": "with a cross-encoder reranker",
+    "fa": "با بازرتبه‌ساز cross-encoder"
    }
   },
   "rr.ce_xl": {
@@ -486,6 +519,11 @@
    "note": {
     "en": "Even so, expect 15 to 18 fewer correct answers than with same-language questions (53–54 against 69–71 of 90).",
     "fa": "با این حال، انتظار داشته باشید پاسخ‌های درست ۱۵ تا ۱۸ مورد کمتر از حالتی باشد که پرسش و اسناد هم‌زبان‌اند (۵۳–۵۴ در برابر ۶۹–۷۱ از ۹۰)."
+   },
+   "key": "g-xl-fusion",
+   "summary": {
+    "en": "and a cross-encoder reranker after the fusion",
+    "fa": "و پس از آن بازرتبه‌ساز cross-encoder"
    }
   },
   "rr.sel": {
@@ -520,6 +558,50 @@
    "note": {
     "en": "About doubles the LLM tokens per question; its value fades above 10,000 characters.",
     "fa": "توکن LLM هر پرسش را تقریباً دو برابر می‌کند؛ سودش بالای ۱۰٬۰۰۰ کاراکتر کم‌رنگ می‌شود."
+   },
+   "key": "g-tight-sel3000",
+   "summary": {
+    "en": "with one LLM selection call over the fused candidates",
+    "fa": "همراه با یک فراخوانی گزینش با LLM روی نامزدهای ادغام‌شده"
+   }
+  },
+  "rr.sel_6000": {
+   "slot": "reranking_or_selection",
+   "text": {
+    "en": "One LLM selection call over the fused candidates (no GPU needed)",
+    "fa": "یک فراخوانی گزینش با LLM روی نامزدهای ادغام‌شده (بی‌نیاز از GPU)"
+   },
+   "evidence": [
+    "g-nogpu",
+    "g-tight-sel6000",
+    "selection-6000",
+    "g-tight-sel3000",
+    "selection-budgets"
+   ],
+   "confidence": [
+    {
+     "level": "tentative",
+     "scope": {
+      "en": "at 6,000 characters, your budget",
+      "fa": "در ۶٬۰۰۰ کاراکتر، یعنی بودجهٔ شما"
+     }
+    },
+    {
+     "level": "strong",
+     "scope": {
+      "en": "only at 3,000 characters, one run",
+      "fa": "فقط در ۳٬۰۰۰ کاراکتر، یک اجرا"
+     }
+    }
+   ],
+   "note": {
+    "en": "About doubles the LLM tokens per question; its value fades above 10,000 characters.",
+    "fa": "توکن LLM هر پرسش را تقریباً دو برابر می‌کند؛ سودش بالای ۱۰٬۰۰۰ کاراکتر کم‌رنگ می‌شود."
+   },
+   "key": "selection-6000",
+   "summary": {
+    "en": "with one LLM selection call over the fused candidates",
+    "fa": "همراه با یک فراخوانی گزینش با LLM روی نامزدهای ادغام‌شده"
    }
   },
   "rr.loose": {
@@ -541,7 +623,12 @@
       "fa": ""
      }
     }
-   ]
+   ],
+   "key": "g-loose",
+   "summary": {
+    "en": "with no reranker or selection call needed",
+    "fa": "بی‌نیاز از بازرتبه‌ساز و فراخوانی گزینش،"
+   }
   },
   "rr.ce_fast": {
    "slot": "reranking_or_selection",
@@ -562,7 +649,12 @@
       "fa": ""
      }
     }
-   ]
+   ],
+   "key": "g-latency",
+   "summary": {
+    "en": "in one pass, with a cross-encoder only if it is fast enough on your hardware",
+    "fa": "در یک مرحله، با بازرتبه‌ساز cross-encoder فقط اگر روی سخت‌افزار شما به‌قدر کافی سریع باشد،"
+   }
   },
   "rr.none_fast": {
    "slot": "reranking_or_selection",
@@ -582,7 +674,12 @@
       "fa": ""
      }
     }
-   ]
+   ],
+   "key": "g-latency",
+   "summary": {
+    "en": "in one fast pass, without a reranker or selection call",
+    "fa": "در یک مرحلهٔ سریع، بدون بازرتبه‌ساز و فراخوانی گزینش،"
+   }
   },
   "rr.none_limited": {
    "slot": "reranking_or_selection",
@@ -606,6 +703,11 @@
    "note": {
     "en": "The evidence favours a choosing step at tight budgets; see the trade-off below.",
     "fa": "شواهد در بودجه‌های محدود به نفع گام گزینش است؛ بده‌بستان را در ادامه ببینید."
+   },
+   "key": "g-nogpu",
+   "summary": {
+    "en": "without a reranker or selection call",
+    "fa": "بدون بازرتبه‌ساز و فراخوانی گزینش،"
    }
   },
   "rr.xl_nogpu": {
@@ -630,6 +732,37 @@
    "note": {
     "en": "An LLM selection call is the general no-GPU option, but it was not tested on translated questions.",
     "fa": "فراخوانی گزینش با LLM گزینهٔ عمومی بدون GPU است، اما روی پرسش‌های ترجمه‌شده آزموده نشده است."
+   },
+   "key": "g-xl-fusion",
+   "summary": {
+    "en": "and no choosing step tested for this case",
+    "fa": "و بدون گام گزینشی که برای این حالت آزموده شده باشد،"
+   }
+  },
+  "bd.tight": {
+   "slot": "budget",
+   "text": {
+    "en": "About 3,000 characters, kept small only because a selection call is in place",
+    "fa": "حدود ۳٬۰۰۰ کاراکتر؛ فقط به این دلیل می‌توان آن را کوچک نگه داشت که فراخوانی گزینش در کار است"
+   },
+   "evidence": [
+    "g-tight-sel3000",
+    "selection-budgets",
+    "budget-curves"
+   ],
+   "confidence": [
+    {
+     "level": "strong",
+     "scope": {
+      "en": "selection call at 3,000, one run",
+      "fa": "فراخوانی گزینش در ۳٬۰۰۰ کاراکتر، یک اجرا"
+     }
+    }
+   ],
+   "key": "g-tight-sel3000",
+   "summary": {
+    "en": "at about 3,000 characters",
+    "fa": "و بودجهٔ حدود ۳٬۰۰۰ کاراکتر"
    }
   },
   "bd.tight_ce": {
@@ -655,28 +788,12 @@
    "note": {
     "en": "At 3,000 characters the reranked pipeline scored 56 of 90 against 49–51 for plain hybrid (one run).",
     "fa": "در ۳٬۰۰۰ کاراکتر، پایپ‌لاین با بازرتبه‌ساز ۵۶ از ۹۰ گرفت و ترکیبیِ ساده ۴۹–۵۱ (یک اجرا)."
-   }
-  },
-  "bd.tight": {
-   "slot": "budget",
-   "text": {
-    "en": "About 3,000 characters, kept small only because a selection call is in place",
-    "fa": "حدود ۳٬۰۰۰ کاراکتر؛ فقط به این دلیل می‌توان آن را کوچک نگه داشت که فراخوانی گزینش در کار است"
    },
-   "evidence": [
-    "g-tight-sel3000",
-    "selection-budgets",
-    "budget-curves"
-   ],
-   "confidence": [
-    {
-     "level": "strong",
-     "scope": {
-      "en": "selection call at 3,000, one run",
-      "fa": "فراخوانی گزینش در ۳٬۰۰۰ کاراکتر، یک اجرا"
-     }
-    }
-   ]
+   "key": "g-tight-ce",
+   "summary": {
+    "en": "at about 3,000 characters",
+    "fa": "و بودجهٔ حدود ۳٬۰۰۰ کاراکتر"
+   }
   },
   "bd.moderate": {
    "slot": "budget",
@@ -697,7 +814,12 @@
       "fa": ""
      }
     }
-   ]
+   ],
+   "key": "budget-curves",
+   "summary": {
+    "en": "at about 6,000 characters",
+    "fa": "و بودجهٔ حدود ۶٬۰۰۰ کاراکتر"
+   }
   },
   "bd.generous": {
    "slot": "budget",
@@ -719,7 +841,12 @@
       "fa": ""
      }
     }
-   ]
+   ],
+   "key": "g-loose",
+   "summary": {
+    "en": "at 15,500 characters or more",
+    "fa": "و بودجهٔ ۱۵٬۵۰۰ کاراکتر یا بیشتر"
+   }
   },
   "bd.raise": {
    "slot": "budget",
@@ -740,7 +867,12 @@
       "fa": ""
      }
     }
-   ]
+   ],
+   "key": "g-nogpu",
+   "summary": {
+    "en": "with the budget raised toward 15,500 characters",
+    "fa": "و بودجه‌ای که تا نزدیک ۱۵٬۵۰۰ کاراکتر بالا برده شود"
+   }
   },
   "bd.tight_t1": {
    "slot": "budget",
@@ -760,7 +892,12 @@
       "fa": ""
      }
     }
-   ]
+   ],
+   "key": "g-t1",
+   "summary": {
+    "en": "at about 3,000 characters",
+    "fa": "و بودجهٔ حدود ۳٬۰۰۰ کاراکتر"
+   }
   },
   "bd.modest_t1": {
    "slot": "budget",
@@ -779,7 +916,12 @@
       "fa": ""
      }
     }
-   ]
+   ],
+   "key": "g-t1",
+   "summary": {
+    "en": "at a modest budget",
+    "fa": "و بودجه‌ای متوسط"
+   }
   },
   "ag.none": {
    "slot": "agent",
@@ -799,7 +941,12 @@
       "fa": ""
      }
     }
-   ]
+   ],
+   "key": null,
+   "summary": {
+    "en": "",
+    "fa": ""
+   }
   },
   "ag.none_latency": {
    "slot": "agent",
@@ -819,7 +966,12 @@
       "fa": ""
      }
     }
-   ]
+   ],
+   "key": null,
+   "summary": {
+    "en": "",
+    "fa": ""
+   }
   },
   "ag.none_budget": {
    "slot": "agent",
@@ -839,58 +991,11 @@
       "fa": ""
      }
     }
-   ]
-  },
-  "ag.hybrid_tool": {
-   "slot": "agent",
-   "text": {
-    "en": "Optional: an iterative search agent (up to five searches) whose search tool is the hybrid index plus a cross-encoder; the agent needs the reranker even though the single-pass pack at this budget does not",
-    "fa": "اختیاری: عامل جست‌وجوی تکرارشونده (تا پنج جست‌وجو) که ابزارش نمایهٔ ترکیبی همراه با بازرتبه‌ساز cross-encoder است. در این بودجه بستهٔ تک‌مرحله‌ای به بازرتبه‌ساز نیاز ندارد، اما عامل نیاز دارد."
-   },
-   "evidence": [
-    "g-t3",
-    "agents",
-    "agents-language",
-    "g-agents"
    ],
-   "confidence": [
-    {
-     "level": "tentative",
-     "scope": {
-      "en": "77 against 69–71 for the reranked pipeline, not significant",
-      "fa": "۷۷ در برابر ۶۹–۷۱ برای پایپ‌لاین با بازرتبه‌ساز، معنادار نیست"
-     }
-    }
-   ],
-   "note": {
-    "en": "About four times the tokens of plain hybrid and a median of 10.5 s; its gain lies mostly in cross-document and English questions.",
-    "fa": "حدود چهار برابر توکن ترکیبیِ ساده و میانهٔ زمان پاسخ ۱۰٫۵ ثانیه؛ بیشتر سودش در پرسش‌های میان‌سندی و پرسش‌های انگلیسی است."
-   }
-  },
-  "ag.hybrid_mix": {
-   "slot": "agent",
-   "text": {
-    "en": "Possibly, as an extrapolation: an iterative search agent over the hybrid index with a cross-encoder as its search tool, if many of your questions are cross-document",
-    "fa": "شاید، به‌عنوان برون‌یابی: اگر بسیاری از پرسش‌هایتان میان‌سندی‌اند، عامل جست‌وجوی تکرارشونده روی نمایهٔ ترکیبی با cross-encoder در نقش ابزار جست‌وجو"
-   },
-   "evidence": [
-    "g-t3",
-    "agents",
-    "agents-language",
-    "g-agents"
-   ],
-   "confidence": [
-    {
-     "level": "tentative",
-     "scope": {
-      "en": "the guide recommends the agent for cross-document questions only; extending it to a mix is our extrapolation",
-      "fa": "جدول راهنما عامل را فقط برای پرسش‌های میان‌سندی توصیه می‌کند؛ گسترش این توصیه به ترکیبی از انواع پرسش برون‌یابی خود ماست"
-     }
-    }
-   ],
-   "note": {
-    "en": "Over all 90 questions the agent scored 77 against 69–71 for the reranked pipeline (not significant), with its gain mostly on cross-document and English questions; about four times the tokens and a median of 10.5 s.",
-    "fa": "روی همهٔ ۹۰ پرسش، عامل ۷۷ پاسخ درست داد و پایپ‌لاین با بازرتبه‌ساز ۶۹–۷۱ (معنادار نیست)؛ بیشتر سودِ عامل در پرسش‌های میان‌سندی و پرسش‌های انگلیسی بود. هزینه‌اش حدود چهار برابر توکن و میانهٔ زمان پاسخ ۱۰٫۵ ثانیه است."
+   "key": "g-t3",
+   "summary": {
+    "en": "",
+    "fa": ""
    }
   },
   "ag.hybrid": {
@@ -917,49 +1022,272 @@
    "note": {
     "en": "About four times the tokens of plain hybrid and a median of 10.5 s; its gain lies mostly in cross-document and English questions.",
     "fa": "حدود چهار برابر توکن ترکیبیِ ساده و میانهٔ زمان پاسخ ۱۰٫۵ ثانیه؛ بیشتر سودش در پرسش‌های میان‌سندی و پرسش‌های انگلیسی است."
+   },
+   "key": "g-t3",
+   "summary": {
+    "en": "; if about 10 s per answer is acceptable, an iterative search agent is optional",
+    "fa": "؛ اگر حدود ۱۰ ثانیه برای هر پاسخ پذیرفتنی است، عامل جست‌وجوی تکرارشونده اختیاری است"
    }
   },
-  "ag.none_xl": {
+  "ag.hybrid_tool": {
    "slot": "agent",
    "text": {
-    "en": "No agent: search agents were not tested on questions in another language, and the only GPU-free agent tested (BM25 tool, which collapses cross-lingually) had no lead over the reranker once memory-answerable questions were removed",
-    "fa": "بدون عامل: عامل‌های جست‌وجو روی پرسش‌هایی به زبان دیگر آزموده نشده‌اند. تنها عامل بدون GPU که آزموده شد با ابزار BM25 کار می‌کرد و BM25 در حالت بین‌زبانی افت شدید دارد؛ این عامل پس از کنار گذاشتن پرسش‌های پاسخ‌پذیر از حافظه برتری‌ای بر بازرتبه‌ساز نداشت"
+    "en": "Optional: an iterative search agent (up to five searches) whose search tool is the hybrid index plus a cross-encoder; the agent needs the reranker even though the single-pass pack at this budget does not",
+    "fa": "اختیاری: عامل جست‌وجوی تکرارشونده (تا پنج جست‌وجو) که ابزارش نمایهٔ ترکیبی همراه با بازرتبه‌ساز cross-encoder است. در این بودجه بستهٔ تک‌مرحله‌ای به بازرتبه‌ساز نیاز ندارد، اما عامل نیاز دارد."
    },
    "evidence": [
-    "g-agents",
+    "g-t3",
+    "agents",
+    "agents-language",
+    "g-agents"
+   ],
+   "confidence": [
+    {
+     "level": "tentative",
+     "scope": {
+      "en": "77 against 69–71 for the reranked pipeline, not significant",
+      "fa": "۷۷ در برابر ۶۹–۷۱ برای پایپ‌لاین با بازرتبه‌ساز، معنادار نیست"
+     }
+    }
+   ],
+   "note": {
+    "en": "About four times the tokens of plain hybrid and a median of 10.5 s; its gain lies mostly in cross-document and English questions.",
+    "fa": "حدود چهار برابر توکن ترکیبیِ ساده و میانهٔ زمان پاسخ ۱۰٫۵ ثانیه؛ بیشتر سودش در پرسش‌های میان‌سندی و پرسش‌های انگلیسی است."
+   },
+   "key": "g-t3",
+   "summary": {
+    "en": "; if about 10 s per answer is acceptable, an iterative search agent is optional; it needs the reranker as its search tool",
+    "fa": "؛ اگر حدود ۱۰ ثانیه برای هر پاسخ پذیرفتنی است، عامل جست‌وجوی تکرارشونده اختیاری است؛ این عامل بازرتبه‌ساز را به‌عنوان ابزار جست‌وجو لازم دارد"
+   }
+  },
+  "ag.hybrid_mix": {
+   "slot": "agent",
+   "text": {
+    "en": "Possibly, as an extrapolation: an iterative search agent over the hybrid index with a cross-encoder as its search tool, if many of your questions are cross-document",
+    "fa": "شاید، به‌عنوان برون‌یابی: اگر بسیاری از پرسش‌هایتان میان‌سندی‌اند، عامل جست‌وجوی تکرارشونده روی نمایهٔ ترکیبی با cross-encoder در نقش ابزار جست‌وجو را هم در نظر بگیرید"
+   },
+   "evidence": [
+    "g-t3",
+    "agents",
+    "agents-language",
+    "g-agents"
+   ],
+   "confidence": [
+    {
+     "level": "tentative",
+     "scope": {
+      "en": "the guide recommends the agent for cross-document questions only; extending it to a mix is our extrapolation",
+      "fa": "جدول راهنما عامل را فقط برای پرسش‌های میان‌سندی توصیه می‌کند؛ گسترش این توصیه به ترکیبی از انواع پرسش برون‌یابی خود ماست"
+     }
+    }
+   ],
+   "note": {
+    "en": "Over all 90 questions the agent scored 77 against 69–71 for the reranked pipeline (not significant), with its gain mostly on cross-document and English questions; about four times the tokens and a median of 10.5 s.",
+    "fa": "در کل ۹۰ پرسش، عامل ۷۷ پاسخ درست داد و پایپ‌لاین با بازرتبه‌ساز ۶۹–۷۱ (معنادار نیست)؛ بیشتر سودِ عامل در پرسش‌های میان‌سندی و پرسش‌های انگلیسی بود. هزینه‌اش حدود چهار برابر توکن و میانهٔ زمان پاسخ ۱۰٫۵ ثانیه است."
+   },
+   "key": "g-t3",
+   "summary": {
+    "en": "; if many of your questions are cross-document, consider an iterative search agent too",
+    "fa": "؛ اگر بسیاری از پرسش‌هایتان میان‌سندی‌اند، عامل جست‌وجوی تکرارشونده را هم در نظر بگیرید"
+   }
+  },
+  "ag.hybrid_xl": {
+   "slot": "agent",
+   "text": {
+    "en": "Not tested for your case: search agents were tested only on questions in the documents' language. If you try one on your own questions, give it the hybrid index with the reranker, not BM25 alone",
+    "fa": "برای حالت شما آزموده نشده است: عامل‌های جست‌وجو فقط روی پرسش‌هایی به زبان خود اسناد آزموده شدند. اگر عاملی را روی پرسش‌های خودتان می‌آزمایید، نمایهٔ ترکیبی همراه با بازرتبه‌ساز را ابزار جست‌وجویش قرار دهید، نه BM25 به‌تنهایی"
+   },
+   "evidence": [
+    "crossling-swap",
     "g-xl-bm25",
+    "agents"
+   ],
+   "confidence": [
+    {
+     "level": "untested",
+     "scope": {
+      "en": "not tested cross-lingually",
+      "fa": "در حالت بین‌زبانی آزموده نشده است"
+     }
+    },
+    {
+     "level": "strong",
+     "scope": {
+      "en": "BM25 alone collapses on questions in another language",
+      "fa": "BM25 به‌تنهایی با پرسش‌هایی به زبان دیگر افت شدید دارد"
+     }
+    }
+   ],
+   "key": "crossling-swap",
+   "summary": {
+    "en": "; no search agent was tested on questions in another language",
+    "fa": "؛ هیچ عامل جست‌وجویی روی پرسش‌هایی به زبان دیگر آزموده نشده است"
+   }
+  },
+  "ag.bm25_en": {
+   "slot": "agent",
+   "text": {
+    "en": "Optional: an iterative search agent with a BM25 search tool (no GPU needed, up to five searches)",
+    "fa": "اختیاری: عامل جست‌وجوی تکرارشونده با ابزار جست‌وجوی BM25 (بی‌نیاز از GPU، تا پنج جست‌وجو)"
+   },
+   "evidence": [
+    "agent-bm25-nogpu",
+    "g-agents",
+    "agents-language",
     "agents"
    ],
    "confidence": [
     {
      "level": "tentative",
      "scope": {
-      "en": "",
-      "fa": ""
+      "en": "73 against 68–69 for the selection call and 62–63 for plain hybrid, within the noise",
+      "fa": "۷۳ در برابر ۶۸–۶۹ برای فراخوانی گزینش و ۶۲–۶۳ برای ترکیبیِ ساده، در حد نوسان"
+     }
+    },
+    {
+     "level": "measured",
+     "scope": {
+      "en": "not in the guide table's no-GPU row",
+      "fa": "در ردیف «بدون GPU» جدول راهنما نیست"
      }
     }
-   ]
+   ],
+   "note": {
+    "en": "About four times the tokens of plain hybrid (9,285 per question, 3.6 calls) and a median of 8.8 s; its lead over the reranked pipeline lay in the questions the reader answers from memory.",
+    "fa": "حدود چهار برابر ترکیبیِ ساده توکن مصرف می‌کند (۹٬۲۸۵ توکن و ۳٫۶ فراخوانی برای هر پرسش) و میانهٔ زمان پاسخش ۸٫۸ ثانیه است. برتری‌اش بر پایپ‌لاین با بازرتبه‌ساز در پرسش‌هایی بود که مدل پاسخ‌گو از حافظه پاسخ می‌دهد."
+   },
+   "key": "agent-bm25-nogpu",
+   "summary": {
+    "en": "; if a median of 8.8 s per answer is acceptable, an iterative search agent with a BM25 tool is an optional extra",
+    "fa": "؛ اگر میانهٔ ۸٫۸ ثانیه برای هر پاسخ پذیرفتنی است، عامل جست‌وجوی تکرارشونده با ابزار BM25 گزینه‌ای اختیاری است"
+   }
   },
-  "ag.nogpu": {
+  "ag.bm25_en_mix": {
    "slot": "agent",
    "text": {
-    "en": "Not recommended without a GPU: the GPU-free agent tested (BM25 tool only) showed no lead over the reranker once memory-answerable questions were removed",
-    "fa": "بدون GPU توصیه نمی‌شود: عامل بدون GPU که آزموده شد (فقط با ابزار BM25) پس از کنار گذاشتن پرسش‌های پاسخ‌پذیر از حافظه برتری‌ای بر بازرتبه‌ساز نداشت"
+    "en": "Possibly, as an extrapolation: an iterative search agent with a BM25 search tool (no GPU needed), if many of your questions are cross-document",
+    "fa": "شاید، به‌عنوان برون‌یابی: اگر بسیاری از پرسش‌هایتان میان‌سندی‌اند، عامل جست‌وجوی تکرارشونده با ابزار جست‌وجوی BM25 (بی‌نیاز از GPU) را هم در نظر بگیرید"
    },
    "evidence": [
+    "agent-bm25-nogpu",
     "g-agents",
-    "agents",
-    "agents-language"
+    "agents-language",
+    "agents"
    ],
    "confidence": [
     {
      "level": "tentative",
      "scope": {
-      "en": "",
-      "fa": ""
+      "en": "the paper's no-GPU options are a larger budget or a selection call; this agent for a mix of questions is our extrapolation",
+      "fa": "گزینه‌های بدون GPU در مقاله بودجهٔ بزرگ‌تر یا فراخوانی گزینش‌اند؛ این عامل برای ترکیبی از انواع پرسش برون‌یابی خود ماست"
      }
     }
-   ]
+   ],
+   "note": {
+    "en": "Over all 90 questions it scored 73 against 68–69 for the selection call and 62–63 for plain hybrid, within the noise; about four times the tokens and a median of 8.8 s.",
+    "fa": "در کل ۹۰ پرسش، این عامل ۷۳ پاسخ درست داد، فراخوانی گزینش ۶۸–۶۹ و ترکیبیِ ساده ۶۲–۶۳؛ این فاصله‌ها در حد نوسان‌اند. هزینه‌اش حدود چهار برابر توکن و میانهٔ زمان پاسخ ۸٫۸ ثانیه است."
+   },
+   "key": "agent-bm25-nogpu",
+   "summary": {
+    "en": "; if many of your questions are cross-document, consider an iterative search agent with a BM25 tool too",
+    "fa": "؛ اگر بسیاری از پرسش‌هایتان میان‌سندی‌اند، عامل جست‌وجوی تکرارشونده با ابزار BM25 را هم در نظر بگیرید"
+   }
+  },
+  "ag.nogpu_fa": {
+   "slot": "agent",
+   "text": {
+    "en": "Not recommended for Persian documents: the GPU-free agent tested (BM25 search tool) gained nothing over plain hybrid in the Persian half (−2 to −1, against +12 in the English half)",
+    "fa": "برای اسناد فارسی توصیه نمی‌شود. عامل بدون GPU که آزموده شد (با ابزار جست‌وجوی BM25) در نیمهٔ فارسی سودی بر ترکیبیِ ساده نداشت (‎−۲ تا ‎−۱، در برابر ‎+۱۲ در نیمهٔ انگلیسی)"
+   },
+   "evidence": [
+    "agents-language",
+    "agent-bm25-nogpu",
+    "halves"
+   ],
+   "confidence": [
+    {
+     "level": "tentative",
+     "scope": {
+      "en": "the halves differ, p .02 before correction and .25 after Holm",
+      "fa": "دو نیمه متفاوت‌اند: p بدون اصلاح ۰٫۰۲ و p اصلاح‌شده (Holm) ۰٫۲۵"
+     }
+    },
+    {
+     "level": "measured",
+     "scope": {
+      "en": "cause unknown: Persian or the Persian documents",
+      "fa": "علت نامعلوم است: خود زبان فارسی یا اسناد فارسی"
+     }
+    }
+   ],
+   "key": "agents-language",
+   "summary": {
+    "en": "",
+    "fa": ""
+   }
+  },
+  "ag.bm25_lang": {
+   "slot": "agent",
+   "text": {
+    "en": "Depends on the language: for English documents, optionally an iterative search agent with a BM25 search tool (no GPU needed); not for Persian documents, where it gained nothing (−2 to −1 against plain hybrid, +12 in the English half)",
+    "fa": "پاسخ به زبان اسناد بستگی دارد. برای اسناد انگلیسی، عامل جست‌وجوی تکرارشونده با ابزار BM25 (بی‌نیاز از GPU) اختیاری است. برای اسناد فارسی نه: در این اسناد سودی بر ترکیبیِ ساده نداشت (‎−۲ تا ‎−۱، در برابر ‎+۱۲ در نیمهٔ انگلیسی)"
+   },
+   "evidence": [
+    "agents-language",
+    "agent-bm25-nogpu",
+    "g-agents"
+   ],
+   "confidence": [
+    {
+     "level": "tentative",
+     "scope": {
+      "en": "English half only; within the noise over all 90",
+      "fa": "فقط نیمهٔ انگلیسی؛ در کل ۹۰ پرسش در حد نوسان"
+     }
+    }
+   ],
+   "note": {
+    "en": "About four times the tokens of plain hybrid and a median of 8.8 s; its lead over the reranked pipeline lay in the questions the reader answers from memory.",
+    "fa": "حدود چهار برابر ترکیبیِ ساده توکن مصرف می‌کند و میانهٔ زمان پاسخش ۸٫۸ ثانیه است. برتری‌اش بر پایپ‌لاین با بازرتبه‌ساز در پرسش‌هایی بود که مدل پاسخ‌گو از حافظه پاسخ می‌دهد."
+   },
+   "key": "agents-language",
+   "summary": {
+    "en": "; for the English documents only, an iterative search agent with a BM25 tool is optional",
+    "fa": "؛ فقط برای اسناد انگلیسی، عامل جست‌وجوی تکرارشونده با ابزار BM25 اختیاری است"
+   }
+  },
+  "ag.none_xl": {
+   "slot": "agent",
+   "text": {
+    "en": "No agent: search agents were not tested on questions in another language than the documents, and BM25, the only search tool of the GPU-free agent, found complete evidence for only 2 and 8 of 45 such questions",
+    "fa": "بدون عامل: عامل‌های جست‌وجو روی پرسش‌هایی به زبانی غیر از زبان اسناد آزموده نشده‌اند. BM25، تنها ابزار جست‌وجوی عامل بدون GPU، در چنین پرسش‌هایی فقط در ۲ و ۸ مورد از ۴۵ شواهد کامل پیدا کرد"
+   },
+   "evidence": [
+    "crossling-swap",
+    "g-xl-bm25",
+    "agents"
+   ],
+   "confidence": [
+    {
+     "level": "untested",
+     "scope": {
+      "en": "agents not tested cross-lingually",
+      "fa": "عامل‌ها در حالت بین‌زبانی آزموده نشده‌اند"
+     }
+    },
+    {
+     "level": "strong",
+     "scope": {
+      "en": "BM25 alone collapses",
+      "fa": "BM25 به‌تنهایی افت شدید دارد"
+     }
+    }
+   ],
+   "key": "crossling-swap",
+   "summary": {
+    "en": "",
+    "fa": ""
+   }
   },
   "nm.fa": {
    "slot": "normalisation",
@@ -979,7 +1307,8 @@
       "fa": ""
      }
     }
-   ]
+   ],
+   "key": null
   },
   "nm.fa_mixed": {
    "slot": "normalisation",
@@ -999,7 +1328,8 @@
       "fa": ""
      }
     }
-   ]
+   ],
+   "key": "g-fa-norm"
   },
   "nm.en": {
    "slot": "normalisation",
@@ -1016,7 +1346,8 @@
       "fa": "برای انگلیسی آزموده نشده است"
      }
     }
-   ]
+   ],
+   "key": null
   },
   "ex.measure_pack": {
    "slot": "extras",
@@ -1318,7 +1649,7 @@
    "slot": "tradeoffs",
    "text": {
     "en": "You want answers under about 2 s, but combined-fact questions gained from a reranker (T2 23–24 vs 20–21, T3 18–19 vs 14 of 30). Plain hybrid had a median of 1.8 s, with the reranker 3.2 s, measured under load. If the reranker runs fast on your hardware, keep it.",
-    "fa": "می‌خواهید پاسخ زیر حدود ۲ ثانیه آماده شود، اما پرسش‌هایی که چند واقعیت را ترکیب می‌کنند از بازرتبه‌ساز سود بردند (T2: ۲۳–۲۴ در برابر ۲۰–۲۱، T3: ۱۸–۱۹ در برابر ۱۴ از ۳۰). میانهٔ زمان پاسخ ترکیبیِ ساده ۱٫۸ ثانیه بود و با بازرتبه‌ساز ۳٫۲ ثانیه؛ هر دو زیر بار اندازه‌گیری شدند. اگر بازرتبه‌ساز روی سخت‌افزار شما سریع اجرا می‌شود، آن را نگه دارید."
+    "fa": "می‌خواهید پاسخ زیر حدود ۲ ثانیه آماده شود، اما پرسش‌هایی که چند واقعیت را ترکیب می‌کنند از بازرتبه‌ساز سود بردند (T2: ۲۳–۲۴ در برابر ۲۰–۲۱، T3: ۱۸–۱۹ در برابر ۱۴ از ۳۰). میانهٔ زمان پاسخ ترکیبیِ ساده ۱٫۸ ثانیه بود و با بازرتبه‌ساز ۳٫۲ ثانیه؛ هر دو در شرایط بار همزمان اندازه‌گیری شدند. اگر بازرتبه‌ساز روی سخت‌افزار شما سریع اجرا می‌شود، آن را نگه دارید."
    },
    "evidence": [
     "g-latency",
@@ -1446,54 +1777,6 @@
     }
    ]
   },
-  "to.agent_xl": {
-   "slot": "tradeoffs",
-   "text": {
-    "en": "Search agents were not tested on questions in another language than the documents.",
-    "fa": "عامل‌های جست‌وجو روی پرسش‌هایی به زبانی غیر از زبان اسناد آزموده نشده‌اند."
-   },
-   "evidence": [
-    "crossling-swap"
-   ],
-   "confidence": [
-    {
-     "level": "measured",
-     "scope": {
-      "en": "untested",
-      "fa": "آزموده نشده"
-     }
-    }
-   ]
-  },
-  "to.cross_nogpu_sel": {
-   "slot": "tradeoffs",
-   "text": {
-    "en": "You allow an extra LLM call, but a selection call over the fused candidates was not tested on questions in another language than the documents; the only tested fix is a reranker after the fusion. Without one, lean on the dense channel: fusion with BM25 lost its lead over dense (19 against 21 complete Persian packs).",
-    "fa": "شما یک فراخوانی اضافهٔ LLM را می‌پذیرید، اما فراخوانی گزینش روی نامزدهای ادغام‌شده، برای پرسش‌هایی به زبانی غیر از زبان اسناد آزموده نشده است. تنها راه‌حل آزموده بازرتبه‌ساز پس از ادغام است. بدون آن، به کانال معنایی تکیه کنید: ادغام با BM25 برتری‌اش را بر جست‌وجوی معنایی از دست داد (۱۹ در برابر ۲۱ بستهٔ کامل فارسی)."
-   },
-   "evidence": [
-    "g-xl-fusion",
-    "g-xl-bm25",
-    "crossling-swap",
-    "g-nogpu"
-   ],
-   "confidence": [
-    {
-     "level": "tentative",
-     "scope": {
-      "en": "",
-      "fa": ""
-     }
-    },
-    {
-     "level": "measured",
-     "scope": {
-      "en": "selection call untested cross-lingually",
-      "fa": "فراخوانی گزینش در حالت بین‌زبانی آزموده نشده است"
-     }
-    }
-   ]
-  },
   "to.agent_calls_unsure": {
    "slot": "tradeoffs",
    "text": {
@@ -1511,6 +1794,27 @@
      "scope": {
       "en": "",
       "fa": ""
+     }
+    }
+   ]
+  },
+  "to.t3_nogpu": {
+   "slot": "tradeoffs",
+   "text": {
+    "en": "On cross-document questions, the options you can run without a GPU scored 16 of 30 with the selection call (Lex-RAG) and 14 with plain hybrid; the reranker reached 18–19. Over both languages the selection call's lead over plain hybrid is 5 to 7 answers, not significant.",
+    "fa": "در پرسش‌های میان‌سندی، از گزینه‌های بدون GPU، فراخوانی گزینش (Lex-RAG) به ۱۶ پرسش از ۳۰ پاسخ درست داد و ترکیبیِ ساده به ۱۴ پرسش. بازرتبه‌ساز به ۱۸–۱۹ رسید. در مجموع دو زبان، برتری فراخوانی گزینش بر ترکیبیِ ساده ۵ تا ۷ پاسخ است و معنادار نیست."
+   },
+   "evidence": [
+    "frozen-tiers",
+    "g-t3",
+    "frozen-gate"
+   ],
+   "confidence": [
+    {
+     "level": "tentative",
+     "scope": {
+      "en": "30 questions per tier",
+      "fa": "۳۰ پرسش در هر سطح"
      }
     }
    ]
@@ -1537,11 +1841,40 @@
     }
    ]
   },
+  "to.cross_nogpu_sel": {
+   "slot": "tradeoffs",
+   "text": {
+    "en": "You allow an extra LLM call, but a selection call over the fused candidates was not tested on questions in another language than the documents; the only tested fix is a reranker after the fusion. Without one, lean on the dense channel: fusion with BM25 lost its lead over dense (19 against 21 complete Persian packs).",
+    "fa": "شما یک فراخوانی اضافی LLM را می‌پذیرید، اما فراخوانی گزینش روی نامزدهای ادغام‌شده برای پرسش‌هایی به زبانی غیر از زبان اسناد آزموده نشده است. تنها راه‌حل آزموده بازرتبه‌ساز پس از ادغام است. بدون آن، به کانال معنایی تکیه کنید: ادغام با BM25 برتری‌اش را بر جست‌وجوی معنایی از دست داد (۱۹ در برابر ۲۱ بستهٔ کامل فارسی)."
+   },
+   "evidence": [
+    "g-xl-fusion",
+    "g-xl-bm25",
+    "crossling-swap",
+    "g-nogpu"
+   ],
+   "confidence": [
+    {
+     "level": "tentative",
+     "scope": {
+      "en": "",
+      "fa": ""
+     }
+    },
+    {
+     "level": "untested",
+     "scope": {
+      "en": "selection call untested cross-lingually",
+      "fa": "فراخوانی گزینش در حالت بین‌زبانی آزموده نشده است"
+     }
+    }
+   ]
+  },
   "to.cross_fast": {
    "slot": "tradeoffs",
    "text": {
     "en": "Questions in another language lose most without a reranker, which costs latency (median 3.2 s against 1.8 s, under load). Weigh the 15 to 18 answers lost even with it against your time limit.",
-    "fa": "پرسش‌هایی به زبان دیگر بدون بازرتبه‌ساز بیشترین افت را دارند؛ اما بازرتبه‌ساز زمان پاسخ را بالا می‌برد (میانهٔ ۳٫۲ ثانیه در برابر ۱٫۸ ثانیه، زیر بار). ۱۵ تا ۱۸ پاسخی را که حتی با بازرتبه‌ساز از دست می‌رود با محدودیت زمانی خود بسنجید."
+    "fa": "پرسش‌هایی به زبان دیگر بدون بازرتبه‌ساز بیشترین افت را دارند؛ اما بازرتبه‌ساز زمان پاسخ را بالا می‌برد (میانهٔ ۳٫۲ ثانیه در برابر ۱٫۸ ثانیه، در شرایط بار همزمان). ۱۵ تا ۱۸ پاسخی را که حتی با بازرتبه‌ساز از دست می‌رود با محدودیت زمانی خود بسنجید."
    },
    "evidence": [
     "g-xl-fusion",
@@ -2012,7 +2345,67 @@
    }
   },
   {
-   "id": "r17-agent-nogpu",
+   "id": "r17-agent-nogpu-en",
+   "why": {
+    "en": "English, no GPU, cross-document: the BM25 agent as an optional, tentative extra (73 against 68–69 and 62–63).",
+    "fa": "انگلیسی، بدون GPU، پرسش‌های میان‌سندی: عامل BM25 به‌عنوان افزوده‌ای اختیاری و غیرقطعی (۷۳ در برابر ۶۸–۶۹ و ۶۲–۶۳)."
+   },
+   "when": {
+    "q1": [
+     "t3"
+    ],
+    "q6": [
+     "many",
+     "unsure"
+    ],
+    "q4": [
+     "slow"
+    ],
+    "q5": [
+     "no"
+    ],
+    "q2": [
+     "en"
+    ]
+   },
+   "set": {
+    "agent": "ag.bm25_en"
+   }
+  },
+  {
+   "id": "r17d-agent-nogpu-en-mix",
+   "why": {
+    "en": "English, no GPU, a mix of question types: the BM25 agent only as a marked extrapolation.",
+    "fa": "انگلیسی، بدون GPU، ترکیبی از انواع پرسش: عامل BM25 فقط به‌عنوان برون‌یابیِ مشخص‌شده."
+   },
+   "when": {
+    "q1": [
+     "mix"
+    ],
+    "q6": [
+     "many",
+     "unsure"
+    ],
+    "q4": [
+     "slow"
+    ],
+    "q5": [
+     "no"
+    ],
+    "q2": [
+     "en"
+    ]
+   },
+   "set": {
+    "agent": "ag.bm25_en_mix"
+   }
+  },
+  {
+   "id": "r17e-agent-nogpu-fa",
+   "why": {
+    "en": "Persian, no GPU: no agent; the BM25 agent gained nothing in the Persian half.",
+    "fa": "فارسی، بدون GPU: بدون عامل؛ عامل BM25 در نیمهٔ فارسی سودی نداشت."
+   },
    "when": {
     "q1": [
      "t3",
@@ -2027,20 +2420,68 @@
     ],
     "q5": [
      "no"
+    ],
+    "q2": [
+     "fa"
     ]
    },
    "set": {
-    "agent": "ag.nogpu"
+    "agent": "ag.nogpu_fa"
+   }
+  },
+  {
+   "id": "r17f-agent-nogpu-both",
+   "why": {
+    "en": "Both languages or not sure, no GPU: the BM25 agent for the English documents only.",
+    "fa": "هر دو زبان یا نامطمئن، بدون GPU: عامل BM25 فقط برای اسناد انگلیسی."
+   },
+   "when": {
+    "q1": [
+     "t3",
+     "mix"
+    ],
+    "q6": [
+     "many",
+     "unsure"
+    ],
+    "q4": [
+     "slow"
+    ],
+    "q5": [
+     "no"
+    ],
+    "q2": [
+     "both",
+     "unsure"
+    ]
+   },
+   "set": {
+    "agent": "ag.bm25_lang"
    }
   },
   {
    "id": "r17c-agent-nogpu-xl",
+   "why": {
+    "en": "Questions in another language, no GPU: no agent; agents were not tested cross-lingually.",
+    "fa": "پرسش‌هایی به زبان دیگر، بدون GPU: بدون عامل؛ عامل‌ها در حالت بین‌زبانی آزموده نشده‌اند."
+   },
    "when": {
+    "q1": [
+     "t3",
+     "mix"
+    ],
+    "q6": [
+     "many",
+     "unsure"
+    ],
+    "q4": [
+     "slow"
+    ],
+    "q5": [
+     "no"
+    ],
     "q2": [
      "cross"
-    ],
-    "agent": [
-     "ag.nogpu"
     ]
    },
    "set": {
@@ -2124,7 +2565,9 @@
     "agent": [
      "ag.hybrid",
      "ag.hybrid_mix",
-     "ag.nogpu"
+     "ag.bm25_en",
+     "ag.bm25_en_mix",
+     "ag.bm25_lang"
     ],
     "q7": [
      "public",
@@ -2409,6 +2852,10 @@
   },
   {
    "id": "r31-cross-agent",
+   "why": {
+    "en": "Questions in another language with a GPU: the agent is marked untested, without same-language numbers.",
+    "fa": "پرسش‌هایی به زبان دیگر، با GPU: کارت عامل با برچسب «آزموده نشده» و بدون عددهای حالت هم‌زبان نشان داده می‌شود."
+   },
    "when": {
     "q2": [
      "cross"
@@ -2418,9 +2865,39 @@
      "ag.hybrid_mix"
     ]
    },
+   "set": {
+    "agent": "ag.hybrid_xl"
+   },
+   "remove": {
+    "tradeoffs": [
+     "to.agent_memory",
+     "to.agent_calls_unsure"
+    ]
+   }
+  },
+  {
+   "id": "r31b-t3-nogpu",
+   "why": {
+    "en": "Cross-document questions without a GPU: show the T3 scores of the options that need no GPU.",
+    "fa": "پرسش‌های میان‌سندی بدون GPU: امتیاز T3 گزینه‌هایی که به GPU نیاز ندارند نشان داده می‌شود."
+   },
+   "when": {
+    "q1": [
+     "t3"
+    ],
+    "q5": [
+     "no"
+    ],
+    "!q2": [
+     "cross"
+    ],
+    "!q3": [
+     "generous"
+    ]
+   },
    "add": {
     "tradeoffs": [
-     "to.agent_xl"
+     "to.t3_nogpu"
     ]
    }
   },
@@ -2589,6 +3066,24 @@
      "av.sel_over_ce"
     ]
    }
+  },
+  {
+   "id": "r37-sel-budget",
+   "why": {
+    "en": "Selection call at a budget other than tight: lead with the grade at 6,000 characters (Tentative).",
+    "fa": "فراخوانی گزینش در بودجه‌ای جز بودجهٔ محدود: اول درجهٔ آن در ۶٬۰۰۰ کاراکتر (غیرقطعی) نشان داده می‌شود."
+   },
+   "when": {
+    "reranking_or_selection": [
+     "rr.sel"
+    ],
+    "!q3": [
+     "tight"
+    ]
+   },
+   "set": {
+    "reranking_or_selection": "rr.sel_6000"
+   }
   }
  ],
  "notes": {
@@ -2612,7 +3107,7 @@
   },
   "scope": {
    "en": "Every row rests on 90 answerable questions, one primary reader (GLM-5.3-flash) and one judge. Recommendations are post hoc, except the first three guide rows, which rest on the frozen test.",
-   "fa": "هر ردیف بر ۹۰ پرسش پاسخ‌پذیر، یک مدل پاسخ‌گوی اصلی (GLM-5.3-flash) و یک داور تکیه دارد. توصیه‌ها پسینی‌اند، جز سه ردیف نخست جدول راهنما که بر آزمون ازپیش‌ثبت‌شده تکیه دارند."
+   "fa": "هر ردیف بر ۹۰ پرسش پاسخ‌پذیر، یک مدل پاسخ‌گوی اصلی (GLM-5.3-flash) و یک داور تکیه دارد. توصیه‌ها پسینی‌اند، جز سه ردیف نخست جدول راهنما که بر آزمون ازپیش‌تعیین‌شده تکیه دارند."
   },
   "ranges": {
    "en": "A range such as 62–63 covers answers the judge could not resolve.",
@@ -2620,14 +3115,51 @@
   },
   "no_default": {
    "en": "The data do not settle one default. Hybrid retrieval followed by a cross-encoder reranker is the suggested starting point: it needs no LLM tokens, but its lead over plain hybrid is not significant and is absent in the Persian half.",
-   "fa": "داده‌ها یک گزینهٔ پیش‌فرض را قطعی نمی‌کنند. بازیابی ترکیبی و پس از آن بازرتبه‌ساز cross-encoder نقطهٔ شروع پیشنهادی است: توکن LLM مصرف نمی‌کند، اما برتری‌اش بر ترکیبیِ ساده معنادار نیست و در نیمهٔ فارسی دیده نمی‌شود."
+   "fa": "داده‌ها گزینهٔ پیش‌فرض واحدی را مشخص نمی‌کنند. بازیابی ترکیبی و پس از آن بازرتبه‌ساز cross-encoder نقطهٔ شروع پیشنهادی است: توکن LLM مصرف نمی‌کند، اما برتری‌اش بر ترکیبیِ ساده معنادار نیست و در نیمهٔ فارسی دیده نمی‌شود."
   },
-  "source": "paper/tables/guide.tex (Table 13) and Sect. 4.7 Practical Recommendations",
+  "no_default_when": [
+   {
+    "reranking_or_selection": [
+     "rr.ce"
+    ],
+    "q1": [
+     "mix",
+     "unsure"
+    ]
+   },
+   {
+    "reranking_or_selection": [
+     "rr.ce"
+    ],
+    "q5": [
+     "unsure"
+    ]
+   }
+  ],
+  "universal": [
+   "av.chunks2000",
+   "av.rewrite",
+   "av.long_context",
+   "ex.measure_pack",
+   "ex.embedding"
+  ],
+  "untested": {
+   "en": "Not tested: the paper did not test this option for your case; the card says what was tested instead.",
+   "fa": "آزموده نشده: این گزینه در مقاله برای حالت شما آزموده نشده است؛ کارت می‌گوید به جای آن چه آزموده شد."
+  },
+  "summary": {
+   "en": "{channels} {reranking_or_selection}, {budget}{agent}.",
+   "fa": "{channels} {reranking_or_selection} {budget}{agent}."
+  },
+  "source": {
+   "en": "Journal manuscript (in preparation): Table “Practical recommendations with supporting evidence and confidence”; Sect. “Reliability of the rankings and practical guidance”. Tables and sections are cited by title because their numbers may change before publication.",
+   "fa": "مقالهٔ مجله (در دست آماده‌سازی): جدول «توصیه‌های عملی، دلیل‌های پشتیبان و میزان اطمینان»؛ بخش «اعتبار رتبه‌بندی‌ها و راهنمای عملی». جدول‌ها و بخش‌ها با عنوانشان ذکر می‌شوند، چون شماره‌شان ممکن است تا انتشار تغییر کند. عنوان‌های فارسی ترجمهٔ عنوان‌های انگلیسی مقاله‌اند."
+  },
   "semantics": {
    "defaults": "Unanswered questions count as 'unsure'. If q2 is 'en', q8 is hidden and counts as 'na'.",
    "order": "Apply rules in array order. A rule fires when every key in 'when' matches: a list means any-of; a key starting with '!' means none-of. Keys q1..q8 refer to answers; a slot name (e.g. 'reranking_or_selection') refers to the current value of that slot.",
    "effects": "'set' overwrites a slot with an option id; 'add' appends ids to a list slot (extras, avoid, tradeoffs) unless already present; 'remove' deletes ids from a list slot.",
-   "display": "Look up every resulting id in 'options'. Show slot cards in the order channels, chunking, reranking_or_selection, budget, agent, normalisation; then extras, avoid, tradeoffs. Each item lists evidence ids (in evidence.json) and its confidence levels with scope.",
+   "display": "Look up every resulting id in 'options'. Show the one-sentence summary (notes.summary filled with each slot option's 'summary'), then slot cards in the order channels, chunking, reranking_or_selection, budget, agent, normalisation; then tradeoffs, avoid, extras, with the ids in notes.universal collapsed under one line. Evidence cards are numbered by first appearance in that order; the slot options' 'key' cards (reranking, agent, channels, budget, normalisation, chunking; at most three) are shown first. Each item lists evidence ids (in evidence.json) and its confidence levels with scope ('untested' marks an option the paper did not test for the case).",
    "hash": "State in the URL hash as #choose?q1=t3&q2=fa&... using question and option ids."
   }
  },
@@ -2831,6 +3363,30 @@
   "st_modest": {
    "en": "modest",
    "fa": "متوسط"
+  },
+  "summary_label": {
+   "en": "In one sentence",
+   "fa": "در یک جمله"
+  },
+  "untested": {
+   "en": "Not tested",
+   "fa": "آزموده نشده"
+  },
+  "universal_title": {
+   "en": "Holds for every setup ({n})",
+   "fa": "در همهٔ چیدمان‌ها صادق است ({n} مورد)"
+  },
+  "st_agent_tool": {
+   "en": "agent's tool",
+   "fa": "ابزار عامل"
+  },
+  "src": {
+   "en": "In the paper",
+   "fa": "در مقاله"
+  },
+  "key_note": {
+   "en": "The three cards that bear most on this recommendation are shown; the rest are one click away.",
+   "fa": "سه کارتی که بیش از همه به این پیشنهاد مربوط‌اند نشان داده شده‌اند؛ بقیه با یک کلیک باز می‌شوند."
   }
  },
  "tests": [
@@ -3431,9 +3987,9 @@
    "expected": {
     "channels": "ch.hybrid",
     "chunking": "ck.1000",
-    "reranking_or_selection": "rr.sel",
+    "reranking_or_selection": "rr.sel_6000",
     "budget": "bd.moderate",
-    "agent": "ag.nogpu",
+    "agent": "ag.bm25_lang",
     "normalisation": "nm.fa",
     "extras": [
      "ex.measure_pack",
@@ -3450,18 +4006,21 @@
     ],
     "tradeoffs": [
      "to.sel_cost",
-     "to.agent_memory"
+     "to.agent_memory",
+     "to.t3_nogpu"
     ]
    },
    "rules_fired": [
     "r01-defaults",
     "r03-persian-tokens",
     "r12-nogpu-sel",
-    "r17-agent-nogpu",
+    "r17f-agent-nogpu-both",
     "r20-agent-memory",
     "r21-agent-persian",
+    "r31b-t3-nogpu",
     "r32-memory-public",
-    "r36-stack-cleanup"
+    "r36-stack-cleanup",
+    "r37-sel-budget"
    ]
   },
   {
@@ -3951,6 +4510,379 @@
     "r30-cross-nogpu",
     "r34-memory-private",
     "r36-stack-cleanup"
+   ]
+  },
+  {
+   "name": "P26 review K: English, cross-document, no GPU, many calls, ~10 s",
+   "answers": {
+    "q1": "t3",
+    "q2": "en",
+    "q3": "moderate",
+    "q4": "slow",
+    "q5": "no",
+    "q6": "many",
+    "q7": "private",
+    "q8": "unsure"
+   },
+   "expected": {
+    "channels": "ch.hybrid",
+    "chunking": "ck.1000",
+    "reranking_or_selection": "rr.sel_6000",
+    "budget": "bd.moderate",
+    "agent": "ag.bm25_en",
+    "normalisation": "nm.en",
+    "extras": [
+     "ex.measure_pack",
+     "ex.embedding",
+     "ex.memory_private"
+    ],
+    "avoid": [
+     "av.bm25_alone",
+     "av.chunks2000",
+     "av.rewrite",
+     "av.long_context"
+    ],
+    "tradeoffs": [
+     "to.sel_cost",
+     "to.t3_nogpu"
+    ]
+   },
+   "rules_fired": [
+    "r01-defaults",
+    "r02-english",
+    "r12-nogpu-sel",
+    "r17-agent-nogpu-en",
+    "r31b-t3-nogpu",
+    "r34-memory-private",
+    "r36-stack-cleanup",
+    "r37-sel-budget"
+   ]
+  },
+  {
+   "name": "P27 review L: Persian, cross-document, no GPU, many calls, ~10 s",
+   "answers": {
+    "q1": "t3",
+    "q2": "fa",
+    "q3": "moderate",
+    "q4": "slow",
+    "q5": "no",
+    "q6": "many",
+    "q7": "private",
+    "q8": "clean"
+   },
+   "expected": {
+    "channels": "ch.hybrid",
+    "chunking": "ck.1000",
+    "reranking_or_selection": "rr.sel_6000",
+    "budget": "bd.moderate",
+    "agent": "ag.nogpu_fa",
+    "normalisation": "nm.fa",
+    "extras": [
+     "ex.measure_pack",
+     "ex.embedding",
+     "ex.tokens_fa",
+     "ex.memory_private"
+    ],
+    "avoid": [
+     "av.bm25_alone",
+     "av.chunks2000",
+     "av.rewrite",
+     "av.long_context",
+     "av.lexical_agent_fa"
+    ],
+    "tradeoffs": [
+     "to.sel_cost",
+     "to.t3_nogpu"
+    ]
+   },
+   "rules_fired": [
+    "r01-defaults",
+    "r03-persian-tokens",
+    "r12-nogpu-sel",
+    "r17e-agent-nogpu-fa",
+    "r21-agent-persian",
+    "r31b-t3-nogpu",
+    "r34-memory-private",
+    "r36-stack-cleanup",
+    "r37-sel-budget"
+   ]
+  },
+  {
+   "name": "P28 review I: cross-lingual, cross-document, GPU, many calls, ~10 s",
+   "answers": {
+    "q1": "t3",
+    "q2": "cross",
+    "q3": "moderate",
+    "q4": "slow",
+    "q5": "yes",
+    "q6": "many",
+    "q7": "private",
+    "q8": "clean"
+   },
+   "expected": {
+    "channels": "ch.cross",
+    "chunking": "ck.1000",
+    "reranking_or_selection": "rr.ce_xl",
+    "budget": "bd.moderate",
+    "agent": "ag.hybrid_xl",
+    "normalisation": "nm.fa",
+    "extras": [
+     "ex.measure_pack",
+     "ex.embedding",
+     "ex.tokens_fa",
+     "ex.memory_private"
+    ],
+    "avoid": [
+     "av.chunks2000",
+     "av.rewrite",
+     "av.long_context",
+     "av.sel_over_ce",
+     "av.bm25_alone_xl"
+    ],
+    "tradeoffs": []
+   },
+   "rules_fired": [
+    "r01-defaults",
+    "r03-persian-tokens",
+    "r10-gpu-stack",
+    "r16-agent",
+    "r27-cross",
+    "r28-cross-gpu",
+    "r31-cross-agent",
+    "r34-memory-private"
+   ]
+  },
+  {
+   "name": "P29 review A: Persian, cross-document, no GPU, one call, tight, varied spelling",
+   "answers": {
+    "q1": "t3",
+    "q2": "fa",
+    "q3": "tight",
+    "q4": "few",
+    "q5": "no",
+    "q6": "one",
+    "q7": "private",
+    "q8": "mixed"
+   },
+   "expected": {
+    "channels": "ch.hybrid",
+    "chunking": "ck.1000",
+    "reranking_or_selection": "rr.sel",
+    "budget": "bd.tight",
+    "agent": "ag.none",
+    "normalisation": "nm.fa_mixed",
+    "extras": [
+     "ex.measure_pack",
+     "ex.embedding",
+     "ex.tokens_fa",
+     "ex.memory_private"
+    ],
+    "avoid": [
+     "av.bm25_alone",
+     "av.chunks2000",
+     "av.rewrite",
+     "av.long_context"
+    ],
+    "tradeoffs": [
+     "to.sel_cost",
+     "to.t3_nogpu"
+    ]
+   },
+   "rules_fired": [
+    "r01-defaults",
+    "r03-persian-tokens",
+    "r04-spelling",
+    "r05-budget-tight",
+    "r12-nogpu-sel",
+    "r31b-t3-nogpu",
+    "r34-memory-private",
+    "r36-stack-cleanup"
+   ]
+  },
+  {
+   "name": "P30 English, mixed questions, no GPU, many calls, public texts",
+   "answers": {
+    "q1": "mix",
+    "q2": "en",
+    "q3": "moderate",
+    "q4": "slow",
+    "q5": "no",
+    "q6": "many",
+    "q7": "public",
+    "q8": "unsure"
+   },
+   "expected": {
+    "channels": "ch.hybrid",
+    "chunking": "ck.1000",
+    "reranking_or_selection": "rr.sel_6000",
+    "budget": "bd.moderate",
+    "agent": "ag.bm25_en_mix",
+    "normalisation": "nm.en",
+    "extras": [
+     "ex.measure_pack",
+     "ex.embedding",
+     "ex.memory_public"
+    ],
+    "avoid": [
+     "av.bm25_alone",
+     "av.chunks2000",
+     "av.rewrite",
+     "av.long_context",
+     "av.router"
+    ],
+    "tradeoffs": [
+     "to.sel_cost",
+     "to.agent_memory"
+    ]
+   },
+   "rules_fired": [
+    "r01-defaults",
+    "r02-english",
+    "r12-nogpu-sel",
+    "r17d-agent-nogpu-en-mix",
+    "r20-agent-memory",
+    "r32-memory-public",
+    "r35-routing",
+    "r36-stack-cleanup",
+    "r37-sel-budget"
+   ]
+  },
+  {
+   "name": "P31 cross-lingual, cross-document, no GPU, many calls",
+   "answers": {
+    "q1": "t3",
+    "q2": "cross",
+    "q3": "moderate",
+    "q4": "slow",
+    "q5": "no",
+    "q6": "many",
+    "q7": "private",
+    "q8": "clean"
+   },
+   "expected": {
+    "channels": "ch.cross",
+    "chunking": "ck.1000",
+    "reranking_or_selection": "rr.xl_nogpu",
+    "budget": "bd.moderate",
+    "agent": "ag.none_xl",
+    "normalisation": "nm.fa",
+    "extras": [
+     "ex.measure_pack",
+     "ex.embedding",
+     "ex.tokens_fa",
+     "ex.memory_private"
+    ],
+    "avoid": [
+     "av.chunks2000",
+     "av.rewrite",
+     "av.long_context",
+     "av.bm25_alone_xl"
+    ],
+    "tradeoffs": [
+     "to.cross_nogpu_sel"
+    ]
+   },
+   "rules_fired": [
+    "r01-defaults",
+    "r03-persian-tokens",
+    "r12-nogpu-sel",
+    "r17c-agent-nogpu-xl",
+    "r27-cross",
+    "r30b-cross-nogpu-calls",
+    "r34-memory-private",
+    "r36-stack-cleanup"
+   ]
+  },
+  {
+   "name": "P32 cross-lingual, mixed, GPU, calls not sure, public",
+   "answers": {
+    "q1": "mix",
+    "q2": "cross",
+    "q3": "moderate",
+    "q4": "slow",
+    "q5": "yes",
+    "q6": "unsure",
+    "q7": "public",
+    "q8": "clean"
+   },
+   "expected": {
+    "channels": "ch.cross",
+    "chunking": "ck.1000",
+    "reranking_or_selection": "rr.ce_xl",
+    "budget": "bd.moderate",
+    "agent": "ag.hybrid_xl",
+    "normalisation": "nm.fa",
+    "extras": [
+     "ex.measure_pack",
+     "ex.embedding",
+     "ex.tokens_fa",
+     "ex.memory_public"
+    ],
+    "avoid": [
+     "av.chunks2000",
+     "av.rewrite",
+     "av.long_context",
+     "av.sel_over_ce",
+     "av.bm25_alone_xl",
+     "av.router"
+    ],
+    "tradeoffs": []
+   },
+   "rules_fired": [
+    "r01-defaults",
+    "r03-persian-tokens",
+    "r10-gpu-stack",
+    "r16b-agent-mix",
+    "r17b-agent-unsure",
+    "r20-agent-memory",
+    "r27-cross",
+    "r28-cross-gpu",
+    "r31-cross-agent",
+    "r32-memory-public",
+    "r35-routing"
+   ]
+  },
+  {
+   "name": "P33 item 15: no GPU, one call, budget not sure",
+   "answers": {
+    "q1": "t2",
+    "q2": "en",
+    "q3": "unsure",
+    "q4": "few",
+    "q5": "no",
+    "q6": "one",
+    "q7": "private",
+    "q8": "unsure"
+   },
+   "expected": {
+    "channels": "ch.hybrid",
+    "chunking": "ck.1000",
+    "reranking_or_selection": "rr.sel_6000",
+    "budget": "bd.moderate",
+    "agent": "ag.none",
+    "normalisation": "nm.en",
+    "extras": [
+     "ex.measure_pack",
+     "ex.embedding",
+     "ex.memory_private"
+    ],
+    "avoid": [
+     "av.bm25_alone",
+     "av.chunks2000",
+     "av.rewrite",
+     "av.long_context"
+    ],
+    "tradeoffs": [
+     "to.sel_cost"
+    ]
+   },
+   "rules_fired": [
+    "r01-defaults",
+    "r02-english",
+    "r12-nogpu-sel",
+    "r34-memory-private",
+    "r36-stack-cleanup",
+    "r37-sel-budget"
    ]
   }
  ]

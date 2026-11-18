@@ -23,9 +23,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&family=Instrument+Serif:ital@0;1&family=Vazirmatn:wght@300;400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/style.css?v=anyrag-1">
-<link rel="stylesheet" href="assets/css/chooser.css">
-<link rel="stylesheet" href="assets/css/viz.css">
+<link rel="stylesheet" href="assets/css/style.css?v=2026-11-18c">
+<link rel="stylesheet" href="assets/css/chooser.css?v=2026-11-18c">
+<link rel="stylesheet" href="assets/css/viz.css?v=2026-11-18c">
 <script>
 /* set theme + language before first paint */
 (function(){var q={};try{q=Object.fromEntries(new URLSearchParams(location.search));}catch(e){}
@@ -34,12 +34,12 @@ if(t==='dark'||t==='light')document.documentElement.setAttribute('data-theme',t)
 if(l==='fa'){document.documentElement.lang='fa';document.documentElement.dir='rtl';}
 document.documentElement.classList.add('js');})();
 </script>
-<script defer src="assets/js/num.js"></script>
-<script defer src="assets/js/app.js?v=anyrag-1"></script>
-<script defer src="assets/js/video.js"></script>
-<script defer src="assets/js/viz2d.js"></script>
-<script defer src="assets/js/pipeline3d.js"></script>
-<script defer src="assets/js/chooser.js"></script>
+<script defer src="assets/js/num.js?v=2026-11-18c"></script>
+<script defer src="assets/js/app.js?v=2026-11-18c"></script>
+<script defer src="assets/js/video.js?v=2026-11-18c"></script>
+<script defer src="assets/js/viz2d.js?v=2026-11-18c"></script>
+<script defer src="assets/js/pipeline3d.js?v=2026-11-18c"></script>
+<script defer src="assets/js/chooser.js?v=2026-11-18c"></script>
 </head>
 <body>
 <a class="skip" href="#video" data-i18n="skip">Skip to content</a>
@@ -87,7 +87,7 @@ document.documentElement.classList.add('js');})();
       <a class="btn accent" href="#choose"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5h5v5H5z M14 14h5v5h-5z M10 7.5h4.5a2 2 0 012 2V14"/></svg><span data-i18n="hero.btn.choose">Choose your RAG</span></a>
       <a class="btn soon" aria-disabled="true" role="link"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3h7l5 5v13H7z M14 3v5h5 M10 13h6 M10 17h6"/></svg><span data-i18n="hero.btn.paper">Paper</span><span class="soon-tag" data-i18n="soon">in preparation</span></a>
       <a class="btn soon" aria-disabled="true" role="link" title="The repository is private until the paper is accepted" data-i18n-attr="title|hero.btn.code.title"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 7l-5 5 5 5 M16 7l5 5-5 5 M14 4l-4 16"/></svg><span data-i18n="hero.btn.code">Code</span><span class="soon-tag" data-i18n="soon2">in preparation</span></a>
-      <a class="btn soon" aria-disabled="true" role="link"><svg viewBox="0 0 24 24" aria-hidden="true"><ellipse cx="12" cy="6" rx="7" ry="3"/><path d="M5 6v6c0 1.7 3.1 3 7 3s7-1.3 7-3V6 M5 12v6c0 1.7 3.1 3 7 3s7-1.3 7-3v-6"/></svg><span data-i18n="hero.btn.bench">Benchmark</span><span class="soon-tag" data-i18n="soon3">in preparation</span></a>
+      <a class="btn" href="https://huggingface.co/datasets/ArashNasr/anyrag-benchmark" target="_blank" rel="noopener" title="The benchmark on Hugging Face (opens in a new tab)" data-i18n-attr="title|hero.btn.bench.title"><svg viewBox="0 0 24 24" aria-hidden="true"><ellipse cx="12" cy="6" rx="7" ry="3"/><path d="M5 6v6c0 1.7 3.1 3 7 3s7-1.3 7-3V6 M5 12v6c0 1.7 3.1 3 7 3s7-1.3 7-3v-6"/></svg><span data-i18n="hero.btn.bench">Benchmark</span><span class="soon-tag hf" data-i18n="hero.btn.bench.where">on Hugging Face</span></a>
     </div>
   </div>
 </section>
@@ -98,7 +98,7 @@ document.documentElement.classList.add('js');})();
     <div class="sn" aria-hidden="true">1</div>
     <div class="sc">
       <h2 id="h-video" data-i18n="video.h">The work in about 90 seconds</h2>
-      <p class="lead" data-i18n="video.lead">An explainer for readers new to RAG: what it is, where answers get lost, and what helps when. On-screen text, no narration, in English and Persian.</p>
+      <p class="lead" data-i18n="video.lead">For newcomers to RAG: where answers get lost and what helps.</p>
       <figure class="player">
         <div id="video-mount" class="mount mount-video">
           <div class="ph"><span data-i18n="video.ph">The explainer video is being prepared.</span></div>
@@ -117,26 +117,41 @@ document.documentElement.classList.add('js');})();
       <div class="glance">
         <div class="gl">
           <h3 data-i18n="about.q.h">The question</h3>
-          <p data-i18n="about.q.p">A retrieval-augmented generation (RAG) system searches a document collection and shows the best passages to a language model, the reader, which writes the answer. Building one means choosing a search method, a way to rank or select passages, and how much text the reader sees. Most comparisons of these choices use English. We asked which choices matter in Persian and in English, and where the answers are lost.</p>
+          <ul class="pts">
+            <li data-i18n="about.q.1">RAG searches documents and hands the best passages to an LLM, the reader, which writes the answer.</li>
+            <li data-i18n="about.q.2">Builders choose a search method, a ranking or selection step, and how much text the reader sees.</li>
+            <li data-i18n="about.q.3">Which choices matter in Persian and English, and where are answers lost?</li>
+          </ul>
         </div>
         <div class="gl">
           <h3 data-i18n="about.b.h">The benchmark</h3>
-          <p data-i18n="about.b.p">156 questions over 155 natural documents: company reports, non-fiction books and statutes, in six search pools. Questions come in three tiers of difficulty, half in Persian and half in English, and each carries annotated gold evidence. The test set has 90 answerable questions.</p>
+          <ul class="pts">
+            <li data-i18n="about.b.1">156 questions over 155 natural documents: company reports, non-fiction books, statutes</li>
+            <li data-i18n="about.b.2">Six search pools, three difficulty tiers</li>
+            <li data-i18n="about.b.3">Half Persian, half English, with annotated gold evidence</li>
+            <li data-i18n="about.b.4">90 answerable test questions</li>
+          </ul>
         </div>
         <div class="gl">
           <h3 data-i18n="about.c.h">What was compared</h3>
-          <p data-i18n="about.c.p">First, a frozen one-shot test of four whole pipelines at two evidence budgets. Then, post hoc on the same questions: retrieval channels, chunk size, query rewriting, embedding models, reranking and LLM selection, five evidence budgets, and iterative search agents.</p>
+          <ul class="pts">
+            <li data-i18n="about.c.1">Fixed in advance: four whole pipelines at two evidence budgets</li>
+            <li data-i18n="about.c.2">Post hoc: retrieval channels, chunk size, query rewriting, embedding models, reranking, LLM selection, five budgets, search agents</li>
+          </ul>
         </div>
         <div class="gl answer">
           <h3 data-i18n="about.a.h">The answer</h3>
-          <p data-i18n="about.a.p">Answers are rarely lost in the reader. They are lost before it: either the complete evidence never reaches the top candidates, or it is dropped when the evidence pack is built.</p>
+          <p data-i18n="about.a.p">Most wrong answers arise before the reader, not in it: either the complete evidence never reaches the top candidates, or it is dropped when the evidence pack is built.</p>
+          <p class="fine" data-i18n="about.a.note">Post hoc; the test fixed in advance missed its pass mark (see Limits).</p>
         </div>
       </div>
       <dl class="terms">
-        <div><dt data-i18n="term.budget">Evidence budget</dt><dd data-i18n="term.budget.d">The number of characters of retrieved text in the reader's prompt. 6,000 characters is the tight budget of the paper.</dd></div>
-        <div><dt data-i18n="term.pack">Evidence pack</dt><dd data-i18n="term.pack.d">The retrieved text a pipeline actually shows the reader, cut to the budget.</dd></div>
-        <div><dt data-i18n="term.bundle">Evidence bundle</dt><dd data-i18n="term.bundle.d">A set of passages that together suffice to answer a question. A pack is complete if it holds a whole bundle.</dd></div>
-        <div><dt data-i18n="term.posthoc">Post hoc</dt><dd data-i18n="term.posthoc.d">Run on the test questions after their answers were known. Only the frozen test is confirmatory.</dd></div>
+        <div><dt data-i18n="term.budget">Evidence budget</dt><dd data-i18n="term.budget.d">Retrieved characters the reader sees; 6,000 is the tight budget.</dd></div>
+        <div><dt data-i18n="term.pack">Evidence pack</dt><dd data-i18n="term.pack.d">What the reader actually sees, cut to the budget.</dd></div>
+        <div><dt data-i18n="term.bundle">Evidence bundle</dt><dd data-i18n="term.bundle.d">Passages that together answer a question; a complete pack holds one.</dd></div>
+        <div><dt data-i18n="term.gold">Gold evidence</dt><dd data-i18n="term.gold.d">Passages marked as evidence; used only to score retrieval.</dd></div>
+        <div><dt data-i18n="term.prereg">Test fixed in advance</dt><dd data-i18n="term.prereg.d">Committed before any test answer was seen; not registered with a third party.</dd></div>
+        <div><dt data-i18n="term.posthoc">Post hoc</dt><dd data-i18n="term.posthoc.d">Run after the test answers were known; not confirmatory.</dd></div>
       </dl>
     </div>
   </div>
@@ -148,7 +163,11 @@ document.documentElement.classList.add('js');})();
     <div class="sn" aria-hidden="true">3</div>
     <div class="sc">
       <h2 id="h-bench" data-i18n="bench.h">A Persian and English benchmark with gold evidence</h2>
-      <p class="lead" data-i18n="bench.lead">A question's tier is set by the simplest evidence in its pool that is enough to answer it. Every question is answered against its whole pool, with no document picked in advance. The examples below are development questions.</p>
+      <ul class="pts lead-pts">
+        <li data-i18n="bench.l1">Three tiers, set by the simplest evidence that answers the question</li>
+        <li data-i18n="bench.l2">Each question searches its whole pool</li>
+        <li data-i18n="bench.l3">The examples below are development questions</li>
+      </ul>
 
       <div class="tiers">
         <article class="tier">
@@ -179,7 +198,7 @@ document.documentElement.classList.add('js');})();
           <p class="src">LAW-fa</p>
         </article>
       </div>
-      <p class="fine" data-i18n="bench.counts">Each pool has 3 development and 5 test questions per tier, plus one unanswerable question per split: 60 development and 96 test questions, 90 of them answerable.</p>
+      <p class="fine" data-i18n="bench.counts">Each pool: 3 development and 5 test questions per tier, plus one unanswerable question per split. In all: 60 development, 96 test, 90 answerable.</p>
 
       <h3 class="sub-h" data-i18n="pools.h">Six search pools</h3>
       <div class="scroll">
@@ -196,13 +215,16 @@ document.documentElement.classList.add('js');})();
           <tfoot><tr><th scope="row" data-i18n="pools.total">Total</th><td class="num" data-i18n="pools.total.n">155</td><td class="num" data-i18n="pools.total.c">38.06 M</td><td data-i18n="pools.total.s">58,218 chunks of at most 1,000 characters</td></tr></tfoot>
         </table>
       </div>
-      <p class="fine" data-i18n="pools.note">Only born-digital text or verified transcriptions, never scans. The Persian and English halves use different documents, so they are two runs of one design and not a controlled contrast between languages.</p>
+      <ul class="pts small">
+        <li data-i18n="pools.n1">Born-digital text or verified transcriptions only, never scans.</li>
+        <li data-i18n="pools.n2">Persian and English use different documents: two runs of one design, not a controlled language contrast.</li>
+      </ul>
 
       <h3 class="sub-h" data-i18n="annot.h">How evidence is annotated</h3>
       <div class="annot">
         <ol class="annot-list">
           <li><b data-i18n="annot.req">Requirements</b><span data-i18n="annot.req.d">the atomic points a correct answer must meet;</span></li>
-          <li><b data-i18n="annot.ev">Evidence passages</b><span data-i18n="annot.ev.d">exact quotes with offsets into frozen text;</span></li>
+          <li><b data-i18n="annot.ev">Evidence passages</b><span data-i18n="annot.ev.d">exact quotes, located by character position in a fixed copy of each document;</span></li>
           <li><b data-i18n="annot.bun">Evidence bundles</b><span data-i18n="annot.bun.d">one or more sets of passages that together suffice.</span></li>
         </ol>
         <figure class="bundle" aria-labelledby="fig1cap">
@@ -225,7 +247,13 @@ document.documentElement.classList.add('js');})();
           <figcaption id="fig1cap"><span class="figno" data-i18n="fig1.no">Fig. 1</span> <span data-i18n="fig1.cap">A development question (T3, cross-version) with its evidence bundle of two documents. Neither passage answers it alone.</span></figcaption>
         </figure>
       </div>
-      <p class="fine" data-i18n="bench.build">Claude Opus 5.5 agents drafted each question from a written specification; a mechanical verifier and a separate source-review agent checked it; a native Persian speaker reviewed the Persian wording; and 32 of the 156 questions were spot-checked by hand (31 accepted, 1 fixed).</p>
+      <h4 class="mini-h" data-i18n="build.h">How the questions were built</h4>
+      <ul class="pts small">
+        <li data-i18n="build.1">Drafted by Claude Opus 5.5 agents from a written specification</li>
+        <li data-i18n="build.2">Checked by a mechanical verifier and a separate source-review agent</li>
+        <li data-i18n="build.3">Persian wording reviewed by a native speaker</li>
+        <li data-i18n="build.4">32 of 156 checked by hand: 31 accepted, 1 fixed</li>
+      </ul>
     </div>
   </div>
 </section>
@@ -236,14 +264,18 @@ document.documentElement.classList.add('js');})();
     <div class="sn" aria-hidden="true">4</div>
     <div class="sc">
       <h2 id="h-how" data-i18n="how.h">How a RAG pipeline answers</h2>
-      <p class="lead" data-i18n="how.lead">Each pipeline turns a question into an evidence pack, the retrieved text the reader sees. It searches the pool, orders or selects the candidates, and packs them into the budget. All four pipelines share the same chunks (at most 1,000 characters), answer prompts and readers.</p>
+      <ul class="pts lead-pts">
+        <li data-i18n="how.l1">Search the pool, order or select candidates, pack them into the budget</li>
+        <li data-i18n="how.l2">The pack is all the reader sees</li>
+        <li data-i18n="how.l3">All four pipelines share chunks (at most 1,000 characters), prompts and readers</li>
+      </ul>
       <figure class="stage" aria-labelledby="fig2cap">
         <div id="pipeline3d" class="mount mount-3d"><div class="ph"><span data-i18n="pipe.ph3d">The 3D view of a pipeline loads here.</span></div></div>
         <div id="pipeline2d" class="mount mount-2d"><div class="ph"><span data-i18n="pipe.ph2d">The 2D view of a pipeline loads here.</span></div></div>
-        <figcaption id="fig2cap"><span class="figno" data-i18n="fig2.no">Fig. 2</span> <span data-i18n="fig2.cap">From the documents to the reader: candidates, the pack window, and the evidence that reaches the reader, from real test traces.</span></figcaption>
+        <figcaption id="fig2cap"><span class="figno" data-i18n="fig2.no">Fig. 2</span> <span data-i18n="fig2.cap">From the documents to the reader: the candidates, the pack, and the evidence that reaches the reader. Recorded runs on three development questions, not test questions.</span></figcaption>
       </figure>
 
-      <h3 class="sub-h" data-i18n="pipes.h">The four pipelines of the frozen test</h3>
+      <h3 class="sub-h" data-i18n="pipes.h">The four pipelines of the test fixed in advance</h3>
       <div class="scroll">
       <table class="pipes">
         <thead><tr>
@@ -253,15 +285,20 @@ document.documentElement.classList.add('js');})();
           <th scope="col" class="num" data-i18n="pipes.c.lat">Median latency</th>
         </tr></thead>
         <tbody>
-          <tr><th scope="row"><span class="pn">Hybrid</span><span class="role" data-i18n="pipes.hy.role">baseline</span></th><td data-i18n="pipes.hy.d">BM25 and dense (bge-m3) retrieval, merged by reciprocal rank fusion. The budget is filled in ranked order.</td><td class="num" data-i18n="pipes.hy.t">1.00</td><td class="num" data-i18n="pipes.hy.l">1.8 s</td></tr>
-          <tr><th scope="row"><span class="pn">HR</span><span class="role" data-i18n="pipes.hr.role">Hybrid + reranker</span></th><td data-i18n="pipes.hr.d">Hybrid, then a cross-encoder reranker rescores the merged list. The reranker is a trained model and uses no LLM tokens.</td><td class="num" data-i18n="pipes.hr.t">1.01</td><td class="num" data-i18n="pipes.hr.l">3.2 s</td></tr>
-          <tr><th scope="row"><span class="pn">Lex-RAG</span><span class="role" data-i18n="pipes.lex.role">our method</span></th><td data-i18n="pipes.lex.d">Fuses BM25, dense and learned-sparse scores. One LLM call splits the question into parts and names a bundle of passages for each; a packer fits the bundles into the budget and fills the rest.</td><td class="num" data-i18n="pipes.lex.t">2.04–2.32</td><td class="num" data-i18n="pipes.lex.l">4.0 s</td></tr>
-          <tr><th scope="row"><span class="pn">SetR-p+fill</span><span class="role" data-i18n="pipes.setr.role">adapted selector</span></th><td data-i18n="pipes.setr.d">One chain-of-thought call with the published SetR prompt picks a set from Hybrid's candidates; Hybrid's list fills the rest. An adaptation, so it says nothing about the published system.</td><td class="num" data-i18n="pipes.setr.t">3.39–3.67</td><td class="num" data-i18n="pipes.setr.l">5.5 s</td></tr>
+          <tr><th scope="row"><span class="pn">Hybrid</span><span class="role" data-i18n="pipes.hy.role">baseline</span></th><td data-i18n="pipes.hy.d">BM25 and dense (bge-m3) retrieval, merged by reciprocal rank fusion; the budget is filled in rank order.</td><td class="num" data-i18n="pipes.hy.t">1.00</td><td class="num" data-i18n="pipes.hy.l">1.8 s</td></tr>
+          <tr><th scope="row"><span class="pn">HR</span><span class="role" data-i18n="pipes.hr.role">Hybrid + reranker</span></th><td data-i18n="pipes.hr.d">Hybrid, reordered by a cross-encoder reranker: a small trained model that scores question and passage together, with no LLM tokens.</td><td class="num" data-i18n="pipes.hr.t">1.01</td><td class="num" data-i18n="pipes.hr.l">3.2 s</td></tr>
+          <tr><th scope="row"><span class="pn">Lex-RAG</span><span class="role" data-i18n="pipes.lex.role">our method</span></th><td data-i18n="pipes.lex.d">Fuses BM25, dense and learned-sparse scores. One LLM call splits the question and names a bundle per part; bundles go in first, ranked passages fill the rest.</td><td class="num" data-i18n="pipes.lex.t">2.04–2.32</td><td class="num" data-i18n="pipes.lex.l">4.0 s</td></tr>
+          <tr><th scope="row"><span class="pn">SetR-p+fill</span><span class="role" data-i18n="pipes.setr.role">adapted selector</span></th><td data-i18n="pipes.setr.d">Our adaptation of SetR: one chain-of-thought call with its published prompt picks a set from Hybrid's candidates, and Hybrid fills the rest. It says nothing about the published system.</td><td class="num" data-i18n="pipes.setr.t">3.39–3.67</td><td class="num" data-i18n="pipes.setr.l">5.5 s</td></tr>
         </tbody>
       </table>
       </div>
-      <p class="fine" data-i18n="pipes.note">At the 6,000-character budget, on all 96 test questions. Tokens count every query-time LLM call. Latency was measured under contention on a laptop GPU, so only the order is informative.</p>
-      <p class="prose-p" data-i18n="how.readers">One primary reader, GLM-5.3-flash, answers every question and makes both selection calls. Five readers from other model families answer the identical packs. A strict LLM judge scores each answer: it counts as correct only if it meets every required point and adds no contradiction, wrong value or unsupported claim.</p>
+      <p class="fine" data-i18n="pipes.note">6,000 characters, all 96 test questions. Tokens: every query-time LLM call. Latency: laptop GPU under contention; only the order is informative.</p>
+      <h4 class="mini-h" data-i18n="readers.h">Readers and scoring</h4>
+      <ul class="pts">
+        <li data-i18n="readers.1">Primary reader: GLM-5.3-flash, for every answer and both selection calls.</li>
+        <li data-i18n="readers.2">Five readers from other model families answer the same packs.</li>
+        <li data-i18n="readers.3">A strict LLM judge: correct only if every required point is met and nothing is contradicted, wrong or unsupported.</li>
+      </ul>
     </div>
   </div>
 </section>
@@ -272,7 +309,7 @@ document.documentElement.classList.add('js');})();
     <div class="sn" aria-hidden="true">5</div>
     <div class="sc">
       <h2 id="h-choose" data-i18n="choose.h">Choose your RAG</h2>
-      <p class="lead" data-i18n="choose.lead">Answer a few questions about your documents, your budget and your hardware. The recommendation follows the paper's guide table, and every step comes with its evidence and a confidence label.</p>
+      <p class="lead" data-i18n="choose.lead">Answer a few questions; get a setup backed by the paper's guide table.</p>
       <div id="chooser" class="mount mount-chooser"><div class="ph"><span data-i18n="choose.ph">The chooser loads here.</span></div></div>
       <p class="caveat" data-i18n="choose.note">Based on 90 test questions; post hoc analyses; your data may differ, so test on your own questions.</p>
     </div>
@@ -285,34 +322,66 @@ document.documentElement.classList.add('js');})();
     <div class="sn" aria-hidden="true">6</div>
     <div class="sc">
       <h2 id="h-res" data-i18n="res.h">What the results show</h2>
-      <p class="lead" data-i18n="res.lead">Scores are correct answers out of the 90 answerable test questions, for the primary reader and the first judge. A range such as 62–63 covers a few answers the judge could not score.</p>
+      <p class="lead" data-i18n="res.lead">Correct answers of 90; primary reader, first judge. Ranges such as 62–63 cover answers the judge could not score.</p>
+
+      <div class="mainres-wrap">
+        <h3 data-i18n="main.h">The main result</h3>
+        <div class="scroll">
+          <table class="mainres">
+            <caption data-i18n="main.cap">Lex-RAG is our method; Hybrid and Hybrid + reranker were the test's controls.</caption>
+            <thead><tr><th scope="col" data-i18n="main.c.pipe">Pipeline</th><th scope="col" class="num" data-i18n="main.c.6k">6,000 characters</th><th scope="col" class="num" data-i18n="main.c.15k">15,500 characters</th></tr></thead>
+            <tbody>
+              <tr><th scope="row"><span class="pn" data-i18n="main.hy">Hybrid</span></th><td class="num" data-num>62–63</td><td class="num" data-num>68</td></tr>
+              <tr><th scope="row"><span class="pn" data-i18n="main.hr">Hybrid + reranker</span></th><td class="num" data-num>69–71</td><td class="num" data-num>69–70</td></tr>
+              <tr class="lex"><th scope="row"><span class="pn">Lex-RAG</span></th><td class="num" data-num>68–69</td><td class="num" data-num>67</td></tr>
+              <tr><th scope="row"><span class="pn">SetR-p+fill</span></th><td class="num" data-num>63</td><td class="num" data-num>66–67</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="gate">
+          <h4 data-i18n="gate.h">Test fixed in advance: not met</h4>
+          <ul class="pts">
+            <li data-i18n="gate.1">Pass mark: at least 5 of 90 ahead of both controls at 6,000 characters.</li>
+            <li class="verdict" data-i18n="gate.2">Result: 5 to 7 more than Hybrid, 0 to 3 fewer than Hybrid + reranker. Neither primary test was significant.</li>
+            <li data-i18n="gate.3">With 90 questions, a few answers is noise. All below is post hoc.</li>
+          </ul>
+        </div>
+      </div>
 
       <figure class="fig" aria-labelledby="fig3cap">
         <figcaption id="fig3cap"><span class="figno" data-i18n="fig3.no">Fig. 3</span> <span class="ft" data-i18n="fig3.t">Where answers are lost</span></figcaption>
         <div id="fig-funnel" class="mount mount-fig" data-viz-head="off"><div class="ph"><span data-i18n="fig.ph">The figure loads here.</span></div></div>
-        <p class="take" data-i18n="fig3.take">With only the gold evidence the reader answers 83 of 90. For 15 to 18 questions no complete evidence bundle reaches the top 40 candidates, and for 11 to 15 more it is dropped while the pack is built.</p>
+        <p class="take" data-i18n="fig3.take">Gold evidence alone: 83 of 90. Lost before the reader: 15 to 18 (no complete bundle in the top 40), 11 to 15 more (dropped from the pack).</p>
       </figure>
 
       <figure class="fig" aria-labelledby="fig4cap">
         <figcaption id="fig4cap"><span class="figno" data-i18n="fig4.no">Fig. 4</span> <span class="ft" data-i18n="fig4.t">How much text to show</span></figcaption>
         <div id="fig-budget" class="mount mount-fig" data-viz-head="off"><div class="ph"><span data-i18n="fig.ph2">The figure loads here.</span></div></div>
-        <p class="take" data-i18n="fig4.take">A choosing step pays most at small budgets: Lex-RAG's selection call is worth 15 to 16 answers at 3,000 characters (one run) and 2 to 4 from 10,000 on. Plain hybrid retrieval rises from about 50 to 72 correct answers between 3,000 and 24,000 characters.</p>
+        <p class="take" data-i18n="fig4.take">Lex-RAG's selection call adds 15 to 16 answers at 3,000 characters (one run), 2 to 4 from 10,000 on. Plain hybrid: about 50 to 72 from 3,000 to 24,000.</p>
       </figure>
 
       <figure class="fig" aria-labelledby="fig5cap">
         <figcaption id="fig5cap"><span class="figno" data-i18n="fig5.no">Fig. 5</span> <span class="ft" data-i18n="fig5.t">Which parts of the pipeline matter</span></figcaption>
         <div id="fig-components" class="mount mount-fig" data-viz-head="off"><div class="ph"><span data-i18n="fig.ph3">The figure loads here.</span></div></div>
-        <p class="take" data-i18n="fig5.take">Hybrid retrieval answers 62 to 63, dense alone 53 and BM25 alone 48. Chunks of 2,000 characters lose 13 to 20 answers; query rewriting and a second embedding model do not help.</p>
+        <p class="take" data-i18n="fig5.take">Hybrid 62 to 63, dense alone 53, BM25 alone 48; 2,000-character chunks lose 13 to 20. Rewriting and a second embedding model did not help (tentative: rewrites gained a few in English).</p>
       </figure>
 
       <div class="aside2">
         <div>
           <h3 data-i18n="search.h">Searching harder</h3>
-          <p data-i18n="search.p">An iterative agent that searches the hybrid index up to five times answers 77 of 90, the highest score of any arm that does not use the annotations. It needs about four times the tokens and a median 10.5 s. Its lead over the reranked pipeline (69 to 71) is 6 to 8 answers, within the noise of the test.</p>
+          <ul class="pts">
+            <li data-i18n="search.1">An iterative agent (hybrid index, up to five searches, reranker): 77 of 90, the best without annotations.</li>
+            <li data-i18n="search.2">About four times the tokens; median 10.5 s.</li>
+            <li data-i18n="search.3">Its 6 to 8 lead over the reranked pipeline (69 to 71) is within the noise. First judge only.</li>
+          </ul>
         </div>
         <div>
           <h3 data-i18n="long.h">Reading whole documents</h3>
-          <p data-i18n="long.p">Long context helps only when the right documents are already known. Given the gold documents, the reader answers 79; given the best-matching documents by BM25, cut to the same length, it answers 24.</p>
+          <ul class="pts">
+            <li data-i18n="long.1">Helps only when the right documents are known.</li>
+            <li data-i18n="long.2">Gold documents: 79 correct.</li>
+            <li data-i18n="long.3">Best BM25 documents, cut to the same length: 24.</li>
+          </ul>
         </div>
       </div>
     </div>
@@ -325,30 +394,46 @@ document.documentElement.classList.add('js');})();
     <div class="sn" aria-hidden="true">7</div>
     <div class="sc">
       <h2 id="h-lang" data-i18n="lang.h">Persian and English</h2>
-      <p class="lead" data-i18n="lang.lead">The two halves use different documents, so a gap between them mixes language and source. The firm findings are those a design can isolate: the cost of a character, and every question asked in the other language.</p>
+      <p class="lead" data-i18n="lang.lead">The halves use different documents, so gaps mix language and source. Firm findings come from the cost of a character and from questions asked in the other language.</p>
       <div class="three">
         <div class="cell">
           <h3 data-i18n="lang.tok.h">Token cost</h3>
           <p class="big" data-i18n="lang.tok.big">1.5–1.8×</p>
-          <p data-i18n="lang.tok.p">A character of Persian evidence costs 1.46 to 1.80 times the tokens of English for five of six readers, and 2.99 times for Qwen3 235B. A 6,000-character Persian pack costs the primary reader about as much as a 10,000-character English one. Set budgets in tokens, not characters.</p>
+          <ul class="pts">
+            <li data-i18n="lang.tok.1">Persian costs 1.46 to 1.80× the tokens per character for five of six readers; 2.99× for Qwen3 235B.</li>
+            <li data-i18n="lang.tok.2">Budget in tokens: for the primary reader, 6,000 Persian characters ≈ 10,000 English.</li>
+          </ul>
         </div>
         <div class="cell">
           <h3 data-i18n="lang.mem.h">Memory gap</h3>
           <p class="big" data-i18n="lang.mem.big">20 and 6 of 45</p>
-          <p data-i18n="lang.mem.p">With no evidence at all, the reader answers 20 of 45 English questions and 6 of 45 Persian ones. Asked in the other language, English-source questions are still answered from memory 18 times and Persian-source ones 4 or 5 times: the gap follows the source texts, not the language of the question.</p>
+          <ul class="pts">
+            <li data-i18n="lang.mem.1">No evidence: 20 of 45 English and 6 of 45 Persian correct.</li>
+            <li data-i18n="lang.mem.2">Asked in the other language: still 18 and 4 or 5.</li>
+            <li data-i18n="lang.mem.3">The gap follows the source texts, not the question language.</li>
+          </ul>
         </div>
         <div class="cell">
           <h3 data-i18n="lang.swap.h">Questions in the other language</h3>
           <p class="big" data-i18n="lang.swap.big">37 → 2</p>
-          <p data-i18n="lang.swap.p">With every question translated, BM25 finds a complete bundle in its top 40 for 2 and 8 of 45 questions (from 37 and 29); dense retrieval keeps 35 and 28 (from 38 and 33). The reranked pipeline answers 53 to 54 of 90, against 69 to 71.</p>
+          <ul class="pts">
+            <li data-i18n="lang.swap.1">BM25's top 40 holds a complete bundle for only 2 and 8 of 45 (from 37 and 29).</li>
+            <li data-i18n="lang.swap.2">Dense retrieval keeps 35 and 28 (from 38 and 33).</li>
+            <li data-i18n="lang.swap.3">Reranked pipeline: 53 to 54 correct, down from 69 to 71.</li>
+          </ul>
         </div>
       </div>
       <figure class="fig" aria-labelledby="fig6cap">
         <figcaption id="fig6cap"><span class="figno" data-i18n="fig6.no">Fig. 6</span> <span class="ft" data-i18n="fig6.t">Token cost by reader, and retrieval with translated questions</span></figcaption>
         <div id="fig-language" class="mount mount-fig" data-viz-head="off"><div class="ph"><span data-i18n="fig.ph4">The figure loads here.</span></div></div>
-        <p class="take" data-i18n="fig6.take">Persian costs more tokens per character under every tokenizer we tested. When the question language differs from the documents, BM25 collapses while dense retrieval holds, so keep a dense channel.</p>
+        <p class="take" data-i18n="fig6.take">Persian costs more tokens per character under every tokenizer tested. Across languages BM25 collapses and dense holds: keep a dense channel. <span class="grade g-strong">Strong</span></p>
       </figure>
-      <p class="prose-p" data-i18n="lang.spell">Persian spelling varies: Arabic or Persian letters, the zero-width non-joiner, and three digit systems. Without normalisation BM25 loses 5 to 8 of 45 complete bundles, while dense retrieval on raw text loses at most one. Normalise before BM25.</p>
+      <h4 class="mini-h" data-i18n="spell.h">Persian spelling</h4>
+      <ul class="pts">
+        <li data-i18n="spell.1">Spelling varies: Arabic or Persian letters, zero-width non-joiners, three digit systems.</li>
+        <li data-i18n="spell.2">Unnormalised, BM25 loses 5 to 8 of 45 complete bundles; dense on raw text at most one.</li>
+        <li data-i18n="spell.3">Normalise before BM25. <span class="grade g-tent">Tentative, retrieval only</span></li>
+      </ul>
     </div>
   </div>
 </section>
@@ -359,33 +444,48 @@ document.documentElement.classList.add('js');})();
     <div class="sn" aria-hidden="true">8</div>
     <div class="sc">
       <h2 id="h-trust" data-i18n="trust.h">How far to trust this</h2>
-      <p class="lead" data-i18n="trust.lead">Every recommendation on this page rests on one benchmark, one primary reader, one judge and 90 answerable questions. These are the limits, stated plainly.</p>
+      <p class="lead" data-i18n="trust.lead">One benchmark, one primary reader, LLM judges, an author-only partial review, 90 answerable questions.</p>
       <div class="limits">
         <div class="lim">
-          <h3 data-i18n="trust.gate.h">The frozen gate failed</h3>
-          <p data-i18n="trust.gate.p">The only confirmatory test required Lex-RAG to beat both controls by at least 5 of 90 answers at 6,000 characters. It answered 5 to 7 more than Hybrid and 0 to 3 fewer than HR. Neither primary test was significant.</p>
+          <h3 data-i18n="trust.gate.h">The test fixed in advance missed its pass mark</h3>
+          <ul class="pts">
+            <li data-i18n="trust.gate.2">Pass mark: at least 5 of 90 over both controls at 6,000 characters. Result: 5 to 7 more than Hybrid, 0 to 3 fewer than HR.</li>
+            <li data-i18n="trust.gate.3">Neither primary test was significant.</li>
+          </ul>
         </div>
         <div class="lim">
           <h3 data-i18n="trust.post.h">The rest is post hoc</h3>
-          <p data-i18n="trust.post.p">Every other result reuses the same test questions after their answers were known, so its p-values are descriptive. The recommendations need a fresh test.</p>
+          <ul class="pts">
+            <li data-i18n="trust.post.1">All other results reuse the test questions after their answers were known.</li>
+            <li data-i18n="trust.post.2">Their p-values are descriptive; the advice needs a fresh test.</li>
+          </ul>
         </div>
         <div class="lim">
           <h3 data-i18n="trust.power.h">90 questions detect about 11 answers</h3>
-          <p data-i18n="trust.power.p">A paired comparison has 80% power only for differences of about 11 answers, or about 8 within one language half. A difference of 5 would need about 400 to 460 questions.</p>
+          <ul class="pts">
+            <li data-i18n="trust.power.1">Paired tests have 80% power only for gaps of about 11 answers (about 8 within one language half).</li>
+            <li data-i18n="trust.power.2">A gap of 5 would need about 400 to 460 questions.</li>
+          </ul>
         </div>
         <div class="lim">
           <h3 data-i18n="trust.judge.h">Judges and the human review disagree</h3>
-          <p data-i18n="trust.judge.p">A second judge agrees with the first on 91% of answers (kappa 0.76), yet orders the middle pipelines differently. A partial human review once gave Lex-RAG a significant lead over Hybrid (+8), which disappeared when all four pipelines were reviewed (+5, corrected p = .36).</p>
+          <ul class="pts">
+            <li data-i18n="trust.judge.1">A second judge agrees on 91% of answers (kappa 0.76) but orders the middle pipelines differently.</li>
+            <li data-i18n="trust.judge.2">The human review covers 30 questions, blind to the method, by the author alone.</li>
+            <li data-i18n="trust.judge.3">Its significant +8 for Lex-RAG over Hybrid fell to +5 (corrected p = .36) with all four pipelines reviewed.</li>
+          </ul>
         </div>
         <div class="lim">
           <h3 data-i18n="trust.noise.h">The reader is noisy, about ±2</h3>
-          <p data-i18n="trust.noise.p">Sending the identical packs to the same reader again gives a standard deviation of about two answers per cell, and single cells moved by up to six.</p>
+          <ul class="pts">
+            <li data-i18n="trust.noise.1">Same packs, same reader again: standard deviation about two answers per cell; single cells moved up to six.</li>
+          </ul>
         </div>
       </div>
       <figure class="fig" aria-labelledby="fig7cap">
-        <figcaption id="fig7cap"><span class="figno" data-i18n="fig7.no">Fig. 7</span> <span class="ft" data-i18n="fig7.t">The same pipelines across reader draws, two judges and the human review</span></figcaption>
+        <figcaption id="fig7cap"><span class="figno" data-i18n="fig7.no">Fig. 7</span> <span class="ft" data-i18n="fig7.t">The order of the four pipelines across repeat runs, two judges and the human review</span></figcaption>
         <div id="fig-stability" class="mount mount-fig" data-viz-head="off"><div class="ph"><span data-i18n="fig.ph5">The figure loads here.</span></div></div>
-        <p class="take" data-i18n="fig7.take">The order of the middle pipelines changes with the judge, the reader draw and the review design. Read a ranking from one run, one judge and one partial review as a tie unless the difference is large.</p>
+        <p class="take" data-i18n="fig7.take">The order shifts with run, judge and review design. Read rankings from one run, one judge and one partial review as ties unless the gap is large.</p>
       </figure>
     </div>
   </div>
@@ -397,20 +497,24 @@ document.documentElement.classList.add('js');})();
     <div class="sn" aria-hidden="true">9</div>
     <div class="sc">
       <h2 id="h-rsc" data-i18n="rsc.h">Paper, code and data</h2>
-      <p class="lead" data-i18n="rsc.lead">The paper is in preparation and not yet public. Code, benchmark and results will be released on acceptance; a reviewer copy is available on request.</p>
+      <ul class="pts lead-pts">
+        <li data-i18n="rsc.l1">Benchmark and results: public on Hugging Face</li>
+        <li data-i18n="rsc.l2">Paper and code: in preparation (the code repository is private)</li>
+        <li data-i18n="rsc.l3">A reviewer copy is available on request</li>
+      </ul>
       <div class="scroll">
       <table class="res">
         <thead><tr><th scope="col" data-i18n="rsc.c.res">Resource</th><th scope="col" data-i18n="rsc.c.status">Status</th><th scope="col" data-i18n="rsc.c.lic">Licence</th></tr></thead>
         <tbody>
           <tr><th scope="row"><span data-i18n="rsc.paper">Paper</span><small data-i18n="rsc.paper.d">What Reaches the Reader</small></th><td><span class="st" data-i18n="rsc.st.prep">In preparation</span></td><td>–</td></tr>
-          <tr><th scope="row"><span data-i18n="rsc.code">Code</span><small data-i18n="rsc.code.d">all arms, the frozen test runner, evaluation and analysis scripts</small></th><td><span class="st" data-i18n="rsc.st.prep2">In preparation; the repository is private</span></td><td>MIT</td></tr>
-          <tr><th scope="row"><span data-i18n="rsc.bench">Benchmark</span><small data-i18n="rsc.bench.d">156 questions with requirements, gold evidence and evidence bundles</small></th><td><span class="st" data-i18n="rsc.st.prep3">In preparation</span></td><td>CC BY 4.0</td></tr>
-          <tr><th scope="row"><span data-i18n="rsc.results">Results</span><small data-i18n="rsc.results.d">per-question records, verdicts and token ledgers for every arm and reader</small></th><td><span class="st" data-i18n="rsc.st.prep4">In preparation</span></td><td>CC BY 4.0</td></tr>
+          <tr><th scope="row"><span data-i18n="rsc.code">Code</span><small data-i18n="rsc.code.d">every pipeline and experiment, the runner of the pre-specified test, evaluation and analysis scripts</small></th><td><span class="st" data-i18n="rsc.st.prep2">In preparation; the repository is private</span></td><td>MIT</td></tr>
+          <tr><th scope="row"><span data-i18n="rsc.bench">Benchmark</span><small data-i18n="rsc.bench.d">156 questions with requirements, gold evidence and evidence bundles</small></th><td><a class="st hf-link" href="https://huggingface.co/datasets/ArashNasr/anyrag-benchmark" target="_blank" rel="noopener"><span data-i18n="rsc.st.hf">Hugging Face</span><span class="hf-path" lang="en" dir="ltr">ArashNasr/anyrag-benchmark</span></a></td><td>CC BY 4.0</td></tr>
+          <tr><th scope="row"><span data-i18n="rsc.results">Results</span><small data-i18n="rsc.results.d">per-question records, verdicts and token counts for every pipeline, experiment and reader</small></th><td><a class="st hf-link" href="https://huggingface.co/datasets/ArashNasr/anyrag-results" target="_blank" rel="noopener"><span data-i18n="rsc.st.hf2">Hugging Face</span><span class="hf-path" lang="en" dir="ltr">ArashNasr/anyrag-results</span></a></td><td>CC BY 4.0</td></tr>
           <tr><th scope="row"><span data-i18n="rsc.large">Large artifacts</span><small data-i18n="rsc.large.d">judge caches, raw logs, indexes and embeddings</small></th><td><span class="st" data-i18n="rsc.st.req">On request</span></td><td>–</td></tr>
         </tbody>
       </table>
       </div>
-      <p class="fine" data-i18n="rsc.corpus">The document corpora are not redistributed. A source manifest lists every document's title, edition, source, address and file hash, so a rebuilt pool can be checked against the annotations.</p>
+      <p class="fine" data-i18n="rsc.corpus">Corpora are not redistributed. A source manifest (title, edition, source, address, file hash) lets a rebuilt pool be checked against the annotations.</p>
 
       <div class="bib">
         <div class="bib-head">

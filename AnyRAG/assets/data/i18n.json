@@ -41,7 +41,7 @@
  },
  "hero.def": {
   "en": "Choose the retrieval setup your questions need.",
-  "fa": "چیدمان بازیابی متناسب با پرسش‌هایتان را انتخاب کنید."
+  "fa": "چیدمان بازیابی متناسب با پرسش‌هایتان را انتخاب کنید"
  },
  "hero.title": {
   "en": "What Reaches the Reader: A Comparison of Retrieval-Augmented Generation Setups in Persian and English",
@@ -83,17 +83,13 @@
   "en": "Benchmark",
   "fa": "بنچمارک"
  },
- "soon3": {
-  "en": "in preparation",
-  "fa": "در دست آماده‌سازی"
- },
  "video.h": {
   "en": "The work in about 90 seconds",
   "fa": "این پژوهش در حدود ۹۰ ثانیه"
  },
  "video.lead": {
-  "en": "An explainer for readers new to RAG: what it is, where answers get lost, and what helps when. On-screen text, no narration, in English and Persian.",
-  "fa": "ویدیویی برای کسانی که با RAG تازه آشنا می‌شوند: RAG چیست، پاسخ‌ها کجا از دست می‌روند و چه چیزی در چه شرایطی کمک می‌کند. فقط متن روی تصویر، بدون گفتار، به فارسی و انگلیسی."
+  "en": "For newcomers to RAG: where answers get lost and what helps.",
+  "fa": "برای کسانی که با RAG تازه آشنا می‌شوند: پاسخ‌ها کجا از دست می‌روند و چه چیزی کمک می‌کند."
  },
  "video.ph": {
   "en": "The explainer video is being prepared.",
@@ -107,73 +103,57 @@
   "en": "The question",
   "fa": "پرسش پژوهش"
  },
- "about.q.p": {
-  "en": "A retrieval-augmented generation (RAG) system searches a document collection and shows the best passages to a language model, the reader, which writes the answer. Building one means choosing a search method, a way to rank or select passages, and how much text the reader sees. Most comparisons of these choices use English. We asked which choices matter in Persian and in English, and where the answers are lost.",
-  "fa": "سامانهٔ تولید تقویت‌شده با بازیابی (RAG) در مجموعه‌ای از اسناد جست‌وجو می‌کند و مرتبط‌ترین بخش‌ها را به یک مدل زبانی می‌دهد. این مدل، که در این پژوهش آن را «مدل پاسخ‌گو» می‌نامیم، پاسخ را می‌نویسد. ساختن چنین سامانه‌ای یعنی سه انتخاب: روش جست‌وجو، شیوهٔ رتبه‌بندی یا گزینش بخش‌ها، و مقدار متنی که مدل پاسخ‌گو می‌بیند. بیشتر مقایسه‌های این انتخاب‌ها با داده‌های انگلیسی انجام شده است. ما پرسیدیم کدام انتخاب‌ها در فارسی و در انگلیسی اثر دارند و پاسخ‌ها در کجای مسیر از دست می‌روند."
- },
  "about.b.h": {
   "en": "The benchmark",
   "fa": "بنچمارک"
  },
- "about.b.p": {
-  "en": "156 questions over 155 natural documents: company reports, non-fiction books and statutes, in six search pools. Questions come in three tiers of difficulty, half in Persian and half in English, and each carries annotated gold evidence. The test set has 90 answerable questions.",
-  "fa": "۱۵۶ پرسش دربارهٔ ۱۵۵ سند واقعی: گزارش شرکت‌ها، کتاب‌های غیرداستانی و متن قوانین، در شش مخزن جست‌وجو. پرسش‌ها در سه سطح دشواری‌اند، نیمی به فارسی و نیمی به انگلیسی، و برای هر کدام شواهد مرجع برچسب‌گذاری شده است. مجموعهٔ آزمون ۹۰ پرسش پاسخ‌پذیر دارد."
- },
  "about.c.h": {
   "en": "What was compared",
   "fa": "چه چیزهایی مقایسه شد"
- },
- "about.c.p": {
-  "en": "First, a frozen one-shot test of four whole pipelines at two evidence budgets. Then, post hoc on the same questions: retrieval channels, chunk size, query rewriting, embedding models, reranking and LLM selection, five evidence budgets, and iterative search agents.",
-  "fa": "نخست، آزمونی یک‌باره و ازپیش‌ثبت‌شده: چهار پایپ‌لاین کامل با دو بودجهٔ شواهد. سپس، به‌صورت پسینی و روی همان پرسش‌ها: کانال‌های بازیابی، اندازهٔ قطعه، بازنویسی پرسش، مدل‌های embedding، بازرتبه‌بندی و گزینش با LLM، پنج بودجهٔ شواهد و عامل‌های جست‌وجوی تکرارشونده."
  },
  "about.a.h": {
   "en": "The answer",
   "fa": "پاسخ"
  },
  "about.a.p": {
-  "en": "Answers are rarely lost in the reader. They are lost before it: either the complete evidence never reaches the top candidates, or it is dropped when the evidence pack is built.",
-  "fa": "پاسخ‌ها به‌ندرت در مدل پاسخ‌گو از دست می‌روند، بلکه پیش از رسیدن به آن. یا شواهد کامل هرگز به نامزدهای برتر راه نمی‌یابد، یا هنگام ساختن بستهٔ شواهد کنار گذاشته می‌شود."
+  "en": "Most wrong answers arise before the reader, not in it: either the complete evidence never reaches the top candidates, or it is dropped when the evidence pack is built.",
+  "fa": "بیشتر پاسخ‌های نادرست ریشه در مرحله‌های پیش از مدل پاسخ‌گو دارند، نه در خود مدل پاسخ‌گو. یا شواهد کامل هرگز به نامزدهای برتر نمی‌رسد، یا هنگام ساختن بستهٔ شواهد کنار گذاشته می‌شود."
  },
  "term.budget": {
   "en": "Evidence budget",
   "fa": "بودجهٔ شواهد"
  },
  "term.budget.d": {
-  "en": "The number of characters of retrieved text in the reader's prompt. 6,000 characters is the tight budget of the paper.",
-  "fa": "تعداد کاراکترهای متن بازیابی‌شده در پرامپت مدل پاسخ‌گو. در این مقاله ۶٬۰۰۰ کاراکتر بودجهٔ محدود به شمار می‌رود."
+  "en": "Retrieved characters the reader sees; 6,000 is the tight budget.",
+  "fa": "تعداد کاراکترهای بازیابی‌شده‌ای که مدل پاسخ‌گو می‌بیند؛ بودجهٔ محدود ۶٬۰۰۰ کاراکتر است."
  },
  "term.pack": {
   "en": "Evidence pack",
   "fa": "بستهٔ شواهد"
  },
  "term.pack.d": {
-  "en": "The retrieved text a pipeline actually shows the reader, cut to the budget.",
-  "fa": "متن بازیابی‌شده‌ای که پایپ‌لاین واقعاً به مدل پاسخ‌گو نشان می‌دهد و به اندازهٔ بودجه کوتاه شده است."
+  "en": "What the reader actually sees, cut to the budget.",
+  "fa": "همان متنی که مدل پاسخ‌گو واقعاً می‌بیند و به اندازهٔ بودجه کوتاه شده است."
  },
  "term.bundle": {
   "en": "Evidence bundle",
   "fa": "مجموعهٔ شواهد"
  },
  "term.bundle.d": {
-  "en": "A set of passages that together suffice to answer a question. A pack is complete if it holds a whole bundle.",
-  "fa": "چند بخش متن که با هم برای پاسخ به پرسش کافی‌اند. بسته‌ای کامل است که دست‌کم یک مجموعهٔ شواهد را به‌تمامی در خود داشته باشد."
+  "en": "Passages that together answer a question; a complete pack holds one.",
+  "fa": "چند بخش متن که با هم برای پاسخ کافی‌اند. بسته‌ای که همهٔ بخش‌های یکی از این مجموعه‌ها را داشته باشد، کامل است."
  },
  "term.posthoc": {
   "en": "Post hoc",
   "fa": "پسینی"
  },
  "term.posthoc.d": {
-  "en": "Run on the test questions after their answers were known. Only the frozen test is confirmatory.",
-  "fa": "تحلیلی که روی پرسش‌های آزمون و پس از معلوم شدن پاسخ‌ها اجرا شده است. فقط آزمون ازپیش‌ثبت‌شده تأییدی است."
+  "en": "Run after the test answers were known; not confirmatory.",
+  "fa": "تحلیلی که پس از معلوم شدن پاسخ‌های آزمون اجرا شده است و تأییدی به شمار نمی‌رود."
  },
  "bench.h": {
   "en": "A Persian and English benchmark with gold evidence",
   "fa": "بنچمارکی فارسی و انگلیسی با شواهد مرجع"
- },
- "bench.lead": {
-  "en": "A question's tier is set by the simplest evidence in its pool that is enough to answer it. Every question is answered against its whole pool, with no document picked in advance. The examples below are development questions.",
-  "fa": "سطح هر پرسش را ساده‌ترین شواهدی تعیین می‌کند که در مخزن آن برای پاسخ کافی است. هر پرسش با جست‌وجو در کل مخزن خود پاسخ داده می‌شود و هیچ سندی از پیش انتخاب نمی‌شود. نمونه‌های زیر از پرسش‌های توسعه‌اند."
  },
  "tier1.h": {
   "en": "Local fact",
@@ -212,8 +192,8 @@
   "fa": "حداقل سنی که برای متقاضی امتیاز روزنامه یا نشریه تعیین شده بود، از لایحهٔ قانونی مطبوعات ۱۳۳۴ تا قانون مطبوعات ۱۳۶۴ چه تغییری کرد؟"
  },
  "bench.counts": {
-  "en": "Each pool has 3 development and 5 test questions per tier, plus one unanswerable question per split: 60 development and 96 test questions, 90 of them answerable.",
-  "fa": "هر مخزن در هر سطح ۳ پرسش توسعه و ۵ پرسش آزمون دارد و در هر یک از دو مجموعهٔ توسعه و آزمون یک پرسش بی‌پاسخ هم دارد. در جمع، ۶۰ پرسش توسعه و ۹۶ پرسش آزمون وجود دارد که ۹۰ پرسش از این ۹۶ پرسش پاسخ‌پذیرند."
+  "en": "Each pool: 3 development and 5 test questions per tier, plus one unanswerable question per split. In all: 60 development, 96 test, 90 answerable.",
+  "fa": "هر مخزن در هر سطح ۳ پرسش توسعه و ۵ پرسش آزمون دارد. هر مخزن یک پرسش بی‌پاسخ هم در پرسش‌های توسعه دارد و یکی در پرسش‌های آزمون. در مجموع ۶۰ پرسش توسعه و ۹۶ پرسش آزمون؛ ۹۰ پرسش آزمون پاسخ‌پذیرند."
  },
  "pools.h": {
   "en": "Six search pools",
@@ -347,10 +327,6 @@
   "en": "58,218 chunks of at most 1,000 characters",
   "fa": "۵۸٬۲۱۸ قطعه، هر کدام حداکثر ۱٬۰۰۰ کاراکتر"
  },
- "pools.note": {
-  "en": "Only born-digital text or verified transcriptions, never scans. The Persian and English halves use different documents, so they are two runs of one design and not a controlled contrast between languages.",
-  "fa": "فقط متن‌هایی به کار رفت که از ابتدا دیجیتال بوده‌اند یا رونویسی‌شان بررسی و تأیید شده است؛ هیچ متن اسکن‌شده‌ای در کار نیست. نیمهٔ فارسی و نیمهٔ انگلیسی اسناد متفاوتی دارند، پس این دو، دو اجرای یک طرح‌اند، نه مقایسه‌ای کنترل‌شده میان دو زبان."
- },
  "annot.h": {
   "en": "How evidence is annotated",
   "fa": "شواهد چگونه برچسب‌گذاری شده‌اند"
@@ -368,8 +344,8 @@
   "fa": "بخش‌های شاهد"
  },
  "annot.ev.d": {
-  "en": "exact quotes with offsets into frozen text;",
-  "fa": "نقل‌قول دقیق، با جایگاهش در متن ثابت‌شدهٔ سند؛"
+  "en": "exact quotes, located by character position in a fixed copy of each document;",
+  "fa": "نقل‌قول‌های دقیق، با موقعیت کاراکتری‌شان در نسخه‌ای ثابت از هر سند؛"
  },
  "annot.bun": {
   "en": "Evidence bundles",
@@ -403,17 +379,9 @@
   "en": "A development question (T3, cross-version) with its evidence bundle of two documents. Neither passage answers it alone.",
   "fa": "یک پرسش توسعه (T3، مقایسهٔ دو نسخهٔ قانون) با مجموعهٔ شواهدش که از دو سند تشکیل شده است. هیچ‌یک از این دو بخش به‌تنهایی پاسخ نمی‌دهد."
  },
- "bench.build": {
-  "en": "Claude Opus 5.5 agents drafted each question from a written specification; a mechanical verifier and a separate source-review agent checked it; a native Persian speaker reviewed the Persian wording; and 32 of the 156 questions were spot-checked by hand (31 accepted, 1 fixed).",
-  "fa": "عامل‌های Claude Opus 5.5 هر پرسش را بر اساس دستورالعملی مکتوب نوشتند. یک بررسی‌کنندهٔ خودکار و یک عامل جداگانه برای بازبینی منبع پرسش را وارسی کردند و یک فارسی‌زبان متن فارسی را بازبینی کرد. ۳۲ پرسش از ۱۵۶ پرسش هم به‌صورت دستی و نمونه‌ای بررسی شد (۳۱ پذیرفته شد و ۱ اصلاح شد)."
- },
  "how.h": {
   "en": "How a RAG pipeline answers",
   "fa": "پایپ‌لاین RAG چگونه پاسخ می‌دهد"
- },
- "how.lead": {
-  "en": "Each pipeline turns a question into an evidence pack, the retrieved text the reader sees. It searches the pool, orders or selects the candidates, and packs them into the budget. All four pipelines share the same chunks (at most 1,000 characters), answer prompts and readers.",
-  "fa": "هر پایپ‌لاین از پرسش یک بستهٔ شواهد می‌سازد، یعنی متن بازیابی‌شده‌ای که مدل پاسخ‌گو می‌بیند. پایپ‌لاین در مخزن جست‌وجو می‌کند، نامزدها را مرتب یا گزینش می‌کند و آن‌ها را در حد بودجه در بسته می‌گذارد. هر چهار پایپ‌لاین قطعه‌ها (حداکثر ۱٬۰۰۰ کاراکتر)، پرامپت پاسخ و مدل‌های پاسخ‌گوی یکسانی دارند."
  },
  "pipe.ph3d": {
   "en": "The 3D view of a pipeline loads here.",
@@ -428,12 +396,12 @@
   "fa": "شکل ۲"
  },
  "fig2.cap": {
-  "en": "From the documents to the reader: candidates, the pack window, and the evidence that reaches the reader, from real test traces.",
-  "fa": "از اسناد تا مدل پاسخ‌گو: نامزدها، پنجرهٔ بستهٔ شواهد و شواهدی که به مدل پاسخ‌گو می‌رسد، بر اساس داده‌های ثبت‌شدهٔ واقعی آزمون."
+  "en": "From the documents to the reader: the candidates, the pack, and the evidence that reaches the reader. Recorded runs on three development questions, not test questions.",
+  "fa": "از اسناد تا مدل پاسخ‌گو: نامزدها، بسته و شواهدی که به مدل پاسخ‌گو می‌رسد. داده‌ها از اجراهای ثبت‌شده روی سه پرسش توسعه است، نه پرسش‌های آزمون."
  },
  "pipes.h": {
-  "en": "The four pipelines of the frozen test",
-  "fa": "چهار پایپ‌لاین آزمون ازپیش‌ثبت‌شده"
+  "en": "The four pipelines of the test fixed in advance",
+  "fa": "چهار پایپ‌لاین آزمون ازپیش‌تعیین‌شده"
  },
  "pipes.c.name": {
   "en": "Pipeline",
@@ -456,8 +424,8 @@
   "fa": "خط پایه (ترکیبی)"
  },
  "pipes.hy.d": {
-  "en": "BM25 and dense (bge-m3) retrieval, merged by reciprocal rank fusion. The budget is filled in ranked order.",
-  "fa": "بازیابی BM25 و جست‌وجوی معنایی (bge-m3) که با ادغام رتبه‌ای متقابل (RRF) یکی می‌شوند. بودجه به ترتیب رتبه پر می‌شود."
+  "en": "BM25 and dense (bge-m3) retrieval, merged by reciprocal rank fusion; the budget is filled in rank order.",
+  "fa": "بازیابی BM25 و جست‌وجوی معنایی (bge-m3) که با ادغام رتبه‌ای متقابل (RRF) یکی می‌شوند؛ بودجه به ترتیب رتبه پر می‌شود."
  },
  "pipes.hy.t": {
   "en": "1.00",
@@ -472,8 +440,8 @@
   "fa": "ترکیبی + بازرتبه‌ساز"
  },
  "pipes.hr.d": {
-  "en": "Hybrid, then a cross-encoder reranker rescores the merged list. The reranker is a trained model and uses no LLM tokens.",
-  "fa": "پایپ‌لاین ترکیبی و سپس یک بازرتبه‌ساز cross-encoder که به فهرست ادغام‌شده دوباره امتیاز می‌دهد. بازرتبه‌ساز مدلی آموزش‌دیده است و توکن LLM مصرف نمی‌کند."
+  "en": "Hybrid, reordered by a cross-encoder reranker: a small trained model that scores question and passage together, with no LLM tokens.",
+  "fa": "پایپ‌لاین ترکیبی که یک بازرتبه‌ساز cross-encoder فهرستش را از نو مرتب می‌کند. این بازرتبه‌ساز مدل آموزش‌دیدهٔ کوچکی است که به پرسش و بخش متن با هم امتیاز می‌دهد و توکن LLM مصرف نمی‌کند."
  },
  "pipes.hr.t": {
   "en": "1.01",
@@ -488,8 +456,8 @@
   "fa": "روش ما"
  },
  "pipes.lex.d": {
-  "en": "Fuses BM25, dense and learned-sparse scores. One LLM call splits the question into parts and names a bundle of passages for each; a packer fits the bundles into the budget and fills the rest.",
-  "fa": "امتیازهای BM25، جست‌وجوی معنایی و learned-sparse را ادغام می‌کند. یک فراخوانی LLM پرسش را به چند جزء می‌شکند و برای هر جزء مجموعه‌ای از بخش‌ها را نام می‌برد. بسته‌ساز این مجموعه‌ها را در بودجه جا می‌دهد و باقی بودجه را پر می‌کند."
+  "en": "Fuses BM25, dense and learned-sparse scores. One LLM call splits the question and names a bundle per part; bundles go in first, ranked passages fill the rest.",
+  "fa": "امتیازهای BM25، جست‌وجوی معنایی و learned-sparse را ادغام می‌کند. یک فراخوانی LLM پرسش را به چند جزء می‌شکند و برای هر جزء مجموعه‌ای از بخش‌ها را نام می‌برد. این مجموعه‌ها پیش از همه در بسته قرار می‌گیرند و بخش‌های رتبه‌بندی‌شده باقی بودجه را پر می‌کنند."
  },
  "pipes.lex.t": {
   "en": "2.04–2.32",
@@ -504,8 +472,8 @@
   "fa": "گزینشگر اقتباسی"
  },
  "pipes.setr.d": {
-  "en": "One chain-of-thought call with the published SetR prompt picks a set from Hybrid's candidates; Hybrid's list fills the rest. An adaptation, so it says nothing about the published system.",
-  "fa": "یک فراخوانی با زنجیرهٔ استدلال و با پرامپت منتشرشدهٔ SetR مجموعه‌ای از نامزدهای پایپ‌لاین ترکیبی را برمی‌گزیند و باقی بودجه با فهرست همان پایپ‌لاین پر می‌شود. این پایپ‌لاین اقتباسی است و دربارهٔ خود سامانهٔ منتشرشده چیزی نمی‌گوید."
+  "en": "Our adaptation of SetR: one chain-of-thought call with its published prompt picks a set from Hybrid's candidates, and Hybrid fills the rest. It says nothing about the published system.",
+  "fa": "اقتباس ما از SetR: یک فراخوانی با زنجیرهٔ استدلال و پرامپت منتشرشدهٔ این روش از میان نامزدهای پایپ‌لاین ترکیبی مجموعه‌ای برمی‌گزیند. باقی بودجه را فهرست همان پایپ‌لاین پر می‌کند. نتایجش دربارهٔ خود سامانهٔ منتشرشده چیزی نمی‌گوید."
  },
  "pipes.setr.t": {
   "en": "3.39–3.67",
@@ -516,20 +484,16 @@
   "fa": "۵٫۵ ثانیه"
  },
  "pipes.note": {
-  "en": "At the 6,000-character budget, on all 96 test questions. Tokens count every query-time LLM call. Latency was measured under contention on a laptop GPU, so only the order is informative.",
-  "fa": "با بودجهٔ ۶٬۰۰۰ کاراکتر و روی همهٔ ۹۶ پرسش آزمون. توکن‌ها همهٔ فراخوانی‌های LLM هنگام پرسش را در بر می‌گیرند. زمان پاسخ روی GPU لپ‌تاپ و در شرایط رقابت بر سر منابع اندازه‌گیری شد، پس فقط ترتیب این اعداد معنا دارد."
- },
- "how.readers": {
-  "en": "One primary reader, GLM-5.3-flash, answers every question and makes both selection calls. Five readers from other model families answer the identical packs. A strict LLM judge scores each answer: it counts as correct only if it meets every required point and adds no contradiction, wrong value or unsupported claim.",
-  "fa": "یک مدل پاسخ‌گوی اصلی، GLM-5.3-flash، به همهٔ پرسش‌ها پاسخ می‌دهد و هر دو فراخوانی گزینش را هم انجام می‌دهد. پنج مدل پاسخ‌گو از خانواده‌های دیگر با همان بسته‌ها به پرسش‌ها پاسخ می‌دهند. یک داور LLM سخت‌گیر هر پاسخ را می‌سنجد. پاسخ فقط وقتی درست شمرده می‌شود که همهٔ نکته‌های لازم را داشته باشد و هیچ تناقض، مقدار نادرست یا ادعای بی‌پشتوانه‌ای نیاورد."
+  "en": "6,000 characters, all 96 test questions. Tokens: every query-time LLM call. Latency: laptop GPU under contention; only the order is informative.",
+  "fa": "بودجهٔ ۶٬۰۰۰ کاراکتر، همهٔ ۹۶ پرسش آزمون. توکن‌ها همهٔ فراخوانی‌های LLM هنگام پرسش را در بر می‌گیرند. زمان پاسخ روی GPU لپ‌تاپ و در رقابت بر سر منابع اندازه‌گیری شد؛ پس فقط ترتیب اعداد معنا دارد."
  },
  "choose.h": {
   "en": "Choose your RAG",
   "fa": "RAG خود را انتخاب کنید"
  },
  "choose.lead": {
-  "en": "Answer a few questions about your documents, your budget and your hardware. The recommendation follows the paper's guide table, and every step comes with its evidence and a confidence label.",
-  "fa": "به چند پرسش دربارهٔ اسناد، بودجه و سخت‌افزارتان پاسخ دهید. پیشنهاد از جدول راهنمای مقاله پیروی می‌کند و هر گام آن با شواهدش و برچسب میزان اطمینان همراه است."
+  "en": "Answer a few questions; get a setup backed by the paper's guide table.",
+  "fa": "به چند پرسش پاسخ دهید و چیدمانی بگیرید که پشتوانه‌اش جدول راهنمای مقاله است."
  },
  "choose.note": {
   "en": "Based on 90 test questions; post hoc analyses; your data may differ, so test on your own questions.",
@@ -540,8 +504,8 @@
   "fa": "نتایج چه نشان می‌دهند"
  },
  "res.lead": {
-  "en": "Scores are correct answers out of the 90 answerable test questions, for the primary reader and the first judge. A range such as 62–63 covers a few answers the judge could not score.",
-  "fa": "امتیازها تعداد پاسخ‌های درست از ۹۰ پرسش پاسخ‌پذیر آزمون است، با مدل پاسخ‌گوی اصلی و داور اول. بازه‌ای مانند ۶۲–۶۳ یعنی داور چند پاسخ را نتوانسته است بسنجد."
+  "en": "Correct answers of 90; primary reader, first judge. Ranges such as 62–63 cover answers the judge could not score.",
+  "fa": "تعداد پاسخ‌های درست از ۹۰، با مدل پاسخ‌گوی اصلی و داور اول. بازه‌ای مانند ۶۲–۶۳ یعنی داور چند پاسخ را نتوانسته است بسنجد."
  },
  "fig3.no": {
   "en": "Fig. 3",
@@ -556,8 +520,8 @@
   "fa": "شکل اینجا بارگذاری می‌شود."
  },
  "fig3.take": {
-  "en": "With only the gold evidence the reader answers 83 of 90. For 15 to 18 questions no complete evidence bundle reaches the top 40 candidates, and for 11 to 15 more it is dropped while the pack is built.",
-  "fa": "مدل پاسخ‌گو اگر فقط شواهد مرجع را ببیند، به ۸۳ پرسش از ۹۰ درست پاسخ می‌دهد. در ۱۵ تا ۱۸ پرسش، هیچ مجموعهٔ کاملی از شواهد به ۴۰ نامزد برتر نمی‌رسد. در ۱۱ تا ۱۵ پرسش دیگر، شواهد کامل هنگام ساختن بسته کنار گذاشته می‌شود."
+  "en": "Gold evidence alone: 83 of 90. Lost before the reader: 15 to 18 (no complete bundle in the top 40), 11 to 15 more (dropped from the pack).",
+  "fa": "اگر فقط شواهد مرجع به مدل پاسخ‌گو داده شود، به ۸۳ پرسش از ۹۰ درست پاسخ می‌دهد. پیش از رسیدن به مدل پاسخ‌گو، ۱۵ تا ۱۸ پرسش از دست می‌رود (هیچ مجموعهٔ کاملی به ۴۰ نامزد برتر نمی‌رسد) و ۱۱ تا ۱۵ پرسش دیگر هم (مجموعهٔ کامل هنگام ساختن بسته کنار گذاشته می‌شود)."
  },
  "fig4.no": {
   "en": "Fig. 4",
@@ -572,8 +536,8 @@
   "fa": "شکل اینجا بارگذاری می‌شود."
  },
  "fig4.take": {
-  "en": "A choosing step pays most at small budgets: Lex-RAG's selection call is worth 15 to 16 answers at 3,000 characters (one run) and 2 to 4 from 10,000 on. Plain hybrid retrieval rises from about 50 to 72 correct answers between 3,000 and 24,000 characters.",
-  "fa": "گام گزینش در بودجه‌های کوچک بیشترین سود را دارد. فراخوانی گزینش Lex-RAG در ۳٬۰۰۰ کاراکتر (در یک اجرا) ۱۵ تا ۱۶ پاسخ درست می‌افزاید و از ۱۰٬۰۰۰ کاراکتر به بالا ۲ تا ۴ پاسخ. با افزایش بودجه از ۳٬۰۰۰ به ۲۴٬۰۰۰ کاراکتر، بازیابی ترکیبیِ ساده از حدود ۵۰ به ۷۲ پاسخ درست می‌رسد."
+  "en": "Lex-RAG's selection call adds 15 to 16 answers at 3,000 characters (one run), 2 to 4 from 10,000 on. Plain hybrid: about 50 to 72 from 3,000 to 24,000.",
+  "fa": "فراخوانی گزینش Lex-RAG در ۳٬۰۰۰ کاراکتر (در یک اجرا) ۱۵ تا ۱۶ پاسخ درست می‌افزاید و از ۱۰٬۰۰۰ کاراکتر به بالا ۲ تا ۴ پاسخ. بازیابی ترکیبیِ ساده از ۳٬۰۰۰ تا ۲۴٬۰۰۰ کاراکتر از حدود ۵۰ به ۷۲ پاسخ درست می‌رسد."
  },
  "fig5.no": {
   "en": "Fig. 5",
@@ -588,32 +552,24 @@
   "fa": "شکل اینجا بارگذاری می‌شود."
  },
  "fig5.take": {
-  "en": "Hybrid retrieval answers 62 to 63, dense alone 53 and BM25 alone 48. Chunks of 2,000 characters lose 13 to 20 answers; query rewriting and a second embedding model do not help.",
-  "fa": "بازیابی ترکیبی ۶۲ تا ۶۳ پاسخ درست می‌دهد، جست‌وجوی معنایی به‌تنهایی ۵۳ و BM25 به‌تنهایی ۴۸. قطعه‌های ۲٬۰۰۰ کاراکتری ۱۳ تا ۲۰ پاسخ را از دست می‌دهند. بازنویسی پرسش و مدل embedding دوم کمکی نمی‌کنند."
+  "en": "Hybrid 62 to 63, dense alone 53, BM25 alone 48; 2,000-character chunks lose 13 to 20. Rewriting and a second embedding model did not help (tentative: rewrites gained a few in English).",
+  "fa": "پایپ‌لاین ترکیبی ۶۲ تا ۶۳ پاسخ درست می‌دهد، جست‌وجوی معنایی به‌تنهایی ۵۳ و BM25 به‌تنهایی ۴۸. با قطعه‌های ۲٬۰۰۰ کاراکتری ۱۳ تا ۲۰ پاسخ درست از دست می‌رود. بازنویسی پرسش و مدل embedding دوم کمکی نکردند (غیرقطعی: در نیمهٔ انگلیسی، بازنویسی چند پاسخ درست افزود)."
  },
  "search.h": {
   "en": "Searching harder",
   "fa": "جست‌وجوی بیشتر"
  },
- "search.p": {
-  "en": "An iterative agent that searches the hybrid index up to five times answers 77 of 90, the highest score of any arm that does not use the annotations. It needs about four times the tokens and a median 10.5 s. Its lead over the reranked pipeline (69 to 71) is 6 to 8 answers, within the noise of the test.",
-  "fa": "عاملی که تا پنج بار در نمایهٔ ترکیبی جست‌وجو می‌کند به ۷۷ پرسش از ۹۰ درست پاسخ می‌دهد. در میان حالت‌هایی که از برچسب‌گذاری‌ها استفاده نمی‌کنند، این بالاترین امتیاز است. حدود چهار برابر توکن مصرف می‌کند و میانهٔ زمان پاسخش ۱۰٫۵ ثانیه است. برتری‌اش بر پایپ‌لاین با بازرتبه‌ساز (۶۹ تا ۷۱) ۶ تا ۸ پاسخ است، یعنی در حد نوسان آزمون."
- },
  "long.h": {
   "en": "Reading whole documents",
   "fa": "خواندن کل اسناد"
- },
- "long.p": {
-  "en": "Long context helps only when the right documents are already known. Given the gold documents, the reader answers 79; given the best-matching documents by BM25, cut to the same length, it answers 24.",
-  "fa": "پنجرهٔ متنی بلند فقط وقتی کمک می‌کند که اسناد درست از پیش معلوم باشند. مدل پاسخ‌گو با اسناد مرجع به ۷۹ پرسش درست پاسخ می‌دهد. اگر به جای آن‌ها اسنادی را ببیند که از نظر BM25 بیشترین تطابق را با پرسش دارند و به همان طول کوتاه شده‌اند، به ۲۴ پرسش درست پاسخ می‌دهد."
  },
  "lang.h": {
   "en": "Persian and English",
   "fa": "فارسی و انگلیسی"
  },
  "lang.lead": {
-  "en": "The two halves use different documents, so a gap between them mixes language and source. The firm findings are those a design can isolate: the cost of a character, and every question asked in the other language.",
-  "fa": "دو نیمهٔ بنچمارک اسناد متفاوتی دارند، پس هر تفاوتی میان آن‌ها اثر زبان و اثر منبع را با هم دارد. یافته‌هایی محکم‌اند که طرح آزمایش بتواند جدایشان کند: هزینهٔ هر کاراکتر، و پرسیدن همهٔ پرسش‌ها به زبان دیگر."
+  "en": "The halves use different documents, so gaps mix language and source. Firm findings come from the cost of a character and from questions asked in the other language.",
+  "fa": "دو نیمه اسناد متفاوتی دارند، پس هر تفاوتی میانشان اثر زبان و منبع را با هم دارد. یافته‌های محکم از دو جا می‌آیند: هزینهٔ هر کاراکتر، و پرسش‌هایی که به زبان دیگر مطرح شوند."
  },
  "lang.tok.h": {
   "en": "Token cost",
@@ -623,10 +579,6 @@
   "en": "1.5–1.8×",
   "fa": "۱٫۵ تا ۱٫۸ برابر"
  },
- "lang.tok.p": {
-  "en": "A character of Persian evidence costs 1.46 to 1.80 times the tokens of English for five of six readers, and 2.99 times for Qwen3 235B. A 6,000-character Persian pack costs the primary reader about as much as a 10,000-character English one. Set budgets in tokens, not characters.",
-  "fa": "برای پنج مدل پاسخ‌گو از شش مدل، هر کاراکتر شواهد فارسی ۱٫۴۶ تا ۱٫۸۰ برابر کاراکتر انگلیسی توکن مصرف می‌کند و برای Qwen3 235B ۲٫۹۹ برابر. هزینهٔ بستهٔ فارسی ۶٬۰۰۰ کاراکتری برای مدل پاسخ‌گوی اصلی تقریباً برابر بستهٔ انگلیسی ۱۰٬۰۰۰ کاراکتری است. بودجه را بر حسب توکن تعیین کنید، نه کاراکتر."
- },
  "lang.mem.h": {
   "en": "Memory gap",
   "fa": "شکاف حافظه"
@@ -635,10 +587,6 @@
   "en": "20 and 6 of 45",
   "fa": "۲۰ و ۶ از ۴۵"
  },
- "lang.mem.p": {
-  "en": "With no evidence at all, the reader answers 20 of 45 English questions and 6 of 45 Persian ones. Asked in the other language, English-source questions are still answered from memory 18 times and Persian-source ones 4 or 5 times: the gap follows the source texts, not the language of the question.",
-  "fa": "مدل پاسخ‌گو بدون هیچ شاهدی به ۲۰ پرسش انگلیسی از ۴۵ و ۶ پرسش فارسی از ۴۵ درست پاسخ می‌دهد. اگر همین پرسش‌ها به زبان دیگر مطرح شوند، مدل هنوز به ۱۸ پرسشِ برآمده از منابع انگلیسی از حافظه پاسخ می‌دهد و به ۴ یا ۵ پرسشِ برآمده از منابع فارسی. پس این شکاف به متن‌های منبع برمی‌گردد، نه به زبان پرسش."
- },
  "lang.swap.h": {
   "en": "Questions in the other language",
   "fa": "پرسش به زبان دیگر"
@@ -646,10 +594,6 @@
  "lang.swap.big": {
   "en": "37 → 2",
   "fa": "۳۷ ← ۲"
- },
- "lang.swap.p": {
-  "en": "With every question translated, BM25 finds a complete bundle in its top 40 for 2 and 8 of 45 questions (from 37 and 29); dense retrieval keeps 35 and 28 (from 38 and 33). The reranked pipeline answers 53 to 54 of 90, against 69 to 71.",
-  "fa": "وقتی همهٔ پرسش‌ها ترجمه شوند، BM25 برای ۲ و ۸ پرسش از ۴۵ یک مجموعهٔ کامل شواهد در ۴۰ نامزد برترش پیدا می‌کند (پیش‌تر ۳۷ و ۲۹). جست‌وجوی معنایی ۳۵ و ۲۸ را نگه می‌دارد (پیش‌تر ۳۸ و ۳۳). پایپ‌لاین با بازرتبه‌ساز به ۵۳ تا ۵۴ پرسش از ۹۰ درست پاسخ می‌دهد، در برابر ۶۹ تا ۷۱."
  },
  "fig6.no": {
   "en": "Fig. 6",
@@ -664,84 +608,56 @@
   "fa": "شکل اینجا بارگذاری می‌شود."
  },
  "fig6.take": {
-  "en": "Persian costs more tokens per character under every tokenizer we tested. When the question language differs from the documents, BM25 collapses while dense retrieval holds, so keep a dense channel.",
-  "fa": "با همهٔ توکنایزرهایی که آزمودیم، هر کاراکتر فارسی توکن بیشتری مصرف می‌کند. وقتی زبان پرسش با زبان اسناد فرق دارد، BM25 به‌شدت افت می‌کند و جست‌وجوی معنایی پابرجا می‌ماند؛ پس کانال معنایی را نگه دارید."
- },
- "lang.spell": {
-  "en": "Persian spelling varies: Arabic or Persian letters, the zero-width non-joiner, and three digit systems. Without normalisation BM25 loses 5 to 8 of 45 complete bundles, while dense retrieval on raw text loses at most one. Normalise before BM25.",
-  "fa": "املای فارسی یکدست نیست: حروف عربی یا فارسی، نیم‌فاصله، و سه دستگاه رقم. بدون نرمال‌سازی، BM25 از ۴۵ مجموعهٔ کامل شواهد ۵ تا ۸ را از دست می‌دهد، در حالی که جست‌وجوی معنایی روی متن خام حداکثر یکی را. پیش از BM25 متن را نرمال کنید."
+  "en": "Persian costs more tokens per character under every tokenizer tested. Across languages BM25 collapses and dense holds: keep a dense channel. <span class=\"grade g-strong\">Strong</span>",
+  "fa": "با همهٔ توکنایزرهایی که آزمودیم، هر کاراکتر فارسی توکن بیشتری مصرف می‌کند. وقتی زبان پرسش و اسناد فرق دارد، BM25 به‌شدت افت می‌کند و جست‌وجوی معنایی پابرجا می‌ماند؛ پس کانال معنایی را نگه دارید. <span class=\"grade g-strong\">قوی</span>"
  },
  "trust.h": {
   "en": "How far to trust this",
   "fa": "تا کجا می‌توان به این نتایج اعتماد کرد"
  },
  "trust.lead": {
-  "en": "Every recommendation on this page rests on one benchmark, one primary reader, one judge and 90 answerable questions. These are the limits, stated plainly.",
-  "fa": "همهٔ توصیه‌های این صفحه بر یک بنچمارک، یک مدل پاسخ‌گوی اصلی، یک داور و ۹۰ پرسش پاسخ‌پذیر تکیه دارند. محدودیت‌ها را بی‌پرده در ادامه آورده‌ایم."
+  "en": "One benchmark, one primary reader, LLM judges, an author-only partial review, 90 answerable questions.",
+  "fa": "یک بنچمارک، یک مدل پاسخ‌گوی اصلی، داورهای LLM، بازبینی انسانی محدودی که فقط نویسنده انجام داده، و ۹۰ پرسش پاسخ‌پذیر."
  },
  "trust.gate.h": {
-  "en": "The frozen gate failed",
-  "fa": "معیار ازپیش‌ثبت‌شده برآورده نشد"
- },
- "trust.gate.p": {
-  "en": "The only confirmatory test required Lex-RAG to beat both controls by at least 5 of 90 answers at 6,000 characters. It answered 5 to 7 more than Hybrid and 0 to 3 fewer than HR. Neither primary test was significant.",
-  "fa": "تنها آزمون تأییدی شرط کرده بود که Lex-RAG در ۶٬۰۰۰ کاراکتر از هر دو پایپ‌لاین کنترل دست‌کم ۵ پاسخ درست از ۹۰ بیشتر بدهد. Lex-RAG از پایپ‌لاین ترکیبی ۵ تا ۷ پاسخ درست بیشتر و از HR ۰ تا ۳ پاسخ کمتر داد. هیچ‌یک از دو آزمون اصلی معنادار نبود."
+  "en": "The test fixed in advance missed its pass mark",
+  "fa": "آزمون ازپیش‌تعیین‌شده به حد قبولی نرسید"
  },
  "trust.post.h": {
   "en": "The rest is post hoc",
   "fa": "باقی نتایج پسینی‌اند"
  },
- "trust.post.p": {
-  "en": "Every other result reuses the same test questions after their answers were known, so its p-values are descriptive. The recommendations need a fresh test.",
-  "fa": "همهٔ نتایج دیگر از همان پرسش‌های آزمون و پس از معلوم شدن پاسخ‌ها استفاده می‌کنند، پس مقدارهای p آن‌ها فقط توصیفی‌اند. این توصیه‌ها به آزمونی تازه نیاز دارند."
- },
  "trust.power.h": {
   "en": "90 questions detect about 11 answers",
   "fa": "۹۰ پرسش فقط تفاوت حدود ۱۱ پاسخ را آشکار می‌کند"
- },
- "trust.power.p": {
-  "en": "A paired comparison has 80% power only for differences of about 11 answers, or about 8 within one language half. A difference of 5 would need about 400 to 460 questions.",
-  "fa": "مقایسهٔ جفتی فقط برای تفاوت‌های حدود ۱۱ پاسخ توان آماری ۸۰٪ دارد، و درون یک نیمهٔ زبانی برای حدود ۸ پاسخ. برای آشکار کردن تفاوت ۵ پاسخ حدود ۴۰۰ تا ۴۶۰ پرسش لازم است."
  },
  "trust.judge.h": {
   "en": "Judges and the human review disagree",
   "fa": "داورها و بازبینی انسانی هم‌نظر نیستند"
  },
- "trust.judge.p": {
-  "en": "A second judge agrees with the first on 91% of answers (kappa 0.76), yet orders the middle pipelines differently. A partial human review once gave Lex-RAG a significant lead over Hybrid (+8), which disappeared when all four pipelines were reviewed (+5, corrected p = .36).",
-  "fa": "داور دوم در ۹۱٪ پاسخ‌ها با داور اول هم‌نظر است (کاپا ۰٫۷۶)، اما ترتیب پایپ‌لاین‌های میانی را به شکل دیگری تعیین می‌کند. یک بازبینی انسانی محدود زمانی برتری معناداری برای Lex-RAG بر پایپ‌لاین ترکیبی نشان داد (‎+۸). وقتی هر چهار پایپ‌لاین بازبینی شدند، این برتری از میان رفت (‎+۵، مقدار p اصلاح‌شده ۰٫۳۶)."
- },
  "trust.noise.h": {
   "en": "The reader is noisy, about ±2",
   "fa": "نوسان مدل پاسخ‌گو حدود ±۲ پاسخ است"
- },
- "trust.noise.p": {
-  "en": "Sending the identical packs to the same reader again gives a standard deviation of about two answers per cell, and single cells moved by up to six.",
-  "fa": "اگر همان بسته‌ها دوباره به همان مدل پاسخ‌گو داده شوند، انحراف معیار در هر خانه حدود دو پاسخ است و تک‌خانه‌ها تا شش پاسخ جابه‌جا شدند."
  },
  "fig7.no": {
   "en": "Fig. 7",
   "fa": "شکل ۷"
  },
  "fig7.t": {
-  "en": "The same pipelines across reader draws, two judges and the human review",
-  "fa": "همان پایپ‌لاین‌ها در اجراهای مختلف مدل پاسخ‌گو، با دو داور و با بازبینی انسانی"
+  "en": "The order of the four pipelines across repeat runs, two judges and the human review",
+  "fa": "ترتیب چهار پایپ‌لاین در اجراهای مکرر، با دو داور و با بازبینی انسانی"
  },
  "fig.ph5": {
   "en": "The figure loads here.",
   "fa": "شکل اینجا بارگذاری می‌شود."
  },
  "fig7.take": {
-  "en": "The order of the middle pipelines changes with the judge, the reader draw and the review design. Read a ranking from one run, one judge and one partial review as a tie unless the difference is large.",
-  "fa": "ترتیب پایپ‌لاین‌های میانی با تغییر داور، اجرای مدل پاسخ‌گو و طرح بازبینی عوض می‌شود. اگر رتبه‌بندی از یک اجرا، یک داور و یک بازبینی محدود آمده است، پایپ‌لاین‌ها را، جز در تفاوت‌های بزرگ، هم‌تراز بدانید."
+  "en": "The order shifts with run, judge and review design. Read rankings from one run, one judge and one partial review as ties unless the gap is large.",
+  "fa": "ترتیب پایپ‌لاین‌ها با اجرا، داور و طرح بازبینی تغییر می‌کند. اگر رتبه‌بندی از یک اجرا، یک داور و یک بازبینی محدود به دست آمده است، پایپ‌لاین‌ها را هم‌تراز بدانید، مگر آنکه فاصله‌شان زیاد باشد."
  },
  "rsc.h": {
   "en": "Paper, code and data",
   "fa": "مقاله، کد و داده"
- },
- "rsc.lead": {
-  "en": "The paper is in preparation and not yet public. Code, benchmark and results will be released on acceptance; a reviewer copy is available on request.",
-  "fa": "مقاله در دست آماده‌سازی است و هنوز منتشر نشده است. کد، بنچمارک و نتایج پس از پذیرش مقاله منتشر می‌شوند؛ داوران مقاله می‌توانند نسخه‌ای از آن‌ها را درخواست کنند."
  },
  "rsc.c.res": {
   "en": "Resource",
@@ -772,8 +688,8 @@
   "fa": "کد"
  },
  "rsc.code.d": {
-  "en": "all arms, the frozen test runner, evaluation and analysis scripts",
-  "fa": "همهٔ حالت‌ها، اجراکنندهٔ آزمون ازپیش‌ثبت‌شده، و اسکریپت‌های ارزیابی و تحلیل"
+  "en": "every pipeline and experiment, the runner of the pre-specified test, evaluation and analysis scripts",
+  "fa": "همهٔ پایپ‌لاین‌ها و آزمایش‌ها، اجراکنندهٔ آزمون ازپیش‌تعیین‌شده، و اسکریپت‌های ارزیابی و تحلیل"
  },
  "rsc.st.prep2": {
   "en": "In preparation; the repository is private",
@@ -787,21 +703,13 @@
   "en": "156 questions with requirements, gold evidence and evidence bundles",
   "fa": "۱۵۶ پرسش با الزامات، شواهد مرجع و مجموعه‌های شواهد"
  },
- "rsc.st.prep3": {
-  "en": "In preparation",
-  "fa": "در دست آماده‌سازی"
- },
  "rsc.results": {
   "en": "Results",
   "fa": "نتایج"
  },
  "rsc.results.d": {
-  "en": "per-question records, verdicts and token ledgers for every arm and reader",
-  "fa": "سوابق تک‌تک پرسش‌ها، حکم داورها و دفتر توکن‌ها برای همهٔ حالت‌ها و مدل‌های پاسخ‌گو"
- },
- "rsc.st.prep4": {
-  "en": "In preparation",
-  "fa": "در دست آماده‌سازی"
+  "en": "per-question records, verdicts and token counts for every pipeline, experiment and reader",
+  "fa": "داده‌های ثبت‌شدهٔ تک‌تک پرسش‌ها، حکم داورها و شمار توکن‌ها برای همهٔ پایپ‌لاین‌ها، آزمایش‌ها و مدل‌های پاسخ‌گو"
  },
  "rsc.large": {
   "en": "Large artifacts",
@@ -816,8 +724,8 @@
   "fa": "در صورت درخواست"
  },
  "rsc.corpus": {
-  "en": "The document corpora are not redistributed. A source manifest lists every document's title, edition, source, address and file hash, so a rebuilt pool can be checked against the annotations.",
-  "fa": "پیکرهٔ اسناد بازتوزیع نمی‌شود. در فهرست مشخصات اسناد، عنوان، ویرایش، منبع، نشانی و هش فایل هر سند آمده است تا بتوان مخزنی را که از نو ساخته می‌شود با برچسب‌گذاری‌ها تطبیق داد."
+  "en": "Corpora are not redistributed. A source manifest (title, edition, source, address, file hash) lets a rebuilt pool be checked against the annotations.",
+  "fa": "پیکرهٔ اسناد بازتوزیع نمی‌شود. فهرست مشخصات اسناد عنوان، ویرایش، منبع، نشانی و هش فایل هر سند را در بر دارد. با این فهرست می‌توان مخزنی را که از نو ساخته شده با برچسب‌ها تطبیق داد."
  },
  "bib.h": {
   "en": "Cite",
@@ -858,5 +766,317 @@
  "copy.fail": {
   "en": "Select the text and copy it",
   "fa": "متن را انتخاب و کپی کنید"
+ },
+ "about.a.note": {
+  "en": "Post hoc; the test fixed in advance missed its pass mark (see Limits).",
+  "fa": "این نتیجه حاصل تحلیل‌های پسینی است؛ آزمون ازپیش‌تعیین‌شده به حد قبولی‌اش نرسید (جزئیات در «محدودیت‌ها»)."
+ },
+ "term.gold": {
+  "en": "Gold evidence",
+  "fa": "شواهد مرجع"
+ },
+ "term.gold.d": {
+  "en": "Passages marked as evidence; used only to score retrieval.",
+  "fa": "بخش‌هایی که به‌عنوان شواهد هر پرسش برچسب‌گذاری شده‌اند و فقط برای سنجیدن بازیابی به کار می‌روند."
+ },
+ "term.prereg": {
+  "en": "Test fixed in advance",
+  "fa": "آزمون ازپیش‌تعیین‌شده"
+ },
+ "term.prereg.d": {
+  "en": "Committed before any test answer was seen; not registered with a third party.",
+  "fa": "پرسش‌ها، پایپ‌لاین‌ها و حد قبولی پیش از دیدن حتی یک پاسخ آزمون در مخزن کد ثبت شدند. این آزمون نزد هیچ نهاد مستقلی ثبت نشده است."
+ },
+ "main.h": {
+  "en": "The main result",
+  "fa": "نتیجهٔ اصلی"
+ },
+ "main.cap": {
+  "en": "Lex-RAG is our method; Hybrid and Hybrid + reranker were the test's controls.",
+  "fa": "Lex-RAG روش ماست؛ پایپ‌لاین ترکیبی و ترکیبی + بازرتبه‌ساز دو پایپ‌لاین کنترل این آزمون بودند."
+ },
+ "main.c.pipe": {
+  "en": "Pipeline",
+  "fa": "پایپ‌لاین"
+ },
+ "main.c.6k": {
+  "en": "6,000 characters",
+  "fa": "۶٬۰۰۰ کاراکتر"
+ },
+ "main.c.15k": {
+  "en": "15,500 characters",
+  "fa": "۱۵٬۵۰۰ کاراکتر"
+ },
+ "main.hy": {
+  "en": "Hybrid",
+  "fa": "ترکیبی"
+ },
+ "main.hr": {
+  "en": "Hybrid + reranker",
+  "fa": "ترکیبی + بازرتبه‌ساز"
+ },
+ "gate.h": {
+  "en": "Test fixed in advance: not met",
+  "fa": "آزمون ازپیش‌تعیین‌شده: به حد قبولی نرسید"
+ },
+ "hero.btn.bench.where": {
+  "en": "on Hugging Face",
+  "fa": "در Hugging Face"
+ },
+ "about.q.1": {
+  "en": "RAG searches documents and hands the best passages to an LLM, the reader, which writes the answer.",
+  "fa": "سامانهٔ تولید تقویت‌شده با بازیابی (RAG) در اسناد جست‌وجو می‌کند و مرتبط‌ترین بخش‌ها را به یک LLM می‌دهد تا پاسخ را بنویسد. این LLM را «مدل پاسخ‌گو» می‌نامیم."
+ },
+ "about.q.2": {
+  "en": "Builders choose a search method, a ranking or selection step, and how much text the reader sees.",
+  "fa": "برای ساختن چنین سامانه‌ای سه چیز را باید انتخاب کرد: روش جست‌وجو، گام رتبه‌بندی یا گزینش، و مقدار متنی که مدل پاسخ‌گو می‌بیند."
+ },
+ "about.q.3": {
+  "en": "Which choices matter in Persian and English, and where are answers lost?",
+  "fa": "پرسش ما: کدام انتخاب‌ها در فارسی و انگلیسی اثر دارند و پاسخ‌ها کجا از دست می‌روند؟"
+ },
+ "about.b.1": {
+  "en": "156 questions over 155 natural documents: company reports, non-fiction books, statutes",
+  "fa": "۱۵۶ پرسش دربارهٔ ۱۵۵ سند واقعی: گزارش شرکت‌ها، کتاب‌های غیرداستانی و متن قوانین"
+ },
+ "about.b.2": {
+  "en": "Six search pools, three difficulty tiers",
+  "fa": "شش مخزن جست‌وجو و سه سطح دشواری"
+ },
+ "about.b.3": {
+  "en": "Half Persian, half English, with annotated gold evidence",
+  "fa": "نیمی فارسی و نیمی انگلیسی، با شواهد مرجعِ برچسب‌گذاری‌شده"
+ },
+ "about.b.4": {
+  "en": "90 answerable test questions",
+  "fa": "۹۰ پرسش آزمونِ پاسخ‌پذیر"
+ },
+ "about.c.1": {
+  "en": "Fixed in advance: four whole pipelines at two evidence budgets",
+  "fa": "آزمون ازپیش‌تعیین‌شده: چهار پایپ‌لاین کامل با دو بودجهٔ شواهد"
+ },
+ "about.c.2": {
+  "en": "Post hoc: retrieval channels, chunk size, query rewriting, embedding models, reranking, LLM selection, five budgets, search agents",
+  "fa": "تحلیل‌های پسینی: کانال‌های بازیابی، اندازهٔ قطعه، بازنویسی پرسش، مدل‌های embedding، بازرتبه‌بندی، گزینش با LLM، پنج بودجه و عامل‌های جست‌وجو"
+ },
+ "bench.l1": {
+  "en": "Three tiers, set by the simplest evidence that answers the question",
+  "fa": "سه سطح پرسش؛ سطح را ساده‌ترین شواهدی تعیین می‌کند که برای پاسخ کافی است"
+ },
+ "bench.l2": {
+  "en": "Each question searches its whole pool",
+  "fa": "پاسخ هر پرسش در کل مخزن خودش جست‌وجو می‌شود"
+ },
+ "bench.l3": {
+  "en": "The examples below are development questions",
+  "fa": "نمونه‌های زیر از پرسش‌های توسعه‌اند"
+ },
+ "pools.n1": {
+  "en": "Born-digital text or verified transcriptions only, never scans.",
+  "fa": "فقط متن‌هایی که از ابتدا دیجیتال بوده‌اند یا رونویسی‌شان تأیید شده است؛ هیچ متن اسکن‌شده‌ای در کار نیست."
+ },
+ "pools.n2": {
+  "en": "Persian and English use different documents: two runs of one design, not a controlled language contrast.",
+  "fa": "نیمهٔ فارسی و نیمهٔ انگلیسی اسناد متفاوتی دارند؛ پس دو بار پیاده‌سازی یک طرح‌اند، نه مقایسه‌ای کنترل‌شده میان دو زبان."
+ },
+ "build.h": {
+  "en": "How the questions were built",
+  "fa": "پرسش‌ها چگونه ساخته شدند"
+ },
+ "build.1": {
+  "en": "Drafted by Claude Opus 5.5 agents from a written specification",
+  "fa": "پیش‌نویس هر پرسش را عامل‌های Claude Opus 5.5 از روی دستورالعملی مکتوب نوشتند"
+ },
+ "build.2": {
+  "en": "Checked by a mechanical verifier and a separate source-review agent",
+  "fa": "هر پرسش را یک بررسی‌کنندهٔ خودکار و یک عامل جداگانهٔ بازبینی منبع وارسی کردند"
+ },
+ "build.3": {
+  "en": "Persian wording reviewed by a native speaker",
+  "fa": "متن فارسی پرسش‌ها را یک فارسی‌زبان بازبینی کرد"
+ },
+ "build.4": {
+  "en": "32 of 156 checked by hand: 31 accepted, 1 fixed",
+  "fa": "از ۱۵۶ پرسش، ۳۲ پرسش به‌صورت دستی بررسی شد: ۳۱ پرسش پذیرفته شد و یکی اصلاح شد"
+ },
+ "how.l1": {
+  "en": "Search the pool, order or select candidates, pack them into the budget",
+  "fa": "جست‌وجو در مخزن، مرتب کردن یا گزینش نامزدها و چیدن آن‌ها در بسته تا سقف بودجه"
+ },
+ "how.l2": {
+  "en": "The pack is all the reader sees",
+  "fa": "مدل پاسخ‌گو فقط همین بسته را می‌بیند"
+ },
+ "how.l3": {
+  "en": "All four pipelines share chunks (at most 1,000 characters), prompts and readers",
+  "fa": "قطعه‌ها (حداکثر ۱٬۰۰۰ کاراکتر)، پرامپت‌ها و مدل‌های پاسخ‌گو در هر چهار پایپ‌لاین یکسان‌اند"
+ },
+ "readers.h": {
+  "en": "Readers and scoring",
+  "fa": "مدل‌های پاسخ‌گو و داوری"
+ },
+ "readers.1": {
+  "en": "Primary reader: GLM-5.3-flash, for every answer and both selection calls.",
+  "fa": "مدل پاسخ‌گوی اصلی، GLM-5.3-flash، به همهٔ پرسش‌ها پاسخ می‌دهد و هر دو فراخوانی گزینش را هم انجام می‌دهد."
+ },
+ "readers.2": {
+  "en": "Five readers from other model families answer the same packs.",
+  "fa": "پنج مدل پاسخ‌گو از خانواده‌های دیگر با همان بسته‌ها پاسخ می‌دهند."
+ },
+ "readers.3": {
+  "en": "A strict LLM judge: correct only if every required point is met and nothing is contradicted, wrong or unsupported.",
+  "fa": "داور LLM سخت‌گیر است: پاسخ فقط وقتی درست است که همهٔ نکته‌های لازم را داشته باشد و هیچ تناقض، مقدار نادرست یا ادعای بی‌پشتوانه‌ای نیاورد."
+ },
+ "choose.ph": {
+  "en": "The chooser loads here.",
+  "fa": "ابزار انتخاب اینجا بارگذاری می‌شود."
+ },
+ "gate.1": {
+  "en": "Pass mark: at least 5 of 90 ahead of both controls at 6,000 characters.",
+  "fa": "حد قبولی: Lex-RAG باید با بودجهٔ ۶٬۰۰۰ کاراکتر دست‌کم ۵ پاسخ درست (از ۹۰) بیشتر از هر دو پایپ‌لاین کنترل بدهد."
+ },
+ "gate.2": {
+  "en": "Result: 5 to 7 more than Hybrid, 0 to 3 fewer than Hybrid + reranker. Neither primary test was significant.",
+  "fa": "نتیجه: ۵ تا ۷ پاسخ درست بیشتر از پایپ‌لاین ترکیبی، اما ۰ تا ۳ پاسخ کمتر از ترکیبی + بازرتبه‌ساز. هیچ‌یک از دو آزمون اصلی معنادار نبود."
+ },
+ "gate.3": {
+  "en": "With 90 questions, a few answers is noise. All below is post hoc.",
+  "fa": "با ۹۰ پرسش، تفاوت چند پاسخ در حد نوسان است. همهٔ نتایج بعدی پسینی‌اند."
+ },
+ "search.1": {
+  "en": "An iterative agent (hybrid index, up to five searches, reranker): 77 of 90, the best without annotations.",
+  "fa": "یک عامل تکرارشونده (روی نمایهٔ ترکیبی، تا پنج جست‌وجو، با بازرتبه‌ساز) به ۷۷ پرسش از ۹۰ درست پاسخ می‌دهد؛ بالاترین امتیاز بدون استفاده از برچسب‌ها."
+ },
+ "search.2": {
+  "en": "About four times the tokens; median 10.5 s.",
+  "fa": "حدود چهار برابر توکن مصرف می‌کند و میانهٔ زمان پاسخش ۱۰٫۵ ثانیه است."
+ },
+ "search.3": {
+  "en": "Its 6 to 8 lead over the reranked pipeline (69 to 71) is within the noise. First judge only.",
+  "fa": "برتری ۶ تا ۸ پاسخی‌اش بر پایپ‌لاین با بازرتبه‌ساز (۶۹ تا ۷۱) در حد نوسان است. این عامل را فقط داور اول سنجیده است."
+ },
+ "long.1": {
+  "en": "Helps only when the right documents are known.",
+  "fa": "پنجرهٔ متنی بلند فقط وقتی کمک می‌کند که اسناد درست از پیش معلوم باشند."
+ },
+ "long.2": {
+  "en": "Gold documents: 79 correct.",
+  "fa": "با اسناد مرجع: ۷۹ پاسخ درست."
+ },
+ "long.3": {
+  "en": "Best BM25 documents, cut to the same length: 24.",
+  "fa": "با اسنادی که از نظر BM25 بیشترین تطابق را دارند و به همان طول کوتاه شده‌اند: ۲۴."
+ },
+ "lang.tok.1": {
+  "en": "Persian costs 1.46 to 1.80× the tokens per character for five of six readers; 2.99× for Qwen3 235B.",
+  "fa": "برای پنج مدل پاسخ‌گو از شش مدل، هر کاراکتر فارسی ۱٫۴۶ تا ۱٫۸۰ برابر کاراکتر انگلیسی توکن مصرف می‌کند؛ برای Qwen3 235B ۲٫۹۹ برابر."
+ },
+ "lang.tok.2": {
+  "en": "Budget in tokens: for the primary reader, 6,000 Persian characters ≈ 10,000 English.",
+  "fa": "بودجه را بر حسب توکن تعیین کنید: برای مدل پاسخ‌گوی اصلی، ۶٬۰۰۰ کاراکتر فارسی تقریباً هم‌هزینهٔ ۱۰٬۰۰۰ کاراکتر انگلیسی است."
+ },
+ "lang.mem.1": {
+  "en": "No evidence: 20 of 45 English and 6 of 45 Persian correct.",
+  "fa": "بدون هیچ شاهدی: ۲۰ پاسخ درست از ۴۵ پرسش انگلیسی و ۶ از ۴۵ پرسش فارسی."
+ },
+ "lang.mem.2": {
+  "en": "Asked in the other language: still 18 and 4 or 5.",
+  "fa": "اگر همین پرسش‌ها به زبان دیگر مطرح شوند، همچنان ۱۸ و ۴ یا ۵."
+ },
+ "lang.mem.3": {
+  "en": "The gap follows the source texts, not the question language.",
+  "fa": "پس این شکاف به متن‌های منبع برمی‌گردد، نه به زبان پرسش."
+ },
+ "lang.swap.1": {
+  "en": "BM25's top 40 holds a complete bundle for only 2 and 8 of 45 (from 37 and 29).",
+  "fa": "BM25 فقط برای ۲ و ۸ پرسش از ۴۵ یک مجموعهٔ کامل شواهد در ۴۰ نامزد برترش پیدا می‌کند (به‌جای ۳۷ و ۲۹)."
+ },
+ "lang.swap.2": {
+  "en": "Dense retrieval keeps 35 and 28 (from 38 and 33).",
+  "fa": "جست‌وجوی معنایی برای ۳۵ و ۲۸ پرسش مجموعهٔ کامل را حفظ می‌کند (به‌جای ۳۸ و ۳۳)."
+ },
+ "lang.swap.3": {
+  "en": "Reranked pipeline: 53 to 54 correct, down from 69 to 71.",
+  "fa": "پایپ‌لاین با بازرتبه‌ساز: ۵۳ تا ۵۴ پاسخ درست، به‌جای ۶۹ تا ۷۱."
+ },
+ "spell.h": {
+  "en": "Persian spelling",
+  "fa": "املای فارسی"
+ },
+ "spell.1": {
+  "en": "Spelling varies: Arabic or Persian letters, zero-width non-joiners, three digit systems.",
+  "fa": "املا یکدست نیست: حروف عربی یا فارسی، نیم‌فاصله و سه دستگاه رقم."
+ },
+ "spell.2": {
+  "en": "Unnormalised, BM25 loses 5 to 8 of 45 complete bundles; dense on raw text at most one.",
+  "fa": "بدون نرمال‌سازی، BM25 از ۴۵ مجموعهٔ کامل شواهد ۵ تا ۸ را از دست می‌دهد؛ جست‌وجوی معنایی روی متن خام حداکثر یکی را."
+ },
+ "spell.3": {
+  "en": "Normalise before BM25. <span class=\"grade g-tent\">Tentative, retrieval only</span>",
+  "fa": "پیش از BM25 متن را نرمال کنید. <span class=\"grade g-tent\">غیرقطعی، فقط برای بازیابی</span>"
+ },
+ "trust.gate.2": {
+  "en": "Pass mark: at least 5 of 90 over both controls at 6,000 characters. Result: 5 to 7 more than Hybrid, 0 to 3 fewer than HR.",
+  "fa": "حد قبولی: دست‌کم ۵ پاسخ درست (از ۹۰) بیشتر از هر دو پایپ‌لاین کنترل در ۶٬۰۰۰ کاراکتر. نتیجه: ۵ تا ۷ پاسخ بیشتر از پایپ‌لاین ترکیبی و ۰ تا ۳ پاسخ کمتر از HR."
+ },
+ "trust.post.1": {
+  "en": "All other results reuse the test questions after their answers were known.",
+  "fa": "همهٔ نتایج دیگر روی همان پرسش‌های آزمون و پس از معلوم شدن پاسخ‌ها به دست آمده‌اند."
+ },
+ "trust.post.2": {
+  "en": "Their p-values are descriptive; the advice needs a fresh test.",
+  "fa": "پس مقدارهای p آن‌ها فقط توصیفی‌اند و توصیه‌ها به آزمونی تازه نیاز دارند."
+ },
+ "trust.power.1": {
+  "en": "Paired tests have 80% power only for gaps of about 11 answers (about 8 within one language half).",
+  "fa": "مقایسهٔ جفتی فقط برای تفاوت‌های حدود ۱۱ پاسخ توان آماری ۸۰٪ دارد، و درون یک نیمهٔ زبانی برای حدود ۸ پاسخ."
+ },
+ "trust.power.2": {
+  "en": "A gap of 5 would need about 400 to 460 questions.",
+  "fa": "برای آشکار کردن تفاوت ۵ پاسخ، حدود ۴۰۰ تا ۴۶۰ پرسش لازم است."
+ },
+ "trust.judge.1": {
+  "en": "A second judge agrees on 91% of answers (kappa 0.76) but orders the middle pipelines differently.",
+  "fa": "داور دوم در ۹۱٪ پاسخ‌ها با داور اول هم‌نظر است (کاپا ۰٫۷۶)، اما پایپ‌لاین‌های میانی را به ترتیب دیگری می‌چیند."
+ },
+ "trust.judge.2": {
+  "en": "The human review covers 30 questions, blind to the method, by the author alone.",
+  "fa": "بازبینی انسانی ۳۰ پرسش را در بر می‌گیرد و فقط خود نویسنده آن را انجام داده است، بی‌آنکه بداند هر پاسخ از کدام روش است."
+ },
+ "trust.judge.3": {
+  "en": "Its significant +8 for Lex-RAG over Hybrid fell to +5 (corrected p = .36) with all four pipelines reviewed.",
+  "fa": "این بازبینی زمانی برتری معنادار ‎+۸ را برای Lex-RAG بر پایپ‌لاین ترکیبی نشان داد. با بازبینی هر چهار پایپ‌لاین، این برتری به ‎+۵ کاهش یافت (مقدار p اصلاح‌شده ۰٫۳۶)."
+ },
+ "trust.noise.1": {
+  "en": "Same packs, same reader again: standard deviation about two answers per cell; single cells moved up to six.",
+  "fa": "اگر همان بسته‌ها دوباره به همان مدل پاسخ‌گو داده شوند، انحراف معیار در هر خانه حدود دو پاسخ است و نتیجهٔ برخی خانه‌ها تا شش پاسخ تغییر کرد."
+ },
+ "rsc.l1": {
+  "en": "Benchmark and results: public on Hugging Face",
+  "fa": "بنچمارک و نتایج: به‌صورت عمومی در Hugging Face"
+ },
+ "rsc.l2": {
+  "en": "Paper and code: in preparation (the code repository is private)",
+  "fa": "مقاله و کد: در دست آماده‌سازی (مخزن کد خصوصی است)"
+ },
+ "rsc.l3": {
+  "en": "A reviewer copy is available on request",
+  "fa": "داوران مقاله می‌توانند نسخه‌ای را درخواست کنند"
+ },
+ "rsc.st.hf": {
+  "en": "Hugging Face",
+  "fa": "Hugging Face"
+ },
+ "rsc.st.hf2": {
+  "en": "Hugging Face",
+  "fa": "Hugging Face"
+ },
+ "hero.btn.bench.title": {
+  "en": "The benchmark on Hugging Face (opens in a new tab)",
+  "fa": "بنچمارک در Hugging Face (در زبانهٔ تازه باز می‌شود)"
+ },
+ "trust.gate.3": {
+  "en": "Neither primary test was significant.",
+  "fa": "هیچ‌یک از دو آزمون اصلی معنادار نبود."
  }
 }

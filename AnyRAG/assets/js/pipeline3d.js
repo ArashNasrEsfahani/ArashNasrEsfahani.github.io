@@ -8,6 +8,8 @@
   var THREE_URL = 'https://cdnjs.cloudflare.com/ajax/libs/three.js/0.160.0/three.module.min.js';
   var NS = 'http://www.w3.org/2000/svg';
   var SCRIPT = document.currentScript;
+  /* cache-busting: the ?v= of this script's own URL (set in index.html) is added to the files it loads */
+  var VQ = (function () { try { var v = new URL(document.currentScript.src).searchParams.get('v'); return v ? '?v=' + encodeURIComponent(v) : ''; } catch (e) { return ''; } })();
   var BASE = (function () { try { return new URL('../data/', SCRIPT.src).href; } catch (e) { return 'assets/data/'; } })();
   var STEPS = 5, STEP_MS = 3600, BUDGET = 6000;
   var mqReduce = window.matchMedia ? window.matchMedia('(prefers-reduced-motion: reduce)') : { matches: false };
@@ -57,22 +59,26 @@
     var ev1 = list1.filter(function (i) { return ex.passages[i].sp.length > 0; }).length;
     var srcDocs = {};
     list1.concat(list2).forEach(function (i) { srcDocs[ex.passages[i].d] = 1; });
-    return { ex: ex, cell: cell, list1: list1, list2: list2, ids: ids, packIdx: packIdx, packPos: packPos, ev1: ev1, srcDocs: srcDocs,
+    var dropIdx = {}, nd = 0;
+    list2.forEach(function (i) { if (packIdx[i] == null) dropIdx[i] = nd++; });
+    var gDocs = ex.docs.filter(function (d) { return d.g; }).length;
+    return { ex: ex, cell: cell, list1: list1, list2: list2, ids: ids, packIdx: packIdx, packPos: packPos, ev1: ev1, srcDocs: srcDocs, dropIdx: dropIdx, gDocs: gDocs,
       evIds: ids.filter(function (i) { return ex.passages[i].sp.length > 0; }) };
   }
-  /* state of item i at step k: {zone: 'doc'|'list'|'pack'|'reader', slot, vis, dim, lit} */
+  /* state of item i at step k: {zone: 'doc'|'list'|'drop'|'pack'|'reader', slot, di, vis, lit}. 'drop' is a candidate
+     the pack left out; it keeps its list slot for the 2D view, and di is its place on the 3D pile. */
   function itemState(M, i, k) {
     var r1 = M.list1.indexOf(i), r2 = M.list2.indexOf(i), inPack = M.packIdx[i] != null, ev = M.ex.passages[i].sp.length > 0;
     if (k === 0) return { zone: 'doc', vis: 0 };
     if (k === 1) return r1 >= 0 ? { zone: 'list', slot: r1, vis: 1, ev: ev } : { zone: 'doc', vis: 0 };
     if (k === 2) return r2 >= 0 ? { zone: 'list', slot: r2, vis: 1, ev: ev } : (r1 >= 0 ? { zone: 'list', slot: r1, vis: 0.15, ev: ev, out: 1 } : { zone: 'doc', vis: 0 });
-    if (k === 3) return inPack ? { zone: 'pack', vis: 1, ev: ev, pp: M.packPos[i] } : (r2 >= 0 ? { zone: 'list', slot: r2, vis: 0.28, ev: ev } : { zone: 'doc', vis: 0 });
+    if (k === 3) return inPack ? { zone: 'pack', vis: 1, ev: ev, pp: M.packPos[i] } : (r2 >= 0 ? { zone: 'drop', slot: r2, di: M.dropIdx[i], vis: 0.28, ev: ev } : { zone: 'doc', vis: 0 });
     if (inPack && M.packPos[i].lit) return { zone: 'reader', vis: 1, ev: ev, pp: M.packPos[i], lit: true };
-    return inPack ? { zone: 'pack', vis: 0.35, ev: ev, pp: M.packPos[i] } : (r2 >= 0 ? { zone: 'list', slot: r2, vis: 0.12, ev: ev } : { zone: 'doc', vis: 0 });
+    return inPack ? { zone: 'pack', vis: 0.35, ev: ev, pp: M.packPos[i] } : (r2 >= 0 ? { zone: 'drop', slot: r2, di: M.dropIdx[i], vis: 0.12, ev: ev } : { zone: 'doc', vis: 0 });
   }
   function caption(M, k) {
     var c = M.cell;
-    if (k === 0) return fill(S('s0'), { docs: fmt(M.ex.docs.length) });
+    if (k === 0) return fill(S('s0'), { docs: fmt(M.ex.docs.length), g: fmt(M.gDocs) });
     if (k === 1) return fill(S('s1'), { ev: fmt(M.ev1) });
     if (k === 2) return S('s2_' + (st.pipe === 'lex5b' ? 'lex' : st.pipe));
     if (k === 3) return fill(S('s3'), { n: fmt(c.pack.length), chars: fmt(c.rendered) });
@@ -172,7 +178,12 @@
 
   function css(el, name, fb) { var v = getComputedStyle(el).getPropertyValue(name).trim(); return v || fb; }
 
-  /* ================= 3D view ================= */
+  /* ================= 3D view =================
+     A three-quarter view on a floor grid, so the stages read as places: the pool of standing documents (the ones
+     holding gold evidence are turquoise from the start), the column of 40 candidates, the pack frame, the reader.
+     Gold passages are turquoise from the moment they are retrieved; what the pack leaves out falls onto a pile in
+     front of the candidates, so a lost piece of evidence stays visible. Colours come from the page tokens and are
+     mixed separately for light and dark, so every object keeps its contrast on both backgrounds. */
   function View3D(THREE, stage) {
     var W = stage.clientWidth, H = stage.clientHeight;
     var renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, powerPreference: 'low-power' });
@@ -182,72 +193,91 @@
     stage.appendChild(renderer.domElement);
     renderer.domElement.setAttribute('aria-hidden', 'true');
     var scene = new THREE.Scene();
-    var camera = new THREE.PerspectiveCamera(30, W / H, 0.5, 200);
-    var hemi = new THREE.HemisphereLight(0xffffff, 0xb8b8b8, 1.5); scene.add(hemi);
-    var dir = new THREE.DirectionalLight(0xffffff, 1.1); dir.position.set(6, 12, 9); scene.add(dir);
+    var camera = new THREE.PerspectiveCamera(32, W / H, 0.5, 300);
+    var hemi = new THREE.HemisphereLight(0xffffff, 0x9a9a9a, 1.6); scene.add(hemi);
+    var key = new THREE.DirectionalLight(0xffffff, 1.5); key.position.set(-7, 14, 11); scene.add(key);
+    var fillL = new THREE.DirectionalLight(0xffffff, 0.55); fillL.position.set(10, 4, -6); scene.add(fillL);
     var col = {};
+    function mix(a, b, t) { return a.clone().lerp(b, t); }
     function readColors() {
       var r = ui.root;
       col.accent = new THREE.Color(css(r, '--viz-accent', '#3e5fb8'));
       col.turq = new THREE.Color(css(r, '--viz-turq', '#0f948c'));
-      col.ctx = new THREE.Color(css(r, '--viz-ctx', '#b5b7bb'));
-      col.ctx2 = new THREE.Color(css(r, '--viz-ctx2', '#7d8188'));
       col.ink = new THREE.Color(css(r, '--viz-ink', '#14161a'));
-      col.line = new THREE.Color(css(r, '--viz-line', '#dcd8cc'));
       col.surf = new THREE.Color(css(r, '--viz-surface', '#fbfaf6'));
-      col.soft = col.turq.clone().lerp(col.surf, 0.45);
+      col.saff = new THREE.Color(css(r, '--viz-saffron', '#b8862b'));
       col.dark = col.surf.getHSL({}).l < 0.5;
+      var dk = col.dark;
+      col.grid = mix(col.surf, col.ink, dk ? 0.11 : 0.2);
+      col.grid2 = mix(col.surf, col.ink, dk ? 0.18 : 0.3);
+      col.doc = mix(col.surf, col.ink, dk ? 0.30 : 0.16);
+      col.docEdge = mix(col.surf, col.ink, dk ? 0.55 : 0.40);
+      col.docSrc = mix(col.accent, col.surf, dk ? 0.35 : 0.55);
+      col.goldDoc = mix(col.turq, col.surf, dk ? 0.25 : 0.35);
+      col.plate = mix(col.surf, col.ink, dk ? 0.58 : 0.40);
+      col.frame = col.accent.clone();
+      col.lineMuted = mix(col.surf, col.ink, dk ? 0.40 : 0.30);
+      hemi.intensity = dk ? 2.4 : 1.6;
+      key.intensity = dk ? 1.9 : 1.5;
     }
     readColors();
 
-    // zones (world units)
-    var Z = { poolX: -8.6, listX: -2.4, packX: 3.0, readerX: 8.4, top: 3.9, colH: 7.8 };
+    // zones (world units); the floor is y = FLOOR
+    var FLOOR = -4.1;
+    var Z = { poolX: -7.6, listX: -2.4, packX: 2.5, readerX: 7.6, top: 3.9, colH: 7.8 };
+    var grid = new THREE.GridHelper(30, 30, col.grid2, col.grid);
+    grid.position.y = FLOOR; grid.material.transparent = true; grid.material.opacity = 0.75; scene.add(grid);
     var poolG = new THREE.Group(); scene.add(poolG);
-    var docMesh = null, docData = [];
+    var docMesh = null, docEdges = null, docData = [];
     var plateGeo = new THREE.BoxGeometry(1, 1, 1);
     var items = {}; // passage index -> {mesh, cur, tgt}
-    var frameMat = new THREE.LineBasicMaterial({ color: col.accent, transparent: true, opacity: 0.9 });
-    var frame = new THREE.LineSegments(new THREE.EdgesGeometry(new THREE.BoxGeometry(2.7, Z.colH, 0.7)), frameMat);
+    var frameMat = new THREE.LineBasicMaterial({ color: col.frame, transparent: true, opacity: 0.95 });
+    var frame = new THREE.LineSegments(new THREE.EdgesGeometry(new THREE.BoxGeometry(2.8, Z.colH, 0.9)), frameMat);
     frame.position.set(Z.packX, Z.top - Z.colH / 2, 0); scene.add(frame);
-    var readerMat = new THREE.MeshStandardMaterial({ color: col.surf, roughness: 0.9, metalness: 0, transparent: true, opacity: 0.55, depthWrite: false });
-    var reader = new THREE.Mesh(new THREE.BoxGeometry(2.6, 2.6, 2.6), readerMat);
-    reader.position.set(Z.readerX, 0, 0); scene.add(reader);
+    var guideMat = new THREE.LineBasicMaterial({ color: col.lineMuted, transparent: true, opacity: 0.8 });
+    var guide = new THREE.LineSegments(new THREE.EdgesGeometry(new THREE.BoxGeometry(2.7, Z.colH, 0.9)), guideMat);
+    guide.position.set(Z.listX, Z.top - Z.colH / 2, 0); scene.add(guide);
+    var readerMat = new THREE.MeshStandardMaterial({ color: col.surf, roughness: 0.6, metalness: 0, transparent: true, opacity: 0.35, depthWrite: false, emissive: 0x000000 });
+    var reader = new THREE.Mesh(new THREE.BoxGeometry(3, 3, 3), readerMat);
+    reader.position.set(Z.readerX, -0.2, 0); scene.add(reader);
     var readerEdgeMat = new THREE.LineBasicMaterial({ color: col.ink });
-    var readerEdge = new THREE.LineSegments(new THREE.EdgesGeometry(reader.geometry), readerEdgeMat);
-    reader.add(readerEdge);
-    var guideMat = new THREE.LineBasicMaterial({ color: col.line });
-    var guide = new THREE.LineSegments(new THREE.EdgesGeometry(new THREE.BoxGeometry(2.6, Z.colH, 0.01)), guideMat);
-    guide.position.set(Z.listX, Z.top - Z.colH / 2, -0.4); scene.add(guide);
+    reader.add(new THREE.LineSegments(new THREE.EdgesGeometry(reader.geometry), readerEdgeMat));
+    // short posts from the floor to the reader and the two columns, so nothing floats without a ground
+    var postMat = new THREE.LineBasicMaterial({ color: col.lineMuted, transparent: true, opacity: 0.6 });
+    var postPts = [];
+    [[Z.readerX, -1.7], [Z.listX, Z.top - Z.colH], [Z.packX, Z.top - Z.colH]].forEach(function (p) { postPts.push(p[0], p[1], 0, p[0], FLOOR, 0); });
+    var postGeo = new THREE.BufferGeometry(); postGeo.setAttribute('position', new THREE.Float32BufferAttribute(postPts, 3));
+    scene.add(new THREE.LineSegments(postGeo, postMat));
 
     // labels
     var labs = {};
-    [['pool', 'l_pool'], ['list', 'l_cands'], ['pack', 'l_pack'], ['reader', 'l_reader']].forEach(function (p) {
+    [['pool', 'l_pool'], ['list', 'l_cands'], ['pack', 'l_pack'], ['reader', 'l_reader'], ['drop', 'l_drop']].forEach(function (p) {
       labs[p[0]] = h('div', { 'class': 'pv-lab', 'aria-hidden': 'true', dir: 'auto' }, stage, S(p[1]));
     });
-    var anchors = { pool: new THREE.Vector3(Z.poolX, 2.6, 0), list: new THREE.Vector3(Z.listX, Z.top + 0.45, 0), pack: new THREE.Vector3(Z.packX, Z.top + 0.45, 0), reader: new THREE.Vector3(Z.readerX, 1.75, 0) };
+    var anchors = { pool: new THREE.Vector3(Z.poolX, FLOOR + 4.3, 0), list: new THREE.Vector3(Z.listX, Z.top + 0.45, 0), pack: new THREE.Vector3(Z.packX, Z.top + 0.45, 0),
+      reader: new THREE.Vector3(Z.readerX, 1.75, 0), drop: new THREE.Vector3(0.1, FLOOR + 1.2, 2.6) };
 
-    // camera orbit (limited)
-    var orbit = { az: 0, el: 0.2, baseAz: 0, baseEl: 0.2, dist: 30 };
+    // camera orbit (limited), three-quarter view from the front left
+    var orbit = { az: -0.36, el: 0.34, baseAz: -0.36, baseEl: 0.34, dist: 30 };
     function fit() {
       var aspect = W / H, vf = camera.fov * Math.PI / 180;
       var hf = 2 * Math.atan(Math.tan(vf / 2) * aspect);
-      var needW = 12.4 / Math.tan(hf / 2), needH = 5.6 / Math.tan(vf / 2);
-      orbit.dist = Math.max(needW, needH);
+      var needW = 10.6 / Math.tan(hf / 2), needH = 5.2 / Math.tan(vf / 2);
+      orbit.dist = Math.max(needW, needH) + 5;
     }
     function placeCam() {
       var d = orbit.dist;
       camera.position.set(Math.sin(orbit.az) * Math.cos(orbit.el) * d, Math.sin(orbit.el) * d + 0.2, Math.cos(orbit.az) * Math.cos(orbit.el) * d);
-      camera.lookAt(0, 0.1, 0);
+      camera.lookAt(0, -0.75, 0.9);
     }
     fit(); placeCam();
 
     var drag = null;
-    var cv = renderer.domElement;
     stage.addEventListener('pointerdown', function (e) { if (e.button !== 0) return; drag = { x: e.clientX, y: e.clientY, az: orbit.az, el: orbit.el, id: e.pointerId }; stage.classList.add('is-drag'); try { stage.setPointerCapture(e.pointerId); } catch (x) {} });
     stage.addEventListener('pointermove', function (e) {
       if (!drag) return;
-      orbit.az = Math.max(-0.5, Math.min(0.5, drag.az - (e.clientX - drag.x) * 0.004));
-      orbit.el = Math.max(0.06, Math.min(0.5, drag.el + (e.clientY - drag.y) * 0.003));
+      orbit.az = Math.max(-0.9, Math.min(0.6, drag.az - (e.clientX - drag.x) * 0.004));
+      orbit.el = Math.max(0.08, Math.min(0.75, drag.el + (e.clientY - drag.y) * 0.003));
       placeCam(); kick();
     });
     function endDrag() { if (!drag) return; drag = null; stage.classList.remove('is-drag'); }
@@ -256,35 +286,48 @@
 
     // ---------- data ----------
     var M = null;
-    function docPos(di) { return docData[di] || { x: Z.poolX, y: 0, z: 0, h: 0.5 }; }
+    function docPos(di) { return docData[di] || { x: Z.poolX, y: FLOOR, z: 0, h: 0.5 }; }
     function setData(m) {
       M = m;
       if (docMesh) { poolG.remove(docMesh); docMesh.geometry.dispose(); docMesh.material.dispose(); docMesh = null; }
+      if (docEdges) { poolG.remove(docEdges); docEdges.geometry.dispose(); docEdges.material.dispose(); docEdges = null; }
       Object.keys(items).forEach(function (k) { scene.remove(items[k].mesh); items[k].mesh.material.dispose(); });
       items = {};
       var docs = m.ex.docs, n = docs.length;
-      var cols = Math.ceil(Math.sqrt(n * 1.1)), rows = Math.ceil(n / cols);
-      var sx = Math.min(0.55, 4.6 / cols), sz = Math.min(0.7, 4.8 / rows);
+      // standing documents in rows on the floor, height by length (log scale)
+      var cols = Math.min(8, Math.ceil(Math.sqrt(n * 1.6))), rows = Math.ceil(n / cols);
+      var sx = Math.min(0.85, 4.6 / cols), sz = Math.min(1.2, 4.4 / rows);
       var maxN = docs.reduce(function (a, d) { return Math.max(a, d.n); }, 1);
       docData = [];
-      var mat = new THREE.MeshStandardMaterial({ roughness: 0.9, metalness: 0 });
+      var mat = new THREE.MeshStandardMaterial({ roughness: 0.85, metalness: 0 });
       docMesh = new THREE.InstancedMesh(new THREE.BoxGeometry(1, 1, 1), mat, n);
-      var o = new THREE.Object3D();
+      var o = new THREE.Object3D(), edgePts = [];
+      // documents holding gold evidence stand in the front row, where the camera sees them
+      var slot = {}, ord = docs.map(function (d, i) { return i; }).sort(function (a, b) { return (docs[b].g ? 1 : 0) - (docs[a].g ? 1 : 0) || a - b; });
+      ord.forEach(function (i, k) { slot[i] = k; });
       docs.forEach(function (d, i) {
-        var c = i % cols, r = Math.floor(i / cols);
-        var hgt = 0.35 + 1.5 * Math.log(1 + d.n) / Math.log(1 + maxN);
-        var x = Z.poolX + (c - (cols - 1) / 2) * sx, z = (r - (rows - 1) / 2) * sz;
-        docData.push({ x: x, y: -2.4 + hgt / 2, z: z, h: hgt });
-        o.position.set(x, -2.4 + hgt / 2, z); o.scale.set(sx * 0.78, hgt, 0.05); o.updateMatrix();
+        var c = slot[i] % cols, r = rows - 1 - Math.floor(slot[i] / cols);
+        var hgt = 1.1 + 2.6 * Math.log(1 + d.n) / Math.log(1 + maxN);
+        var x = Z.poolX + (c - (cols - 1) / 2) * sx, z = (r - (rows - 1) / 2) * sz + 0.4;
+        var w = sx * 0.8, dpt = 0.14;
+        docData.push({ x: x, y: FLOOR + hgt / 2, z: z, h: hgt });
+        o.position.set(x, FLOOR + hgt / 2, z); o.scale.set(w, hgt, dpt); o.updateMatrix();
         docMesh.setMatrixAt(i, o.matrix);
-        docMesh.setColorAt(i, col.line);
+        docMesh.setColorAt(i, col.doc);
+        if (d.g) { // an outline on the documents that hold gold evidence
+          var x0 = x - w / 2 - 0.03, x1 = x + w / 2 + 0.03, y0 = FLOOR, y1 = FLOOR + hgt + 0.03, zz = z + dpt / 2 + 0.02;
+          edgePts.push(x0, y0, zz, x0, y1, zz, x0, y1, zz, x1, y1, zz, x1, y1, zz, x1, y0, zz);
+        }
       });
       poolG.add(docMesh);
+      var eg = new THREE.BufferGeometry(); eg.setAttribute('position', new THREE.Float32BufferAttribute(edgePts, 3));
+      docEdges = new THREE.LineSegments(eg, new THREE.LineBasicMaterial({ color: col.turq }));
+      poolG.add(docEdges);
       m.ids.forEach(function (pi) {
-        var mt = new THREE.MeshStandardMaterial({ roughness: 0.75, metalness: 0, transparent: true, opacity: 0, color: col.ctx });
+        var mt = new THREE.MeshStandardMaterial({ roughness: 0.7, metalness: 0, transparent: true, opacity: 0, color: col.plate });
         var mesh = new THREE.Mesh(plateGeo, mt);
         var dp = docPos(m.ex.passages[pi].d);
-        var cur = { x: dp.x, y: dp.y, z: dp.z, sx: 0.3, sy: 0.05, sz: 0.3, op: 0, r: col.ctx.r, g: col.ctx.g, b: col.ctx.b, e: 0 };
+        var cur = { x: dp.x, y: dp.y, z: dp.z, sx: 0.3, sy: 0.05, sz: 0.3, op: 0, r: col.plate.r, g: col.plate.g, b: col.plate.b, e: 0 };
         mesh.position.set(cur.x, cur.y, cur.z); mesh.scale.set(cur.sx, cur.sy, cur.sz); mesh.visible = false;
         scene.add(mesh);
         items[pi] = { mesh: mesh, cur: cur, from: null, tgt: null, delay: 0 };
@@ -293,30 +336,35 @@
     function docColors(k) {
       if (!docMesh) return;
       M.ex.docs.forEach(function (d, i) {
-        var c = col.line;
-        if (k >= 1 && M.srcDocs[i]) c = col.ctx2;
-        if (k >= 4 && d.g) c = col.soft;
+        var c = col.doc;
+        if (k >= 1 && M.srcDocs[i]) c = col.docSrc;
+        if (d.g) c = col.goldDoc;
         docMesh.setColorAt(i, c);
       });
       docMesh.instanceColor.needsUpdate = true;
     }
     function target(pi, k) {
       var s = itemState(M, pi, k), p = M.ex.passages[pi];
-      var w = 0.7 + 1.7 * Math.min(p.n, 1200) / 1200;
-      var base = s.ev ? (s.lit ? col.turq : col.soft) : col.ctx;
+      var w = 0.8 + 1.7 * Math.min(p.n, 1200) / 1200;
+      var base = s.ev ? col.turq : col.plate;
       if (s.zone === 'doc') { var dp = docPos(p.d); return { x: dp.x, y: dp.y + dp.h / 2, z: dp.z, sx: 0.3, sy: 0.05, sz: 0.3, op: 0, c: base, e: 0 }; }
-      if (s.zone === 'list') return { x: Z.listX, y: Z.top - 0.1 - s.slot * (Z.colH / 40), z: 0, sx: w, sy: Z.colH / 40 * 0.62, sz: 0.55, op: s.vis, c: base, e: 0 };
+      if (s.zone === 'list') return { x: Z.listX, y: Z.top - 0.1 - s.slot * (Z.colH / 40), z: 0, sx: w, sy: Z.colH / 40 * 0.66, sz: 0.7, op: Math.max(s.vis, s.out ? 0.22 : 0), c: base, e: s.ev ? 0.25 : 0 };
+      if (s.zone === 'drop') {
+        // the pile: stacks of four in two rows of five, lying on the floor in front of the candidates
+        var st2 = Math.floor(s.di / 4), lv = s.di % 4, cx = st2 % 5, rz = Math.floor(st2 / 5) % 2;
+        return { x: -1.9 + cx * 1.0, y: FLOOR + 0.06 + lv * 0.13, z: 2.2 + rz * 0.75, sx: 0.82, sy: 0.1, sz: 0.55, op: s.ev ? 1 : 0.85, c: base, e: s.ev ? 0.3 : 0 };
+      }
       if (s.zone === 'pack') {
         var a = s.pp.a * Z.colH, b = s.pp.b * Z.colH;
-        return { x: Z.packX, y: Z.top - (a + b) / 2, z: 0, sx: 2.4, sy: Math.max(0.04, (b - a) - 0.05), sz: 0.5, op: s.vis, c: base, e: 0 };
+        return { x: Z.packX, y: Z.top - (a + b) / 2, z: 0, sx: 2.5, sy: Math.max(0.04, (b - a) - 0.06), sz: 0.7, op: Math.max(0.45, s.vis), c: base, e: s.ev ? 0.25 : 0 };
       }
       // reader: evidence pieces rest lit in front of the reader; the rest goes inside
       if (s.lit) {
         var evList = M.cell.pack.filter(function (q) { return q.sp.length > 0; }).map(function (q) { return q.p; });
         var j = evList.indexOf(pi), n = evList.length;
-        return { x: Z.readerX, y: 0.9 - j * (1.8 / Math.max(1, n)) - 0.9 / Math.max(1, n) + 0.0, z: 1.42, sx: 2.1, sy: Math.min(0.32, 1.4 / Math.max(1, n)), sz: 0.12, op: 1, c: col.turq, e: 0.55 };
+        return { x: Z.readerX, y: -0.2 + 1.0 - j * (2.0 / Math.max(1, n)) - 1.0 / Math.max(1, n), z: 1.62, sx: 2.4, sy: Math.min(0.38, 1.5 / Math.max(1, n)), sz: 0.14, op: 1, c: col.turq, e: 0.6 };
       }
-      return { x: Z.readerX, y: 0, z: 0, sx: 1.2, sy: 0.1, sz: 0.8, op: 0, c: base, e: 0 };
+      return { x: Z.readerX, y: -0.2, z: 0, sx: 1.2, sy: 0.1, sz: 0.8, op: 0, c: base, e: 0 };
     }
 
     // ---------- animation (render on demand) ----------
@@ -329,18 +377,21 @@
       m.material.emissive.setRGB(v.r * v.e, v.g * v.e, v.b * v.e);
       m.material.opacity = v.op; m.visible = v.op > 0.01;
     }
+    var curStep = 0;
     function show(m, k, instant) {
       if (m !== M) setData(m);
+      curStep = k;
       docColors(k);
-      readerEdgeMat.color.copy(k >= 4 ? (M.cell.full ? col.turq : col.ink) : col.ink);
+      var endCol = k >= 4 ? (M.cell.full ? col.turq : col.saff) : col.ink;
+      readerEdgeMat.color.copy(endCol);
+      readerMat.emissive.copy(k >= 4 && M.cell.full ? col.turq : new THREE.Color(0x000000)).multiplyScalar(0.12);
       var dur = instant ? 0 : 1300;
-      var order = M.ids.slice();
-      order.forEach(function (pi, n) {
+      M.ids.forEach(function (pi) {
         var it = items[pi], t = target(pi, k);
         it.from = { x: it.cur.x, y: it.cur.y, z: it.cur.z, sx: it.cur.sx, sy: it.cur.sy, sz: it.cur.sz, op: it.cur.op, r: it.cur.r, g: it.cur.g, b: it.cur.b, e: it.cur.e };
         it.tgt = { x: t.x, y: t.y, z: t.z, sx: t.sx, sy: t.sy, sz: t.sz, op: t.op, r: t.c.r, g: t.c.g, b: t.c.b, e: t.e };
         var s1 = itemState(M, pi, k);
-        it.delay = instant ? 0 : Math.min(500, (s1.zone === 'pack' || s1.zone === 'reader' ? (M.packIdx[pi] || 0) * 70 : (s1.slot || 0) * 9));
+        it.delay = instant ? 0 : Math.min(500, (s1.zone === 'pack' || s1.zone === 'reader' ? (M.packIdx[pi] || 0) * 70 : s1.zone === 'drop' ? 200 + s1.di * 8 : (s1.slot || 0) * 9));
       });
       anim = { t0: performance.now(), dur: dur };
       kick();
@@ -359,7 +410,7 @@
           var e = ease(t), f = it.from, g = it.tgt, c = it.cur;
           ['x', 'y', 'z', 'sx', 'sy', 'sz', 'op', 'r', 'g', 'b', 'e'].forEach(function (k) { c[k] = f[k] + (g[k] - f[k]) * e; });
           // lift passages along an arc while they travel between zones
-          var arc = Math.sin(Math.PI * e) * (Math.abs(g.x - f.x) > 1 ? 0.6 : 0);
+          var arc = Math.sin(Math.PI * e) * (Math.abs(g.x - f.x) > 1 ? 0.8 : 0);
           var v = { x: c.x, y: c.y + arc, z: c.z + arc * 0.5, sx: c.sx, sy: c.sy, sz: c.sz, op: c.op, r: c.r, g: c.g, b: c.b, e: c.e };
           apply(it, v);
         });
@@ -377,6 +428,7 @@
         labs[k].style.left = ((v.x + 1) / 2 * W) + 'px';
         labs[k].style.top = ((1 - v.y) / 2 * H) + 'px';
       });
+      labs.drop.style.opacity = curStep >= 3 ? '1' : '0';
     }
     function resize() {
       W = stage.clientWidth; H = stage.clientHeight;
@@ -387,10 +439,13 @@
     if (ro) ro.observe(stage);
     function retheme() {
       readColors();
-      frameMat.color.copy(col.accent); guideMat.color.copy(col.line); readerMat.color.copy(col.surf);
+      frameMat.color.copy(col.frame); guideMat.color.copy(col.lineMuted); postMat.color.copy(col.lineMuted); readerMat.color.copy(col.surf);
+      grid.material.dispose(); scene.remove(grid);
+      grid = new THREE.GridHelper(30, 30, col.grid2, col.grid); grid.position.y = FLOOR; grid.material.transparent = true; grid.material.opacity = 0.75; scene.add(grid);
+      if (docEdges) docEdges.material.color.copy(col.turq);
       if (M) show(M, st.step, true);
     }
-    function relabel() { labs.pool.textContent = S('l_pool'); labs.list.textContent = S('l_cands'); labs.pack.textContent = S('l_pack'); labs.reader.textContent = S('l_reader'); }
+    function relabel() { labs.pool.textContent = S('l_pool'); labs.list.textContent = S('l_cands'); labs.pack.textContent = S('l_pack'); labs.reader.textContent = S('l_reader'); labs.drop.textContent = S('l_drop'); }
     var destroyed = false;
     function destroy() {
       destroyed = true; if (raf) cancelAnimationFrame(raf); if (ro) ro.disconnect();
@@ -449,7 +504,7 @@
       if (m !== M || !L || Math.abs(L.W - stage.clientWidth) > 2) setData(m);
       svg.classList.toggle('instant', !!instant);
       docs.forEach(function (d, i) {
-        d.setAttribute('class', 'doc' + (k >= 1 && M.srcDocs[i] ? ' src' : '') + (k >= 4 && M.ex.docs[i].g ? ' gold' : ''));
+        d.setAttribute('class', 'doc' + (k >= 1 && M.srcDocs[i] ? ' src' : '') + (M.ex.docs[i].g ? ' gold' : ''));
       });
       reader.setAttribute('class', 'reader' + (k >= 4 && M.cell.full ? ' lit' : ''));
       var evList = M.cell.pack.filter(function (q) { return q.sp.length > 0; }).map(function (q) { return q.p; });
@@ -457,7 +512,7 @@
         var s = itemState(M, pi, k), p = M.ex.passages[pi], r = rects[pi], b;
         var hgt = L.listH * (0.25 + 0.75 * Math.min(p.n, 1200) / 1200);
         if (s.zone === 'doc') b = docBox(p.d);
-        else if (s.zone === 'list') { var w = Math.max(2, L.colW - 2); b = { x: mirror(L.pad + s.slot * L.colW + 1, w), y: L.yList + L.listH - hgt, w: w, h: hgt }; }
+        else if (s.zone === 'list' || s.zone === 'drop') { var w = Math.max(2, L.colW - 2); b = { x: mirror(L.pad + s.slot * L.colW + 1, w), y: L.yList + L.listH - hgt, w: w, h: hgt }; }
         else if (s.zone === 'pack') { var full = L.W - 2 * L.pad - 4, a = s.pp.a * full, bb = s.pp.b * full; b = { x: mirror(L.pad + 2 + a, bb - a - 2), y: L.yPack + 3, w: Math.max(2, bb - a - 2), h: L.packH - 6 }; }
         else if (s.lit) { var j = evList.indexOf(pi), fw = Math.min(140, (L.W - 2 * L.pad - 24) / Math.max(1, evList.length)); b = { x: mirror(L.pad + 12 + j * (fw + 6), fw), y: L.yRead + L.readH / 2 - 7, w: fw, h: 14 }; }
         else b = { x: L.W / 2, y: L.yRead + L.readH / 2, w: 1, h: 1 };
@@ -512,7 +567,7 @@
     var host = m3 || m2, started = false;
     function begin() {
       if (started) return; started = true;
-      fetch(BASE + 'viz_pipeline.json', { cache: 'no-cache' }).then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); }).then(function (d) {
+      fetch(BASE + 'viz_pipeline.json' + VQ, { cache: 'no-cache' }).then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); }).then(function (d) {
         D = d;
         st.ex = 0;
         build(chooseMode());

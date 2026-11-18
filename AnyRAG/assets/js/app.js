@@ -6,6 +6,8 @@
    window.AnyRAG exposes {lang, theme, t(key), ready} for them. */
 (function () {
   'use strict';
+  /* cache-busting: the ?v= of this script's own URL (set in index.html) is added to the files it loads */
+  var VQ = (function () { try { var v = new URL(document.currentScript.src).searchParams.get('v'); return v ? '?v=' + encodeURIComponent(v) : ''; } catch (e) { return ''; } })();
   var root = document.documentElement;
   var $ = function (s, r) { return (r || document).querySelector(s); };
   var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
@@ -61,6 +63,7 @@
       el.textContent = lang === 'fa' && N ? N.local(el.dataset.numEn, 'fa') : el.dataset.numEn;
     });
     labelPipes();
+    lattice();
     document.title = 'AnyRAG';
   }
   function setLang(next, announce) {
@@ -183,11 +186,19 @@
 
   /* ---------- hero: a girih-like hairline lattice (eight-point stars and crosses);
      a few stars are lit in turquoise and joined to one lapis star, the reader ---------- */
+  /* In Persian the lattice sits on the left, so the figure is mirrored: the reader star stays at the outer edge,
+     clear of the wordmark. */
+  var latticeDir = null;
   function lattice() {
     var svg = $('#lattice'); if (!svg) return;
+    var rtl = lang === 'fa';
+    if (latticeDir === rtl) return;
+    latticeDir = rtl;
+    svg.textContent = '';
+    svg.classList.remove('on');
     var W = 900, H = 860, s = 100, r = 24, q = r * Math.SQRT2;
     svg.setAttribute('viewBox', '0 0 ' + W + ' ' + H);
-    svg.setAttribute('preserveAspectRatio', 'xMaxYMid slice');
+    svg.setAttribute('preserveAspectRatio', (rtl ? 'xMin' : 'xMax') + 'YMid slice');
     var cols = Math.ceil(W / s) + 1, rows = Math.ceil(H / s) + 1, d = '';
     function star(cx, cy) {
       var p = [];
@@ -208,7 +219,7 @@
       d += 'M' + (cx + k - m) + ',' + (cy + k) + 'L' + (cx + k) + ',' + (cy + k - m) + 'L' + (cx + k + m) + ',' + (cy + k) + 'L' + (cx + k) + ',' + (cy + k + m) + 'Z';
     }
     var g = document.createElementNS(NS, 'path'); g.setAttribute('class', 'g'); g.setAttribute('d', d); svg.appendChild(g);
-    var C = function (i, j) { return [i * s + s / 2, j * s + s / 2]; };
+    var C = function (i, j) { var x = i * s + s / 2; return [rtl ? W - x : x, j * s + s / 2]; };
     var lit = [C(3, 1), C(2, 4), C(4, 5)], reader = C(7, 3);
     lit.forEach(function (c, n) {
       var f = document.createElementNS(NS, 'path'); f.setAttribute('class', 'litfill'); f.setAttribute('d', star(c[0], c[1]));
@@ -221,6 +232,40 @@
     rd.style.setProperty('--d', '1.9s'); svg.appendChild(rd);
     $$('.lit,.reader', svg).forEach(function (p) { try { p.style.setProperty('--len', Math.ceil(p.getTotalLength()) + 1); } catch (e) {} });
     requestAnimationFrame(function () { requestAnimationFrame(function () { svg.classList.add('on'); }); });
+  }
+
+  /* ---------- landing on a #section from a shared link: fonts, the Persian strings, the figures, the pipeline scene
+     and the chooser all arrive after the browser's jump and push the target down. Re-anchor whenever the layout
+     moves, until it has been still for a while or the reader scrolls. ---------- */
+  function settleAnchor() {
+    var id = '';
+    try { id = decodeURIComponent(location.hash.slice(1).split('?')[0]); } catch (e) { return; }
+    var el = id && document.getElementById(id);
+    if (!el || !window.ResizeObserver) return;
+    if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+    var nav = $('.nav'), done = false, quiet = null, t0 = Date.now();
+    var EV = ['wheel', 'touchstart', 'keydown', 'pointerdown'];
+    function snap() {
+      if (done) return;
+      var off = nav ? nav.getBoundingClientRect().height : 0;
+      var top = el.getBoundingClientRect().top - off;
+      if (Math.abs(top) > 1) window.scrollTo({ top: Math.max(0, window.scrollY + top), behavior: 'instant' });
+      // keep watching for 20 s whatever happens (autoplaying figures change height late); the reader's own
+      // scrolling or typing ends it at once
+      if (!quiet) quiet = setTimeout(stop, 20000);
+      if (Date.now() - t0 > 20000) stop();
+    }
+    function stop() {
+      if (done) return;
+      done = true; ro.disconnect(); clearTimeout(quiet);
+      EV.forEach(function (ev) { window.removeEventListener(ev, stop, true); });
+    }
+    var ro = new ResizeObserver(function () { requestAnimationFrame(snap); });
+    ro.observe(document.body);
+    $$('main .sec, .mount').forEach(function (m) { ro.observe(m); });
+    EV.forEach(function (ev) { window.addEventListener(ev, stop, { capture: true, passive: true }); });
+    window.addEventListener('hashchange', stop, { once: true });
+    snap();
   }
 
   /* ---------- BibTeX copy ---------- */
@@ -246,11 +291,11 @@
 
   /* ---------- start ---------- */
   applyLang();
-  lattice();
   lazyVideos();
+  settleAnchor();
   function finish() { if (readyResolve) readyResolve(window.AnyRAG); if (lang === 'fa') document.dispatchEvent(new CustomEvent('langchange', { detail: { lang: lang } })); }
   if (window.fetch) {
-    fetch('assets/data/i18n.json', { cache: 'no-cache' })
+    fetch('assets/data/i18n.json' + VQ, { cache: 'no-cache' })
       .then(function (r) { return r.ok ? r.json() : {}; })
       .then(function (j) { dict = j || {}; applyLang(); finish(); })
       .catch(function () { finish(); });
