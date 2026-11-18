@@ -1,0 +1,443 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AnyRAG</title>
+<meta name="description" content="AnyRAG: a comparison of retrieval-augmented generation setups on a Persian and English benchmark, with a guide that helps you choose the setup your questions need.">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#f4f2ec" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0b0d12" media="(prefers-color-scheme: dark)">
+<meta property="og:title" content="AnyRAG">
+<meta property="og:description" content="Choose the retrieval setup your questions need. A comparison of RAG setups in Persian and English.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://arashnasresfahani.github.io/AnyRAG/assets/img/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="AnyRAG wordmark on a hairline lattice, with the line: Choose the retrieval setup your questions need.">
+<meta property="og:url" content="https://arashnasresfahani.github.io/AnyRAG/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://arashnasresfahani.github.io/AnyRAG/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%2324418f'/%3E%3Ctext x='16' y='23' font-family='Georgia,serif' font-size='19' text-anchor='middle' fill='%23f4f2ec'%3EA%3C/text%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&family=Instrument+Serif:ital@0;1&family=Vazirmatn:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css?v=anyrag-1">
+<link rel="stylesheet" href="assets/css/chooser.css">
+<link rel="stylesheet" href="assets/css/viz.css">
+<script>
+/* set theme + language before first paint */
+(function(){var q={};try{q=Object.fromEntries(new URLSearchParams(location.search));}catch(e){}
+var t=q.theme,l=q.lang;try{t=t||localStorage.getItem('anyrag-theme');l=l||localStorage.getItem('anyrag-lang');}catch(e){}
+if(t==='dark'||t==='light')document.documentElement.setAttribute('data-theme',t);
+if(l==='fa'){document.documentElement.lang='fa';document.documentElement.dir='rtl';}
+document.documentElement.classList.add('js');})();
+</script>
+<script defer src="assets/js/num.js"></script>
+<script defer src="assets/js/app.js?v=anyrag-1"></script>
+<script defer src="assets/js/video.js"></script>
+<script defer src="assets/js/viz2d.js"></script>
+<script defer src="assets/js/pipeline3d.js"></script>
+<script defer src="assets/js/chooser.js"></script>
+</head>
+<body>
+<a class="skip" href="#video" data-i18n="skip">Skip to content</a>
+
+<header class="nav" id="top">
+  <div class="nav-in">
+    <a class="brand" href="#top" aria-label="AnyRAG, back to top">AnyRAG</a>
+    <nav class="links" id="navLinks" aria-label="Sections">
+      <a href="#video" data-i18n="nav.video">Video</a>
+      <a href="#about" data-i18n="nav.about">At a glance</a>
+      <a href="#benchmark" data-i18n="nav.benchmark">Benchmark</a>
+      <a href="#how" data-i18n="nav.how">How it works</a>
+      <a href="#choose" data-i18n="nav.choose">Choose</a>
+      <a href="#results" data-i18n="nav.results">Results</a>
+      <a href="#languages" data-i18n="nav.languages">Languages</a>
+      <a href="#trust" data-i18n="nav.trust">Limits</a>
+      <a href="#resources" data-i18n="nav.resources">Resources</a>
+    </nav>
+    <div class="tools">
+      <button class="tool menu-btn" id="menuBtn" type="button" aria-expanded="false" aria-controls="navLinks" aria-label="Sections menu" data-i18n-attr="aria-label|nav.menu">
+        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" fill="none" stroke="currentColor" stroke-width="1.4"/></svg>
+      </button>
+      <button class="tool" id="langBtn" type="button" aria-label="تغییر به فارسی"><span class="lang-en">فارسی</span><span class="lang-fa">English</span></button>
+      <button class="tool icon" id="themeBtn" type="button" aria-label="Switch between light and dark theme" data-i18n-attr="aria-label|nav.theme">
+        <svg class="moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M20 14.5A8 8 0 019.5 4 8 8 0 1020 14.5z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+        <svg class="sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M12 2.5v2.5M12 19v2.5M2.5 12H5M19 12h2.5M5.3 5.3l1.8 1.8M16.9 16.9l1.8 1.8M5.3 18.7l1.8-1.8M16.9 7.1l1.8-1.8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main>
+<!-- 1 HERO -->
+<section class="hero" aria-labelledby="title">
+  <svg class="lattice" id="lattice" aria-hidden="true" focusable="false"></svg>
+  <div class="wrap hero-in">
+    <h1 id="title" class="mark">AnyRAG</h1>
+    <p class="def" data-i18n="hero.def">Choose the retrieval setup your questions need.</p>
+    <div class="paper">
+      <p class="ptitle" data-i18n="hero.title">What Reaches the Reader: A Comparison of Retrieval-Augmented Generation Setups in Persian and English</p>
+      <p class="who"><span data-i18n="hero.author">Arash Nasr Esfahani</span><span class="sep" aria-hidden="true"></span><span class="aff"><i class="lg ut" aria-hidden="true"></i><span data-i18n="hero.affil">University of Tehran</span></span></p>
+    </div>
+    <div class="btns">
+      <a class="btn primary" href="#video"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5l11 7-11 7z"/></svg><span data-i18n="hero.btn.video">Watch the video</span></a>
+      <a class="btn accent" href="#choose"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5h5v5H5z M14 14h5v5h-5z M10 7.5h4.5a2 2 0 012 2V14"/></svg><span data-i18n="hero.btn.choose">Choose your RAG</span></a>
+      <a class="btn soon" aria-disabled="true" role="link"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3h7l5 5v13H7z M14 3v5h5 M10 13h6 M10 17h6"/></svg><span data-i18n="hero.btn.paper">Paper</span><span class="soon-tag" data-i18n="soon">in preparation</span></a>
+      <a class="btn soon" aria-disabled="true" role="link" title="The repository is private until the paper is accepted" data-i18n-attr="title|hero.btn.code.title"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 7l-5 5 5 5 M16 7l5 5-5 5 M14 4l-4 16"/></svg><span data-i18n="hero.btn.code">Code</span><span class="soon-tag" data-i18n="soon2">in preparation</span></a>
+      <a class="btn soon" aria-disabled="true" role="link"><svg viewBox="0 0 24 24" aria-hidden="true"><ellipse cx="12" cy="6" rx="7" ry="3"/><path d="M5 6v6c0 1.7 3.1 3 7 3s7-1.3 7-3V6 M5 12v6c0 1.7 3.1 3 7 3s7-1.3 7-3v-6"/></svg><span data-i18n="hero.btn.bench">Benchmark</span><span class="soon-tag" data-i18n="soon3">in preparation</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- 2 VIDEO -->
+<section class="sec" id="video" aria-labelledby="h-video">
+  <div class="wrap grid">
+    <div class="sn" aria-hidden="true">1</div>
+    <div class="sc">
+      <h2 id="h-video" data-i18n="video.h">The work in about 90 seconds</h2>
+      <p class="lead" data-i18n="video.lead">An explainer for readers new to RAG: what it is, where answers get lost, and what helps when. On-screen text, no narration, in English and Persian.</p>
+      <figure class="player">
+        <div id="video-mount" class="mount mount-video">
+          <div class="ph"><span data-i18n="video.ph">The explainer video is being prepared.</span></div>
+        </div>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- 3 AT A GLANCE -->
+<section class="sec tint" id="about" aria-labelledby="h-about">
+  <div class="wrap grid">
+    <div class="sn" aria-hidden="true">2</div>
+    <div class="sc">
+      <h2 id="h-about" data-i18n="about.h">Where a RAG pipeline loses its answers</h2>
+      <div class="glance">
+        <div class="gl">
+          <h3 data-i18n="about.q.h">The question</h3>
+          <p data-i18n="about.q.p">A retrieval-augmented generation (RAG) system searches a document collection and shows the best passages to a language model, the reader, which writes the answer. Building one means choosing a search method, a way to rank or select passages, and how much text the reader sees. Most comparisons of these choices use English. We asked which choices matter in Persian and in English, and where the answers are lost.</p>
+        </div>
+        <div class="gl">
+          <h3 data-i18n="about.b.h">The benchmark</h3>
+          <p data-i18n="about.b.p">156 questions over 155 natural documents: company reports, non-fiction books and statutes, in six search pools. Questions come in three tiers of difficulty, half in Persian and half in English, and each carries annotated gold evidence. The test set has 90 answerable questions.</p>
+        </div>
+        <div class="gl">
+          <h3 data-i18n="about.c.h">What was compared</h3>
+          <p data-i18n="about.c.p">First, a frozen one-shot test of four whole pipelines at two evidence budgets. Then, post hoc on the same questions: retrieval channels, chunk size, query rewriting, embedding models, reranking and LLM selection, five evidence budgets, and iterative search agents.</p>
+        </div>
+        <div class="gl answer">
+          <h3 data-i18n="about.a.h">The answer</h3>
+          <p data-i18n="about.a.p">Answers are rarely lost in the reader. They are lost before it: either the complete evidence never reaches the top candidates, or it is dropped when the evidence pack is built.</p>
+        </div>
+      </div>
+      <dl class="terms">
+        <div><dt data-i18n="term.budget">Evidence budget</dt><dd data-i18n="term.budget.d">The number of characters of retrieved text in the reader's prompt. 6,000 characters is the tight budget of the paper.</dd></div>
+        <div><dt data-i18n="term.pack">Evidence pack</dt><dd data-i18n="term.pack.d">The retrieved text a pipeline actually shows the reader, cut to the budget.</dd></div>
+        <div><dt data-i18n="term.bundle">Evidence bundle</dt><dd data-i18n="term.bundle.d">A set of passages that together suffice to answer a question. A pack is complete if it holds a whole bundle.</dd></div>
+        <div><dt data-i18n="term.posthoc">Post hoc</dt><dd data-i18n="term.posthoc.d">Run on the test questions after their answers were known. Only the frozen test is confirmatory.</dd></div>
+      </dl>
+    </div>
+  </div>
+</section>
+
+<!-- 4 BENCHMARK -->
+<section class="sec" id="benchmark" aria-labelledby="h-bench">
+  <div class="wrap grid">
+    <div class="sn" aria-hidden="true">3</div>
+    <div class="sc">
+      <h2 id="h-bench" data-i18n="bench.h">A Persian and English benchmark with gold evidence</h2>
+      <p class="lead" data-i18n="bench.lead">A question's tier is set by the simplest evidence in its pool that is enough to answer it. Every question is answered against its whole pool, with no document picked in advance. The examples below are development questions.</p>
+
+      <div class="tiers">
+        <article class="tier">
+          <header><span class="tcode">T1</span><h3 data-i18n="tier1.h">Local fact</h3></header>
+          <p class="tdef" data-i18n="tier1.d">One passage, list or table region gives the answer.</p>
+          <p class="ex" lang="en" dir="ltr">Whose consent is needed before a prosecution under the Bribery Act 2010 can be brought in England and Wales?</p>
+          <p class="src">LAW-en</p>
+          <p class="ex fa" lang="fa" dir="rtl">در سال ۱۴۰۰ دیوار چند کاربر را مسدود کرد و این تعداد چند برابر سال ۱۳۹۹ بود؟</p>
+          <p class="gloss" data-i18n="tier1.gloss">In 1400, how many users did Divar block, and how many times the 1399 figure was that?</p>
+          <p class="src">RPT-fa</p>
+        </article>
+        <article class="tier">
+          <header><span class="tcode">T2</span><h3 data-i18n="tier2.h">Within one document</h3></header>
+          <p class="tdef" data-i18n="tier2.d">One document suffices, but no single region of it does.</p>
+          <p class="ex" lang="en" dir="ltr">Wise's FY2024 annual report gives its total customer balances and, in the Wise Business section, the business deposits it holds. Roughly what share of total customer balances were business deposits?</p>
+          <p class="src">RPT-en</p>
+          <p class="ex fa" lang="fa" dir="rtl">در سال ۱۴۰۰ تقریباً چند نفر در دیوار بدون پرداخت هزینه آگهی گذاشتند؟</p>
+          <p class="gloss" data-i18n="tier2.gloss">Roughly how many people posted ads on Divar free of charge in 1400?</p>
+          <p class="src">RPT-fa</p>
+        </article>
+        <article class="tier">
+          <header><span class="tcode">T3</span><h3 data-i18n="tier3.h">Across documents</h3></header>
+          <p class="tdef" data-i18n="tier3.d">Every sufficient bundle spans at least two documents.</p>
+          <p class="ex" lang="en" dir="ltr">Turkcell and Vodafone Turkey both had their 2G licences extended to 30 April 2029. What fee did each operator agree for the extension, and how did the way they paid it differ?</p>
+          <p class="src">RPT-en</p>
+          <p class="ex fa" lang="fa" dir="rtl">حداقل سنی که برای متقاضی امتیاز روزنامه یا نشریه تعیین شده بود، از لایحهٔ قانونی مطبوعات ۱۳۳۴ تا قانون مطبوعات ۱۳۶۴ چه تغییری کرد؟</p>
+          <p class="gloss" data-i18n="tier3.gloss">How did the minimum age set for an applicant for a newspaper or periodical licence change from the 1334 [1955] Press Bill to the 1364 [1985] Press Law?</p>
+          <p class="src">LAW-fa</p>
+        </article>
+      </div>
+      <p class="fine" data-i18n="bench.counts">Each pool has 3 development and 5 test questions per tier, plus one unanswerable question per split: 60 development and 96 test questions, 90 of them answerable.</p>
+
+      <h3 class="sub-h" data-i18n="pools.h">Six search pools</h3>
+      <div class="scroll">
+        <table class="pools">
+          <thead><tr><th scope="col" data-i18n="pools.c.pool">Pool</th><th scope="col" class="num" data-i18n="pools.c.docs">Documents</th><th scope="col" class="num" data-i18n="pools.c.chars">Characters</th><th scope="col" data-i18n="pools.c.src">Sources</th></tr></thead>
+          <tbody>
+            <tr><th scope="row"><span data-i18n="pools.rptfa">Reports</span> <span class="lc">fa</span></th><td class="num" data-i18n="pools.rptfa.n">97</td><td class="num" data-i18n="pools.rptfa.c">4.76 M</td><td data-i18n="pools.rptfa.s">Annual and activity reports of 42 Iranian companies</td></tr>
+            <tr><th scope="row"><span data-i18n="pools.rpten">Reports</span> <span class="lc">en</span></th><td class="num" data-i18n="pools.rpten.n">15</td><td class="num" data-i18n="pools.rpten.c">16.64 M</td><td data-i18n="pools.rpten.s">Annual or integrated reports of 11 international companies</td></tr>
+            <tr><th scope="row"><span data-i18n="pools.bookfa">Books</span> <span class="lc">fa</span></th><td class="num" data-i18n="pools.bookfa.n">9</td><td class="num" data-i18n="pools.bookfa.c">5.70 M</td><td data-i18n="pools.bookfa.s">Modern Persian prose transcribed on Wikisource (Kasravi, Pirnia, Bahar and others)</td></tr>
+            <tr><th scope="row"><span data-i18n="pools.booken">Books</span> <span class="lc">en</span></th><td class="num" data-i18n="pools.booken.n">11</td><td class="num" data-i18n="pools.booken.c">6.26 M</td><td data-i18n="pools.booken.s">Project Gutenberg non-fiction (Darwin, Mill, Tocqueville, Douglass and others)</td></tr>
+            <tr><th scope="row"><span data-i18n="pools.lawfa">Statutes</span> <span class="lc">fa</span></th><td class="num" data-i18n="pools.lawfa.n">13</td><td class="num" data-i18n="pools.lawfa.c">1.18 M</td><td data-i18n="pools.lawfa.s">Iranian statutes from Wikisource transcriptions (Civil Code, Commercial Codes, Direct Taxes Acts and others)</td></tr>
+            <tr><th scope="row"><span data-i18n="pools.lawen">Statutes</span> <span class="lc">en</span></th><td class="num" data-i18n="pools.lawen.n">10</td><td class="num" data-i18n="pools.lawen.c">3.52 M</td><td data-i18n="pools.lawen.s">EU regulations (GDPR, DSA, AI Act and others) and UK Acts</td></tr>
+          </tbody>
+          <tfoot><tr><th scope="row" data-i18n="pools.total">Total</th><td class="num" data-i18n="pools.total.n">155</td><td class="num" data-i18n="pools.total.c">38.06 M</td><td data-i18n="pools.total.s">58,218 chunks of at most 1,000 characters</td></tr></tfoot>
+        </table>
+      </div>
+      <p class="fine" data-i18n="pools.note">Only born-digital text or verified transcriptions, never scans. The Persian and English halves use different documents, so they are two runs of one design and not a controlled contrast between languages.</p>
+
+      <h3 class="sub-h" data-i18n="annot.h">How evidence is annotated</h3>
+      <div class="annot">
+        <ol class="annot-list">
+          <li><b data-i18n="annot.req">Requirements</b><span data-i18n="annot.req.d">the atomic points a correct answer must meet;</span></li>
+          <li><b data-i18n="annot.ev">Evidence passages</b><span data-i18n="annot.ev.d">exact quotes with offsets into frozen text;</span></li>
+          <li><b data-i18n="annot.bun">Evidence bundles</b><span data-i18n="annot.bun.d">one or more sets of passages that together suffice.</span></li>
+        </ol>
+        <figure class="bundle" aria-labelledby="fig1cap">
+          <div class="bq">
+            <p class="ex fa" lang="fa" dir="rtl">حداقل سنی که برای متقاضی امتیاز روزنامه یا نشریه تعیین شده بود، از لایحهٔ قانونی مطبوعات ۱۳۳۴ تا قانون مطبوعات ۱۳۶۴ چه تغییری کرد؟</p>
+          </div>
+          <div class="bdocs">
+            <div class="bdoc">
+              <p class="bid" lang="en" dir="ltr">press-bill-1334</p>
+              <p class="ex fa" lang="fa" dir="rtl">درخواست کننده اجازه باید دارای شرایط ذیل باشد: … ب - <mark>سن او از سی سال کمتر نباشد.</mark></p>
+              <p class="gloss" data-i18n="annot.doc1.gloss">The applicant must meet the following conditions: … b. be not younger than thirty.</p>
+            </div>
+            <div class="bdoc">
+              <p class="bid" lang="en" dir="ltr">press-law-1364</p>
+              <p class="ex fa" lang="fa" dir="rtl">شخص حقیقی متقاضی صاحب امتیاز باید دارای شرایط زیر باشد: … ۲- <mark>دارا بودن حداقل ۲۵ سال.</mark></p>
+              <p class="gloss" data-i18n="annot.doc2.gloss">A natural person applying for a licence must meet the following conditions: … 2. be at least 25 years old.</p>
+            </div>
+          </div>
+          <p class="bans"><span class="k" data-i18n="annot.expected">Expected answer</span> <span data-i18n="annot.answer">30 years under the 1334 bill, 25 years under the 1364 law: the minimum age fell by 5 years.</span></p>
+          <figcaption id="fig1cap"><span class="figno" data-i18n="fig1.no">Fig. 1</span> <span data-i18n="fig1.cap">A development question (T3, cross-version) with its evidence bundle of two documents. Neither passage answers it alone.</span></figcaption>
+        </figure>
+      </div>
+      <p class="fine" data-i18n="bench.build">Claude Opus 5.5 agents drafted each question from a written specification; a mechanical verifier and a separate source-review agent checked it; a native Persian speaker reviewed the Persian wording; and 32 of the 156 questions were spot-checked by hand (31 accepted, 1 fixed).</p>
+    </div>
+  </div>
+</section>
+
+<!-- 5 HOW -->
+<section class="sec tint" id="how" aria-labelledby="h-how">
+  <div class="wrap grid">
+    <div class="sn" aria-hidden="true">4</div>
+    <div class="sc">
+      <h2 id="h-how" data-i18n="how.h">How a RAG pipeline answers</h2>
+      <p class="lead" data-i18n="how.lead">Each pipeline turns a question into an evidence pack, the retrieved text the reader sees. It searches the pool, orders or selects the candidates, and packs them into the budget. All four pipelines share the same chunks (at most 1,000 characters), answer prompts and readers.</p>
+      <figure class="stage" aria-labelledby="fig2cap">
+        <div id="pipeline3d" class="mount mount-3d"><div class="ph"><span data-i18n="pipe.ph3d">The 3D view of a pipeline loads here.</span></div></div>
+        <div id="pipeline2d" class="mount mount-2d"><div class="ph"><span data-i18n="pipe.ph2d">The 2D view of a pipeline loads here.</span></div></div>
+        <figcaption id="fig2cap"><span class="figno" data-i18n="fig2.no">Fig. 2</span> <span data-i18n="fig2.cap">From the documents to the reader: candidates, the pack window, and the evidence that reaches the reader, from real test traces.</span></figcaption>
+      </figure>
+
+      <h3 class="sub-h" data-i18n="pipes.h">The four pipelines of the frozen test</h3>
+      <div class="scroll">
+      <table class="pipes">
+        <thead><tr>
+          <th scope="col" data-i18n="pipes.c.name">Pipeline</th>
+          <th scope="col" data-i18n="pipes.c.what">What it does</th>
+          <th scope="col" class="num" data-i18n="pipes.c.tok">LLM tokens, × Hybrid</th>
+          <th scope="col" class="num" data-i18n="pipes.c.lat">Median latency</th>
+        </tr></thead>
+        <tbody>
+          <tr><th scope="row"><span class="pn">Hybrid</span><span class="role" data-i18n="pipes.hy.role">baseline</span></th><td data-i18n="pipes.hy.d">BM25 and dense (bge-m3) retrieval, merged by reciprocal rank fusion. The budget is filled in ranked order.</td><td class="num" data-i18n="pipes.hy.t">1.00</td><td class="num" data-i18n="pipes.hy.l">1.8 s</td></tr>
+          <tr><th scope="row"><span class="pn">HR</span><span class="role" data-i18n="pipes.hr.role">Hybrid + reranker</span></th><td data-i18n="pipes.hr.d">Hybrid, then a cross-encoder reranker rescores the merged list. The reranker is a trained model and uses no LLM tokens.</td><td class="num" data-i18n="pipes.hr.t">1.01</td><td class="num" data-i18n="pipes.hr.l">3.2 s</td></tr>
+          <tr><th scope="row"><span class="pn">Lex-RAG</span><span class="role" data-i18n="pipes.lex.role">our method</span></th><td data-i18n="pipes.lex.d">Fuses BM25, dense and learned-sparse scores. One LLM call splits the question into parts and names a bundle of passages for each; a packer fits the bundles into the budget and fills the rest.</td><td class="num" data-i18n="pipes.lex.t">2.04–2.32</td><td class="num" data-i18n="pipes.lex.l">4.0 s</td></tr>
+          <tr><th scope="row"><span class="pn">SetR-p+fill</span><span class="role" data-i18n="pipes.setr.role">adapted selector</span></th><td data-i18n="pipes.setr.d">One chain-of-thought call with the published SetR prompt picks a set from Hybrid's candidates; Hybrid's list fills the rest. An adaptation, so it says nothing about the published system.</td><td class="num" data-i18n="pipes.setr.t">3.39–3.67</td><td class="num" data-i18n="pipes.setr.l">5.5 s</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <p class="fine" data-i18n="pipes.note">At the 6,000-character budget, on all 96 test questions. Tokens count every query-time LLM call. Latency was measured under contention on a laptop GPU, so only the order is informative.</p>
+      <p class="prose-p" data-i18n="how.readers">One primary reader, GLM-5.3-flash, answers every question and makes both selection calls. Five readers from other model families answer the identical packs. A strict LLM judge scores each answer: it counts as correct only if it meets every required point and adds no contradiction, wrong value or unsupported claim.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 6 CHOOSE -->
+<section class="sec" id="choose" aria-labelledby="h-choose">
+  <div class="wrap grid">
+    <div class="sn" aria-hidden="true">5</div>
+    <div class="sc">
+      <h2 id="h-choose" data-i18n="choose.h">Choose your RAG</h2>
+      <p class="lead" data-i18n="choose.lead">Answer a few questions about your documents, your budget and your hardware. The recommendation follows the paper's guide table, and every step comes with its evidence and a confidence label.</p>
+      <div id="chooser" class="mount mount-chooser"><div class="ph"><span data-i18n="choose.ph">The chooser loads here.</span></div></div>
+      <p class="caveat" data-i18n="choose.note">Based on 90 test questions; post hoc analyses; your data may differ, so test on your own questions.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 7 RESULTS -->
+<section class="sec tint" id="results" aria-labelledby="h-res">
+  <div class="wrap grid">
+    <div class="sn" aria-hidden="true">6</div>
+    <div class="sc">
+      <h2 id="h-res" data-i18n="res.h">What the results show</h2>
+      <p class="lead" data-i18n="res.lead">Scores are correct answers out of the 90 answerable test questions, for the primary reader and the first judge. A range such as 62–63 covers a few answers the judge could not score.</p>
+
+      <figure class="fig" aria-labelledby="fig3cap">
+        <figcaption id="fig3cap"><span class="figno" data-i18n="fig3.no">Fig. 3</span> <span class="ft" data-i18n="fig3.t">Where answers are lost</span></figcaption>
+        <div id="fig-funnel" class="mount mount-fig" data-viz-head="off"><div class="ph"><span data-i18n="fig.ph">The figure loads here.</span></div></div>
+        <p class="take" data-i18n="fig3.take">With only the gold evidence the reader answers 83 of 90. For 15 to 18 questions no complete evidence bundle reaches the top 40 candidates, and for 11 to 15 more it is dropped while the pack is built.</p>
+      </figure>
+
+      <figure class="fig" aria-labelledby="fig4cap">
+        <figcaption id="fig4cap"><span class="figno" data-i18n="fig4.no">Fig. 4</span> <span class="ft" data-i18n="fig4.t">How much text to show</span></figcaption>
+        <div id="fig-budget" class="mount mount-fig" data-viz-head="off"><div class="ph"><span data-i18n="fig.ph2">The figure loads here.</span></div></div>
+        <p class="take" data-i18n="fig4.take">A choosing step pays most at small budgets: Lex-RAG's selection call is worth 15 to 16 answers at 3,000 characters (one run) and 2 to 4 from 10,000 on. Plain hybrid retrieval rises from about 50 to 72 correct answers between 3,000 and 24,000 characters.</p>
+      </figure>
+
+      <figure class="fig" aria-labelledby="fig5cap">
+        <figcaption id="fig5cap"><span class="figno" data-i18n="fig5.no">Fig. 5</span> <span class="ft" data-i18n="fig5.t">Which parts of the pipeline matter</span></figcaption>
+        <div id="fig-components" class="mount mount-fig" data-viz-head="off"><div class="ph"><span data-i18n="fig.ph3">The figure loads here.</span></div></div>
+        <p class="take" data-i18n="fig5.take">Hybrid retrieval answers 62 to 63, dense alone 53 and BM25 alone 48. Chunks of 2,000 characters lose 13 to 20 answers; query rewriting and a second embedding model do not help.</p>
+      </figure>
+
+      <div class="aside2">
+        <div>
+          <h3 data-i18n="search.h">Searching harder</h3>
+          <p data-i18n="search.p">An iterative agent that searches the hybrid index up to five times answers 77 of 90, the highest score of any arm that does not use the annotations. It needs about four times the tokens and a median 10.5 s. Its lead over the reranked pipeline (69 to 71) is 6 to 8 answers, within the noise of the test.</p>
+        </div>
+        <div>
+          <h3 data-i18n="long.h">Reading whole documents</h3>
+          <p data-i18n="long.p">Long context helps only when the right documents are already known. Given the gold documents, the reader answers 79; given the best-matching documents by BM25, cut to the same length, it answers 24.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 8 LANGUAGES -->
+<section class="sec" id="languages" aria-labelledby="h-lang">
+  <div class="wrap grid">
+    <div class="sn" aria-hidden="true">7</div>
+    <div class="sc">
+      <h2 id="h-lang" data-i18n="lang.h">Persian and English</h2>
+      <p class="lead" data-i18n="lang.lead">The two halves use different documents, so a gap between them mixes language and source. The firm findings are those a design can isolate: the cost of a character, and every question asked in the other language.</p>
+      <div class="three">
+        <div class="cell">
+          <h3 data-i18n="lang.tok.h">Token cost</h3>
+          <p class="big" data-i18n="lang.tok.big">1.5–1.8×</p>
+          <p data-i18n="lang.tok.p">A character of Persian evidence costs 1.46 to 1.80 times the tokens of English for five of six readers, and 2.99 times for Qwen3 235B. A 6,000-character Persian pack costs the primary reader about as much as a 10,000-character English one. Set budgets in tokens, not characters.</p>
+        </div>
+        <div class="cell">
+          <h3 data-i18n="lang.mem.h">Memory gap</h3>
+          <p class="big" data-i18n="lang.mem.big">20 and 6 of 45</p>
+          <p data-i18n="lang.mem.p">With no evidence at all, the reader answers 20 of 45 English questions and 6 of 45 Persian ones. Asked in the other language, English-source questions are still answered from memory 18 times and Persian-source ones 4 or 5 times: the gap follows the source texts, not the language of the question.</p>
+        </div>
+        <div class="cell">
+          <h3 data-i18n="lang.swap.h">Questions in the other language</h3>
+          <p class="big" data-i18n="lang.swap.big">37 → 2</p>
+          <p data-i18n="lang.swap.p">With every question translated, BM25 finds a complete bundle in its top 40 for 2 and 8 of 45 questions (from 37 and 29); dense retrieval keeps 35 and 28 (from 38 and 33). The reranked pipeline answers 53 to 54 of 90, against 69 to 71.</p>
+        </div>
+      </div>
+      <figure class="fig" aria-labelledby="fig6cap">
+        <figcaption id="fig6cap"><span class="figno" data-i18n="fig6.no">Fig. 6</span> <span class="ft" data-i18n="fig6.t">Token cost by reader, and retrieval with translated questions</span></figcaption>
+        <div id="fig-language" class="mount mount-fig" data-viz-head="off"><div class="ph"><span data-i18n="fig.ph4">The figure loads here.</span></div></div>
+        <p class="take" data-i18n="fig6.take">Persian costs more tokens per character under every tokenizer we tested. When the question language differs from the documents, BM25 collapses while dense retrieval holds, so keep a dense channel.</p>
+      </figure>
+      <p class="prose-p" data-i18n="lang.spell">Persian spelling varies: Arabic or Persian letters, the zero-width non-joiner, and three digit systems. Without normalisation BM25 loses 5 to 8 of 45 complete bundles, while dense retrieval on raw text loses at most one. Normalise before BM25.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 9 TRUST -->
+<section class="sec tint" id="trust" aria-labelledby="h-trust">
+  <div class="wrap grid">
+    <div class="sn" aria-hidden="true">8</div>
+    <div class="sc">
+      <h2 id="h-trust" data-i18n="trust.h">How far to trust this</h2>
+      <p class="lead" data-i18n="trust.lead">Every recommendation on this page rests on one benchmark, one primary reader, one judge and 90 answerable questions. These are the limits, stated plainly.</p>
+      <div class="limits">
+        <div class="lim">
+          <h3 data-i18n="trust.gate.h">The frozen gate failed</h3>
+          <p data-i18n="trust.gate.p">The only confirmatory test required Lex-RAG to beat both controls by at least 5 of 90 answers at 6,000 characters. It answered 5 to 7 more than Hybrid and 0 to 3 fewer than HR. Neither primary test was significant.</p>
+        </div>
+        <div class="lim">
+          <h3 data-i18n="trust.post.h">The rest is post hoc</h3>
+          <p data-i18n="trust.post.p">Every other result reuses the same test questions after their answers were known, so its p-values are descriptive. The recommendations need a fresh test.</p>
+        </div>
+        <div class="lim">
+          <h3 data-i18n="trust.power.h">90 questions detect about 11 answers</h3>
+          <p data-i18n="trust.power.p">A paired comparison has 80% power only for differences of about 11 answers, or about 8 within one language half. A difference of 5 would need about 400 to 460 questions.</p>
+        </div>
+        <div class="lim">
+          <h3 data-i18n="trust.judge.h">Judges and the human review disagree</h3>
+          <p data-i18n="trust.judge.p">A second judge agrees with the first on 91% of answers (kappa 0.76), yet orders the middle pipelines differently. A partial human review once gave Lex-RAG a significant lead over Hybrid (+8), which disappeared when all four pipelines were reviewed (+5, corrected p = .36).</p>
+        </div>
+        <div class="lim">
+          <h3 data-i18n="trust.noise.h">The reader is noisy, about ±2</h3>
+          <p data-i18n="trust.noise.p">Sending the identical packs to the same reader again gives a standard deviation of about two answers per cell, and single cells moved by up to six.</p>
+        </div>
+      </div>
+      <figure class="fig" aria-labelledby="fig7cap">
+        <figcaption id="fig7cap"><span class="figno" data-i18n="fig7.no">Fig. 7</span> <span class="ft" data-i18n="fig7.t">The same pipelines across reader draws, two judges and the human review</span></figcaption>
+        <div id="fig-stability" class="mount mount-fig" data-viz-head="off"><div class="ph"><span data-i18n="fig.ph5">The figure loads here.</span></div></div>
+        <p class="take" data-i18n="fig7.take">The order of the middle pipelines changes with the judge, the reader draw and the review design. Read a ranking from one run, one judge and one partial review as a tie unless the difference is large.</p>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- 10 RESOURCES -->
+<section class="sec" id="resources" aria-labelledby="h-rsc">
+  <div class="wrap grid">
+    <div class="sn" aria-hidden="true">9</div>
+    <div class="sc">
+      <h2 id="h-rsc" data-i18n="rsc.h">Paper, code and data</h2>
+      <p class="lead" data-i18n="rsc.lead">The paper is in preparation and not yet public. Code, benchmark and results will be released on acceptance; a reviewer copy is available on request.</p>
+      <div class="scroll">
+      <table class="res">
+        <thead><tr><th scope="col" data-i18n="rsc.c.res">Resource</th><th scope="col" data-i18n="rsc.c.status">Status</th><th scope="col" data-i18n="rsc.c.lic">Licence</th></tr></thead>
+        <tbody>
+          <tr><th scope="row"><span data-i18n="rsc.paper">Paper</span><small data-i18n="rsc.paper.d">What Reaches the Reader</small></th><td><span class="st" data-i18n="rsc.st.prep">In preparation</span></td><td>–</td></tr>
+          <tr><th scope="row"><span data-i18n="rsc.code">Code</span><small data-i18n="rsc.code.d">all arms, the frozen test runner, evaluation and analysis scripts</small></th><td><span class="st" data-i18n="rsc.st.prep2">In preparation; the repository is private</span></td><td>MIT</td></tr>
+          <tr><th scope="row"><span data-i18n="rsc.bench">Benchmark</span><small data-i18n="rsc.bench.d">156 questions with requirements, gold evidence and evidence bundles</small></th><td><span class="st" data-i18n="rsc.st.prep3">In preparation</span></td><td>CC BY 4.0</td></tr>
+          <tr><th scope="row"><span data-i18n="rsc.results">Results</span><small data-i18n="rsc.results.d">per-question records, verdicts and token ledgers for every arm and reader</small></th><td><span class="st" data-i18n="rsc.st.prep4">In preparation</span></td><td>CC BY 4.0</td></tr>
+          <tr><th scope="row"><span data-i18n="rsc.large">Large artifacts</span><small data-i18n="rsc.large.d">judge caches, raw logs, indexes and embeddings</small></th><td><span class="st" data-i18n="rsc.st.req">On request</span></td><td>–</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <p class="fine" data-i18n="rsc.corpus">The document corpora are not redistributed. A source manifest lists every document's title, edition, source, address and file hash, so a rebuilt pool can be checked against the annotations.</p>
+
+      <div class="bib">
+        <div class="bib-head">
+          <h3 data-i18n="bib.h">Cite</h3>
+          <button class="tool copy" id="copyBib" type="button" aria-describedby="bibText"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><rect x="8" y="8" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M16 8V4H4v12h4" fill="none" stroke="currentColor" stroke-width="1.4"/></svg><span class="copy-l" data-i18n="bib.copy">Copy BibTeX</span></button>
+        </div>
+<pre class="bibtex" id="bibText" lang="en" dir="ltr" tabindex="0" aria-label="BibTeX entry"><code>@misc{nasresfahani2026anyrag,
+  author = {Nasr Esfahani, Arash},
+  title  = {What Reaches the Reader: A Comparison of
+            Retrieval-Augmented Generation Setups in Persian and English},
+  year   = {2026},
+  note   = {In preparation}
+}</code></pre>
+        <p class="copy-status" id="copyStatus" role="status" aria-live="polite"></p>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="foot">
+  <div class="wrap fline">
+    <p><span class="fmark">AnyRAG</span> <span data-i18n="foot.c">© 2026 Arash Nasr Esfahani</span></p>
+    <p data-i18n="foot.lic">Code: MIT. Data: CC BY 4.0.</p>
+    <p><a href="../" data-i18n="foot.home">Home</a></p>
+  </div>
+</footer>
+
+</body>
+</html>

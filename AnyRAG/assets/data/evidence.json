@@ -1,0 +1,4412 @@
+[
+ {
+  "id": "bench-size",
+  "claim": {
+   "en": "The benchmark has 156 questions over six document pools, half Persian and half English: 60 for development and 96 for the test, of which 90 are answerable.",
+   "fa": "بنچمارک ۱۵۶ پرسش در شش مخزن سند دارد، نیمی فارسی و نیمی انگلیسی: ۶۰ پرسش برای توسعه و ۹۶ پرسش برای آزمون، که ۹۰ پرسش از آن‌ها پاسخ‌پذیرند."
+  },
+  "numbers": [
+   {
+    "label": {
+     "en": "Questions",
+     "fa": "پرسش‌ها"
+    },
+    "value": {
+     "en": "156",
+     "fa": "۱۵۶"
+    }
+   },
+   {
+    "label": {
+     "en": "Development / test",
+     "fa": "توسعه / آزمون"
+    },
+    "value": {
+     "en": "60 / 96",
+     "fa": "۶۰ / ۹۶"
+    }
+   },
+   {
+    "label": {
+     "en": "Answerable test questions",
+     "fa": "پرسش‌های پاسخ‌پذیر آزمون"
+    },
+    "value": {
+     "en": "90 (45 Persian, 45 English)",
+     "fa": "۹۰ (۴۵ فارسی، ۴۵ انگلیسی)"
+    }
+   },
+   {
+    "label": {
+     "en": "Unanswerable test questions",
+     "fa": "پرسش‌های بی‌پاسخ آزمون"
+    },
+    "value": {
+     "en": "6 (one per pool)",
+     "fa": "۶ (یکی در هر مخزن)"
+    }
+   },
+   {
+    "label": {
+     "en": "Search pools",
+     "fa": "مخزن‌های جست‌وجو"
+    },
+    "value": {
+     "en": "6",
+     "fa": "۶"
+    }
+   },
+   {
+    "label": {
+     "en": "Documents",
+     "fa": "اسناد"
+    },
+    "value": {
+     "en": "155",
+     "fa": "۱۵۵"
+    }
+   },
+   {
+    "label": {
+     "en": "Text",
+     "fa": "متن"
+    },
+    "value": {
+     "en": "38.06 million characters (about 12 M Persian, 26 M English)",
+     "fa": "۳۸٫۰۶ میلیون کاراکتر (حدود ۱۲ میلیون فارسی، ۲۶ میلیون انگلیسی)"
+    }
+   },
+   {
+    "label": {
+     "en": "Chunks",
+     "fa": "قطعه‌ها"
+    },
+    "value": {
+     "en": "58,218 of at most 1,000 characters (mean about 810, 200 overlap)",
+     "fa": "۵۸٬۲۱۸ قطعه با حداکثر ۱٬۰۰۰ کاراکتر (میانگین حدود ۸۱۰، همپوشانی ۲۰۰)"
+    }
+   }
+  ],
+  "source": {
+   "paper": {
+    "en": "Table 2 (Search pools, sources and question counts) / Sect. 3.1 Benchmark",
+    "fa": "جدول ۲ (مخزن‌های جست‌وجو، منابع و تعداد پرسش‌ها) / بخش ۳٫۱ (بنچمارک)"
+   },
+   "file": "paper/tables/pools.tex (src: work/multidoc/pools/*.json, work/datasets_v2/questions/*.jsonl)"
+  },
+  "confidence": "measured",
+  "caveat": {
+   "en": "The Persian and English halves use different documents, so a difference between the halves mixes language and source.",
+   "fa": "نیمهٔ فارسی و نیمهٔ انگلیسی اسناد متفاوتی دارند، پس تفاوت میان دو نیمه اثر زبان و اثر منبع را در هم می‌آمیزد."
+  },
+  "tags": [
+   "benchmark",
+   "headline"
+  ]
+ },
+ {
+  "id": "bench-tiers",
+  "claim": {
+   "en": "Questions come in three tiers, set by the simplest evidence that answers them anywhere in the pool: one passage (T1), several parts of one document (T2), or at least two documents (T3).",
+   "fa": "پرسش‌ها سه سطح دارند و سطح هر پرسش را ساده‌ترین شواهدی تعیین می‌کند که در هر جای مخزن به آن پاسخ می‌دهد: یک بخش متن (T1)، چند بخش از یک سند (T2)، یا دست‌کم دو سند (T3)."
+  },
+  "numbers": [
+   {
+    "label": {
+     "en": "T1 local fact (dev / test)",
+     "fa": "T1 پاسخ در یک بخش متن (توسعه / آزمون)"
+    },
+    "value": {
+     "en": "18 / 30",
+     "fa": "۱۸ / ۳۰"
+    }
+   },
+   {
+    "label": {
+     "en": "T2 within-document integration (dev / test)",
+     "fa": "T2 ترکیب درون یک سند (توسعه / آزمون)"
+    },
+    "value": {
+     "en": "18 / 30",
+     "fa": "۱۸ / ۳۰"
+    }
+   },
+   {
+    "label": {
+     "en": "T3 cross-document integration (dev / test)",
+     "fa": "T3 ترکیب میان اسناد (توسعه / آزمون)"
+    },
+    "value": {
+     "en": "18 / 30",
+     "fa": "۱۸ / ۳۰"
+    }
+   },
+   {
+    "label": {
+     "en": "Unanswerable (dev / test)",
+     "fa": "بی‌پاسخ (توسعه / آزمون)"
+    },
+    "value": {
+     "en": "6 / 6",
+     "fa": "۶ / ۶"
+    }
+   },
+   {
+    "label": {
+     "en": "Per pool and split",
+     "fa": "در هر مخزن و هر دسته (توسعه یا آزمون)"
+    },
+    "value": {
+     "en": "3 dev and 5 test questions per tier, plus one unanswerable",
+     "fa": "در هر سطح ۳ پرسش توسعه و ۵ پرسش آزمون، به‌علاوهٔ یک پرسش بی‌پاسخ"
+    }
+   }
+  ],
+  "source": {
+   "paper": {
+    "en": "Table 1 (The three question tiers) / Sect. 3.1 Benchmark",
+    "fa": "جدول ۱ (سه سطح پرسش) / بخش ۳٫۱ (بنچمارک)"
+   },
+   "file": "paper/tables/tiers.tex (src: work/datasets_v2/DESIGN.md, questions/*_{dev,test}.jsonl)"
+  },
+  "confidence": "measured",
+  "caveat": {
+   "en": "Each tier has only 30 test questions, so tier-level differences are small samples.",
+   "fa": "هر سطح فقط ۳۰ پرسش آزمون دارد، پس تفاوت‌های درون هر سطح بر نمونه‌هایی کوچک تکیه دارند."
+  },
+  "tags": [
+   "benchmark",
+   "tiers",
+   "headline"
+  ]
+ },
+ {
+  "id": "bench-pools",
+  "claim": {
+   "en": "The documents are natural company reports, non-fiction books and statutes, each genre in Persian and in English, searched in full with no document picked in advance.",
+   "fa": "اسناد، متن‌های واقعی‌اند: گزارش شرکت‌ها، کتاب‌های غیرداستانی و متن قوانین، هر نوع هم به فارسی و هم به انگلیسی. جست‌وجو در کل اسناد انجام می‌شود و هیچ سندی از پیش انتخاب نمی‌شود."
+  },
+  "numbers": [
+   {
+    "label": {
+     "en": "RPT-fa (reports)",
+     "fa": "RPT-fa (گزارش‌ها)"
+    },
+    "value": {
+     "en": "97 documents, 4.76 M characters, 42 Iranian companies",
+     "fa": "۹۷ سند، ۴٫۷۶ میلیون کاراکتر، ۴۲ شرکت ایرانی"
+    }
+   },
+   {
+    "label": {
+     "en": "RPT-en (reports)",
+     "fa": "RPT-en (گزارش‌ها)"
+    },
+    "value": {
+     "en": "15 documents, 16.64 M characters, 11 international companies",
+     "fa": "۱۵ سند، ۱۶٫۶۴ میلیون کاراکتر، ۱۱ شرکت بین‌المللی"
+    }
+   },
+   {
+    "label": {
+     "en": "BOOK-fa (non-fiction)",
+     "fa": "BOOK-fa (غیرداستانی)"
+    },
+    "value": {
+     "en": "9 documents, 5.70 M characters (Wikisource)",
+     "fa": "۹ سند، ۵٫۷۰ میلیون کاراکتر (Wikisource)"
+    }
+   },
+   {
+    "label": {
+     "en": "BOOK-en (non-fiction)",
+     "fa": "BOOK-en (غیرداستانی)"
+    },
+    "value": {
+     "en": "11 documents, 6.26 M characters (Project Gutenberg)",
+     "fa": "۱۱ سند، ۶٫۲۶ میلیون کاراکتر (Project Gutenberg)"
+    }
+   },
+   {
+    "label": {
+     "en": "LAW-fa (statutes)",
+     "fa": "LAW-fa (قوانین)"
+    },
+    "value": {
+     "en": "13 documents, 1.18 M characters",
+     "fa": "۱۳ سند، ۱٫۱۸ میلیون کاراکتر"
+    }
+   },
+   {
+    "label": {
+     "en": "LAW-en (statutes)",
+     "fa": "LAW-en (قوانین)"
+    },
+    "value": {
+     "en": "10 documents, 3.52 M characters (EU regulations, UK Acts)",
+     "fa": "۱۰ سند، ۳٫۵۲ میلیون کاراکتر (مقررات اتحادیهٔ اروپا، قوانین بریتانیا)"
+    }
+   }
+  ],
+  "source": {
+   "paper": {
+    "en": "Table 2 (Search pools, sources and question counts)",
+    "fa": "جدول ۲ (مخزن‌های جست‌وجو، منابع و تعداد پرسش‌ها)"
+   },
+   "file": "paper/tables/pools.tex (src: work/multidoc/pools/*.json)"
+  },
+  "confidence": "measured",
+  "caveat": {
+   "en": "Only born-digital text or verified transcriptions were used, never scans.",
+   "fa": "فقط متن‌هایی به کار رفت که از ابتدا دیجیتال بوده‌اند یا رونویسی‌شان تأیید شده است؛ هیچ متن اسکن‌شده‌ای در کار نیست."
+  },
+  "tags": [
+   "benchmark"
+  ]
+ },
+ {
+  "id": "bench-annotation",
+  "claim": {
+   "en": "Every question carries the atomic requirements a correct answer must meet, evidence passages with exact quotes and offsets, and one or more evidence bundles: sets of passages that together suffice. Pipelines never see these; only the evaluator does.",
+   "fa": "هر پرسش این‌ها را همراه دارد: الزامات پایه‌ای و تفکیک‌ناپذیری که پاسخ درست باید برآورده کند، بخش‌های شاهد با نقل‌قول دقیق و جایگاهشان در متن، و یک یا چند مجموعهٔ شواهد، یعنی مجموعه‌هایی از بخش‌ها که با هم کافی‌اند. پایپ‌لاین‌ها هیچ‌وقت این‌ها را نمی‌بینند؛ فقط ارزیاب می‌بیند."
+  },
+  "numbers": [
+   {
+    "label": {
+     "en": "Questions spot-checked by the author",
+     "fa": "پرسش‌هایی که نویسنده نمونه‌وار بررسی کرد"
+    },
+    "value": {
+     "en": "32 of 156 (31 accepted, 1 fixed)",
+     "fa": "۳۲ از ۱۵۶ (۳۱ پذیرفته، ۱ اصلاح‌شده)"
+    }
+   },
+   {
+    "label": {
+     "en": "Source groups in the test (for clustered intervals)",
+     "fa": "گروه‌های منبع در آزمون (برای بازه‌های خوشه‌ای)"
+    },
+    "value": {
+     "en": "20",
+     "fa": "۲۰"
+    }
+   },
+   {
+    "label": {
+     "en": "Detectable difference within one language half",
+     "fa": "تفاوت آشکارشدنی درون یک نیمهٔ زبانی"
+    },
+    "value": {
+     "en": "about 8 of 45",
+     "fa": "حدود ۸ از ۴۵"
+    }
+   }
+  ],
+  "source": {
+   "paper": {
+    "en": "Sect. 3.1 Benchmark",
+    "fa": "بخش ۳٫۱ (بنچمارک)"
+   },
+   "file": "paper/sections/03_benchmark.tex"
+  },
+  "confidence": "measured",
+  "caveat": {
+   "en": "Questions were drafted and checked by AI agents and a mechanical verifier; a native speaker reviewed the Persian wording.",
+   "fa": "پرسش‌ها را عامل‌های هوش مصنوعی و یک بررسی‌کنندهٔ خودکار نوشتند و وارسی کردند؛ یک فارسی‌زبان متن فارسی را بازبینی کرد."
+  },
+  "tags": [
+   "benchmark"
+  ]
+ },
+ {
+  "id": "pipelines",
+  "claim": {
+   "en": "Four whole pipelines were compared. All share 1,000-character chunks, the answer prompt and the reader; they differ in how candidates are found and packed into the evidence budget.",
+   "fa": "چهار پایپ‌لاین کامل مقایسه شدند. قطعه‌های ۱٬۰۰۰ کاراکتری، پرامپت پاسخ و مدل پاسخ‌گو در همه یکسان است؛ تفاوتشان در شیوهٔ یافتن نامزدها و جا دادن آن‌ها در بودجهٔ شواهد است."
+  },
+  "numbers": [
+   {
+    "label": {
+     "en": "Hybrid",
+     "fa": "ترکیبی"
+    },
+    "value": {
+     "en": "BM25 and dense bge-m3 retrieval, merged by reciprocal rank fusion",
+     "fa": "BM25 و جست‌وجوی معنایی با bge-m3، ادغام‌شده با ادغام رتبه‌ای متقابل (RRF)"
+    }
+   },
+   {
+    "label": {
+     "en": "HR",
+     "fa": "HR"
+    },
+    "value": {
+     "en": "Hybrid plus a cross-encoder reranker (bge-reranker-v2-m3; local GPU, no LLM tokens)",
+     "fa": "ترکیبی به‌علاوهٔ بازرتبه‌ساز cross-encoder (bge-reranker-v2-m3؛ GPU محلی، بدون توکن LLM)"
+    }
+   },
+   {
+    "label": {
+     "en": "Lex-RAG",
+     "fa": "Lex-RAG"
+    },
+    "value": {
+     "en": "three-signal score fusion plus one LLM selection call (3 s deadline) that names evidence bundles",
+     "fa": "ادغام امتیاز سه سیگنال به‌علاوهٔ یک فراخوانی گزینش با LLM (مهلت ۳ ثانیه) که مجموعه‌های شواهد را نام می‌برد"
+    }
+   },
+   {
+    "label": {
+     "en": "SetR-p+fill",
+     "fa": "SetR-p+fill"
+    },
+    "value": {
+     "en": "one chain-of-thought selection call with the SetR prompt, filled from Hybrid's list",
+     "fa": "یک فراخوانی گزینش با زنجیرهٔ استدلال و پرامپت SetR، که باقی بودجه از فهرست ترکیبی پر می‌شود"
+    }
+   },
+   {
+    "label": {
+     "en": "Budgets in the frozen test",
+     "fa": "بودجه‌ها در آزمون ازپیش‌ثبت‌شده"
+    },
+    "value": {
+     "en": "6,000 and 15,500 characters",
+     "fa": "۶٬۰۰۰ و ۱۵٬۵۰۰ کاراکتر"
+    }
+   }
+  ],
+  "source": {
+   "paper": {
+    "en": "Table 3 (The four pipelines and their settings) / Sect. 3.2 Pipelines",
+    "fa": "جدول ۳ (چهار پایپ‌لاین و تنظیمات آن‌ها) / بخش ۳٫۲ (پایپ‌لاین‌ها)"
+   },
+   "file": "paper/tables/settings.tex"
+  },
+  "confidence": "measured",
+  "caveat": {
+   "en": "SetR-p+fill is an adaptation; its results say nothing about the published SetR system.",
+   "fa": "SetR-p+fill اقتباسی از SetR است؛ نتایج آن دربارهٔ سامانهٔ منتشرشدهٔ SetR چیزی نمی‌گوید."
+  },
+  "tags": [
+   "pipelines",
+   "headline"
+  ]
+ },
+ {
+  "id": "frozen-gate",
+  "claim": {
+   "en": "The one pre-registered test was inconclusive. The gate required Lex-RAG to beat both Hybrid and HR by at least 5 of 90 answers; it beat Hybrid by 5 to 7 and trailed HR by 0 to 3, and neither primary test was significant.",
+   "fa": "تنها آزمون ازپیش‌ثبت‌شده به نتیجهٔ قطعی نرسید. معیار، برتری دست‌کم ۵ پاسخ از ۹۰ برای Lex-RAG هم بر ترکیبی و هم بر HR بود. Lex-RAG از ترکیبی ۵ تا ۷ پاسخ جلو افتاد و از HR ۰ تا ۳ پاسخ عقب ماند، و هیچ‌یک از دو آزمون اصلی معنادار نبود."
+  },
+  "numbers": [
+   {
+    "label": {
+     "en": "Required margin",
+     "fa": "حاشیهٔ لازم"
+    },
+    "value": {
+     "en": "+5 of 90 against both",
+     "fa": "‎+۵ از ۹۰ در برابر هر دو"
+    }
+   },
+   {
+    "label": {
+     "en": "Lex-RAG minus Hybrid (6,000 characters)",
+     "fa": "Lex-RAG منهای ترکیبی (۶٬۰۰۰ کاراکتر)"
+    },
+    "value": {
+     "en": "+5 to +7 of 90",
+     "fa": "‎+۵ تا ‎+۷ از ۹۰"
+    }
+   },
+   {
+    "label": {
+     "en": "Lex-RAG minus HR (6,000 characters)",
+     "fa": "Lex-RAG منهای HR (۶٬۰۰۰ کاراکتر)"
+    },
+    "value": {
+     "en": "−3 to 0 of 90",
+     "fa": "‎−۳ تا ۰ از ۹۰"
+    }
+   },
+   {
+    "label": {
+     "en": "Holm-adjusted p against Hybrid",
+     "fa": "مقدار p اصلاح‌شده به روش Holm در برابر ترکیبی"
+    },
+    "value": {
+     "en": ".237",
+     "fa": "۰٫۲۳۷"
+    }
+   },
+   {
+    "label": {
+     "en": "Token gate (≤ 2.5× Hybrid)",
+     "fa": "معیار توکن (حداکثر ۲٫۵ برابر ترکیبی)"
+    },
+    "value": {
+     "en": "passed at 2.04–2.32×, only under a limit relaxed during development",
+     "fa": "با ۲٫۰۴ تا ۲٫۳۲ برابر پذیرفته شد، آن هم فقط با حدی که در مرحلهٔ توسعه آسان‌تر شده بود"
+    }
+   }
+  ],
+  "source": {
+   "paper": {
+    "en": "Table 5 (Test accuracy with the primary reader) / Sect. 4.1 Confirmatory Test",
+    "fa": "جدول ۵ (دقت آزمون با مدل پاسخ‌گوی اصلی) / بخش ۴٫۱ (آزمون تأییدی)"
+   },
+   "file": "work/datasets_v2/test_run/TEST_RESULTS.md (sec. 1)"
+  },
+  "confidence": "measured",
+  "caveat": {
+   "en": "With 90 questions the gate was likely to fail whether or not selection helps, so its failure is weak evidence either way.",
+   "fa": "با ۹۰ پرسش، این معیار به احتمال زیاد برآورده نمی‌شد، چه گزینش کمک کند چه نکند؛ پس برآورده نشدنش در هیچ جهتی دلیل محکمی نیست."
+  },
+  "tags": [
+   "frozen",
+   "headline",
+   "trust"
+  ]
+ },
+ {
+  "id": "frozen-scores",
+  "claim": {
+   "en": "Correct answers of 90 in the frozen test, machine judge. At 6,000 characters the reranked pipeline and Lex-RAG lead plain hybrid retrieval; at 15,500 characters the four pipelines are close.",
+   "fa": "پاسخ‌های درست از ۹۰ در آزمون ازپیش‌ثبت‌شده، با داور ماشینی. در ۶٬۰۰۰ کاراکتر، پایپ‌لاین با بازرتبه‌ساز و Lex-RAG از بازیابی ترکیبیِ ساده جلوترند؛ در ۱۵٬۵۰۰ کاراکتر چهار پایپ‌لاین به هم نزدیک‌اند."
+  },
+  "numbers": [
+   {
+    "label": {
+     "en": "Hybrid, 6,000",
+     "fa": "ترکیبی، ۶٬۰۰۰"
+    },
+    "value": {
+     "en": "62–63 of 90",
+     "fa": "۶۲–۶۳ از ۹۰"
+    }
+   },
+   {
+    "label": {
+     "en": "HR, 6,000",
+     "fa": "HR، ۶٬۰۰۰"
+    },
+    "value": {
+     "en": "69–71 of 90",
+     "fa": "۶۹–۷۱ از ۹۰"
+    }
+   },
+   {
+    "label": {
+     "en": "Lex-RAG, 6,000",
+     "fa": "Lex-RAG، ۶٬۰۰۰"
+    },
+    "value": {
+     "en": "68–69 of 90",
+     "fa": "۶۸–۶۹ از ۹۰"
+    }
+   },
+   {
+    "label": {
+     "en": "SetR-p+fill, 6,000",
+     "fa": "SetR-p+fill، ۶٬۰۰۰"
+    },
+    "value": {
+     "en": "63 of 90",
+     "fa": "۶۳ از ۹۰"
+    }
+   },
+   {
+    "label": {
+     "en": "Hybrid, 15,500",
+     "fa": "ترکیبی، ۱۵٬۵۰۰"
+    },
+    "value": {
+     "en": "68 of 90",
+     "fa": "۶۸ از ۹۰"
+    }
+   },
+   {
+    "label": {
+     "en": "HR, 15,500",
+     "fa": "HR، ۱۵٬۵۰۰"
+    },
+    "value": {
+     "en": "69–70 of 90",
+     "fa": "۶۹–۷۰ از ۹۰"
+    }
+   },
+   {
+    "label": {
+     "en": "Lex-RAG, 15,500",
+     "fa": "Lex-RAG، ۱۵٬۵۰۰"
+    },
+    "value": {
+     "en": "67 of 90",
+     "fa": "۶۷ از ۹۰"
+    }
+   },
+   {
+    "label": {
+     "en": "SetR-p+fill, 15,500",
+     "fa": "SetR-p+fill، ۱۵٬۵۰۰"
+    },
+    "value": {
+     "en": "66–67 of 90",
+     "fa": "۶۶–۶۷ از ۹۰"
+    }
+   }
+  ],
+  "source": {
+   "paper": {
+    "en": "Table 5 (Test accuracy with the primary reader) / Sect. 4.1 Confirmatory Test",
+    "fa": "جدول ۵ (دقت آزمون با مدل پاسخ‌گوی اصلی) / بخش ۴٫۱ (آزمون تأییدی)"
+   },
+   "file": "work/datasets_v2/test_run/TEST_RESULTS.md (sec. 2)"
+  },
+  "confidence": "measured",
+  "caveat": {
+   "en": "A range a–b covers answers the judge could not resolve. Every pipeline abstained correctly on all six unanswerable questions.",
+   "fa": "بازهٔ a–b پاسخ‌هایی را در بر می‌گیرد که داور نتوانست دربارهٔ آن‌ها حکم کند. همهٔ پایپ‌لاین‌ها در هر شش پرسش بی‌پاسخ به‌درستی از پاسخ دادن خودداری کردند."
+  },
+  "tags": [
+   "frozen",
+   "headline",
+   "results"
+  ]
+ },
+ {
+  "id": "frozen-tiers",
+  "claim": {
+   "en": "By tier at 6,000 characters: single facts are near ceiling for every pipeline; the pipelines differ on within-document and cross-document questions.",
+   "fa": "به تفکیک سطح در ۶٬۰۰۰ کاراکتر: در پرسش‌های تک‌واقعیتی همهٔ پایپ‌لاین‌ها نزدیک سقف‌اند؛ تفاوت پایپ‌لاین‌ها در پرسش‌های درون‌سندی و میان‌سندی است."
+  },
+  "numbers": [
+   {
+    "label": {
+     "en": "T1 (of 30): Hybrid / HR / Lex-RAG / SetR",
+     "fa": "T1 (از ۳۰): ترکیبی / HR / Lex-RAG / SetR"
+    },
+    "value": {
+     "en": "28 / 28 / 29 / 27",
+     "fa": "۲۸ / ۲۸ / ۲۹ / ۲۷"
+    }
+   },
+   {
+    "label": {
+     "en": "T2 (of 30): Hybrid / HR / Lex-RAG / SetR",
+     "fa": "T2 (از ۳۰): ترکیبی / HR / Lex-RAG / SetR"
+    },
+    "value": {
+     "en": "20–21 / 23–24 / 23–24 / 18",
+     "fa": "۲۰–۲۱ / ۲۳–۲۴ / ۲۳–۲۴ / ۱۸"
+    }
+   },
+   {
+    "label": {
+     "en": "T3 (of 30): Hybrid / HR / Lex-RAG / SetR",
+     "fa": "T3 (از ۳۰): ترکیبی / HR / Lex-RAG / SetR"
+    },
+    "value": {
+     "en": "14 / 18–19 / 16 / 18",
+     "fa": "۱۴ / ۱۸–۱۹ / ۱۶ / ۱۸"
+    }
+   }
+  ],
+  "source": {
+   "paper": {
+    "en": "Table 5 (Test accuracy with the primary reader)",
+    "fa": "جدول ۵ (دقت آزمون با مدل پاسخ‌گوی اصلی)"
+   },
+   "file": "work/datasets_v2/test_run/TEST_RESULTS.md (sec. 2)"
+  },
+  "confidence": "measured",
+  "caveat": {
+   "en": "Only 30 questions per tier.",
+   "fa": "در هر سطح فقط ۳۰ پرسش."
+  },
+  "tags": [
+   "frozen",
+   "tiers"
+  ]
+ },
+ {
+  "id": "human-merge",
+  "claim": {
+   "en": "When the author's blinded verdicts replace the judge's on the 30 questions where pipelines differed, every score rises but the conclusion stays: no selection pipeline is clearly better than the reranker.",
+   "fa": "وقتی در ۳۰ پرسشی که پایپ‌لاین‌ها در آن‌ها اختلاف داشتند حکم‌های نویسنده در بازبینی کور جای حکم داور را می‌گیرد، همهٔ امتیازها بالا می‌روند اما نتیجه همان می‌ماند: هیچ پایپ‌لاین گزینشی آشکارا بهتر از بازرتبه‌ساز نیست."
+  },
+  "numbers": [
+   {
+    "label": {
+     "en": "Hybrid / HR / Lex-RAG / SetR (symmetric merge, of 90)",
+     "fa": "ترکیبی / HR / Lex-RAG / SetR (جایگزینی متقارن حکم‌ها، از ۹۰)"
+    },
+    "value": {
+     "en": "71 / 76 / 76 / 78",
+     "fa": "۷۱ / ۷۶ / ۷۶ / ۷۸"
+    }
+   },
+   {
+    "label": {
+     "en": "Lex-RAG minus Hybrid, merged",
+     "fa": "Lex-RAG منهای ترکیبی، پس از جایگزینی حکم‌ها"
+    },
+    "value": {
+     "en": "+5 (7 wins, 2 losses), Holm p .359",
+     "fa": "‎+۵ (۷ برد، ۲ باخت)، p (Holm) = ۰٫۳۵۹"
+    }
+   },
+   {
+    "label": {
+     "en": "SetR minus Hybrid, merged",
+     "fa": "SetR منهای ترکیبی، پس از جایگزینی حکم‌ها"
+    },
+    "value": {
+     "en": "+7 (7 wins, 0 losses), p .016, one of six uncorrected comparisons",
+     "fa": "‎+۷ (۷ برد، ۰ باخت)، p = ۰٫۰۱۶، یکی از شش مقایسهٔ اصلاح‌نشده"
+    }
+   }
+  ],
+  "source": {
+   "paper": {
+    "en": "Table 5 (Sym. merge column) / Sect. 4.1 Confirmatory Test",
+    "fa": "جدول ۵ (ستون جایگزینی متقارن) / بخش ۴٫۱ (آزمون تأییدی)"
+   },
+   "file": "work/datasets_v2/test_run/TEST_RESULTS_HUMAN_SYM.md (sec. 1–2)"
+  },
+  "confidence": "measured",
+  "caveat": {
+   "en": "The merge was added after the test and rests on one reviewer.",
+   "fa": "این جایگزینی پس از آزمون افزوده شد و بر یک بازبین تکیه دارد."
+  },
+  "tags": [
+   "frozen",
+   "human",
+   "trust"
+  ]
+ },
+ {
+  "id": "equivalence",
+  "claim": {
+   "en": "An equivalence test cannot show that Lex-RAG and the reranked pipeline are equivalent, even within a margin of 8 answers of 90.",
+   "fa": "آزمون هم‌ارزی نمی‌تواند نشان دهد که Lex-RAG و پایپ‌لاین با بازرتبه‌ساز هم‌ارزند، حتی با حاشیهٔ ۸ پاسخ از ۹۰."
+  },
+  "numbers": [
+   {
+    "label": {
+     "en": "TOST p at ±8 of 90 (machine judge, component bootstrap)",
+     "fa": "مقدار p در TOST با حاشیهٔ ±۸ از ۹۰ (داور ماشینی، بوت‌استرپ مؤلفه‌ای)"
+    },
+    "value": {
+     "en": ".062",
+     "fa": "۰٫۰۶۲"
+    }
+   },
+   {
+    "label": {
+     "en": "90% interval, Lex-RAG minus HR",
+     "fa": "بازهٔ ۹۰٪، Lex-RAG منهای HR"
+    },
+    "value": {
+     "en": "−8.3 to +5.7 answers",
+     "fa": "‎−۸٫۳ تا ‎+۵٫۷ پاسخ"
+    }
+   }
+  ],
+  "source": {
+   "paper": {
+    "en": "Sect. 4.1 Confirmatory Test",
+    "fa": "بخش ۴٫۱ (آزمون تأییدی)"
+   },
+   "file": "work/posthoc_2026-11/S5_stats/RESULTS.md (sec. 2.2)"
+  },
+  "confidence": "measured",
+  "caveat": {
+   "en": "Margins were chosen post hoc.",
+   "fa": "حاشیه‌ها به‌صورت پسینی انتخاب شدند."
+  },
+  "tags": [
+   "frozen",
+   "power",
+   "trust"
+  ]
+ },
+ {
+  "id": "power",
+  "claim": {
+   "en": "With 90 questions the test can only detect a difference of about 11 answers. A difference of 5 would be detected in fewer than one case in five and needs about 400 to 460 questions.",
+   "fa": "با ۹۰ پرسش، آزمون فقط تفاوتی در حدود ۱۱ پاسخ را آشکار می‌کند. تفاوت ۵ پاسخ در کمتر از یک مورد از هر پنج مورد آشکار می‌شود و برای آن حدود ۴۰۰ تا ۴۶۰ پرسش لازم است."
+  },
+  "numbers": [
+   {
+    "label": {
+     "en": "Detectable difference, Lex-RAG vs Hybrid (80% power)",
+     "fa": "تفاوت آشکارشدنی، Lex-RAG در برابر ترکیبی (توان ۸۰٪)"
+    },
+    "value": {
+     "en": "11.1 of 90",
+     "fa": "۱۱٫۱ از ۹۰"
+    }
+   },
+   {
+    "label": {
+     "en": "Detectable difference, Lex-RAG vs HR",
+     "fa": "تفاوت آشکارشدنی، Lex-RAG در برابر HR"
+    },
+    "value": {
+     "en": "10.4 of 90",
+     "fa": "۱۰٫۴ از ۹۰"
+    }
+   },
+   {
+    "label": {
+     "en": "Power to detect 5 of 90",
+     "fa": "توان آشکار کردن ۵ از ۹۰"
+    },
+    "value": {
+     "en": ".18 and .19",
+     "fa": "۰٫۱۸ و ۰٫۱۹"
+    }
+   },
+   {
+    "label": {
+     "en": "Questions needed to detect 5",
+     "fa": "پرسش‌های لازم برای آشکار کردن ۵"
+    },
+    "value": {
+     "en": "458 and 401",
+     "fa": "۴۵۸ و ۴۰۱"
+    }
+   },
+   {
+    "label": {
+     "en": "Detectable within one language half (45)",
+     "fa": "آشکارشدنی درون یک نیمهٔ زبانی (۴۵)"
+    },
+    "value": {
+     "en": "about 8",
+     "fa": "حدود ۸"
+    }
+   }
+  ],
+  "source": {
+   "paper": {
+    "en": "Table 14 (Detectable with 90 questions) / Sect. 4.1 Confirmatory Test",
+    "fa": "جدول ۱۴ (تفاوت قابل‌تشخیص با ۹۰ پرسش) / بخش ۴٫۱ (آزمون تأییدی)"
+   },
+   "file": "work/posthoc_2026-11/S5_stats/RESULTS.md (sec. 2.3)"
+  },
+  "confidence": "measured",
+  "caveat": {
+   "en": "Exact two-sided sign test, α = .05, at the observed disagreement rate.",
+   "fa": "آزمون علامت دقیق دوطرفه، α = ۰٫۰۵، با نرخ اختلافِ مشاهده‌شده."
+  },
+  "tags": [
+   "power",
+   "trust",
+   "headline"
+  ]
+ },
+ {
+  "id": "reader-bounds",
+  "claim": {
+   "en": "The reader is rarely the problem. Given only the gold evidence (about 570 characters) it answers 83 of 90; with no evidence it still answers 26 from memory. The best single-pass pipelines reach about 70.",
+   "fa": "مشکل به‌ندرت از مدل پاسخ‌گوست. اگر فقط شواهد مرجع را ببیند (حدود ۵۷۰ کاراکتر) به ۸۳ پرسش از ۹۰ درست پاسخ می‌دهد؛ بدون هیچ شاهدی هم ۲۶ پرسش را از حافظه پاسخ می‌دهد. بهترین پایپ‌لاین‌های تک‌مرحله‌ای به حدود ۷۰ می‌رسند."
+  },
+  "numbers": [
+   {
+    "label": {
+     "en": "Closed book (no evidence)",
+     "fa": "بدون شواهد"
+    },
+    "value": {
+     "en": "26 of 90",
+     "fa": "۲۶ از ۹۰"
+    }
+   },
+   {
+    "label": {
+     "en": "Gold evidence only",
+     "fa": "فقط شواهد مرجع"
+    },
+    "value": {
+     "en": "83 of 90 (all 30 within-document questions)",
+     "fa": "۸۳ از ۹۰ (هر ۳۰ پرسش درون‌سندی)"
+    }
+   },
+   {
+    "label": {
+     "en": "HR at 6,000 characters",
+     "fa": "HR در ۶٬۰۰۰ کاراکتر"
+    },
+    "value": {
+     "en": "69–71 of 90",
+     "fa": "۶۹–۷۱ از ۹۰"
+    }
+   },
+   {
+    "label": {
+     "en": "Gold evidence minus HR",
+     "fa": "شواهد مرجع منهای HR"
+    },
+    "value": {
+     "en": "+12 to +14 (18 wins, 5 losses)",
+     "fa": "‎+۱۲ تا ‎+۱۴ (۱۸ برد، ۵ باخت)"
+    }
+   }
+  ],
+  "source": {
+   "paper": {
+    "en": "Table 8 (Effect of the selection step) / Sect. 4.3 Where Answers Are Lost",
+    "fa": "جدول ۸ (اثر گام گزینش) / بخش ۴٫۳ (پاسخ‌ها کجا از دست می‌روند)"
+   },
+   "file": "work/posthoc_2026-11/S6_baselines/RESULTS.md (sec. 2); work/posthoc_2026-11/S2a_packs/RESULTS.md; work/posthoc_2026-11/S7_analysis/contam_tables.md"
+  },
+  "confidence": "measured",
+  "caveat": {
+   "en": "Post hoc: the 90 test questions had already been answered and seen.",
+   "fa": "پسینی: پاسخ ۹۰ پرسش آزمون پیش‌تر گرفته و دیده شده بود."
+  },
+  "tags": [
+   "funnel",
+   "headline",
+   "reader"
+  ]
+ },
+ {
+  "id": "funnel",
+  "claim": {
+   "en": "Answers are lost in two stages before the reader: the complete evidence never reaches the top 40 candidates (15 to 18 of 90 questions), or it is dropped when the evidence pack is built (a further 11 to 15).",
+   "fa": "پاسخ‌ها پیش از رسیدن به مدل پاسخ‌گو در دو مرحله از دست می‌روند: یا شواهد کامل هیچ‌وقت به ۴۰ نامزد برتر نمی‌رسد (۱۵ تا ۱۸ پرسش از ۹۰)، یا هنگام ساختن بستهٔ شواهد کنار گذاشته می‌شود (۱۱ تا ۱۵ پرسش دیگر)."
+  },
+  "numbers": [
+   {
+    "label": {
+     "en": "BM25: top 40 / pack / correct",
+     "fa": "BM25: ۴۰ نامزد برتر / بسته / درست"
+    },
+    "value": {
+     "en": "66 / 45 / 48",
+     "fa": "۶۶ / ۴۵ / ۴۸"
+    }
+   },
+   {
+    "label": {
+     "en": "Dense: top 40 / pack / correct",
+     "fa": "معنایی: ۴۰ نامزد برتر / بسته / درست"
+    },
+    "value": {
+     "en": "71 / 47 / 53",
+     "fa": "۷۱ / ۴۷ / ۵۳"
+    }
+   },
+   {
+    "label": {
+     "en": "Hybrid: top 40 / pack / correct",
+     "fa": "ترکیبی: ۴۰ نامزد برتر / بسته / درست"
+    },
+    "value": {
+     "en": "72 / 57 / 62–63",
+     "fa": "۷۲ / ۵۷ / ۶۲–۶۳"
+    }
+   },
+   {
+    "label": {
+     "en": "HR: top 40 / pack / correct",
+     "fa": "HR: ۴۰ نامزد برتر / بسته / درست"
+    },
+    "value": {
+     "en": "75 / 63 / 69–71",
+     "fa": "۷۵ / ۶۳ / ۶۹–۷۱"
+    }
+   },
+   {
+    "label": {
+     "en": "Lex-RAG without selection: top 40 / pack / correct",
+     "fa": "Lex-RAG بدون گزینش: ۴۰ نامزد برتر / بسته / درست"
+    },
+    "value": {
+     "en": "75 / 53 / 58–59",
+     "fa": "۷۵ / ۵۳ / ۵۸–۵۹"
+    }
+   },
+   {
+    "label": {
+     "en": "Lex-RAG: top 40 / pack / correct",
+     "fa": "Lex-RAG: ۴۰ نامزد برتر / بسته / درست"
+    },
+    "value": {
+     "en": "75 / 64 / 68–69",
+     "fa": "۷۵ / ۶۴ / ۶۸–۶۹"
+    }
+   },
+   {
+    "label": {
+     "en": "Gold evidence: pack / correct",
+     "fa": "شواهد مرجع: بسته / درست"
+    },
+    "value": {
+     "en": "90 / 83",
+     "fa": "۹۰ / ۸۳"
+    }
+   },
+   {
+    "label": {
+     "en": "Lost before the candidate list",
+     "fa": "از دست‌رفته پیش از فهرست نامزدها"
+    },
+    "value": {
+     "en": "15–18 of 90",
+     "fa": "۱۵–۱۸ از ۹۰"
+    }
+   },
+   {
+    "label": {
+     "en": "Lost in packing (6,000 characters)",
+     "fa": "از دست‌رفته در بسته‌سازی (۶٬۰۰۰ کاراکتر)"
+    },
+    "value": {
+     "en": "11–15 of 90",
+     "fa": "۱۱–۱۵ از ۹۰"
+    }
+   }
+  ],
+  "source": {
+   "paper": {
+    "en": "Table 7 (complete bundle in top 40, pack, correct) / Sect. 4.3 Where Answers Are Lost",
+    "fa": "جدول ۷ (مجموعهٔ کامل در ۴۰ نامزد برتر، بسته، پاسخ درست) / بخش ۴٫۳ (پاسخ‌ها کجا از دست می‌روند)"
+   },
+   "file": "work/posthoc_2026-11/S10_retrieval/RESULTS.md (sec. 2.4); work/posthoc_2026-11/S7_analysis/RESULTS.md (sec. 1, 5)"
+  },
+  "confidence": "measured",
+  "caveat": {
+   "en": "Counts of questions (of 90) with a complete gold bundle; 6,000-character packs. Post hoc: the 90 test questions had already been answered and seen.",
+   "fa": "تعداد پرسش‌هایی (از ۹۰) که یک مجموعهٔ کامل شواهد مرجع دارند؛ بسته‌های ۶٬۰۰۰ کاراکتری. پسینی: پاسخ ۹۰ پرسش آزمون پیش‌تر گرفته و دیده شده بود."
+  },
+  "tags": [
+   "funnel",
+   "headline",
+   "results"
+  ]
+ },
+ {
+  "id": "partial-misses",
+  "claim": {
+   "en": "Most wrong answers had part of the needed evidence, not none of it; misses with a complete bundle are mostly judge disagreements.",
+   "fa": "بیشتر پاسخ‌های نادرست بخشی از شواهد لازم را داشتند، نه اینکه هیچ شاهدی نداشته باشند؛ پاسخ‌های نادرستی که مجموعهٔ کامل شواهد داشتند بیشتر مواردی‌اند که داور با بازبین انسانی هم‌نظر نبود."
+  },
+  "numbers": [
+   {
+    "label": {
+     "en": "Misses with partial evidence, per pipeline (6,000)",
+     "fa": "پاسخ‌های نادرست با شواهد ناقص، در هر پایپ‌لاین (۶٬۰۰۰)"
+    },
+    "value": {
+     "en": "14–26",
+     "fa": "۱۴–۲۶"
+    }
+   },
+   {
+    "label": {
+     "en": "Misses with no evidence",
+     "fa": "پاسخ‌های نادرست بدون هیچ شاهدی"
+    },
+    "value": {
+     "en": "1–5",
+     "fa": "۱–۵"
+    }
+   },
+   {
+    "label": {
+     "en": "Reviewed complete-bundle misses the human accepted",
+     "fa": "پاسخ‌های نادرستِ بازبینی‌شده با مجموعهٔ کامل که بازبین انسانی پذیرفت"
+    },
+    "value": {
+     "en": "16 of 16",
+     "fa": "۱۶ از ۱۶"
+    }
+   },
+   {
+    "label": {
+     "en": "Questions no single-pass pipeline packed completely (6,000)",
+     "fa": "پرسش‌هایی که هیچ پایپ‌لاین تک‌مرحله‌ایی شواهدشان را کامل در بسته نگذاشت (۶٬۰۰۰)"
+    },
+    "value": {
+     "en": "22 (mostly cross-document)",
+     "fa": "۲۲ (بیشترشان میان‌سندی)"
+    }
+   },
+   {
+    "label": {
+     "en": "Complete bundles from the iterative BM25 agent",
+     "fa": "مجموعه‌های کاملِ عامل تکرارشوندهٔ BM25"
+    },
+    "value": {
+     "en": "71 of 90",
+     "fa": "۷۱ از ۹۰"
+    }
+   }
+  ],
+  "source": {
+   "paper": {
+    "en": "Figure 2 (Where the answers are lost) / Sect. 4.3",
+    "fa": "شکل ۲ (پاسخ‌ها کجا از دست می‌روند) / بخش ۴٫۳"
+   },
+   "file": "work/posthoc_2026-11/S7_analysis/RESULTS.md (sec. 1)"
+  },
+  "confidence": "measured",
+  "caveat": {
+   "en": "Post hoc: the 90 test questions had already been answered and seen.",
+   "fa": "پسینی: پاسخ ۹۰ پرسش آزمون پیش‌تر گرفته و دیده شده بود."
+  },
+  "tags": [
+   "funnel"
+  ]
+ },
+ {
+  "id": "selection-6000",
+  "claim": {
+   "en": "Removing Lex-RAG's selection call (same candidates, same packer) costs about 5 to 10 answers at 6,000 characters, and fewer complete bundles reach the reader.",
+   "fa": "حذف فراخوانی گزینش Lex-RAG (با همان نامزدها و همان بسته‌ساز) در ۶٬۰۰۰ کاراکتر حدود ۵ تا ۱۰ پاسخ درست را از دست می‌دهد، و مجموعه‌های کامل کمتری به مدل پاسخ‌گو می‌رسند."
+  },
+  "numbers": [
+   {
+    "label": {
+     "en": "Lex-RAG minus Lex-RAG without selection, saved answers",
+     "fa": "Lex-RAG منهای Lex-RAG بدون گزینش، پاسخ‌های ذخیره‌شده"
+    },
+    "value": {
+     "en": "+9 to +11 (12 wins, 2 losses)",
+     "fa": "‎+۹ تا ‎+۱۱ (۱۲ برد، ۲ باخت)"
+    }
+   },
+   {
+    "label": {
+     "en": "Same, with either of two reader redraws",
+     "fa": "همین، با هر یک از دو اجرای دوبارهٔ مدل پاسخ‌گو"
+    },
+    "value": {
+     "en": "+4 to +6 and +4 to +5",
+     "fa": "‎+۴ تا ‎+۶ و ‎+۴ تا ‎+۵"
+    }
+   },
+   {
+    "label": {
+     "en": "Same, under the second judge",
+     "fa": "همین، با داور دوم"
+    },
+    "value": {
+     "en": "+6 to +10",
+     "fa": "‎+۶ تا ‎+۱۰"
+    }
+   },
+   {
+    "label": {
+     "en": "Same, on 54 dev questions",
+     "fa": "همین، در ۵۴ پرسش توسعه"
+    },
+    "value": {
+     "en": "+8 (9 wins, 1 loss)",
+     "fa": "‎+۸ (۹ برد، ۱ باخت)"
+    }
+   },
+   {
+    "label": {
+     "en": "Complete bundle in the pack, with / without the call",
+     "fa": "مجموعهٔ کامل در بسته، با / بدون فراخوانی"
+    },
+    "value": {
+     "en": "64 / 53 of 90",
+     "fa": "۶۴ / ۵۳ از ۹۰"
+    }
+   }
+  ],
+  "source": {
+   "paper": {
+    "en": "Table 8 (Effect of the selection step) / Sect. 4.3 Role of the Selection Call",
+    "fa": "جدول ۸ (اثر گام گزینش) / بخش ۴٫۳ (نقش فراخوانی گزینش)"
+   },
+   "file": "work/posthoc_2026-11/S8_factorial/tables.md; work/posthoc_2026-11/S14_bilingual/RESULTS.md (sec. 2.1)"
+  },
+  "confidence": "tentative",
+  "caveat": {
+   "en": "Without the call Lex-RAG is no better than Hybrid. Post hoc: the 90 test questions had already been answered and seen.",
+   "fa": "Lex-RAG بدون این فراخوانی بهتر از ترکیبی نیست. پسینی: پاسخ ۹۰ پرسش آزمون پیش‌تر گرفته و دیده شده بود."
+  },
+  "tags": [
+   "selection",
+   "results"
+  ]
+ },
+ {
+  "id": "selection-budgets",
+  "claim": {
+   "en": "The selection call matters most when the pack is small and fades as the budget grows.",
+   "fa": "فراخوانی گزینش وقتی بسته کوچک است بیشترین اثر را دارد و با بزرگ‌تر شدن بودجه کم‌اثر می‌شود."
+  },
+  "numbers": [
+   {
+    "label": {
+     "en": "3,000 characters",
+     "fa": "۳٬۰۰۰ کاراکتر"
+    },
+    "value": {
+     "en": "+15 to +16 (17 wins, 2 losses)",
+     "fa": "‎+۱۵ تا ‎+۱۶ (۱۷ برد، ۲ باخت)"
+    }
+   },
+   {
+    "label": {
+     "en": "6,000 characters",
+     "fa": "۶٬۰۰۰ کاراکتر"
+    },
+    "value": {
+     "en": "+9 to +11",
+     "fa": "‎+۹ تا ‎+۱۱"
+    }
+   },
+   {
+    "label": {
+     "en": "10,000 characters",
+     "fa": "۱۰٬۰۰۰ کاراکتر"
+    },
+    "value": {
+     "en": "+3 to +4",
+     "fa": "‎+۳ تا ‎+۴"
+    }
+   },
+   {
+    "label": {
+     "en": "15,500 characters",
+     "fa": "۱۵٬۵۰۰ کاراکتر"
+    },
+    "value": {
+     "en": "+2",
+     "fa": "‎+۲"
+    }
+   },
+   {
+    "label": {
+     "en": "24,000 characters",
+     "fa": "۲۴٬۰۰۰ کاراکتر"
+    },
+    "value": {
+     "en": "+2",
+     "fa": "‎+۲"
+    }
+   },
+   {
+    "label": {
+     "en": "Lex-RAG vs Hybrid / vs HR at 3,000",
+     "fa": "Lex-RAG در برابر ترکیبی / در برابر HR در ۳٬۰۰۰"
+    },
+    "value": {
+     "en": "59 vs 49–51 / vs 56",
+     "fa": "۵۹ در برابر ۴۹–۵۱ / در برابر ۵۶"
+    }
+   }
+  ],
+  "source": {
+   "paper": {
+    "en": "Figure 3 (Accuracy at five evidence budgets) / Sect. 4.4 Effect of the Evidence Budget",
+    "fa": "شکل ۳ (دقت در پنج بودجهٔ شواهد) / بخش ۴٫۴ (اثر بودجهٔ شواهد)"
+   },
+   "file": "work/posthoc_2026-11/S8_factorial/tables.md (paired comparisons)"
+  },
+  "confidence": "measured",
+  "caveat": {
+   "en": "Lex-RAG minus Lex-RAG without selection. The 3,000 figure is one run, with no redraw and no second judge; the comparison pack is itself 6 below plain Hybrid at 3,000.",
+   "fa": "Lex-RAG منهای Lex-RAG بدون گزینش. نتیجهٔ ۳٬۰۰۰ کاراکتر از یک اجراست، بدون اجرای دوباره و بدون داور دوم؛ بسته‌ای که مبنای مقایسه است، خود در ۳٬۰۰۰ کاراکتر ۶ پاسخ پایین‌تر از ترکیبیِ ساده است."
+  },
+  "tags": [
+   "selection",
+   "budget"
+  ]
+ },
+ {
+  "id": "selection-over-ce",
+  "claim": {
+   "en": "Running Lex-RAG's selection call over the reranker's candidates is no better than the reranker alone: once a cross-encoder has ordered the candidates, the call adds no measurable gain.",
+   "fa": "اجرای فراخوانی گزینش Lex-RAG روی نامزدهای بازرتبه‌ساز بهتر از خود بازرتبه‌ساز نیست: وقتی cross-encoder نامزدها را مرتب کرده باشد، این فراخوانی سودی که بتوان اندازه گرفت نمی‌افزاید."
+  },
+  "numbers": [
+   {
+    "label": {
+     "en": "Selection over HR's candidates",
+     "fa": "گزینش روی نامزدهای HR"
+    },
+    "value": {
+     "en": "70 of 90",
+     "fa": "۷۰ از ۹۰"
+    }
+   },
+   {
+    "label": {
+     "en": "HR alone",
+     "fa": "فقط HR"
+    },
+    "value": {
+     "en": "69–71 of 90",
+     "fa": "۶۹–۷۱ از ۹۰"
+    }
+   },
+   {
+    "label": {
+     "en": "Difference",
+     "fa": "تفاوت"
+    },
+    "value": {
+     "en": "−1 to +1 (9 wins, 8 losses)",
+     "fa": "‎−۱ تا ‎+۱ (۹ برد، ۸ باخت)"
+    }
+   }
+  ],
+  "source": {
+   "paper": {
+    "en": "Table 8 (Effect of the selection step) / Sect. 4.3",
+    "fa": "جدول ۸ (اثر گام گزینش) / بخش ۴٫۳"
+   },
+   "file": "work/posthoc_2026-11/S8_factorial/RESULTS.md (sec. 2.3–2.4), tables.md"
+  },
+  "confidence": "tentative",
+  "caveat": {
+   "en": "Not scored by the second judge. Post hoc: the 90 test questions had already been answered and seen.",
+   "fa": "داور دوم این را نسنجیده است. پسینی: پاسخ ۹۰ پرسش آزمون پیش‌تر گرفته و دیده شده بود."
+  },
+  "tags": [
+   "selection",
+   "reranker",
+   "avoid"
+  ]
+ },
+ {
+  "id": "other-selectors",
+  "claim": {
+   "en": "Packers without an LLM do not replace the selection call, and other LLM rerankers cost more without beating the cross-encoder.",
+   "fa": "بسته‌سازهای بدون LLM جای فراخوانی گزینش را نمی‌گیرند، و بازرتبه‌سازهای LLM دیگر گران‌ترند و از cross-encoder هم بهتر نیستند."
+  },
+  "numbers": [
+   {
+    "label": {
+     "en": "MMR packer, same candidates",
+     "fa": "بسته‌ساز MMR، همان نامزدها"
+    },
+    "value": {
+     "en": "60 of 90",
+     "fa": "۶۰ از ۹۰"
+    }
+   },
+   {
+    "label": {
+     "en": "Knapsack packer, same candidates",
+     "fa": "بسته‌ساز کوله‌پشتی (knapsack)، همان نامزدها"
+    },
+    "value": {
+     "en": "44 of 90",
+     "fa": "۴۴ از ۹۰"
+    }
+   },
+   {
+    "label": {
+     "en": "Listwise LLM reranker",
+     "fa": "بازرتبه‌ساز LLM فهرستی (listwise)"
+    },
+    "value": {
+     "en": "66–67 of 90 at 7,028 tokens per question",
+     "fa": "۶۶–۶۷ از ۹۰ با ۷٬۰۲۸ توکن برای هر پرسش"
+    }
+   },
+   {
+    "label": {
+     "en": "Lex-RAG with a smaller selector model",
+     "fa": "Lex-RAG با مدل گزینشگر کوچک‌تر"
+    },
+    "value": {
+     "en": "59 of 90",
+     "fa": "۵۹ از ۹۰"
+    }
+   },
+   {
+    "label": {
+     "en": "Lex-RAG without the 3 s deadline",
+     "fa": "Lex-RAG بدون مهلت ۳ ثانیه‌ای"
+    },
+    "value": {
+     "en": "71–72 of 90",
+     "fa": "۷۱–۷۲ از ۹۰"
+    }
+   },
+   {
+    "label": {
+     "en": "SetR selected set only (about 3,000 characters)",
+     "fa": "فقط مجموعهٔ گزینش‌شدهٔ SetR (حدود ۳٬۰۰۰ کاراکتر)"
+    },
+    "value": {
+     "en": "63 of 90, same as with fill",
+     "fa": "۶۳ از ۹۰، برابر با حالت با پرکردن"
+    }
+   }
+  ],
+  "source": {
+   "paper": {
+    "en": "Table 8 (Effect of the selection step) / Sect. 4.3",
+    "fa": "جدول ۸ (اثر گام گزینش) / بخش ۴٫۳"
+   },
+   "file": "work/posthoc_2026-11/S2a_packs/RESULTS.md; work/posthoc_2026-11/S6_baselines/RESULTS.md; work/posthoc_2026-11/S2b_variance/RESULTS.md"
+  },
+  "confidence": "measured",
+  "caveat": {
+   "en": "Post hoc: the 90 test questions had already been answered and seen.",
+   "fa": "پسینی: پاسخ ۹۰ پرسش آزمون پیش‌تر گرفته و دیده شده بود."
+  },
+  "tags": [
+   "selection"
+  ]
+ },
+ {
+  "id": "ce-vs-hybrid",
+  "claim": {
+   "en": "The cross-encoder reranker is the suggested starting point: it needs no LLM tokens and was ahead of plain hybrid in all nine pairings of reader draws, but its lead is not significant.",
+   "fa": "بازرتبه‌ساز cross-encoder نقطهٔ شروع پیشنهادی است: توکن LLM مصرف نمی‌کند و در هر نُه جفت از اجراهای مدل پاسخ‌گو از ترکیبیِ ساده جلوتر بود، اما برتری‌اش معنادار نیست."
+  },
+  "numbers": [
+   {
+    "label": {
+     "en": "HR minus Hybrid, 6,000 (saved answers)",
+     "fa": "HR منهای ترکیبی، ۶٬۰۰۰ (پاسخ‌های ذخیره‌شده)"
+    },
+    "value": {
+     "en": "+6 to +9 (10 wins, 4 losses), sign p .049–.18",
+     "fa": "‎+۶ تا ‎+۹ (۱۰ برد، ۴ باخت)، p آزمون علامت = ۰٫۰۴۹ تا ۰٫۱۸"
+    }
+   },
+   {
+    "label": {
+     "en": "Pairings of reader draws with HR ahead",
+     "fa": "جفت‌اجراهایی که HR در آن‌ها جلوتر بود"
+    },
+    "value": {
+     "en": "9 of 9 (mean +6.3 to +8.0)",
+     "fa": "۹ از ۹ (میانگین ‎+۶٫۳ تا ‎+۸٫۰)"
+    }
+   },
+   {
+    "label": {
+     "en": "Persian half / English half",
+     "fa": "نیمهٔ فارسی / نیمهٔ انگلیسی"
+    },
+    "value": {
+     "en": "0 to +1 / +6 to +8",
+     "fa": "۰ تا ‎+۱ / ‎+۶ تا ‎+۸"
+    }
+   },
+   {
+    "label": {
+     "en": "Under the second judge",
+     "fa": "با داور دوم"
+    },
+    "value": {
+     "en": "63 vs 59–61",
+     "fa": "۶۳ در برابر ۵۹–۶۱"
+    }
+   },
+   {
+    "label": {
+     "en": "Six readers pooled, odds ratio",
+     "fa": "شش مدل پاسخ‌گو با هم، نسبت شانس"
+    },
+    "value": {
+     "en": "1.31, p .308",
+     "fa": "۱٫۳۱، p = ۰٫۳۰۸"
+    }
+   }
+  ],
+  "source": {
+   "paper": {
+    "en": "Table 13 (guide) / Sect. 4.7 Practical Recommendations; Table 33; Table 14",
+    "fa": "جدول ۱۳ (جدول راهنما) / بخش ۴٫۷ (توصیه‌های عملی)؛ جدول ۳۳؛ جدول ۱۴"
+   },
+   "file": "work/posthoc_2026-11/S2b_variance/RESULTS.md (sec. 2.3); work/posthoc_2026-11/S8_factorial/tables.md; work/posthoc_2026-11/S5_stats/tables.md"
+  },
+  "confidence": "tentative",
+  "caveat": {
+   "en": "Absent in the Persian half. Post hoc: the 90 test questions had already been answered and seen.",
+   "fa": "در نیمهٔ فارسی دیده نمی‌شود. پسینی: پاسخ ۹۰ پرسش آزمون پیش‌تر گرفته و دیده شده بود."
+  },
+  "tags": [
+   "reranker",
+   "results"
+  ]
+ },
+ {
+  "id": "budget-curves",
+  "claim": {
+   "en": "Plain hybrid retrieval keeps improving as the pack grows; the reranked pipeline gets most of its accuracy from the first 6,000 characters; at 24,000 the pipelines converge.",
+   "fa": "بازیابی ترکیبیِ ساده با بزرگ‌تر شدن بسته پیوسته بهتر می‌شود؛ پایپ‌لاین با بازرتبه‌ساز بیشتر دقتش را از ۶٬۰۰۰ کاراکتر نخست می‌گیرد؛ در ۲۴٬۰۰۰ کاراکتر پایپ‌لاین‌ها به هم می‌رسند."
+  },
+  "numbers": [
+   {
+    "label": {
+     "en": "Hybrid at 3,000 / 6,000 / 10,000 / 15,500 / 24,000",
+     "fa": "ترکیبی در ۳٬۰۰۰ / ۶٬۰۰۰ / ۱۰٬۰۰۰ / ۱۵٬۵۰۰ / ۲۴٬۰۰۰"
+    },
+    "value": {
+     "en": "49–51 / 62–63 / 63–64 / 68 / 72",
+     "fa": "۴۹–۵۱ / ۶۲–۶۳ / ۶۳–۶۴ / ۶۸ / ۷۲"
+    }
+   },
+   {
+    "label": {
+     "en": "HR at the same budgets",
+     "fa": "HR در همان بودجه‌ها"
+    },
+    "value": {
+     "en": "56 / 69–71 / 70 / 69–70 / 66",
+     "fa": "۵۶ / ۶۹–۷۱ / ۷۰ / ۶۹–۷۰ / ۶۶"
+    }
+   },
+   {
+    "label": {
+     "en": "Lex-RAG at the same budgets",
+     "fa": "Lex-RAG در همان بودجه‌ها"
+    },
+    "value": {
+     "en": "59 / 68–69 / 69–70 / 67 / 72",
+     "fa": "۵۹ / ۶۸–۶۹ / ۶۹–۷۰ / ۶۷ / ۷۲"
+    }
+   },
+   {
+    "label": {
+     "en": "Lex-RAG without selection",
+     "fa": "Lex-RAG بدون گزینش"
+    },
+    "value": {
+     "en": "43–44 / 58–59 / 66 / 65 / 70",
+     "fa": "۴۳–۴۴ / ۵۸–۵۹ / ۶۶ / ۶۵ / ۷۰"
+    }
+   },
+   {
+    "label": {
+     "en": "Hybrid tokens per question (thousands)",
+     "fa": "توکن ترکیبی برای هر پرسش (هزار)"
+    },
+    "value": {
+     "en": "1.24 / 2.22 / 3.48 / 5.24 / 7.93",
+     "fa": "۱٫۲۴ / ۲٫۲۲ / ۳٫۴۸ / ۵٫۲۴ / ۷٫۹۳"
+    }
+   }
+  ],
+  "source": {
+   "paper": {
+    "en": "Figure 3 (Accuracy at five evidence budgets) / Sect. 4.4 Effect of the Evidence Budget",
+    "fa": "شکل ۳ (دقت در پنج بودجهٔ شواهد) / بخش ۴٫۴ (اثر بودجهٔ شواهد)"
+   },
+   "file": "paper/figures/data/budget.dat (src: work/posthoc_2026-11/S2a_packs/results.json, work/posthoc_2026-11/S8_factorial/results.json)"
+  },
+  "confidence": "measured",
+  "caveat": {
+   "en": "Only 6,000 and 15,500 are frozen cells; Lex-RAG at 3,000, 10,000 and 24,000 reuses the selection made at 6,000. First judge only. Post hoc: the 90 test questions had already been answered and seen.",
+   "fa": "فقط ۶٬۰۰۰ و ۱۵٬۵۰۰ از خانه‌های آزمون ازپیش‌ثبت‌شده‌اند؛ Lex-RAG در ۳٬۰۰۰، ۱۰٬۰۰۰ و ۲۴٬۰۰۰ از همان گزینشِ انجام‌شده در ۶٬۰۰۰ استفاده می‌کند. فقط داور اول. پسینی: پاسخ ۹۰ پرسش آزمون پیش‌تر گرفته و دیده شده بود."
+  },
+  "tags": [
+   "budget",
+   "results",
+   "headline"
+  ]
+ },
+ {
+  "id": "budget-hr",
+  "claim": {
+   "en": "Whether the reranked pipeline gains from a bigger pack is unclear: flat on the saved draw, up by 5 or 6 on two redraws.",
+   "fa": "روشن نیست پایپ‌لاین با بازرتبه‌ساز از بستهٔ بزرگ‌تر سود می‌برد یا نه: در اجرای ذخیره‌شده تغییری نکرد و در دو اجرای دوباره ۵ یا ۶ پاسخ بالا رفت."
+  },
+  "numbers": [
+   {
+    "label": {
+     "en": "HR, 15,500 minus 6,000 (saved draw)",
+     "fa": "HR، ۱۵٬۵۰۰ منهای ۶٬۰۰۰ (اجرای ذخیره‌شده)"
+    },
+    "value": {
+     "en": "−2 to +1",
+     "fa": "‎−۲ تا ‎+۱"
+    }
+   },
+   {
+    "label": {
+     "en": "Same, two redraws",
+     "fa": "همین، دو اجرای دوباره"
+    },
+    "value": {
+     "en": "+5 to +6",
+     "fa": "‎+۵ تا ‎+۶"
+    }
+   },
+   {
+    "label": {
+     "en": "Same, five other readers",
+     "fa": "همین، پنج مدل پاسخ‌گوی دیگر"
+    },
+    "value": {
+     "en": "+1 to +12",
+     "fa": "‎+۱ تا ‎+۱۲"
+    }
+   },
+   {
+    "label": {
+     "en": "Pooled odds ratio (six readers)",
+     "fa": "نسبت شانس تجمیعی (شش مدل پاسخ‌گو)"
+    },
+    "value": {
+     "en": "1.61, p .076",
+     "fa": "۱٫۶۱، p = ۰٫۰۷۶"
+    }
+   },
+   {
+    "label": {
+     "en": "HR at 24,000",
+     "fa": "HR در ۲۴٬۰۰۰"
+    },
+    "value": {
+     "en": "66 of 90",
+     "fa": "۶۶ از ۹۰"
+    }
+   }
+  ],
+  "source": {
+   "paper": {
+    "en": "Sect. 4.4 Effect of the Evidence Budget; Table 14; Table 19",
+    "fa": "بخش ۴٫۴ (اثر بودجهٔ شواهد)؛ جدول ۱۴؛ جدول ۱۹"
+   },
+   "file": "work/posthoc_2026-11/S2b_variance/RESULTS.md (sec. 2.1); work/posthoc_2026-11/S5_stats/tables.md"
+  },
+  "confidence": "tentative",
+  "caveat": {
+   "en": "The drop at 24,000 lies within reader noise.",
+   "fa": "افت در ۲۴٬۰۰۰ در حد نوسان مدل پاسخ‌گوست."
+  },
+  "tags": [
+   "budget",
+   "reranker"
+  ]
+ },
+ {
+  "id": "budget-tokens",
+  "claim": {
+   "en": "A bigger budget is an alternative to selection, but it costs tokens: Hybrid needs 15,500 characters to match Lex-RAG at 6,000, at about the same total tokens; the reranker gets there at 6,000 with less than half.",
+   "fa": "بودجهٔ بزرگ‌تر جایگزینی برای گزینش است، اما توکن مصرف می‌کند: ترکیبی برای رسیدن به Lex-RAG در ۶٬۰۰۰ کاراکتر به ۱۵٬۵۰۰ کاراکتر نیاز دارد، با کل توکنی تقریباً برابر؛ بازرتبه‌ساز در همان ۶٬۰۰۰ کاراکتر و با کمتر از نیمِ آن توکن به همین‌جا می‌رسد."
+  },
+  "numbers": [
+   {
+    "label": {
+     "en": "Hybrid 15,500 minus Lex-RAG 6,000",
+     "fa": "ترکیبی ۱۵٬۵۰۰ منهای Lex-RAG ۶٬۰۰۰"
+    },
+    "value": {
+     "en": "−1 to 0 (6 wins, 7 losses)",
+     "fa": "‎−۱ تا ۰ (۶ برد، ۷ باخت)"
+    }
+   },
+   {
+    "label": {
+     "en": "Tokens per question: Hybrid 15,500 / Lex-RAG 6,000",
+     "fa": "توکن هر پرسش: ترکیبی ۱۵٬۵۰۰ / Lex-RAG ۶٬۰۰۰"
+    },
+    "value": {
+     "en": "5,235 / 4,511–5,131",
+     "fa": "۵٬۲۳۵ / ۴٬۵۱۱–۵٬۱۳۱"
+    }
+   },
+   {
+    "label": {
+     "en": "HR 6,000",
+     "fa": "HR ۶٬۰۰۰"
+    },
+    "value": {
+     "en": "69–71 of 90 at 2,237 tokens",
+     "fa": "۶۹–۷۱ از ۹۰ با ۲٬۲۳۷ توکن"
+    }
+   }
+  ],
+  "source": {
+   "paper": {
+    "en": "Table 18 (Paired comparisons) / Table 20 (Cost) / Sect. 4.4",
+    "fa": "جدول ۱۸ (مقایسه‌های جفتی) / جدول ۲۰ (هزینه) / بخش ۴٫۴"
+   },
+   "file": "paper/analysis/revision_stats.md; work/datasets_v2/test_run/TEST_RESULTS.md (sec. 4)"
+  },
+  "confidence": "measured",
+  "caveat": {
+   "en": "Post hoc: the 90 test questions had already been answered and seen.",
+   "fa": "پسینی: پاسخ ۹۰ پرسش آزمون پیش‌تر گرفته و دیده شده بود."
+  },
+  "tags": [
+   "budget",
+   "cost"
+  ]
+ },
+ {
+  "id": "cost-latency",
+  "claim": {
+   "en": "Query-time cost and speed of the frozen pipelines. Selection calls double or triple the tokens; latencies were measured under contention, so only their order is informative.",
+   "fa": "هزینه و سرعت پایپ‌لاین‌های آزمون ازپیش‌ثبت‌شده هنگام پرسش. فراخوانی‌های گزینش توکن را دو یا سه برابر می‌کنند؛ زمان پاسخ در شرایط رقابت بر سر منابع اندازه‌گیری شد، پس فقط ترتیب این اعداد معنا دارد."
+  },
+  "numbers": [
+   {
+    "label": {
+     "en": "Tokens per question, 6,000: Hybrid / HR / Lex-RAG / SetR",
+     "fa": "توکن هر پرسش، ۶٬۰۰۰: ترکیبی / HR / Lex-RAG / SetR"
+    },
+    "value": {
+     "en": "2,216 / 2,237 / 4,511–5,131 / 7,503–8,128",
+     "fa": "۲٬۲۱۶ / ۲٬۲۳۷ / ۴٬۵۱۱–۵٬۱۳۱ / ۷٬۵۰۳–۸٬۱۲۸"
+    }
+   },
+   {
+    "label": {
+     "en": "Median latency, 6,000: Hybrid / HR / Lex-RAG / SetR",
+     "fa": "میانهٔ زمان پاسخ، ۶٬۰۰۰: ترکیبی / HR / Lex-RAG / SetR"
+    },
+    "value": {
+     "en": "1.84 / 3.21 / 3.97 / 5.53 s",
+     "fa": "۱٫۸۴ / ۳٫۲۱ / ۳٫۹۷ / ۵٫۵۳ ثانیه"
+    }
+   },
+   {
+    "label": {
+     "en": "95th percentile latency, 6,000",
+     "fa": "صدک ۹۵ زمان پاسخ، ۶٬۰۰۰"
+    },
+    "value": {
+     "en": "5.90 / 6.01 / 8.62 / 13.12 s",
+     "fa": "۵٫۹۰ / ۶٫۰۱ / ۸٫۶۲ / ۱۳٫۱۲ ثانیه"
+    }
+   },
+   {
+    "label": {
+     "en": "Tokens per question, Hybrid 15,500",
+     "fa": "توکن هر پرسش، ترکیبی ۱۵٬۵۰۰"
+    },
+    "value": {
+     "en": "5,235 (2.36× Hybrid at 6,000)",
+     "fa": "۵٬۲۳۵ (۲٫۳۶ برابر ترکیبی در ۶٬۰۰۰)"
+    }
+   },
+   {
+    "label": {
+     "en": "Hybrid-index search agent",
+     "fa": "عامل جست‌وجو روی نمایهٔ ترکیبی"
+    },
+    "value": {
+     "en": "9,070 tokens, median 10.5 s",
+     "fa": "۹٬۰۷۰ توکن، میانهٔ زمان پاسخ ۱۰٫۵ ثانیه"
+    }
+   }
+  ],
+  "source": {
+   "paper": {
+    "en": "Table 20 (Cost with the primary reader) / Table 9",
+    "fa": "جدول ۲۰ (هزینه با مدل پاسخ‌گوی اصلی) / جدول ۹"
+   },
+   "file": "work/datasets_v2/test_run/TEST_RESULTS.md (sec. 2, 4); work/posthoc_2026-11/S9_gpu/RESULTS.md (sec. 2)"
+  },
+  "confidence": "measured",
+  "caveat": {
+   "en": "Latency measured with GPU contention and two restarts; descriptive only.",
+   "fa": "زمان پاسخ با رقابت بر سر GPU و دو بار راه‌اندازی مجدد اندازه‌گیری شد؛ فقط توصیفی است."
+  },
+  "tags": [
+   "cost",
+   "latency"
+  ]
+ },
+ {
+  "id": "channels-recall",
+  "claim": {
+   "en": "Before any reader is involved, BM25 and dense retrieval find a complete evidence bundle in their top 40 for a similar number of questions; dense finds more of the individual gold passages.",
+   "fa": "پیش از آنکه پای مدل پاسخ‌گو در میان باشد، BM25 و جست‌وجوی معنایی برای تعداد مشابهی از پرسش‌ها یک مجموعهٔ کامل شواهد در ۴۰ نامزد برترشان پیدا می‌کنند؛ جست‌وجوی معنایی تعداد بیشتری از بخش‌های شاهد مرجع را جداجدا پیدا می‌کند."
+  },
+  "numbers": [
+   {
+    "label": {
+     "en": "Persian, complete/partial/none (items of 106): BM25",
+     "fa": "فارسی، کامل/ناقص/هیچ (از ۱۰۶ مورد): BM25"
+    },
+    "value": {
+     "en": "37/6/2 (85)",
+     "fa": "کامل ۳۷، ناقص ۶، هیچ ۲ (۸۵ مورد)"
+    }
+   },
+   {
+    "label": {
+     "en": "Persian: dense",
+     "fa": "فارسی: معنایی"
+    },
+    "value": {
+     "en": "38/6/1 (98)",
+     "fa": "کامل ۳۸، ناقص ۶، هیچ ۱ (۹۸ مورد)"
+    }
+   },
+   {
+    "label": {
+     "en": "Persian: Hybrid fused",
+     "fa": "فارسی: ترکیبی ادغام‌شده"
+    },
+    "value": {
+     "en": "39/6/0 (98)",
+     "fa": "کامل ۳۹، ناقص ۶، هیچ ۰ (۹۸ مورد)"
+    }
+   },
+   {
+    "label": {
+     "en": "English (items of 124): BM25",
+     "fa": "انگلیسی (از ۱۲۴ مورد): BM25"
+    },
+    "value": {
+     "en": "29/14/2 (88)",
+     "fa": "کامل ۲۹، ناقص ۱۴، هیچ ۲ (۸۸ مورد)"
+    }
+   },
+   {
+    "label": {
+     "en": "English: dense",
+     "fa": "انگلیسی: معنایی"
+    },
+    "value": {
+     "en": "33/11/1 (104)",
+     "fa": "کامل ۳۳، ناقص ۱۱، هیچ ۱ (۱۰۴ مورد)"
+    }
+   },
+   {
+    "label": {
+     "en": "English: Hybrid fused",
+     "fa": "انگلیسی: ترکیبی ادغام‌شده"
+    },
+    "value": {
+     "en": "33/11/1 (98)",
+     "fa": "کامل ۳۳، ناقص ۱۱، هیچ ۱ (۹۸ مورد)"
+    }
+   },
+   {
+    "label": {
+     "en": "All 90, complete in top 40: dense / BM25",
+     "fa": "همهٔ ۹۰ پرسش، کامل در ۴۰ نامزد برتر: معنایی / BM25"
+    },
+    "value": {
+     "en": "71 / 66",
+     "fa": "۷۱ / ۶۶"
+    }
+   }
+  ],
+  "source": {
+   "paper": {
+    "en": "Table 31 (Gold evidence found by each retrieval channel) / Sect. 4.2",
+    "fa": "جدول ۳۱ (شواهد مرجعی که هر کانال بازیابی پیدا می‌کند) / بخش ۴٫۲"
+   },
+   "file": "work/posthoc_2026-11/S10_retrieval/RESULTS.md (sec. 2.4); work/posthoc_2026-11/S7_analysis/channels_tables.md"
+  },
+  "confidence": "measured",
+  "caveat": {
+   "en": "Recall is not accuracy.",
+   "fa": "بازیابی شواهد همان دقت پاسخ نیست."
+  },
+  "tags": [
+   "channels"
+  ]
+ },
+ {
+  "id": "channels-complement",
+  "claim": {
+   "en": "The two channels are complementary: they disagree on a third of the questions, and fusion helps through ordering, not recall.",
+   "fa": "دو کانال مکمل یکدیگرند: در یک‌سوم پرسش‌ها نتیجهٔ متفاوت می‌دهند، و ادغام از راه ترتیب کمک می‌کند، نه از راه بازیابی بیشتر."
+  },
+  "numbers": [
+   {
+    "label": {
+     "en": "Questions where dense and BM25 disagree (6,000)",
+     "fa": "پرسش‌هایی که نتیجهٔ معنایی و BM25 در آن‌ها فرق دارد (۶٬۰۰۰)"
+    },
+    "value": {
+     "en": "31 of 90",
+     "fa": "۳۱ از ۹۰"
+    }
+   },
+   {
+    "label": {
+     "en": "Oracle taking whichever channel was right",
+     "fa": "حالت آرمانی: هر بار کانالی که درست بود"
+    },
+    "value": {
+     "en": "66 of 90",
+     "fa": "۶۶ از ۹۰"
+    }
+   },
+   {
+    "label": {
+     "en": "Single facts correct: BM25 / dense",
+     "fa": "درست در پرسش‌های تک‌واقعیتی: BM25 / معنایی"
+    },
+    "value": {
+     "en": "26 / 24 of 30",
+     "fa": "۲۶ / ۲۴ از ۳۰"
+    }
+   },
+   {
+    "label": {
+     "en": "Cross-document correct: dense / BM25",
+     "fa": "درست در پرسش‌های میان‌سندی: معنایی / BM25"
+    },
+    "value": {
+     "en": "14 / 9 of 30",
+     "fa": "۱۴ / ۹ از ۳۰"
+    }
+   },
+   {
+    "label": {
+     "en": "Complete bundle, top 40: dense / Hybrid",
+     "fa": "مجموعهٔ کامل، ۴۰ نامزد برتر: معنایی / ترکیبی"
+    },
+    "value": {
+     "en": "71 / 72",
+     "fa": "۷۱ / ۷۲"
+    }
+   },
+   {
+    "label": {
+     "en": "Complete bundle, 6,000 pack: dense / Hybrid",
+     "fa": "مجموعهٔ کامل، بستهٔ ۶٬۰۰۰: معنایی / ترکیبی"
+    },
+    "value": {
+     "en": "47 / 57",
+     "fa": "۴۷ / ۵۷"
+    }
+   }
+  ],
+  "source": {
+   "paper": {
+    "en": "Sect. 4.2 Retrieval Components",
+    "fa": "بخش ۴٫۲ (اجزای بازیابی)"
+   },
+   "file": "work/posthoc_2026-11/S10_retrieval/RESULTS.md (sec. 2.3, 2.4, 3)"
+  },
+  "confidence": "measured",
+  "caveat": {
+   "en": "Subgroup splits are small and descriptive.",
+   "fa": "زیرگروه‌ها کوچک‌اند و فقط توصیفی‌اند."
+  },
+  "tags": [
+   "channels"
+  ]
+ },
+ {
+  "id": "chunks",
+  "claim": {
+   "en": "Large chunks lose at packing, not at retrieval: only about four 2,000-character chunks fit a 6,000-character pack and the last is usually cut.",
+   "fa": "قطعه‌های بزرگ در بسته‌سازی می‌بازند، نه در بازیابی: فقط حدود چهار قطعهٔ ۲٬۰۰۰ کاراکتری در بستهٔ ۶٬۰۰۰ کاراکتری جا می‌شود و آخری معمولاً بریده می‌شود."
+  },
+  "numbers": [
+   {
+    "label": {
+     "en": "Hybrid, 500 / 1,000 / 2,000-character chunks",
+     "fa": "ترکیبی، قطعه‌های ۵۰۰ / ۱٬۰۰۰ / ۲٬۰۰۰ کاراکتری"
+    },
+    "value": {
+     "en": "58–59 / 62–63 / 49 of 90",
+     "fa": "۵۸–۵۹ / ۶۲–۶۳ / ۴۹ از ۹۰"
+    }
+   },
+   {
+    "label": {
+     "en": "HR, 500 / 1,000 / 2,000",
+     "fa": "HR، ۵۰۰ / ۱٬۰۰۰ / ۲٬۰۰۰"
+    },
+    "value": {
+     "en": "62 / 69–71 / 51 of 90",
+     "fa": "۶۲ / ۶۹–۷۱ / ۵۱ از ۹۰"
+    }
+   },
+   {
+    "label": {
+     "en": "Mean chunks in the pack",
+     "fa": "میانگین تعداد قطعه‌ها در بسته"
+    },
+    "value": {
+     "en": "11.5 / 6.7 / 3.7",
+     "fa": "۱۱٫۵ / ۶٫۷ / ۳٫۷"
+    }
+   },
+   {
+    "label": {
+     "en": "Packs whose last chunk was cut at 2,000",
+     "fa": "بسته‌هایی که قطعهٔ آخرشان در ۲٬۰۰۰ بریده شد"
+    },
+    "value": {
+     "en": "73 (Hybrid) and 71 (HR) of 96",
+     "fa": "۷۳ (ترکیبی) و ۷۱ (HR) از ۹۶"
+    }
+   },
+   {
+    "label": {
+     "en": "Complete bundle in top 40, 2,000 vs 1,000",
+     "fa": "مجموعهٔ کامل در ۴۰ نامزد برتر، ۲٬۰۰۰ در برابر ۱٬۰۰۰"
+    },
+    "value": {
+     "en": "79–80 vs 72–75",
+     "fa": "۷۹–۸۰ در برابر ۷۲–۷۵"
+    }
+   }
+  ],
+  "source": {
+   "paper": {
+    "en": "Table 6 (Retrieval components) / Sect. 4.2",
+    "fa": "جدول ۶ (اجزای بازیابی) / بخش ۴٫۲"
+   },
+   "file": "work/posthoc_2026-11/S12_chunks/RESULTS.md (sec. 2)"
+  },
+  "confidence": "measured",
+  "caveat": {
+   "en": "One packer, one 6,000-character budget.",
+   "fa": "یک بسته‌ساز و یک بودجهٔ ۶٬۰۰۰ کاراکتری."
+  },
+  "tags": [
+   "chunking"
+  ]
+ },
+ {
+  "id": "rewrite",
+  "claim": {
+   "en": "Query rewriting did not help: neither a hypothetical answer passage (HyDE) nor multi-query beat the unrewritten query, and both lowered the number of complete bundles reaching the reader, mostly in Persian.",
+   "fa": "بازنویسی پرسش کمکی نکرد: نه متن فرضیِ پاسخ (HyDE) و نه multi-query از پرسش بازنویسی‌نشده بهتر نبودند، و هر دو تعداد مجموعه‌های کاملی را که به مدل پاسخ‌گو می‌رسید کم کردند، بیشتر در فارسی."
+  },
+  "numbers": [
+   {
+    "label": {
+     "en": "HyDE / multi-query / no rewrite",
+     "fa": "HyDE / multi-query / بدون بازنویسی"
+    },
+    "value": {
+     "en": "61 / 58–59 / 62–63 of 90",
+     "fa": "۶۱ / ۵۸–۵۹ / ۶۲–۶۳ از ۹۰"
+    }
+   },
+   {
+    "label": {
+     "en": "Complete bundle in the pack",
+     "fa": "مجموعهٔ کامل در بسته"
+    },
+    "value": {
+     "en": "51 / 54 / 57",
+     "fa": "۵۱ / ۵۴ / ۵۷"
+    }
+   },
+   {
+    "label": {
+     "en": "Persian complete bundles",
+     "fa": "مجموعه‌های کامل فارسی"
+    },
+    "value": {
+     "en": "26 / 28 / 33 of 45",
+     "fa": "۲۶ / ۲۸ / ۳۳ از ۴۵"
+    }
+   },
+   {
+    "label": {
+     "en": "Tokens per question",
+     "fa": "توکن هر پرسش"
+    },
+    "value": {
+     "en": "2,551 / 2,438 / 2,216 (one extra LLM call)",
+     "fa": "۲٬۵۵۱ / ۲٬۴۳۸ / ۲٬۲۱۶ (یک فراخوانی LLM اضافه)"
+    }
+   }
+  ],
+  "source": {
+   "paper": {
+    "en": "Table 6 (Retrieval components) / Sect. 4.2",
+    "fa": "جدول ۶ (اجزای بازیابی) / بخش ۴٫۲"
+   },
+   "file": "work/posthoc_2026-11/S11_rewrite/RESULTS.md (sec. 2)"
+  },
+  "confidence": "measured",
+  "caveat": {
+   "en": "In English the rewrites were a few answers better, within noise.",
+   "fa": "در انگلیسی بازنویسی‌ها چند پاسخ بهتر بودند، در حد نوسان."
+  },
+  "tags": [
+   "rewriting"
+  ]
+ },
+ {
+  "id": "embedding",
+  "claim": {
+   "en": "Swapping bge-m3 for multilingual-e5-large changes little: dense-only scores tie, and inside hybrid e5 is 4 to 5 lower, all in Persian, not significantly.",
+   "fa": "جایگزینی bge-m3 با multilingual-e5-large تغییر چندانی نمی‌دهد: امتیازها در حالت فقط معنایی برابرند، و درون ترکیبی e5 چهار تا پنج پاسخ پایین‌تر است که همه در فارسی است و معنادار نیست."
+  },
+  "numbers": [
+   {
+    "label": {
+     "en": "Dense only: e5 / bge-m3",
+     "fa": "فقط معنایی: e5 / bge-m3"
+    },
+    "value": {
+     "en": "54–55 / 53 of 90",
+     "fa": "۵۴–۵۵ / ۵۳ از ۹۰"
+    }
+   },
+   {
+    "label": {
+     "en": "Hybrid: e5 / bge-m3",
+     "fa": "ترکیبی: e5 / bge-m3"
+    },
+    "value": {
+     "en": "58 / 62–63 of 90",
+     "fa": "۵۸ / ۶۲–۶۳ از ۹۰"
+    }
+   },
+   {
+    "label": {
+     "en": "Hybrid e5 minus bge-m3",
+     "fa": "ترکیبی e5 منهای bge-m3"
+    },
+    "value": {
+     "en": "−5 to −4, p .18–.34",
+     "fa": "‎−۵ تا ‎−۴، p = ۰٫۱۸ تا ۰٫۳۴"
+    }
+   },
+   {
+    "label": {
+     "en": "Complete bundle in top 40, either hybrid",
+     "fa": "مجموعهٔ کامل در ۴۰ نامزد برتر، هر دو ترکیبی"
+    },
+    "value": {
+     "en": "72 of 90",
+     "fa": "۷۲ از ۹۰"
+    }
+   }
+  ],
+  "source": {
+   "paper": {
+    "en": "Table 6 (Retrieval components) / Sect. 4.2",
+    "fa": "جدول ۶ (اجزای بازیابی) / بخش ۴٫۲"
+   },
+   "file": "work/posthoc_2026-11/S13_embed/RESULTS.md (sec. 2)"
+  },
+  "confidence": "measured",
+  "caveat": {
+   "en": "Two embedding models tried.",
+   "fa": "دو مدل embedding آزموده شد."
+  },
+  "tags": [
+   "embedding"
+  ]
+ },
+ {
+  "id": "agents",
+  "claim": {
+   "en": "Iterative search agents have the best point estimates, at about four times the tokens and three times the latency. The agent over the hybrid index with the reranker scores highest of any deployable arm.",
+   "fa": "عامل‌های جست‌وجوی تکرارشونده بهترین برآوردهای نقطه‌ای را دارند، با حدود چهار برابر توکن و سه برابر زمان پاسخ. عامل روی نمایهٔ ترکیبی با بازرتبه‌ساز در میان همهٔ حالت‌های قابل استقرار بالاترین امتیاز را می‌گیرد."
+  },
+  "numbers": [
+   {
+    "label": {
+     "en": "Hybrid-index search agent (reranker)",
+     "fa": "عامل جست‌وجو روی نمایهٔ ترکیبی (با بازرتبه‌ساز)"
+    },
+    "value": {
+     "en": "77 of 90; 9,070 tokens; 3.6 calls",
+     "fa": "۷۷ از ۹۰؛ ۹٬۰۷۰ توکن؛ ۳٫۶ فراخوانی"
+    }
+   },
+   {
+    "label": {
+     "en": "BM25 search agent",
+     "fa": "عامل جست‌وجوی BM25"
+    },
+    "value": {
+     "en": "73 of 90; 9,285 tokens; 3.6 calls",
+     "fa": "۷۳ از ۹۰؛ ۹٬۲۸۵ توکن؛ ۳٫۶ فراخوانی"
+    }
+   },
+   {
+    "label": {
+     "en": "Grep agent",
+     "fa": "عامل grep"
+    },
+    "value": {
+     "en": "68 of 90; 12,338 tokens; 5.1 calls",
+     "fa": "۶۸ از ۹۰؛ ۱۲٬۳۳۸ توکن؛ ۵٫۱ فراخوانی"
+    }
+   },
+   {
+    "label": {
+     "en": "HR at 6,000, for comparison",
+     "fa": "HR در ۶٬۰۰۰، برای مقایسه"
+    },
+    "value": {
+     "en": "69–71 of 90; 2,237 tokens; 1 call",
+     "fa": "۶۹–۷۱ از ۹۰؛ ۲٬۲۳۷ توکن؛ ۱ فراخوانی"
+    }
+   },
+   {
+    "label": {
+     "en": "Hybrid-index agent minus HR / minus Hybrid",
+     "fa": "عامل روی نمایهٔ ترکیبی منهای HR / منهای ترکیبی"
+    },
+    "value": {
+     "en": "+6 to +8 (not significant) / +14 to +15",
+     "fa": "‎+۶ تا ‎+۸ (معنادار نیست) / ‎+۱۴ تا ‎+۱۵"
+    }
+   },
+   {
+    "label": {
+     "en": "Cross-document questions: hybrid-index agent / HR",
+     "fa": "پرسش‌های میان‌سندی: عامل روی نمایهٔ ترکیبی / HR"
+    },
+    "value": {
+     "en": "25 / 18–19 of 30",
+     "fa": "۲۵ / ۱۸–۱۹ از ۳۰"
+    }
+   },
+   {
+    "label": {
+     "en": "Median latency: hybrid-index agent / HR",
+     "fa": "میانهٔ زمان پاسخ: عامل روی نمایهٔ ترکیبی / HR"
+    },
+    "value": {
+     "en": "10.5 / 3.2 s",
+     "fa": "۱۰٫۵ / ۳٫۲ ثانیه"
+    }
+   },
+   {
+    "label": {
+     "en": "Evidence handed over (BM25 agent, median)",
+     "fa": "شواهد تحویل‌شده (عامل BM25، میانه)"
+    },
+    "value": {
+     "en": "2,735 characters of 15,500 allowed",
+     "fa": "۲٬۷۳۵ کاراکتر از ۱۵٬۵۰۰ کاراکتر مجاز"
+    }
+   }
+  ],
+  "source": {
+   "paper": {
+    "en": "Table 9 (Search agents, long context and routing) / Sect. 4.5",
+    "fa": "جدول ۹ (عامل‌های جست‌وجو، پنجرهٔ متنی بلند و مسیریابی) / بخش ۴٫۵"
+   },
+   "file": "work/posthoc_2026-11/S3_agentic/RESULTS.md; work/posthoc_2026-11/S9_gpu/RESULTS.md (sec. 2)"
+  },
+  "confidence": "measured",
+  "caveat": {
+   "en": "Each agent ran once; the BM25-agent family of 17 tests has nothing surviving correction; the hybrid-index agent comparisons are uncorrected.",
+   "fa": "هر عامل یک بار اجرا شد. از خانوادهٔ ۱۷ آزمونیِ عامل BM25 هیچ آزمونی پس از اصلاح برای مقایسه‌های چندگانه معنادار نماند؛ مقایسه‌های عامل روی نمایهٔ ترکیبی اصلاح نشده‌اند."
+  },
+  "tags": [
+   "agents",
+   "results",
+   "headline"
+  ]
+ },
+ {
+  "id": "agents-language",
+  "claim": {
+   "en": "Agents with only lexical tools gained in the English half and not in the Persian half; the hybrid-index agent gained in both.",
+   "fa": "عامل‌هایی که فقط ابزار واژگانی داشتند در نیمهٔ انگلیسی سود بردند و در نیمهٔ فارسی نه؛ عامل روی نمایهٔ ترکیبی در هر دو نیمه سود برد."
+  },
+  "numbers": [
+   {
+    "label": {
+     "en": "Grep agent minus Hybrid: Persian / English half",
+     "fa": "عامل grep منهای ترکیبی: نیمهٔ فارسی / انگلیسی"
+    },
+    "value": {
+     "en": "−7 to −6 / +12 (halves differ, adjusted p .02)",
+     "fa": "‎−۷ تا ‎−۶ / ‎+۱۲ (دو نیمه متفاوت‌اند، p تعدیل‌شده = ۰٫۰۲)"
+    }
+   },
+   {
+    "label": {
+     "en": "BM25 agent minus Hybrid",
+     "fa": "عامل BM25 منهای ترکیبی"
+    },
+    "value": {
+     "en": "−2 to −1 / +12",
+     "fa": "‎−۲ تا ‎−۱ / ‎+۱۲"
+    }
+   },
+   {
+    "label": {
+     "en": "Hybrid-index agent minus Hybrid",
+     "fa": "عامل روی نمایهٔ ترکیبی منهای ترکیبی"
+    },
+    "value": {
+     "en": "+3 to +4 / +11",
+     "fa": "‎+۳ تا ‎+۴ / ‎+۱۱"
+    }
+   }
+  ],
+  "source": {
+   "paper": {
+    "en": "Table 12 (Contrasts split by language half) / Sect. 4.6 Persian and English",
+    "fa": "جدول ۱۲ (مقایسه‌ها به تفکیک نیمهٔ زبانی) / بخش ۴٫۶ (فارسی و انگلیسی)"
+   },
+   "file": "work/posthoc_2026-11/S14_bilingual/RESULTS.md, compact_table.md"
+  },
+  "confidence": "measured",
+  "caveat": {
+   "en": "Only the grep row survives correction over 14 contrasts. The halves use different documents, so the cause may be Persian or the Persian documents.",
+   "fa": "از ۱۴ مقایسه فقط ردیف grep پس از اصلاح معنادار می‌ماند. دو نیمه اسناد متفاوتی دارند، پس علت ممکن است خود زبان فارسی باشد یا اسناد فارسی."
+  },
+  "tags": [
+   "agents",
+   "language",
+   "persian"
+  ]
+ },
+ {
+  "id": "long-context",
+  "claim": {
+   "en": "Reading whole documents only works when the right documents are already known.",
+   "fa": "خواندن کل اسناد فقط وقتی جواب می‌دهد که اسناد درست از پیش معلوم باشند."
+  },
+  "numbers": [
+   {
+    "label": {
+     "en": "Gold documents in a 32,000-token prompt",
+     "fa": "اسناد مرجع در پرامپتی ۳۲٬۰۰۰ توکنی"
+    },
+    "value": {
+     "en": "79 of 90 (uses the annotation)",
+     "fa": "۷۹ از ۹۰ (از برچسب‌گذاری استفاده می‌کند)"
+    }
+   },
+   {
+    "label": {
+     "en": "BM25-ranked documents in the same window",
+     "fa": "اسناد رتبه‌بندی‌شده با BM25 در همان پنجره"
+    },
+    "value": {
+     "en": "24 of 90",
+     "fa": "۲۴ از ۹۰"
+    }
+   },
+   {
+    "label": {
+     "en": "Tokens per question",
+     "fa": "توکن هر پرسش"
+    },
+    "value": {
+     "en": "29,569 and 30,967",
+     "fa": "۲۹٬۵۶۹ و ۳۰٬۹۶۷"
+    }
+   },
+   {
+    "label": {
+     "en": "Whole-pool prompt vs a Hybrid question",
+     "fa": "پرامپت کل مخزن در برابر یک پرسش با پایپ‌لاین ترکیبی"
+    },
+    "value": {
+     "en": "about 210× the tokens; only the two statute pools fit",
+     "fa": "حدود ۲۱۰ برابر توکن؛ فقط دو مخزن قوانین در پنجره جا می‌شوند"
+    }
+   }
+  ],
+  "source": {
+   "paper": {
+    "en": "Table 9 / Sect. 4.5 Iterative Retrieval, Long Context and Routing",
+    "fa": "جدول ۹ / بخش ۴٫۵ (بازیابی تکرارشونده، پنجرهٔ متنی بلند و مسیریابی)"
+   },
+   "file": "work/posthoc_2026-11/S4_route_long/RESULTS.md"
+  },
+  "confidence": "measured",
+  "caveat": {
+   "en": "One run each; not graded in the paper's guide table.",
+   "fa": "هر کدام یک اجرا؛ در جدول راهنمای مقاله درجه‌بندی نشده است."
+  },
+  "tags": [
+   "long-context",
+   "avoid"
+  ]
+ },
+ {
+  "id": "routing",
+  "claim": {
+   "en": "Routing questions between a cheap and a wide pipeline has little to gain here: the reranker at 6,000 characters already scores as high as at 15,500, at fewer tokens than any router.",
+   "fa": "مسیریابی پرسش‌ها میان یک پایپ‌لاین ارزان و یک پایپ‌لاین با بودجهٔ بزرگ اینجا سود چندانی ندارد: بازرتبه‌ساز در ۶٬۰۰۰ کاراکتر همان امتیاز ۱۵٬۵۰۰ کاراکتر را می‌گیرد، با توکنی کمتر از هر مسیریابی."
+  },
+  "numbers": [
+   {
+    "label": {
+     "en": "HR 6,000 / HR 15,500",
+     "fa": "HR ۶٬۰۰۰ / HR ۱۵٬۵۰۰"
+    },
+    "value": {
+     "en": "69–71 / 69–70 of 90",
+     "fa": "۶۹–۷۱ / ۶۹–۷۰ از ۹۰"
+    }
+   },
+   {
+    "label": {
+     "en": "Tokens: HR 6,000 / routers",
+     "fa": "توکن: HR ۶٬۰۰۰ / مسیریاب‌ها"
+    },
+    "value": {
+     "en": "2,237 / 4,153–5,065",
+     "fa": "۲٬۲۳۷ / ۴٬۱۵۳–۵٬۰۶۵"
+    }
+   },
+   {
+    "label": {
+     "en": "Oracle router token saving (vs always HR 15,500)",
+     "fa": "صرفه‌جویی توکن مسیریاب آرمانی (در برابر HR ۱۵٬۵۰۰ در همهٔ پرسش‌ها)"
+    },
+    "value": {
+     "en": "21%",
+     "fa": "۲۱٪"
+    }
+   },
+   {
+    "label": {
+     "en": "Router guessing from the question text",
+     "fa": "مسیریابی که از روی متن پرسش حدس می‌زند"
+    },
+    "value": {
+     "en": "sent 8 of 30 single-fact questions to the cheap path; saved 4%",
+     "fa": "۸ پرسش از ۳۰ پرسش تک‌واقعیتی را به مسیر ارزان فرستاد؛ ۴٪ صرفه‌جویی"
+    }
+   }
+  ],
+  "source": {
+   "paper": {
+    "en": "Table 9 / Sect. 4.5",
+    "fa": "جدول ۹ / بخش ۴٫۵"
+   },
+   "file": "work/posthoc_2026-11/S4_route_long/RESULTS.md"
+  },
+  "confidence": "measured",
+  "caveat": {
+   "en": "The oracle uses the annotation; not graded in the paper's guide table.",
+   "fa": "مسیریاب آرمانی از برچسب‌گذاری پرسش‌ها استفاده می‌کند؛ در جدول راهنمای مقاله درجه‌بندی نشده است."
+  },
+  "tags": [
+   "routing",
+   "avoid"
+  ]
+ },
+ {
+  "id": "token-matched",
+  "claim": {
+   "en": "The same character budget is a bigger token budget in Persian: for the primary reader a 6,000-character Persian pack costs about as much as a 10,000-character English one.",
+   "fa": "بودجهٔ کاراکتری یکسان در فارسی بودجهٔ توکنی بزرگ‌تری است: برای مدل پاسخ‌گوی اصلی، هزینهٔ یک بستهٔ فارسی ۶٬۰۰۰ کاراکتری تقریباً برابر یک بستهٔ انگلیسی ۱۰٬۰۰۰ کاراکتری است."
+  },
+  "numbers": [
+   {
+    "label": {
+     "en": "Hybrid prompt tokens at 3,000 characters: Persian / English",
+     "fa": "توکن پرامپت ترکیبی در ۳٬۰۰۰ کاراکتر: فارسی / انگلیسی"
+    },
+    "value": {
+     "en": "1,416 / 857",
+     "fa": "۱٬۴۱۶ / ۸۵۷"
+    }
+   },
+   {
+    "label": {
+     "en": "At 6,000",
+     "fa": "در ۶٬۰۰۰"
+    },
+    "value": {
+     "en": "2,655 / 1,531",
+     "fa": "۲٬۶۵۵ / ۱٬۵۳۱"
+    }
+   },
+   {
+    "label": {
+     "en": "At 15,500",
+     "fa": "در ۱۵٬۵۰۰"
+    },
+    "value": {
+     "en": "6,527 / 3,683",
+     "fa": "۶٬۵۲۷ / ۳٬۶۸۳"
+    }
+   },
+   {
+    "label": {
+     "en": "Gain when English gets equal tokens, 3,000 characters",
+     "fa": "سود انگلیسی با توکن برابر، ۳٬۰۰۰ کاراکتر"
+    },
+    "value": {
+     "en": "4 to 8 answers",
+     "fa": "۴ تا ۸ پاسخ"
+    }
+   },
+   {
+    "label": {
+     "en": "Same at 6,000: Hybrid / HR",
+     "fa": "همین در ۶٬۰۰۰: ترکیبی / HR"
+    },
+    "value": {
+     "en": "2 to 5 / none",
+     "fa": "۲ تا ۵ / هیچ"
+    }
+   }
+  ],
+  "source": {
+   "paper": {
+    "en": "Table 29 (Persian-to-English token ratio) / Sect. 4.4",
+    "fa": "جدول ۲۹ (نسبت توکن فارسی به انگلیسی) / بخش ۴٫۴"
+   },
+   "file": "work/posthoc_2026-11/S7_analysis/RESULTS.md (sec. 3), tokens_tables.md"
+  },
+  "confidence": "measured",
+  "caveat": {
+   "en": "Primary reader only.",
+   "fa": "فقط مدل پاسخ‌گوی اصلی."
+  },
+  "tags": [
+   "persian",
+   "tokens",
+   "budget"
+  ]
+ },
+ {
+  "id": "memory-gap",
+  "claim": {
+   "en": "The reader answers far more English questions than Persian ones from memory, and the gap follows the source texts, not the language of the question.",
+   "fa": "مدل پاسخ‌گو پرسش‌های انگلیسی بسیار بیشتری را از حافظه پاسخ می‌دهد تا پرسش‌های فارسی، و این شکاف به متن‌های منبع برمی‌گردد، نه به زبان پرسش."
+  },
+  "numbers": [
+   {
+    "label": {
+     "en": "Closed book, English / Persian",
+     "fa": "بدون شواهد، انگلیسی / فارسی"
+    },
+    "value": {
+     "en": "20 / 6 of 45",
+     "fa": "۲۰ / ۶ از ۴۵"
+    }
+   },
+   {
+    "label": {
+     "en": "Company-report questions answered from memory",
+     "fa": "پرسش‌های گزارش شرکت‌ها که از حافظه پاسخ داده شد"
+    },
+    "value": {
+     "en": "0 of 30",
+     "fa": "۰ از ۳۰"
+    }
+   },
+   {
+    "label": {
+     "en": "The 26 by pool",
+     "fa": "آن ۲۶ پرسش به تفکیک مخزن"
+    },
+    "value": {
+     "en": "BOOK-en 9, LAW-en 11, BOOK-fa 3, LAW-fa 3",
+     "fa": "BOOK-en: ۹، LAW-en: ۱۱، BOOK-fa: ۳، LAW-fa: ۳"
+    }
+   },
+   {
+    "label": {
+     "en": "English-source questions asked in Persian",
+     "fa": "پرسش‌های برآمده از منابع انگلیسی، پرسیده‌شده به فارسی"
+    },
+    "value": {
+     "en": "18 of 45",
+     "fa": "۱۸ از ۴۵"
+    }
+   },
+   {
+    "label": {
+     "en": "Persian-source questions asked in English",
+     "fa": "پرسش‌های برآمده از منابع فارسی، پرسیده‌شده به انگلیسی"
+    },
+    "value": {
+     "en": "4–5 of 45",
+     "fa": "۴–۵ از ۴۵"
+    }
+   }
+  ],
+  "source": {
+   "paper": {
+    "en": "Sect. 4.6 Persian and English (Memory); Table 30",
+    "fa": "بخش ۴٫۶ (فارسی و انگلیسی: حافظه)؛ جدول ۳۰"
+   },
+   "file": "work/posthoc_2026-11/S6_baselines/RESULTS.md; work/posthoc_2026-11/S7_analysis/RESULTS.md (sec. 2); work/posthoc_2026-11/S15_crossling/RESULTS.md (sec. 2)"
+  },
+  "confidence": "measured",
+  "caveat": {
+   "en": "The English pool contains classic books and EU law, which are better known.",
+   "fa": "مخزن انگلیسی کتاب‌های کلاسیک و قوانین اتحادیهٔ اروپا را دارد که شناخته‌شده‌ترند."
+  },
+  "tags": [
+   "memory",
+   "persian",
+   "headline"
+  ]
+ },
+ {
+  "id": "crossling-swap",
+  "claim": {
+   "en": "When every question is asked in the other language against its own documents, BM25 collapses, dense retrieval holds, and fusion loses its lead over dense; a reranker recovers most of the loss in the Persian pool.",
+   "fa": "وقتی هر پرسش به زبان دیگر و در برابر اسناد خودش پرسیده شود، BM25 به‌شدت افت می‌کند، جست‌وجوی معنایی پابرجا می‌ماند و ادغام برتری‌اش را بر جست‌وجوی معنایی از دست می‌دهد؛ بازرتبه‌ساز در مخزن فارسی بیشتر این افت را جبران می‌کند."
+  },
+  "numbers": [
+   {
+    "label": {
+     "en": "BM25, complete bundle in top 40 (Persian pool / English pool)",
+     "fa": "BM25، مجموعهٔ کامل در ۴۰ نامزد برتر (مخزن فارسی / مخزن انگلیسی)"
+    },
+    "value": {
+     "en": "37 → 2 / 29 → 8 of 45",
+     "fa": "۳۷ ← ۲ / ۲۹ ← ۸ از ۴۵"
+    }
+   },
+   {
+    "label": {
+     "en": "Dense, top 40",
+     "fa": "معنایی، ۴۰ نامزد برتر"
+    },
+    "value": {
+     "en": "38 → 35 / 33 → 28",
+     "fa": "۳۸ ← ۳۵ / ۳۳ ← ۲۸"
+    }
+   },
+   {
+    "label": {
+     "en": "Hybrid fusion, top 40",
+     "fa": "ادغام ترکیبی، ۴۰ نامزد برتر"
+    },
+    "value": {
+     "en": "39 → 33 / 33 → 27",
+     "fa": "۳۹ ← ۳۳ / ۳۳ ← ۲۷"
+    }
+   },
+   {
+    "label": {
+     "en": "Hybrid and reranker, top 40",
+     "fa": "ترکیبی با بازرتبه‌ساز، ۴۰ نامزد برتر"
+    },
+    "value": {
+     "en": "39 → 35 / 36 → 28",
+     "fa": "۳۹ ← ۳۵ / ۳۶ ← ۲۸"
+    }
+   },
+   {
+    "label": {
+     "en": "6,000 pack: fusion / dense (Persian pool)",
+     "fa": "بستهٔ ۶٬۰۰۰: ادغام / معنایی (مخزن فارسی)"
+    },
+    "value": {
+     "en": "33 → 19 / 26 → 21",
+     "fa": "۳۳ ← ۱۹ / ۲۶ ← ۲۱"
+    }
+   },
+   {
+    "label": {
+     "en": "6,000 pack: hybrid and reranker",
+     "fa": "بستهٔ ۶٬۰۰۰: ترکیبی با بازرتبه‌ساز"
+    },
+    "value": {
+     "en": "34 → 29 / 29 → 20",
+     "fa": "۳۴ ← ۲۹ / ۲۹ ← ۲۰"
+    }
+   },
+   {
+    "label": {
+     "en": "Reranked pipeline, correct of 90",
+     "fa": "پایپ‌لاین با بازرتبه‌ساز، درست از ۹۰"
+    },
+    "value": {
+     "en": "69–71 → 53–54",
+     "fa": "۶۹–۷۱ ← ۵۳–۵۴"
+    }
+   }
+  ],
+  "source": {
+   "paper": {
+    "en": "Table 11 (Question language swapped) / Sect. 4.6",
+    "fa": "جدول ۱۱ (زبان پرسش جابه‌جا شده) / بخش ۴٫۶"
+   },
+   "file": "work/posthoc_2026-11/S15_crossling/RESULTS.md (sec. 2), results_tables.md"
+  },
+  "confidence": "measured",
+  "caveat": {
+   "en": "Questions were machine-translated by the reader model, keeping names and numbers; 20 of 45 Persian translations keep Latin-script names.",
+   "fa": "پرسش‌ها را خود مدل پاسخ‌گو به‌صورت ماشینی ترجمه کرد و نام‌ها و اعداد را نگه داشت؛ از ۴۵ ترجمهٔ فارسی، ۲۰ ترجمه نام‌ها را به خط لاتین نگه داشته‌اند."
+  },
+  "tags": [
+   "cross-lingual",
+   "persian",
+   "headline"
+  ]
+ },
+ {
+  "id": "orthography",
+  "claim": {
+   "en": "Persian spelling variants (Arabic letters, missing non-joiners, other digit systems) hurt BM25 badly without normalisation; dense retrieval barely notices.",
+   "fa": "گونه‌های املایی فارسی (حروف عربی، نیم‌فاصله‌های جاافتاده، دستگاه‌های رقم دیگر) بدون نرمال‌سازی به BM25 آسیب جدی می‌زنند؛ جست‌وجوی معنایی تقریباً از آن‌ها اثر نمی‌پذیرد."
+  },
+  "numbers": [
+   {
+    "label": {
+     "en": "BM25 without normalisation, Arabic letters",
+     "fa": "BM25 بدون نرمال‌سازی، حروف عربی"
+    },
+    "value": {
+     "en": "loses 5–7 complete bundles of 45",
+     "fa": "۵ تا ۷ مجموعهٔ کامل شواهد از ۴۵ از دست می‌رود"
+    }
+   },
+   {
+    "label": {
+     "en": "BM25 without normalisation, all changes combined",
+     "fa": "BM25 بدون نرمال‌سازی، همهٔ تغییرها با هم"
+    },
+    "value": {
+     "en": "loses 8",
+     "fa": "۸ مورد از دست می‌رود"
+    }
+   },
+   {
+    "label": {
+     "en": "Dense on raw text",
+     "fa": "معنایی روی متن خام"
+    },
+    "value": {
+     "en": "loses at most 1",
+     "fa": "حداکثر ۱ مورد از دست می‌رود"
+    }
+   },
+   {
+    "label": {
+     "en": "Normalised hybrid pack, non-joiner removed",
+     "fa": "بستهٔ ترکیبی نرمال‌شده، با حذف نیم‌فاصله"
+    },
+    "value": {
+     "en": "loses 3",
+     "fa": "۳ مورد از دست می‌رود"
+    }
+   },
+   {
+    "label": {
+     "en": "Persian test questions containing Persian digits",
+     "fa": "پرسش‌های آزمون فارسی که رقم فارسی دارند"
+    },
+    "value": {
+     "en": "27 of 45",
+     "fa": "۲۷ از ۴۵"
+    }
+   },
+   {
+    "label": {
+     "en": "Loss from dropping normalisation on the clean test questions",
+     "fa": "افت ناشی از کنار گذاشتن نرمال‌سازی در پرسش‌های آزمونِ دست‌نخورده"
+    },
+    "value": {
+     "en": "2 bundles",
+     "fa": "۲ مجموعهٔ شواهد"
+    }
+   }
+  ],
+  "source": {
+   "paper": {
+    "en": "Sect. 4.6 Persian and English (Spelling variants); Table 31",
+    "fa": "بخش ۴٫۶ (فارسی و انگلیسی: گونه‌های املایی)؛ جدول ۳۱"
+   },
+   "file": "work/posthoc_2026-11/S15_crossling/RESULTS.md (sec. 2, orthography); work/posthoc_2026-11/S7_analysis/RESULTS.md (sec. 5)"
+  },
+  "confidence": "measured",
+  "caveat": {
+   "en": "Retrieval only; no answers were scored on the rewritten questions.",
+   "fa": "فقط بازیابی سنجیده شد؛ هیچ پاسخی روی پرسش‌های بازنویسی‌شده ارزیابی نشد."
+  },
+  "tags": [
+   "orthography",
+   "persian"
+  ]
+ },
+ {
+  "id": "halves",
+  "claim": {
+   "en": "Split by language half, the selection call has the same sign in both halves; the reranker's gain, the larger budget and the SetR set lie mainly in the English half, but no difference between halves is shown.",
+   "fa": "به تفکیک نیمهٔ زبانی، اثر فراخوانی گزینش در هر دو نیمه هم‌جهت است؛ سود بازرتبه‌ساز، بودجهٔ بزرگ‌تر و مجموعهٔ SetR بیشتر در نیمهٔ انگلیسی است، اما هیچ تفاوتی میان دو نیمه اثبات نشده است."
+  },
+  "numbers": [
+   {
+    "label": {
+     "en": "Selection call, 3,000: Persian / English",
+     "fa": "فراخوانی گزینش، ۳٬۰۰۰: فارسی / انگلیسی"
+    },
+    "value": {
+     "en": "+7 to +8 / +8",
+     "fa": "‎+۷ تا ‎+۸ / ‎+۸"
+    }
+   },
+   {
+    "label": {
+     "en": "Selection call, 6,000",
+     "fa": "فراخوانی گزینش، ۶٬۰۰۰"
+    },
+    "value": {
+     "en": "+4 to +6 / +5",
+     "fa": "‎+۴ تا ‎+۶ / ‎+۵"
+    }
+   },
+   {
+    "label": {
+     "en": "HR minus Hybrid, 6,000",
+     "fa": "HR منهای ترکیبی، ۶٬۰۰۰"
+    },
+    "value": {
+     "en": "0 to +1 / +6 to +8 (p .17)",
+     "fa": "۰ تا ‎+۱ / ‎+۶ تا ‎+۸ (p = ۰٫۱۷)"
+    }
+   },
+   {
+    "label": {
+     "en": "Hybrid 15,500 minus 6,000",
+     "fa": "ترکیبی ۱۵٬۵۰۰ منهای ۶٬۰۰۰"
+    },
+    "value": {
+     "en": "−1 to 0 / +6 (p .11)",
+     "fa": "‎−۱ تا ۰ / ‎+۶ (p = ۰٫۱۱)"
+    }
+   }
+  ],
+  "source": {
+   "paper": {
+    "en": "Table 12 (Contrasts split by language half) / Sect. 4.6",
+    "fa": "جدول ۱۲ (مقایسه‌ها به تفکیک نیمهٔ زبانی) / بخش ۴٫۶"
+   },
+   "file": "work/posthoc_2026-11/S14_bilingual/RESULTS.md, compact_table.md"
+  },
+  "confidence": "measured",
+  "caveat": {
+   "en": "Each half detects only about 8 of 45; no claim that any method works better or worse in Persian as such.",
+   "fa": "هر نیمه فقط تفاوتی در حدود ۸ از ۴۵ را آشکار می‌کند؛ هیچ ادعایی نیست که روشی در خود زبان فارسی بهتر یا بدتر کار می‌کند."
+  },
+  "tags": [
+   "persian",
+   "language"
+  ]
+ },
+ {
+  "id": "reader-noise",
+  "claim": {
+   "en": "Answering the identical packs again moves a pipeline's score by about ±2 answers, and single cells by up to six.",
+   "fa": "اگر همان بسته‌ها دوباره پاسخ داده شوند، امتیاز هر پایپ‌لاین حدود ±۲ پاسخ جابه‌جا می‌شود و امتیاز تک‌تک خانه‌ها تا شش پاسخ."
+  },
+  "numbers": [
+   {
+    "label": {
+     "en": "Standard deviation per cell",
+     "fa": "انحراف معیار در هر خانه"
+    },
+    "value": {
+     "en": "about 2 of 90 (0.6 to 3.2)",
+     "fa": "حدود ۲ از ۹۰ (۰٫۶ تا ۳٫۲)"
+    }
+   },
+   {
+    "label": {
+     "en": "Lex-RAG, 6,000: saved / redraws",
+     "fa": "Lex-RAG، ۶٬۰۰۰: ذخیره‌شده / اجراهای دوباره"
+    },
+    "value": {
+     "en": "68–69 / 63–64 / 63",
+     "fa": "۶۸–۶۹ / ۶۳–۶۴ / ۶۳"
+    }
+   },
+   {
+    "label": {
+     "en": "SetR, 6,000: saved / redraws",
+     "fa": "SetR، ۶٬۰۰۰: ذخیره‌شده / اجراهای دوباره"
+    },
+    "value": {
+     "en": "63 / 68–69 / 68",
+     "fa": "۶۳ / ۶۸–۶۹ / ۶۸"
+    }
+   },
+   {
+    "label": {
+     "en": "Questions flipping verdict across three draws",
+     "fa": "پرسش‌هایی که حکمشان در سه اجرا عوض شد"
+    },
+    "value": {
+     "en": "9 to 17%",
+     "fa": "۹ تا ۱۷٪"
+    }
+   },
+   {
+    "label": {
+     "en": "Noise in a one-run difference between two pipelines",
+     "fa": "نوسان در تفاوت یک‌اجرایی میان دو پایپ‌لاین"
+    },
+    "value": {
+     "en": "about 2.5 answers",
+     "fa": "حدود ۲٫۵ پاسخ"
+    }
+   }
+  ],
+  "source": {
+   "paper": {
+    "en": "Table 33 (Noise from re-running the reader) / Sect. 5 Run-to-Run Variance",
+    "fa": "جدول ۳۳ (نوسان ناشی از اجرای دوبارهٔ مدل پاسخ‌گو) / بخش ۵ (واریانس میان اجراها)"
+   },
+   "file": "work/posthoc_2026-11/S2b_variance/RESULTS.md (sec. 2.1)"
+  },
+  "confidence": "measured",
+  "caveat": {
+   "en": "The saved draw is five weeks older than the redraws.",
+   "fa": "اجرای ذخیره‌شده پنج هفته قدیمی‌تر از اجراهای دوباره است."
+  },
+  "tags": [
+   "stability",
+   "trust",
+   "headline"
+  ]
+ },
+ {
+  "id": "selector-noise",
+  "claim": {
+   "en": "Re-sending the selection call with the same prompt changes the pack for about half the questions, yet accuracy varies no more than reader noise.",
+   "fa": "فرستادن دوبارهٔ فراخوانی گزینش با همان پرامپت، بستهٔ حدود نیمی از پرسش‌ها را تغییر می‌دهد، اما نوسان دقت از نوسان مدل پاسخ‌گو بیشتر نیست."
+  },
+  "numbers": [
+   {
+    "label": {
+     "en": "Lex-RAG packs changed (of 96)",
+     "fa": "بسته‌های تغییرکردهٔ Lex-RAG (از ۹۶)"
+    },
+    "value": {
+     "en": "44 and 50",
+     "fa": "۴۴ و ۵۰"
+    }
+   },
+   {
+    "label": {
+     "en": "Lex-RAG correct: saved / re-sends",
+     "fa": "پاسخ‌های درست Lex-RAG: ذخیره‌شده / ارسال‌های دوباره"
+    },
+    "value": {
+     "en": "68–69 / 65 / 67–68",
+     "fa": "۶۸–۶۹ / ۶۵ / ۶۷–۶۸"
+    }
+   },
+   {
+    "label": {
+     "en": "SetR packs changed / correct on re-send",
+     "fa": "بسته‌های تغییرکردهٔ SetR / درست در ارسال دوباره"
+    },
+    "value": {
+     "en": "52 of 96 / 68 (saved 63)",
+     "fa": "۵۲ از ۹۶ / ۶۸ (اجرای ذخیره‌شده: ۶۳)"
+    }
+   }
+  ],
+  "source": {
+   "paper": {
+    "en": "Table 33 / Sect. 5",
+    "fa": "جدول ۳۳ / بخش ۵"
+   },
+   "file": "work/posthoc_2026-11/S2b_variance/RESULTS.md (sec. 2.2)"
+  },
+  "confidence": "measured",
+  "caveat": {
+   "en": "",
+   "fa": ""
+  },
+  "tags": [
+   "stability"
+  ]
+ },
+ {
+  "id": "two-judges",
+  "claim": {
+   "en": "A second judge from another model family agrees with the first on 91% of answers but orders the middle pipelines differently.",
+   "fa": "داور دومی از خانوادهٔ مدلی دیگر در ۹۱٪ پاسخ‌ها با داور اول هم‌نظر است، اما پایپ‌لاین‌های میانی را به ترتیب دیگری می‌چیند."
+  },
+  "numbers": [
+   {
+    "label": {
+     "en": "Agreement / kappa",
+     "fa": "توافق / کاپا"
+    },
+    "value": {
+     "en": "91.2% / 0.760",
+     "fa": "۹۱٫۲٪ / ۰٫۷۶۰"
+    }
+   },
+   {
+    "label": {
+     "en": "Judge 1 at 6,000: HR / Lex-RAG / SetR / Hybrid",
+     "fa": "داور ۱ در ۶٬۰۰۰: HR / Lex-RAG / SetR / ترکیبی"
+    },
+    "value": {
+     "en": "69–71 / 68–69 / 63 / 62–63",
+     "fa": "۶۹–۷۱ / ۶۸–۶۹ / ۶۳ / ۶۲–۶۳"
+    }
+   },
+   {
+    "label": {
+     "en": "Judge 2 at 6,000: Lex-RAG / SetR / HR / Hybrid",
+     "fa": "داور ۲ در ۶٬۰۰۰: Lex-RAG / SetR / HR / ترکیبی"
+    },
+    "value": {
+     "en": "65–67 / 63–65 / 63 / 59–61",
+     "fa": "۶۵–۶۷ / ۶۳–۶۵ / ۶۳ / ۵۹–۶۱"
+    }
+   },
+   {
+    "label": {
+     "en": "Disagreeing answers / about a real defect",
+     "fa": "پاسخ‌های محل اختلاف / مربوط به ایرادی واقعی"
+    },
+    "value": {
+     "en": "66 / 7",
+     "fa": "۶۶ / ۷"
+    }
+   },
+   {
+    "label": {
+     "en": "Disagreements from a true added detail failed as unsupported",
+     "fa": "اختلاف‌هایی که در آن‌ها جزئیاتِ درستِ افزوده، بی‌پشتوانه شمرده شد"
+    },
+    "value": {
+     "en": "30",
+     "fa": "۳۰"
+    }
+   },
+   {
+    "label": {
+     "en": "Kappa Persian / English",
+     "fa": "کاپا فارسی / انگلیسی"
+    },
+    "value": {
+     "en": "0.69 / 0.82 (p .21)",
+     "fa": "۰٫۶۹ / ۰٫۸۲ (p = ۰٫۲۱)"
+    }
+   }
+  ],
+  "source": {
+   "paper": {
+    "en": "Table 24 (A second judge) / Sect. 5 Judge Agreement",
+    "fa": "جدول ۲۴ (داور دوم) / بخش ۵ (توافق داورها)"
+   },
+   "file": "work/posthoc_2026-11/S1_evaluator/RESULTS.md; work/posthoc_2026-11/S8_factorial/tables.md; work/posthoc_2026-11/S14_bilingual/RESULTS.md (sec. 2.5)"
+  },
+  "confidence": "measured",
+  "caveat": {
+   "en": "The second judge scored only the 6,000 and 15,500 arms.",
+   "fa": "داور دوم فقط حالت‌های ۶٬۰۰۰ و ۱۵٬۵۰۰ را سنجید."
+  },
+  "tags": [
+   "judges",
+   "stability",
+   "trust"
+  ]
+ },
+ {
+  "id": "judge-human",
+  "claim": {
+   "en": "Both judges are stricter than the human reviewer on about a third of the reviewed answers and never laxer.",
+   "fa": "هر دو داور در حدود یک‌سوم پاسخ‌های بازبینی‌شده از بازبین انسانی سخت‌گیرترند و هرگز آسان‌گیرتر نیستند."
+  },
+  "numbers": [
+   {
+    "label": {
+     "en": "Judge 1 vs human: agree / stricter / laxer",
+     "fa": "داور ۱ در برابر انسان: هم‌نظر / سخت‌گیرتر / آسان‌گیرتر"
+    },
+    "value": {
+     "en": "79 of 116 / 37 / 0",
+     "fa": "۷۹ از ۱۱۶ / ۳۷ / ۰"
+    }
+   },
+   {
+    "label": {
+     "en": "Judge 2 vs human",
+     "fa": "داور ۲ در برابر انسان"
+    },
+    "value": {
+     "en": "78 of 117 / 39 / 0",
+     "fa": "۷۸ از ۱۱۷ / ۳۹ / ۰"
+    }
+   },
+   {
+    "label": {
+     "en": "Judge 1 strictness on SetR",
+     "fa": "سخت‌گیری داور ۱ در پاسخ‌های SetR"
+    },
+    "value": {
+     "en": "15 of 30 reviewed answers",
+     "fa": "۱۵ از ۳۰ پاسخ بازبینی‌شده"
+    }
+   }
+  ],
+  "source": {
+   "paper": {
+    "en": "Table 23 / Table 24 / Sect. 5",
+    "fa": "جدول ۲۳ / جدول ۲۴ / بخش ۵"
+   },
+   "file": "work/datasets_v2/test_run/TEST_RESULTS_HUMAN_SYM.md (sec. 4); work/posthoc_2026-11/S1_evaluator/RESULTS.md"
+  },
+  "confidence": "measured",
+  "caveat": {
+   "en": "120 reviewed answers on 30 questions; one reviewer.",
+   "fa": "۱۲۰ پاسخ بازبینی‌شده روی ۳۰ پرسش؛ یک بازبین."
+  },
+  "tags": [
+   "judges",
+   "human",
+   "trust"
+  ]
+ },
+ {
+  "id": "human-asymmetry",
+  "claim": {
+   "en": "A partial human review can mislead. Reviewing one pipeline more thoroughly favoured it: the first review showed a significant lead for Lex-RAG that disappeared once all four pipelines were reviewed on the same questions.",
+   "fa": "بازبینی انسانی محدود می‌تواند گمراه‌کننده باشد. بازبینی دقیق‌ترِ یک پایپ‌لاین به نفع همان پایپ‌لاین تمام شد: بازبینی نخست برتری معناداری برای Lex-RAG نشان داد که وقتی هر چهار پایپ‌لاین روی همان پرسش‌ها بازبینی شدند، از میان رفت."
+  },
+  "numbers": [
+   {
+    "label": {
+     "en": "First (asymmetric) review, Lex-RAG minus Hybrid",
+     "fa": "بازبینی نخست (نامتقارن)، Lex-RAG منهای ترکیبی"
+    },
+    "value": {
+     "en": "+8 (9 wins, 1 loss), corrected p .043",
+     "fa": "‎+۸ (۹ برد، ۱ باخت)، p اصلاح‌شده = ۰٫۰۴۳"
+    }
+   },
+   {
+    "label": {
+     "en": "Symmetric review",
+     "fa": "بازبینی متقارن"
+    },
+    "value": {
+     "en": "+5 (7 wins, 2 losses), corrected p .36",
+     "fa": "‎+۵ (۷ برد، ۲ باخت)، p اصلاح‌شده = ۰٫۳۶"
+    }
+   },
+   {
+    "label": {
+     "en": "Lex-RAG wins where only its own answer had been reviewed",
+     "fa": "بردهای Lex-RAG در جایی که فقط پاسخ خودش بازبینی شده بود"
+    },
+    "value": {
+     "en": "almost half (8 of 17)",
+     "fa": "تقریباً نیمی (۸ از ۱۷)"
+    }
+   }
+  ],
+  "source": {
+   "paper": {
+    "en": "Sect. 5 Human Review",
+    "fa": "بخش ۵ (بازبینی انسانی)"
+   },
+   "file": "work/datasets_v2/test_run/TEST_RESULTS_HUMAN_SYM.md; work/datasets_v2/test_run/TEST_RESULTS_HUMAN.md (sec. 2)"
+  },
+  "confidence": "measured",
+  "caveat": {
+   "en": "Because the judge is never laxer, each extra reviewed answer can only keep or raise a pipeline's score.",
+   "fa": "چون داور هرگز آسان‌گیرتر نیست، هر پاسخ بازبینی‌شدهٔ اضافه فقط می‌تواند امتیاز پایپ‌لاین را ثابت نگه دارد یا بالا ببرد."
+  },
+  "tags": [
+   "human",
+   "trust",
+   "headline"
+  ]
+ },
+ {
+  "id": "pooled-model",
+  "claim": {
+   "en": "Pooling all six readers in one mixed model puts Lex-RAG ahead of Hybrid at 6,000 characters, but not ahead of HR, and nothing suggests the effects depend on the reader.",
+   "fa": "وقتی هر شش مدل پاسخ‌گو در یک مدل آمیخته کنار هم گذاشته شوند، Lex-RAG در ۶٬۰۰۰ کاراکتر از ترکیبی جلو می‌افتد اما از HR نه، و هیچ نشانه‌ای نیست که اثرها به مدل پاسخ‌گو وابسته باشند."
+  },
+  "numbers": [
+   {
+    "label": {
+     "en": "Lex-RAG vs Hybrid, odds ratio",
+     "fa": "Lex-RAG در برابر ترکیبی، نسبت شانس"
+    },
+    "value": {
+     "en": "2.11 [1.24, 3.60], p .006",
+     "fa": "۲٫۱۱ [۱٫۲۴ تا ۳٫۶۰]، p = ۰٫۰۰۶"
+    }
+   },
+   {
+    "label": {
+     "en": "Lex-RAG vs HR",
+     "fa": "Lex-RAG در برابر HR"
+    },
+    "value": {
+     "en": "1.61, p .080",
+     "fa": "۱٫۶۱، p = ۰٫۰۸۰"
+    }
+   },
+   {
+    "label": {
+     "en": "HR vs Hybrid",
+     "fa": "HR در برابر ترکیبی"
+    },
+    "value": {
+     "en": "1.31, p .308",
+     "fa": "۱٫۳۱، p = ۰٫۳۰۸"
+    }
+   },
+   {
+    "label": {
+     "en": "Budget effect: Hybrid / HR / Lex-RAG",
+     "fa": "اثر بودجه: ترکیبی / HR / Lex-RAG"
+    },
+    "value": {
+     "en": "1.77 / 1.61 / 1.13",
+     "fa": "۱٫۷۷ / ۱٫۶۱ / ۱٫۱۳"
+    }
+   },
+   {
+    "label": {
+     "en": "Pipeline × reader interaction",
+     "fa": "اثر متقابل پایپ‌لاین × مدل پاسخ‌گو"
+    },
+    "value": {
+     "en": "p .648",
+     "fa": "p = ۰٫۶۴۸"
+    }
+   }
+  ],
+  "source": {
+   "paper": {
+    "en": "Table 14 (Six readers pooled) / Sect. 5 Pooled Model",
+    "fa": "جدول ۱۴ (شش مدل پاسخ‌گو با هم) / بخش ۵ (مدل تجمیعی)"
+   },
+   "file": "work/posthoc_2026-11/S5_stats/tables.md"
+  },
+  "confidence": "measured",
+  "caveat": {
+   "en": "Uncorrected, post hoc; answers a different question from the frozen test and does not rescue the failed gate.",
+   "fa": "اصلاح‌نشده و پسینی؛ به پرسشی جز پرسش آزمون ازپیش‌ثبت‌شده پاسخ می‌دهد و برآورده نشدن معیار را جبران نمی‌کند."
+  },
+  "tags": [
+   "stability",
+   "readers"
+  ]
+ },
+ {
+  "id": "g-t1",
+  "claim": {
+   "en": "For single-fact questions, hybrid retrieval at a modest budget is enough; every pipeline answers nearly all of them.",
+   "fa": "برای پرسش‌های تک‌واقعیتی، بازیابی ترکیبی با بودجه‌ای متوسط کافی است؛ همهٔ پایپ‌لاین‌ها تقریباً به همهٔ آن‌ها پاسخ درست می‌دهند."
+  },
+  "numbers": [
+   {
+    "label": {
+     "en": "Single-fact questions answered, every pipeline",
+     "fa": "پرسش‌های تک‌واقعیتیِ پاسخ‌داده‌شده، در همهٔ پایپ‌لاین‌ها"
+    },
+    "value": {
+     "en": "27–29 of 30",
+     "fa": "۲۷–۲۹ از ۳۰"
+    }
+   }
+  ],
+  "source": {
+   "paper": {
+    "en": "Table 13 (Recommendations for choosing a setup) / Sect. 4.7 Practical Recommendations; Table 5",
+    "fa": "جدول ۱۳ (توصیه‌ها برای انتخاب چیدمان) / بخش ۴٫۷ (توصیه‌های عملی)؛ جدول ۵"
+   },
+   "file": "work/datasets_v2/test_run/TEST_RESULTS.md (sec. 2)"
+  },
+  "confidence": "strong",
+  "caveat": {
+   "en": "Frozen test, 6,000 and 15,500 characters; the tier leaves no room for a difference.",
+   "fa": "آزمون ازپیش‌ثبت‌شده، ۶٬۰۰۰ و ۱۵٬۵۰۰ کاراکتر؛ این سطح جایی برای تفاوت نمی‌گذارد."
+  },
+  "tags": [
+   "guide",
+   "tiers",
+   "t1"
+  ],
+  "guide_row": {
+   "situation": {
+    "en": "Single-fact questions (T1)",
+    "fa": "پرسش‌های تک‌واقعیتی (T1)"
+   },
+   "recommended": {
+    "en": "Hybrid retrieval at a modest budget; no reranker or selection call.",
+    "fa": "بازیابی ترکیبی با بودجه‌ای متوسط؛ بدون بازرتبه‌ساز و بدون فراخوانی گزینش."
+   },
+   "confidence_text": "Strong"
+  }
+ },
+ {
+  "id": "g-t2",
+  "claim": {
+   "en": "For questions that combine facts within one document, add a cross-encoder reranker to hybrid retrieval.",
+   "fa": "برای پرسش‌هایی که چند واقعیت را درون یک سند ترکیب می‌کنند، یک بازرتبه‌ساز cross-encoder به بازیابی ترکیبی بیفزایید."
+  },
+  "numbers": [
+   {
+    "label": {
+     "en": "HR and Lex-RAG, within-document questions",
+     "fa": "HR و Lex-RAG، پرسش‌های درون‌سندی"
+    },
+    "value": {
+     "en": "23–24 of 30",
+     "fa": "۲۳–۲۴ از ۳۰"
+    }
+   },
+   {
+    "label": {
+     "en": "Plain Hybrid",
+     "fa": "ترکیبیِ ساده"
+    },
+    "value": {
+     "en": "20–21 of 30",
+     "fa": "۲۰–۲۱ از ۳۰"
+    }
+   }
+  ],
+  "source": {
+   "paper": {
+    "en": "Table 13 (Recommendations for choosing a setup) / Sect. 4.7 Practical Recommendations; Table 5",
+    "fa": "جدول ۱۳ (توصیه‌ها برای انتخاب چیدمان) / بخش ۴٫۷ (توصیه‌های عملی)؛ جدول ۵"
+   },
+   "file": "work/datasets_v2/test_run/TEST_RESULTS.md (sec. 2)"
+  },
+  "confidence": "tentative",
+  "caveat": {
+   "en": "A gap of about 3 of 30, within noise.",
+   "fa": "فاصله‌ای حدود ۳ از ۳۰، در حد نوسان."
+  },
+  "tags": [
+   "guide",
+   "tiers",
+   "t2",
+   "reranker"
+  ],
+  "guide_row": {
+   "situation": {
+    "en": "Within-document questions (T2)",
+    "fa": "پرسش‌های درون‌سندی (T2)"
+   },
+   "recommended": {
+    "en": "Hybrid retrieval with a cross-encoder reranker.",
+    "fa": "بازیابی ترکیبی همراه با بازرتبه‌ساز cross-encoder."
+   },
+   "confidence_text": "Tentative"
+  }
+ },
+ {
+  "id": "g-t3",
+  "claim": {
+   "en": "For cross-document questions, start with a reranker; add an iterative search agent over the hybrid index if four times the tokens and about 10 s are acceptable.",
+   "fa": "برای پرسش‌های میان‌سندی، با بازرتبه‌ساز شروع کنید؛ اگر چهار برابر توکن و حدود ۱۰ ثانیه زمان پاسخ قابل قبول است، یک عامل جست‌وجوی تکرارشونده روی نمایهٔ ترکیبی بیفزایید."
+  },
+  "numbers": [
+   {
+    "label": {
+     "en": "HR and SetR, cross-document questions",
+     "fa": "HR و SetR، پرسش‌های میان‌سندی"
+    },
+    "value": {
+     "en": "18–19 and 18 of 30",
+     "fa": "۱۸–۱۹ و ۱۸ از ۳۰"
+    }
+   },
+   {
+    "label": {
+     "en": "Plain Hybrid",
+     "fa": "ترکیبیِ ساده"
+    },
+    "value": {
+     "en": "14 of 30",
+     "fa": "۱۴ از ۳۰"
+    }
+   },
+   {
+    "label": {
+     "en": "Hybrid-index search agent",
+     "fa": "عامل جست‌وجو روی نمایهٔ ترکیبی"
+    },
+    "value": {
+     "en": "25 of 30",
+     "fa": "۲۵ از ۳۰"
+    }
+   },
+   {
+    "label": {
+     "en": "Agent minus HR, all 90",
+     "fa": "عامل منهای HR، همهٔ ۹۰ پرسش"
+    },
+    "value": {
+     "en": "+6 to +8, not significant",
+     "fa": "‎+۶ تا ‎+۸، معنادار نیست"
+    }
+   }
+  ],
+  "source": {
+   "paper": {
+    "en": "Table 13 (Recommendations for choosing a setup) / Sect. 4.7 Practical Recommendations; Tables 5 and 9",
+    "fa": "جدول ۱۳ (توصیه‌ها برای انتخاب چیدمان) / بخش ۴٫۷ (توصیه‌های عملی)؛ جدول‌های ۵ و ۹"
+   },
+   "file": "work/datasets_v2/test_run/TEST_RESULTS.md; work/posthoc_2026-11/S9_gpu/RESULTS.md (sec. 2)"
+  },
+  "confidence": "tentative",
+  "caveat": {
+   "en": "The agent's lead over the reranker is not significant.",
+   "fa": "برتری عامل بر بازرتبه‌ساز معنادار نیست."
+  },
+  "tags": [
+   "guide",
+   "tiers",
+   "t3",
+   "reranker",
+   "agents"
+  ],
+  "guide_row": {
+   "situation": {
+    "en": "Cross-document questions (T3)",
+    "fa": "پرسش‌های میان‌سندی (T3)"
+   },
+   "recommended": {
+    "en": "Reranker first. Add an iterative agent over the hybrid index if four times the tokens and about 10 s are acceptable.",
+    "fa": "اول بازرتبه‌ساز. اگر چهار برابر توکن و حدود ۱۰ ثانیه قابل قبول است، یک عامل تکرارشونده روی نمایهٔ ترکیبی بیفزایید."
+   },
+   "confidence_text": "Tentative"
+  }
+ },
+ {
+  "id": "g-channel-bm25",
+  "claim": {
+   "en": "Run BM25 and dense retrieval and fuse them; BM25 alone loses clearly.",
+   "fa": "BM25 و جست‌وجوی معنایی را اجرا و ادغام کنید؛ BM25 به‌تنهایی آشکارا عقب می‌ماند."
+  },
+  "numbers": [
+   {
+    "label": {
+     "en": "Hybrid / BM25 alone, 6,000",
+     "fa": "ترکیبی / فقط BM25، ۶٬۰۰۰"
+    },
+    "value": {
+     "en": "62–63 / 48 of 90",
+     "fa": "۶۲–۶۳ / ۴۸ از ۹۰"
+    }
+   },
+   {
+    "label": {
+     "en": "Hybrid minus BM25",
+     "fa": "ترکیبی منهای BM25"
+    },
+    "value": {
+     "en": "+14 to +15 (16 wins, 2 losses)",
+     "fa": "‎+۱۴ تا ‎+۱۵ (۱۶ برد، ۲ باخت)"
+    }
+   },
+   {
+    "label": {
+     "en": "At 15,500: Hybrid / BM25",
+     "fa": "در ۱۵٬۵۰۰: ترکیبی / BM25"
+    },
+    "value": {
+     "en": "68 / 61",
+     "fa": "۶۸ / ۶۱"
+    }
+   }
+  ],
+  "source": {
+   "paper": {
+    "en": "Table 13 (Recommendations for choosing a setup) / Sect. 4.7 Practical Recommendations; Table 6",
+    "fa": "جدول ۱۳ (توصیه‌ها برای انتخاب چیدمان) / بخش ۴٫۷ (توصیه‌های عملی)؛ جدول ۶"
+   },
+   "file": "work/posthoc_2026-11/S10_retrieval/RESULTS.md (sec. 2.1–2.2)"
+  },
+  "confidence": "strong",
+  "caveat": {
+   "en": "Survives correction over 12 declared comparisons; the gap shrinks to 7 at 15,500.",
+   "fa": "پس از اصلاح برای ۱۲ مقایسهٔ اعلام‌شده معنادار می‌ماند؛ در ۱۵٬۵۰۰ فاصله به ۷ کاهش می‌یابد."
+  },
+  "tags": [
+   "guide",
+   "channels",
+   "avoid"
+  ],
+  "guide_row": {
+   "situation": {
+    "en": "Retrieval channel",
+    "fa": "کانال بازیابی"
+   },
+   "recommended": {
+    "en": "Run BM25 and dense retrieval and fuse them. If only one can run, use dense retrieval with a larger budget.",
+    "fa": "BM25 و جست‌وجوی معنایی را اجرا و ادغام کنید. اگر فقط یکی را می‌توان اجرا کرد، جست‌وجوی معنایی را با بودجهٔ بزرگ‌تر به کار ببرید."
+   },
+   "confidence_text": "Strong against BM25 alone, tentative against dense"
+  }
+ },
+ {
+  "id": "g-channel-dense",
+  "claim": {
+   "en": "Fusion also beats dense retrieval alone, but less clearly; if only one channel can run, use dense retrieval with a larger budget.",
+   "fa": "ادغام از جست‌وجوی معنایی به‌تنهایی هم بهتر است، اما نه چندان آشکار؛ اگر فقط یک کانال را می‌توان اجرا کرد، جست‌وجوی معنایی را با بودجهٔ بزرگ‌تر به کار ببرید."
+  },
+  "numbers": [
+   {
+    "label": {
+     "en": "Hybrid / dense alone, 6,000",
+     "fa": "ترکیبی / فقط معنایی، ۶٬۰۰۰"
+    },
+    "value": {
+     "en": "62–63 / 53 of 90",
+     "fa": "۶۲–۶۳ / ۵۳ از ۹۰"
+    }
+   },
+   {
+    "label": {
+     "en": "At 15,500: Hybrid / dense",
+     "fa": "در ۱۵٬۵۰۰: ترکیبی / معنایی"
+    },
+    "value": {
+     "en": "68 / 63",
+     "fa": "۶۸ / ۶۳"
+    }
+   }
+  ],
+  "source": {
+   "paper": {
+    "en": "Table 13 (Recommendations for choosing a setup) / Sect. 4.7 Practical Recommendations; Table 6",
+    "fa": "جدول ۱۳ (توصیه‌ها برای انتخاب چیدمان) / بخش ۴٫۷ (توصیه‌های عملی)؛ جدول ۶"
+   },
+   "file": "work/posthoc_2026-11/S10_retrieval/RESULTS.md (sec. 2.1–2.2)"
+  },
+  "confidence": "tentative",
+  "caveat": {
+   "en": "The 9–10 answer gap is below the detectable difference.",
+   "fa": "فاصلهٔ ۹ تا ۱۰ پاسخی از تفاوت آشکارشدنی کمتر است."
+  },
+  "tags": [
+   "guide",
+   "channels"
+  ],
+  "guide_row": {
+   "situation": {
+    "en": "Retrieval channel",
+    "fa": "کانال بازیابی"
+   },
+   "recommended": {
+    "en": "Run BM25 and dense retrieval and fuse them. If only one can run, use dense retrieval with a larger budget.",
+    "fa": "BM25 و جست‌وجوی معنایی را اجرا و ادغام کنید. اگر فقط یکی را می‌توان اجرا کرد، جست‌وجوی معنایی را با بودجهٔ بزرگ‌تر به کار ببرید."
+   },
+   "confidence_text": "Strong against BM25 alone, tentative against dense"
+  }
+ },
+ {
+  "id": "g-chunk-2000",
+  "claim": {
+   "en": "Use chunks of about 1,000 characters; 2,000-character chunks lose clearly at a 6,000-character budget because few large chunks fit the pack.",
+   "fa": "قطعه‌های حدود ۱٬۰۰۰ کاراکتری به کار ببرید؛ قطعه‌های ۲٬۰۰۰ کاراکتری در بودجهٔ ۶٬۰۰۰ کاراکتر آشکارا عقب می‌مانند، چون قطعهٔ بزرگ زیادی در بسته جا نمی‌شود."
+  },
+  "numbers": [
+   {
+    "label": {
+     "en": "Reranked pipeline: 1,000 / 2,000-character chunks",
+     "fa": "پایپ‌لاین با بازرتبه‌ساز: قطعه‌های ۱٬۰۰۰ / ۲٬۰۰۰ کاراکتری"
+    },
+    "value": {
+     "en": "69–71 / 51 of 90",
+     "fa": "۶۹–۷۱ / ۵۱ از ۹۰"
+    }
+   },
+   {
+    "label": {
+     "en": "Plain Hybrid: 1,000 / 2,000",
+     "fa": "ترکیبیِ ساده: ۱٬۰۰۰ / ۲٬۰۰۰"
+    },
+    "value": {
+     "en": "62–63 / 49",
+     "fa": "۶۲–۶۳ / ۴۹"
+    }
+   }
+  ],
+  "source": {
+   "paper": {
+    "en": "Table 13 (Recommendations for choosing a setup) / Sect. 4.7 Practical Recommendations; Table 6",
+    "fa": "جدول ۱۳ (توصیه‌ها برای انتخاب چیدمان) / بخش ۴٫۷ (توصیه‌های عملی)؛ جدول ۶"
+   },
+   "file": "work/posthoc_2026-11/S12_chunks/RESULTS.md (sec. 2)"
+  },
+  "confidence": "strong",
+  "caveat": {
+   "en": "At a 6,000-character budget with this packer.",
+   "fa": "با بودجهٔ ۶٬۰۰۰ کاراکتر و همین بسته‌ساز."
+  },
+  "tags": [
+   "guide",
+   "chunking",
+   "avoid"
+  ],
+  "guide_row": {
+   "situation": {
+    "en": "Chunk size",
+    "fa": "اندازهٔ قطعه"
+   },
+   "recommended": {
+    "en": "About 1,000 characters.",
+    "fa": "حدود ۱٬۰۰۰ کاراکتر."
+   },
+   "confidence_text": "Strong against 2,000 at a 6,000-character budget with this packer; tentative against 500"
+  }
+ },
+ {
+  "id": "g-chunk-500",
+  "claim": {
+   "en": "Smaller 500-character chunks cost a few answers too.",
+   "fa": "قطعه‌های کوچک‌تر ۵۰۰ کاراکتری هم چند پاسخ درست را از دست می‌دهند."
+  },
+  "numbers": [
+   {
+    "label": {
+     "en": "Reranked pipeline: 1,000 / 500",
+     "fa": "پایپ‌لاین با بازرتبه‌ساز: ۱٬۰۰۰ / ۵۰۰"
+    },
+    "value": {
+     "en": "69–71 / 62 of 90",
+     "fa": "۶۹–۷۱ / ۶۲ از ۹۰"
+    }
+   },
+   {
+    "label": {
+     "en": "Plain Hybrid: 1,000 / 500",
+     "fa": "ترکیبیِ ساده: ۱٬۰۰۰ / ۵۰۰"
+    },
+    "value": {
+     "en": "62–63 / 58–59",
+     "fa": "۶۲–۶۳ / ۵۸–۵۹"
+    }
+   }
+  ],
+  "source": {
+   "paper": {
+    "en": "Table 13 (Recommendations for choosing a setup) / Sect. 4.7 Practical Recommendations; Table 6",
+    "fa": "جدول ۱۳ (توصیه‌ها برای انتخاب چیدمان) / بخش ۴٫۷ (توصیه‌های عملی)؛ جدول ۶"
+   },
+   "file": "work/posthoc_2026-11/S12_chunks/RESULTS.md (sec. 2)"
+  },
+  "confidence": "tentative",
+  "caveat": {
+   "en": "For Hybrid the loss cannot be told from no change.",
+   "fa": "در ترکیبی، این افت از نبودِ تغییر قابل تشخیص نیست."
+  },
+  "tags": [
+   "guide",
+   "chunking"
+  ],
+  "guide_row": {
+   "situation": {
+    "en": "Chunk size",
+    "fa": "اندازهٔ قطعه"
+   },
+   "recommended": {
+    "en": "About 1,000 characters.",
+    "fa": "حدود ۱٬۰۰۰ کاراکتر."
+   },
+   "confidence_text": "Strong against 2,000 at a 6,000-character budget with this packer; tentative against 500"
+  }
+ },
+ {
+  "id": "g-rewrite",
+  "claim": {
+   "en": "Do not add HyDE or multi-query rewriting: they cost an extra LLM call and did not help.",
+   "fa": "بازنویسی HyDE یا multi-query را نیفزایید: به یک فراخوانی اضافهٔ LLM نیاز دارند و کمکی نکردند."
+  },
+  "numbers": [
+   {
+    "label": {
+     "en": "HyDE / multi-query / no rewrite",
+     "fa": "HyDE / multi-query / بدون بازنویسی"
+    },
+    "value": {
+     "en": "61 / 58–59 / 62–63 of 90",
+     "fa": "۶۱ / ۵۸–۵۹ / ۶۲–۶۳ از ۹۰"
+    }
+   },
+   {
+    "label": {
+     "en": "Persian complete bundles",
+     "fa": "مجموعه‌های کامل فارسی"
+    },
+    "value": {
+     "en": "26 / 28 / 33 of 45",
+     "fa": "۲۶ / ۲۸ / ۳۳ از ۴۵"
+    }
+   }
+  ],
+  "source": {
+   "paper": {
+    "en": "Table 13 (Recommendations for choosing a setup) / Sect. 4.7 Practical Recommendations; Sect. 4.2",
+    "fa": "جدول ۱۳ (توصیه‌ها برای انتخاب چیدمان) / بخش ۴٫۷ (توصیه‌های عملی)؛ بخش ۴٫۲"
+   },
+   "file": "work/posthoc_2026-11/S11_rewrite/RESULTS.md (sec. 2)"
+  },
+  "confidence": "tentative",
+  "caveat": {
+   "en": "Differences within noise.",
+   "fa": "تفاوت‌ها در حد نوسان‌اند."
+  },
+  "tags": [
+   "guide",
+   "rewriting",
+   "avoid"
+  ],
+  "guide_row": {
+   "situation": {
+    "en": "Query rewriting",
+    "fa": "بازنویسی پرسش"
+   },
+   "recommended": {
+    "en": "Do not add HyDE or multi-query.",
+    "fa": "HyDE یا multi-query را نیفزایید."
+   },
+   "confidence_text": "Tentative"
+  }
+ },
+ {
+  "id": "g-embed",
+  "claim": {
+   "en": "Either bge-m3 or multilingual-e5-large will do; spend the effort on a reranker instead.",
+   "fa": "bge-m3 و multilingual-e5-large هر دو کافی‌اند؛ به جای انتخاب میان آن‌ها، وقت خود را صرف بازرتبه‌ساز کنید."
+  },
+  "numbers": [
+   {
+    "label": {
+     "en": "Dense only: e5 / bge-m3",
+     "fa": "فقط معنایی: e5 / bge-m3"
+    },
+    "value": {
+     "en": "54–55 / 53",
+     "fa": "۵۴–۵۵ / ۵۳"
+    }
+   },
+   {
+    "label": {
+     "en": "Inside Hybrid: e5 / bge-m3",
+     "fa": "درون ترکیبی: e5 / bge-m3"
+    },
+    "value": {
+     "en": "58 / 62–63",
+     "fa": "۵۸ / ۶۲–۶۳"
+    }
+   }
+  ],
+  "source": {
+   "paper": {
+    "en": "Table 13 (Recommendations for choosing a setup) / Sect. 4.7 Practical Recommendations; Table 6",
+    "fa": "جدول ۱۳ (توصیه‌ها برای انتخاب چیدمان) / بخش ۴٫۷ (توصیه‌های عملی)؛ جدول ۶"
+   },
+   "file": "work/posthoc_2026-11/S13_embed/RESULTS.md (sec. 2)"
+  },
+  "confidence": "tentative",
+  "caveat": {
+   "en": "Not significant; two models tried.",
+   "fa": "معنادار نیست؛ دو مدل آزموده شد."
+  },
+  "tags": [
+   "guide",
+   "embedding"
+  ],
+  "guide_row": {
+   "situation": {
+    "en": "Embedding model",
+    "fa": "مدل embedding"
+   },
+   "recommended": {
+    "en": "bge-m3 or multilingual-e5-large; spend effort on a reranker.",
+    "fa": "bge-m3 یا multilingual-e5-large؛ وقت خود را صرف بازرتبه‌ساز کنید."
+   },
+   "confidence_text": "Tentative"
+  }
+ },
+ {
+  "id": "g-fa-tokens",
+  "claim": {
+   "en": "Set budgets in tokens, not characters: Persian costs about 1.5 to 1.8 times the tokens per character for five of six readers, and 3.0 for one.",
+   "fa": "بودجه را بر حسب توکن تعیین کنید، نه کاراکتر: هر کاراکتر فارسی برای پنج مدل پاسخ‌گو از شش مدل حدود ۱٫۵ تا ۱٫۸ برابر و برای یکی ۳٫۰ برابر توکن مصرف می‌کند."
+  },
+  "numbers": [
+   {
+    "label": {
+     "en": "GLM-5.3-flash (primary)",
+     "fa": "GLM-5.3-flash (اصلی)"
+    },
+    "value": {
+     "en": "1.80 (0.409 vs 0.228 tokens per character)",
+     "fa": "۱٫۸۰ (۰٫۴۰۹ در برابر ۰٫۲۲۸ توکن برای هر کاراکتر)"
+    }
+   },
+   {
+    "label": {
+     "en": "DeepSeek-V4-flash",
+     "fa": "DeepSeek-V4-flash"
+    },
+    "value": {
+     "en": "1.75",
+     "fa": "۱٫۷۵"
+    }
+   },
+   {
+    "label": {
+     "en": "Llama 3.3 70B",
+     "fa": "Llama 3.3 70B"
+    },
+    "value": {
+     "en": "1.53",
+     "fa": "۱٫۵۳"
+    }
+   },
+   {
+    "label": {
+     "en": "gpt-oss-20b",
+     "fa": "gpt-oss-20b"
+    },
+    "value": {
+     "en": "1.51",
+     "fa": "۱٫۵۱"
+    }
+   },
+   {
+    "label": {
+     "en": "Gemma 3 27B",
+     "fa": "Gemma 3 27B"
+    },
+    "value": {
+     "en": "1.46",
+     "fa": "۱٫۴۶"
+    }
+   },
+   {
+    "label": {
+     "en": "Qwen3 235B",
+     "fa": "Qwen3 235B"
+    },
+    "value": {
+     "en": "2.99",
+     "fa": "۲٫۹۹"
+    }
+   }
+  ],
+  "source": {
+   "paper": {
+    "en": "Table 13 (Recommendations for choosing a setup) / Sect. 4.7 Practical Recommendations; Table 10 (Reader prompt tokens per character of evidence)",
+    "fa": "جدول ۱۳ (توصیه‌ها برای انتخاب چیدمان) / بخش ۴٫۷ (توصیه‌های عملی)؛ جدول ۱۰ (توکن پرامپت مدل پاسخ‌گو برای هر کاراکتر شواهد)"
+   },
+   "file": "work/posthoc_2026-11/S14_bilingual/RESULTS.md (sec. 2.4), tokjudge.json"
+  },
+  "confidence": "strong",
+  "caveat": {
+   "en": "A measured cost; 95% intervals within ±0.11.",
+   "fa": "هزینه‌ای اندازه‌گیری‌شده؛ بازه‌های ۹۵٪ همه در محدودهٔ ±۰٫۱۱."
+  },
+  "tags": [
+   "guide",
+   "persian",
+   "tokens",
+   "budget"
+  ],
+  "guide_row": {
+   "situation": {
+    "en": "Persian budgets",
+    "fa": "بودجه در فارسی"
+   },
+   "recommended": {
+    "en": "Set budgets in tokens, not characters.",
+    "fa": "بودجه را بر حسب توکن تعیین کنید، نه کاراکتر."
+   },
+   "confidence_text": "Strong"
+  }
+ },
+ {
+  "id": "g-fa-norm",
+  "claim": {
+   "en": "Normalise Persian letters, non-joiners and digits before BM25.",
+   "fa": "پیش از BM25 حروف فارسی، نیم‌فاصله‌ها و رقم‌ها را نرمال کنید."
+  },
+  "numbers": [
+   {
+    "label": {
+     "en": "BM25 without normalisation, spelling variants",
+     "fa": "BM25 بدون نرمال‌سازی، گونه‌های املایی"
+    },
+    "value": {
+     "en": "loses 5–8 of 45 complete bundles",
+     "fa": "۵ تا ۸ مجموعهٔ کامل شواهد از ۴۵ از دست می‌رود"
+    }
+   }
+  ],
+  "source": {
+   "paper": {
+    "en": "Table 13 (Recommendations for choosing a setup) / Sect. 4.7 Practical Recommendations; Sect. 4.6",
+    "fa": "جدول ۱۳ (توصیه‌ها برای انتخاب چیدمان) / بخش ۴٫۷ (توصیه‌های عملی)؛ بخش ۴٫۶"
+   },
+   "file": "work/posthoc_2026-11/S15_crossling/RESULTS.md (sec. 2)"
+  },
+  "confidence": "tentative",
+  "caveat": {
+   "en": "Retrieval only.",
+   "fa": "فقط بازیابی سنجیده شد."
+  },
+  "tags": [
+   "guide",
+   "orthography",
+   "persian"
+  ],
+  "guide_row": {
+   "situation": {
+    "en": "Persian spelling and digits",
+    "fa": "املا و رقم‌های فارسی"
+   },
+   "recommended": {
+    "en": "Normalise letters, non-joiners and digits before BM25.",
+    "fa": "پیش از BM25 حروف، نیم‌فاصله‌ها و رقم‌ها را نرمال کنید."
+   },
+   "confidence_text": "Tentative"
+  }
+ },
+ {
+  "id": "g-xl-bm25",
+  "claim": {
+   "en": "When questions are in another language than the documents, BM25 alone collapses; a dense channel is necessary.",
+   "fa": "وقتی پرسش‌ها به زبانی غیر از زبان اسناد باشند، BM25 به‌تنهایی به‌شدت افت می‌کند؛ کانال معنایی ضروری است."
+  },
+  "numbers": [
+   {
+    "label": {
+     "en": "BM25, complete bundle in top 40 with translated questions",
+     "fa": "BM25، مجموعهٔ کامل در ۴۰ نامزد برتر با پرسش‌های ترجمه‌شده"
+    },
+    "value": {
+     "en": "2 and 8 of 45",
+     "fa": "۲ و ۸ از ۴۵"
+    }
+   },
+   {
+    "label": {
+     "en": "Dense",
+     "fa": "معنایی"
+    },
+    "value": {
+     "en": "35 and 28 of 45",
+     "fa": "۳۵ و ۲۸ از ۴۵"
+    }
+   }
+  ],
+  "source": {
+   "paper": {
+    "en": "Table 13 (Recommendations for choosing a setup) / Sect. 4.7 Practical Recommendations; Table 11",
+    "fa": "جدول ۱۳ (توصیه‌ها برای انتخاب چیدمان) / بخش ۴٫۷ (توصیه‌های عملی)؛ جدول ۱۱"
+   },
+   "file": "work/posthoc_2026-11/S15_crossling/RESULTS.md (sec. 2)"
+  },
+  "confidence": "strong",
+  "caveat": {
+   "en": "Machine-translated questions.",
+   "fa": "پرسش‌ها به‌صورت ماشینی ترجمه شده‌اند."
+  },
+  "tags": [
+   "guide",
+   "cross-lingual",
+   "avoid"
+  ],
+  "guide_row": {
+   "situation": {
+    "en": "Query language differs from the documents",
+    "fa": "زبان پرسش با زبان اسناد فرق دارد"
+   },
+   "recommended": {
+    "en": "A dense channel, and a reranker after the fusion; not BM25 alone.",
+    "fa": "کانال معنایی، و بازرتبه‌ساز پس از ادغام؛ BM25 به‌تنهایی نه."
+   },
+   "confidence_text": "Strong for the BM25 collapse, tentative for fusion against dense"
+  }
+ },
+ {
+  "id": "g-xl-fusion",
+  "claim": {
+   "en": "With cross-language questions, fusion with BM25 loses its lead over dense retrieval; put a reranker after the fusion. Even then the best pipeline answers 15 to 18 fewer questions.",
+   "fa": "با پرسش‌های بین‌زبانی، ادغام با BM25 برتری‌اش را بر جست‌وجوی معنایی از دست می‌دهد؛ پس از ادغام یک بازرتبه‌ساز بگذارید. حتی در این حالت، بهترین پایپ‌لاین به ۱۵ تا ۱۸ پرسش کمتر پاسخ درست می‌دهد."
+  },
+  "numbers": [
+   {
+    "label": {
+     "en": "Persian pool, complete bundle in the pack: fusion / dense",
+     "fa": "مخزن فارسی، مجموعهٔ کامل در بسته: ادغام / معنایی"
+    },
+    "value": {
+     "en": "19 / 21 of 45 (were 33 / 26)",
+     "fa": "۱۹ / ۲۱ از ۴۵ (پیش‌تر ۳۳ / ۲۶)"
+    }
+   },
+   {
+    "label": {
+     "en": "Reranked pipeline, translated / original questions",
+     "fa": "پایپ‌لاین با بازرتبه‌ساز، پرسش‌های ترجمه‌شده / اصلی"
+    },
+    "value": {
+     "en": "53–54 / 69–71 of 90",
+     "fa": "۵۳–۵۴ / ۶۹–۷۱ از ۹۰"
+    }
+   }
+  ],
+  "source": {
+   "paper": {
+    "en": "Table 13 (Recommendations for choosing a setup) / Sect. 4.7 Practical Recommendations; Table 11",
+    "fa": "جدول ۱۳ (توصیه‌ها برای انتخاب چیدمان) / بخش ۴٫۷ (توصیه‌های عملی)؛ جدول ۱۱"
+   },
+   "file": "work/posthoc_2026-11/S15_crossling/RESULTS.md (sec. 2)"
+  },
+  "confidence": "tentative",
+  "caveat": {
+   "en": "",
+   "fa": ""
+  },
+  "tags": [
+   "guide",
+   "cross-lingual",
+   "reranker"
+  ],
+  "guide_row": {
+   "situation": {
+    "en": "Query language differs from the documents",
+    "fa": "زبان پرسش با زبان اسناد فرق دارد"
+   },
+   "recommended": {
+    "en": "A dense channel, and a reranker after the fusion; not BM25 alone.",
+    "fa": "کانال معنایی، و بازرتبه‌ساز پس از ادغام؛ BM25 به‌تنهایی نه."
+   },
+   "confidence_text": "Strong for the BM25 collapse, tentative for fusion against dense"
+  }
+ },
+ {
+  "id": "g-tight-sel3000",
+  "claim": {
+   "en": "At a tight 3,000-character budget a reranking or selection step pays clearly: removing the selection call costs about 15 answers.",
+   "fa": "در بودجهٔ محدود ۳٬۰۰۰ کاراکتری، گام بازرتبه‌بندی یا گزینش آشکارا می‌ارزد: با حذف فراخوانی گزینش حدود ۱۵ پاسخ درست از دست می‌رود."
+  },
+  "numbers": [
+   {
+    "label": {
+     "en": "Lex-RAG minus Lex-RAG without selection, 3,000",
+     "fa": "Lex-RAG منهای Lex-RAG بدون گزینش، ۳٬۰۰۰"
+    },
+    "value": {
+     "en": "+15 to +16 (17 wins, 2 losses)",
+     "fa": "‎+۱۵ تا ‎+۱۶ (۱۷ برد، ۲ باخت)"
+    }
+   }
+  ],
+  "source": {
+   "paper": {
+    "en": "Table 13 (Recommendations for choosing a setup) / Sect. 4.7 Practical Recommendations; Table 8, Figure 3",
+    "fa": "جدول ۱۳ (توصیه‌ها برای انتخاب چیدمان) / بخش ۴٫۷ (توصیه‌های عملی)؛ جدول ۸، شکل ۳"
+   },
+   "file": "work/posthoc_2026-11/S8_factorial/tables.md"
+  },
+  "confidence": "strong",
+  "caveat": {
+   "en": "One run, no redraw, no second judge.",
+   "fa": "یک اجرا، بدون اجرای دوباره، بدون داور دوم."
+  },
+  "tags": [
+   "guide",
+   "budget",
+   "selection"
+  ],
+  "guide_row": {
+   "situation": {
+    "en": "Tight budget (6,000 characters)",
+    "fa": "بودجهٔ محدود (۶٬۰۰۰ کاراکتر)"
+   },
+   "recommended": {
+    "en": "A reranking or selection step: a cross-encoder, or an LLM selection call if none is available.",
+    "fa": "یک گام بازرتبه‌بندی یا گزینش: cross-encoder، یا اگر در دسترس نیست، فراخوانی گزینش با LLM."
+   },
+   "confidence_text": "Strong at 3,000 characters for the selection call, one run; tentative at 6,000 characters and for the cross-encoder"
+  }
+ },
+ {
+  "id": "g-tight-sel6000",
+  "claim": {
+   "en": "At 6,000 characters the selection call is worth about 5 to 10 answers.",
+   "fa": "در ۶٬۰۰۰ کاراکتر، فراخوانی گزینش حدود ۵ تا ۱۰ پاسخ می‌ارزد."
+  },
+  "numbers": [
+   {
+    "label": {
+     "en": "Removing the selection call, 6,000",
+     "fa": "حذف فراخوانی گزینش، ۶٬۰۰۰"
+    },
+    "value": {
+     "en": "−5 to −10 answers (saved answers, redraws, second judge)",
+     "fa": "‎−۵ تا ‎−۱۰ پاسخ (پاسخ‌های ذخیره‌شده، اجراهای دوباره، داور دوم)"
+    }
+   }
+  ],
+  "source": {
+   "paper": {
+    "en": "Table 13 (Recommendations for choosing a setup) / Sect. 4.7 Practical Recommendations; Table 8",
+    "fa": "جدول ۱۳ (توصیه‌ها برای انتخاب چیدمان) / بخش ۴٫۷ (توصیه‌های عملی)؛ جدول ۸"
+   },
+   "file": "work/posthoc_2026-11/S8_factorial/tables.md; work/posthoc_2026-11/S14_bilingual/RESULTS.md (sec. 2.1)"
+  },
+  "confidence": "tentative",
+  "caveat": {
+   "en": "",
+   "fa": ""
+  },
+  "tags": [
+   "guide",
+   "budget",
+   "selection"
+  ],
+  "guide_row": {
+   "situation": {
+    "en": "Tight budget (6,000 characters)",
+    "fa": "بودجهٔ محدود (۶٬۰۰۰ کاراکتر)"
+   },
+   "recommended": {
+    "en": "A reranking or selection step: a cross-encoder, or an LLM selection call if none is available.",
+    "fa": "یک گام بازرتبه‌بندی یا گزینش: cross-encoder، یا اگر در دسترس نیست، فراخوانی گزینش با LLM."
+   },
+   "confidence_text": "Strong at 3,000 characters for the selection call, one run; tentative at 6,000 characters and for the cross-encoder"
+  }
+ },
+ {
+  "id": "g-tight-ce",
+  "claim": {
+   "en": "The cross-encoder's lead over plain hybrid at 6,000 characters is 6 to 9 answers, but not significant.",
+   "fa": "برتری cross-encoder بر ترکیبیِ ساده در ۶٬۰۰۰ کاراکتر ۶ تا ۹ پاسخ است، اما معنادار نیست."
+  },
+  "numbers": [
+   {
+    "label": {
+     "en": "HR minus Hybrid, 6,000",
+     "fa": "HR منهای ترکیبی، ۶٬۰۰۰"
+    },
+    "value": {
+     "en": "+6 to +9",
+     "fa": "‎+۶ تا ‎+۹"
+    }
+   },
+   {
+    "label": {
+     "en": "Pooled p",
+     "fa": "مقدار p تجمیعی"
+    },
+    "value": {
+     "en": ".31",
+     "fa": "۰٫۳۱"
+    }
+   },
+   {
+    "label": {
+     "en": "Second judge: HR / Hybrid",
+     "fa": "داور دوم: HR / ترکیبی"
+    },
+    "value": {
+     "en": "63 / 59–61",
+     "fa": "۶۳ / ۵۹–۶۱"
+    }
+   }
+  ],
+  "source": {
+   "paper": {
+    "en": "Table 13 (Recommendations for choosing a setup) / Sect. 4.7 Practical Recommendations; Table 14; Table 24",
+    "fa": "جدول ۱۳ (توصیه‌ها برای انتخاب چیدمان) / بخش ۴٫۷ (توصیه‌های عملی)؛ جدول ۱۴؛ جدول ۲۴"
+   },
+   "file": "work/posthoc_2026-11/S5_stats/tables.md; work/posthoc_2026-11/S8_factorial/tables.md"
+  },
+  "confidence": "tentative",
+  "caveat": {
+   "en": "",
+   "fa": ""
+  },
+  "tags": [
+   "guide",
+   "budget",
+   "reranker"
+  ],
+  "guide_row": {
+   "situation": {
+    "en": "Tight budget (6,000 characters)",
+    "fa": "بودجهٔ محدود (۶٬۰۰۰ کاراکتر)"
+   },
+   "recommended": {
+    "en": "A reranking or selection step: a cross-encoder, or an LLM selection call if none is available.",
+    "fa": "یک گام بازرتبه‌بندی یا گزینش: cross-encoder، یا اگر در دسترس نیست، فراخوانی گزینش با LLM."
+   },
+   "confidence_text": "Strong at 3,000 characters for the selection call, one run; tentative at 6,000 characters and for the cross-encoder"
+  }
+ },
+ {
+  "id": "g-loose",
+  "claim": {
+   "en": "At 15,500 characters or more, plain hybrid retrieval is enough; reranking and selection add little.",
+   "fa": "در ۱۵٬۵۰۰ کاراکتر یا بیشتر، بازیابی ترکیبیِ ساده کافی است؛ بازرتبه‌بندی و گزینش چیز زیادی نمی‌افزایند."
+  },
+  "numbers": [
+   {
+    "label": {
+     "en": "Hybrid from 3,000 to 24,000 characters",
+     "fa": "ترکیبی از ۳٬۰۰۰ تا ۲۴٬۰۰۰ کاراکتر"
+    },
+    "value": {
+     "en": "about 50 → 72 correct",
+     "fa": "حدود ۵۰ ← ۷۲ پاسخ درست"
+    }
+   },
+   {
+    "label": {
+     "en": "HR budget gain across reader draws",
+     "fa": "سود HR از بودجه در اجراهای مختلف مدل پاسخ‌گو"
+    },
+    "value": {
+     "en": "−2 to +6",
+     "fa": "‎−۲ تا ‎+۶"
+    }
+   }
+  ],
+  "source": {
+   "paper": {
+    "en": "Table 13 (Recommendations for choosing a setup) / Sect. 4.7 Practical Recommendations; Figure 3",
+    "fa": "جدول ۱۳ (توصیه‌ها برای انتخاب چیدمان) / بخش ۴٫۷ (توصیه‌های عملی)؛ شکل ۳"
+   },
+   "file": "paper/figures/data/budget.dat; work/posthoc_2026-11/S2b_variance/RESULTS.md"
+  },
+  "confidence": "tentative",
+  "caveat": {
+   "en": "A bigger pack costs more tokens.",
+   "fa": "بستهٔ بزرگ‌تر توکن بیشتری مصرف می‌کند."
+  },
+  "tags": [
+   "guide",
+   "budget"
+  ],
+  "guide_row": {
+   "situation": {
+    "en": "Loose budget (15,500 characters or more)",
+    "fa": "بودجهٔ بزرگ (۱۵٬۵۰۰ کاراکتر یا بیشتر)"
+   },
+   "recommended": {
+    "en": "Plain hybrid retrieval; reranking and selection add little.",
+    "fa": "بازیابی ترکیبیِ ساده؛ بازرتبه‌بندی و گزینش چیز زیادی نمی‌افزایند."
+   },
+   "confidence_text": "Tentative"
+  }
+ },
+ {
+  "id": "g-latency",
+  "claim": {
+   "en": "If latency matters, use one pass: hybrid, with or without a reranker; no selection calls or agents.",
+   "fa": "اگر زمان پاسخ مهم است، یک مرحله به کار ببرید: ترکیبی، با بازرتبه‌ساز یا بدون آن؛ بدون فراخوانی گزینش و بدون عامل."
+  },
+  "numbers": [
+   {
+    "label": {
+     "en": "Median latency: Hybrid / HR / Lex-RAG / SetR / agent",
+     "fa": "میانهٔ زمان پاسخ: ترکیبی / HR / Lex-RAG / SetR / عامل"
+    },
+    "value": {
+     "en": "1.8 / 3.2 / 4.0 / 5.5 / 10.5 s",
+     "fa": "۱٫۸ / ۳٫۲ / ۴٫۰ / ۵٫۵ / ۱۰٫۵ ثانیه"
+    }
+   }
+  ],
+  "source": {
+   "paper": {
+    "en": "Table 13 (Recommendations for choosing a setup) / Sect. 4.7 Practical Recommendations; Tables 9 and 20",
+    "fa": "جدول ۱۳ (توصیه‌ها برای انتخاب چیدمان) / بخش ۴٫۷ (توصیه‌های عملی)؛ جدول‌های ۹ و ۲۰"
+   },
+   "file": "work/datasets_v2/test_run/TEST_RESULTS.md (sec. 4); work/posthoc_2026-11/S9_gpu/RESULTS.md"
+  },
+  "confidence": "tentative",
+  "caveat": {
+   "en": "Measured under contention, so only the order is informative.",
+   "fa": "در شرایط رقابت بر سر منابع اندازه‌گیری شد، پس فقط ترتیب این اعداد معنا دارد."
+  },
+  "tags": [
+   "guide",
+   "latency"
+  ],
+  "guide_row": {
+   "situation": {
+    "en": "Latency-sensitive",
+    "fa": "حساس به زمان پاسخ"
+   },
+   "recommended": {
+    "en": "One pass: hybrid, with or without a reranker. No selection calls or agents.",
+    "fa": "یک مرحله: ترکیبی، با بازرتبه‌ساز یا بدون آن. بدون فراخوانی گزینش و بدون عامل."
+   },
+   "confidence_text": "Tentative"
+  }
+ },
+ {
+  "id": "g-nogpu",
+  "claim": {
+   "en": "Without a GPU for a reranker, use hybrid with a larger budget, or an LLM selection call over the fused candidates.",
+   "fa": "اگر برای بازرتبه‌ساز GPU ندارید، ترکیبی را با بودجهٔ بزرگ‌تر به کار ببرید، یا یک فراخوانی گزینش با LLM روی نامزدهای ادغام‌شده."
+  },
+  "numbers": [
+   {
+    "label": {
+     "en": "Hybrid at 15,500 vs Lex-RAG at 6,000",
+     "fa": "ترکیبی در ۱۵٬۵۰۰ در برابر Lex-RAG در ۶٬۰۰۰"
+    },
+    "value": {
+     "en": "68 vs 68–69 of 90, with 2.5× the text",
+     "fa": "۶۸ در برابر ۶۸–۶۹ از ۹۰، با ۲٫۵ برابر متن"
+    }
+   }
+  ],
+  "source": {
+   "paper": {
+    "en": "Table 13 (Recommendations for choosing a setup) / Sect. 4.7 Practical Recommendations; Figure 3",
+    "fa": "جدول ۱۳ (توصیه‌ها برای انتخاب چیدمان) / بخش ۴٫۷ (توصیه‌های عملی)؛ شکل ۳"
+   },
+   "file": "paper/figures/data/budget.dat"
+  },
+  "confidence": "tentative",
+  "caveat": {
+   "en": "",
+   "fa": ""
+  },
+  "tags": [
+   "guide",
+   "no-gpu",
+   "budget",
+   "selection"
+  ],
+  "guide_row": {
+   "situation": {
+    "en": "No GPU for a reranker",
+    "fa": "بدون GPU برای بازرتبه‌ساز"
+   },
+   "recommended": {
+    "en": "Hybrid with a larger budget, or an LLM selection call over the fused candidates.",
+    "fa": "ترکیبی با بودجهٔ بزرگ‌تر، یا یک فراخوانی گزینش با LLM روی نامزدهای ادغام‌شده."
+   },
+   "confidence_text": "Tentative"
+  }
+ },
+ {
+  "id": "g-memory",
+  "claim": {
+   "en": "If the reader may already know the answers, do not count on retrieval for them, and build the evaluation without them.",
+   "fa": "اگر ممکن است مدل پاسخ‌گو پاسخ برخی پرسش‌ها را از پیش بداند، برای آن پرسش‌ها به بازیابی تکیه نکنید و ارزیابی را بدون آن‌ها بسازید."
+  },
+  "numbers": [
+   {
+    "label": {
+     "en": "Answered with no evidence at all",
+     "fa": "پاسخ درست بدون هیچ شاهدی"
+    },
+    "value": {
+     "en": "26 of 90",
+     "fa": "۲۶ از ۹۰"
+    }
+   }
+  ],
+  "source": {
+   "paper": {
+    "en": "Table 13 (Recommendations for choosing a setup) / Sect. 4.7 Practical Recommendations; Table 30",
+    "fa": "جدول ۱۳ (توصیه‌ها برای انتخاب چیدمان) / بخش ۴٫۷ (توصیه‌های عملی)؛ جدول ۳۰"
+   },
+   "file": "work/posthoc_2026-11/S6_baselines/RESULTS.md; work/posthoc_2026-11/S7_analysis/RESULTS.md (sec. 2)"
+  },
+  "confidence": "strong",
+  "caveat": {
+   "en": "",
+   "fa": ""
+  },
+  "tags": [
+   "guide",
+   "memory"
+  ],
+  "guide_row": {
+   "situation": {
+    "en": "Questions answerable from memory",
+    "fa": "پرسش‌های پاسخ‌پذیر از حافظه"
+   },
+   "recommended": {
+    "en": "Do not count on retrieval; build the evaluation without them.",
+    "fa": "به بازیابی تکیه نکنید؛ ارزیابی را بدون این پرسش‌ها بسازید."
+   },
+   "confidence_text": "Strong"
+  }
+ },
+ {
+  "id": "g-agents",
+  "claim": {
+   "en": "Treat the BM25 agent's lead over the reranker with caution: it lies in the questions the reader answers from memory. The hybrid-index agent keeps a lead without them.",
+   "fa": "برتری عامل BM25 بر بازرتبه‌ساز را با احتیاط تفسیر کنید: این برتری در پرسش‌هایی است که مدل پاسخ‌گو از حافظه پاسخ می‌دهد. عامل روی نمایهٔ ترکیبی بدون این پرسش‌ها هم برتری‌اش را حفظ می‌کند."
+  },
+  "numbers": [
+   {
+    "label": {
+     "en": "BM25 agent minus HR on the 26 memory-answerable",
+     "fa": "عامل BM25 منهای HR در ۲۶ پرسش پاسخ‌پذیر از حافظه"
+    },
+    "value": {
+     "en": "+3 to +4 (4 wins, 1 loss)",
+     "fa": "‎+۳ تا ‎+۴ (۴ برد، ۱ باخت)"
+    }
+   },
+   {
+    "label": {
+     "en": "Same on the other 64",
+     "fa": "همین در ۶۴ پرسش دیگر"
+    },
+    "value": {
+     "en": "−1 to 0",
+     "fa": "‎−۱ تا ۰"
+    }
+   },
+   {
+    "label": {
+     "en": "Hybrid-index agent / HR on the other 64",
+     "fa": "عامل روی نمایهٔ ترکیبی / HR در ۶۴ پرسش دیگر"
+    },
+    "value": {
+     "en": "55 / 50–51",
+     "fa": "۵۵ / ۵۰–۵۱"
+    }
+   }
+  ],
+  "source": {
+   "paper": {
+    "en": "Table 13 (Recommendations for choosing a setup) / Sect. 4.7 Practical Recommendations; Table 30",
+    "fa": "جدول ۱۳ (توصیه‌ها برای انتخاب چیدمان) / بخش ۴٫۷ (توصیه‌های عملی)؛ جدول ۳۰"
+   },
+   "file": "work/posthoc_2026-11/S7_analysis/contam_tables.md; work/posthoc_2026-11/S9_gpu/RESULTS.md (sec. 2)"
+  },
+  "confidence": "tentative",
+  "caveat": {
+   "en": "",
+   "fa": ""
+  },
+  "tags": [
+   "guide",
+   "agents",
+   "memory"
+  ],
+  "guide_row": {
+   "situation": {
+    "en": "Search agents",
+    "fa": "عامل‌های جست‌وجو"
+   },
+   "recommended": {
+    "en": "Treat the BM25 agent's lead over the reranker with caution.",
+    "fa": "برتری عامل BM25 بر بازرتبه‌ساز را با احتیاط تفسیر کنید."
+   },
+   "confidence_text": "Tentative"
+  }
+ }
+]
