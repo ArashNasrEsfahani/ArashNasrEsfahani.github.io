@@ -89,8 +89,8 @@
   ],
   "source": {
    "paper": {
-    "en": "Table “Search pools, sources and question counts”; Sect. “Benchmark”",
-    "fa": "جدول «مخزن‌های جست‌وجو، منابع و تعداد پرسش‌ها»؛ بخش «بنچمارک»"
+    "en": "Table “Definition and examples of the three question tiers”; Sect. “Benchmark”; Data release: anyrag-benchmark/corpus_manifest",
+    "fa": "جدول «تعریف و نمونه‌های سه سطح پرسش»؛ بخش «بنچمارک»؛ داده‌های منتشرشده: anyrag-benchmark/corpus_manifest"
    },
    "file": "paper/tables/pools.tex (src: work/multidoc/pools/*.json, work/datasets_v2/questions/*.jsonl)",
    "manuscript": "paper_journal/main.pdf (journal manuscript, in preparation)"
@@ -252,8 +252,8 @@
   ],
   "source": {
    "paper": {
-    "en": "Table “Search pools, sources and question counts”",
-    "fa": "جدول «مخزن‌های جست‌وجو، منابع و تعداد پرسش‌ها»"
+    "en": "Sect. “Benchmark”; Data release: anyrag-benchmark/corpus_manifest",
+    "fa": "بخش «بنچمارک»؛ داده‌های منتشرشده: anyrag-benchmark/corpus_manifest"
    },
    "file": "paper/tables/pools.tex (src: work/multidoc/pools/*.json)",
    "manuscript": "paper_journal/main.pdf (journal manuscript, in preparation)"
@@ -307,8 +307,8 @@
   ],
   "source": {
    "paper": {
-    "en": "Sect. “Benchmark”; App. “Annotation and construction”",
-    "fa": "بخش «بنچمارک»؛ پیوست «برچسب‌گذاری و ساخت بنچمارک»"
+    "en": "Sect. “Benchmark”",
+    "fa": "بخش «بنچمارک»"
    },
    "file": "paper/sections/03_benchmark.tex",
    "manuscript": "paper_journal/main.pdf (journal manuscript, in preparation)"
@@ -382,8 +382,8 @@
   ],
   "source": {
    "paper": {
-    "en": "Table “The four pipelines and their settings”; Sect. “Retrieval and selection pipelines”",
-    "fa": "جدول «چهار پایپ‌لاین و تنظیمات آن‌ها»؛ بخش «پایپ‌لاین‌های بازیابی و گزینش»"
+    "en": "Fig. “The four pipelines”; Sect. “Retrieval and selection pipelines”; Sect. “Experimental setup”",
+    "fa": "شکل «چهار پایپ‌لاین»؛ بخش «پایپ‌لاین‌های بازیابی و گزینش»؛ بخش «طرح آزمایش»"
    },
    "file": "paper/tables/settings.tex",
    "manuscript": "paper_journal/main.pdf (journal manuscript, in preparation)"
@@ -458,8 +458,8 @@
   ],
   "source": {
    "paper": {
-    "en": "Table “Test accuracy of four pipelines at two evidence budgets”; Sect. “Confirmatory test”",
-    "fa": "جدول «دقت چهار پایپ‌لاین در پرسش‌های آزمون با دو بودجهٔ شواهد»؛ بخش «آزمون تأییدی»"
+    "en": "Table “Test accuracy of four pipelines at two evidence budgets”; Sect. “Confirmatory test”; Sect. “Experimental setup”; Data release: anyrag-results/test",
+    "fa": "جدول «دقت چهار پایپ‌لاین در پرسش‌های آزمون با دو بودجهٔ شواهد»؛ بخش «آزمون تأییدی»؛ بخش «طرح آزمایش»؛ داده‌های منتشرشده: anyrag-results/test"
    },
    "file": "work/datasets_v2/test_run/TEST_RESULTS.md (sec. 1)",
    "manuscript": "paper_journal/main.pdf (journal manuscript, in preparation)"
@@ -678,8 +678,8 @@
   ],
   "source": {
    "paper": {
-    "en": "Table “Test accuracy of four pipelines at two evidence budgets”; Sect. “Confirmatory test”; App. “Extended results of the frozen test”",
-    "fa": "جدول «دقت چهار پایپ‌لاین در پرسش‌های آزمون با دو بودجهٔ شواهد»؛ بخش «آزمون تأییدی»؛ پیوست «نتایج تکمیلی آزمون ازپیش‌تعیین‌شده»"
+    "en": "Table “Test accuracy of four pipelines at two evidence budgets”; Sect. “Confirmatory test”; Data release: anyrag-results/test",
+    "fa": "جدول «دقت چهار پایپ‌لاین در پرسش‌های آزمون با دو بودجهٔ شواهد»؛ بخش «آزمون تأییدی»؛ داده‌های منتشرشده: anyrag-results/test"
    },
    "file": "work/datasets_v2/test_run/TEST_RESULTS_HUMAN_SYM.md (sec. 1–2)",
    "manuscript": "paper_journal/main.pdf (journal manuscript, in preparation)"
@@ -725,8 +725,8 @@
   ],
   "source": {
    "paper": {
-    "en": "Sect. “Confirmatory test”; Sect. “Experimental setup”",
-    "fa": "بخش «آزمون تأییدی»؛ بخش «طرح آزمایش»"
+    "en": "Sect. “Confirmatory test”; Data release: anyrag-results/posthoc/S5_stats",
+    "fa": "بخش «آزمون تأییدی»؛ داده‌های منتشرشده: anyrag-results/posthoc/S5_stats"
    },
    "file": "work/posthoc_2026-11/S5_stats/RESULTS.md (sec. 2.2)",
    "manuscript": "paper_journal/main.pdf (journal manuscript, in preparation)"
@@ -802,8 +802,8 @@
   ],
   "source": {
    "paper": {
-    "en": "Sect. “Confirmatory test”; Sect. “Experimental setup”; App. “Statistical definitions and variance”",
-    "fa": "بخش «آزمون تأییدی»؛ بخش «طرح آزمایش»؛ پیوست «تعریف‌های آماری و واریانس»"
+    "en": "Sect. “Confirmatory test”; Sect. “Experimental setup”; Data release: anyrag-results/posthoc/S5_stats",
+    "fa": "بخش «آزمون تأییدی»؛ بخش «طرح آزمایش»؛ داده‌های منتشرشده: anyrag-results/posthoc/S5_stats"
    },
    "file": "work/posthoc_2026-11/S5_stats/RESULTS.md (sec. 2.3)",
    "manuscript": "paper_journal/main.pdf (journal manuscript, in preparation)"
@@ -869,8 +869,8 @@
   ],
   "source": {
    "paper": {
-    "en": "Table “Effect of the selection step at 6,000 characters”; Sect. “Retrieval components and where answers are lost”",
-    "fa": "جدول «اثر گام گزینش در بودجهٔ ۶٬۰۰۰ کاراکتر»؛ بخش «اجزای بازیابی و مرحله‌ای که پاسخ‌ها در آن از دست می‌روند»"
+    "en": "Table “Complete evidence bundles in the candidate list and in the pack, with accuracy under two judges”; Sect. “Retrieval components and where answers are lost”; Data release: anyrag-results/posthoc/S6_baselines, anyrag-results/posthoc/S2a_packs",
+    "fa": "جدول «مجموعه‌های کامل شواهد در فهرست نامزدها و در بسته، و دقت با دو داور»؛ بخش «اجزای بازیابی و مرحله‌ای که پاسخ‌ها در آن از دست می‌روند»؛ داده‌های منتشرشده: anyrag-results/posthoc/S6_baselines، anyrag-results/posthoc/S2a_packs"
    },
    "file": "work/posthoc_2026-11/S6_baselines/RESULTS.md (sec. 2); work/posthoc_2026-11/S2a_packs/RESULTS.md; work/posthoc_2026-11/S7_analysis/contam_tables.md",
    "manuscript": "paper_journal/main.pdf (journal manuscript, in preparation)"
@@ -1063,8 +1063,8 @@
   ],
   "source": {
    "paper": {
-    "en": "Fig. “Evidence in the pack for correct and wrong answers”; Sect. “Retrieval components and where answers are lost”",
-    "fa": "شکل «شواهد درون بسته در پاسخ‌های درست و نادرست»؛ بخش «اجزای بازیابی و مرحله‌ای که پاسخ‌ها در آن از دست می‌روند»"
+    "en": "Sect. “Retrieval components and where answers are lost”; Data release: anyrag-results/posthoc/S7_analysis",
+    "fa": "بخش «اجزای بازیابی و مرحله‌ای که پاسخ‌ها در آن از دست می‌روند»؛ داده‌های منتشرشده: anyrag-results/posthoc/S7_analysis"
    },
    "file": "work/posthoc_2026-11/S7_analysis/RESULTS.md (sec. 1)",
    "manuscript": "paper_journal/main.pdf (journal manuscript, in preparation)"
@@ -1138,8 +1138,8 @@
   ],
   "source": {
    "paper": {
-    "en": "Table “Effect of the selection step at 6,000 characters”; Sect. “Retrieval components and where answers are lost”",
-    "fa": "جدول «اثر گام گزینش در بودجهٔ ۶٬۰۰۰ کاراکتر»؛ بخش «اجزای بازیابی و مرحله‌ای که پاسخ‌ها در آن از دست می‌روند»"
+    "en": "Table “Complete evidence bundles in the candidate list and in the pack, with accuracy under two judges”; Sect. “Retrieval components and where answers are lost”; Data release: anyrag-results/posthoc/S8_factorial, anyrag-results/posthoc/S14_bilingual",
+    "fa": "جدول «مجموعه‌های کامل شواهد در فهرست نامزدها و در بسته، و دقت با دو داور»؛ بخش «اجزای بازیابی و مرحله‌ای که پاسخ‌ها در آن از دست می‌روند»؛ داده‌های منتشرشده: anyrag-results/posthoc/S8_factorial، anyrag-results/posthoc/S14_bilingual"
    },
    "file": "work/posthoc_2026-11/S8_factorial/tables.md; work/posthoc_2026-11/S14_bilingual/RESULTS.md (sec. 2.1)",
    "manuscript": "paper_journal/main.pdf (journal manuscript, in preparation)"
@@ -1224,8 +1224,8 @@
   ],
   "source": {
    "paper": {
-    "en": "Fig. “Accuracy at five evidence budgets”; Sect. “Evidence budget and iterative or long-context retrieval”",
-    "fa": "شکل «دقت در پنج بودجهٔ شواهد»؛ بخش «بودجهٔ شواهد و بازیابی تکرارشونده یا با پنجرهٔ متنی بلند»"
+    "en": "Fig. “Accuracy at five evidence budgets (left) and against tokens spent per question (right)”; Sect. “Evidence budget and iterative or long-context retrieval”; Data release: anyrag-results/posthoc/S8_factorial",
+    "fa": "شکل «دقت در پنج بودجهٔ شواهد (چپ) و بر حسب توکن مصرف‌شده برای هر پرسش (راست)»؛ بخش «بودجهٔ شواهد و بازیابی تکرارشونده یا با پنجرهٔ متنی بلند»؛ داده‌های منتشرشده: anyrag-results/posthoc/S8_factorial"
    },
    "file": "work/posthoc_2026-11/S8_factorial/tables.md (paired comparisons)",
    "manuscript": "paper_journal/main.pdf (journal manuscript, in preparation)"
@@ -1280,8 +1280,8 @@
   ],
   "source": {
    "paper": {
-    "en": "Table “Effect of the selection step at 6,000 characters”; Sect. “Retrieval components and where answers are lost”",
-    "fa": "جدول «اثر گام گزینش در بودجهٔ ۶٬۰۰۰ کاراکتر»؛ بخش «اجزای بازیابی و مرحله‌ای که پاسخ‌ها در آن از دست می‌روند»"
+    "en": "Sect. “Retrieval components and where answers are lost”; Data release: anyrag-results/posthoc/S8_factorial",
+    "fa": "بخش «اجزای بازیابی و مرحله‌ای که پاسخ‌ها در آن از دست می‌روند»؛ داده‌های منتشرشده: anyrag-results/posthoc/S8_factorial"
    },
    "file": "work/posthoc_2026-11/S8_factorial/RESULTS.md (sec. 2.3–2.4), tables.md",
    "manuscript": "paper_journal/main.pdf (journal manuscript, in preparation)"
@@ -1367,8 +1367,8 @@
   ],
   "source": {
    "paper": {
-    "en": "Table “Effect of the selection step at 6,000 characters”; Sect. “Retrieval components and where answers are lost”",
-    "fa": "جدول «اثر گام گزینش در بودجهٔ ۶٬۰۰۰ کاراکتر»؛ بخش «اجزای بازیابی و مرحله‌ای که پاسخ‌ها در آن از دست می‌روند»"
+    "en": "Sect. “Retrieval components and where answers are lost”; Data release: anyrag-results/posthoc/S2a_packs, anyrag-results/posthoc/S6_baselines, anyrag-results/posthoc/S2b_variance",
+    "fa": "بخش «اجزای بازیابی و مرحله‌ای که پاسخ‌ها در آن از دست می‌روند»؛ داده‌های منتشرشده: anyrag-results/posthoc/S2a_packs، anyrag-results/posthoc/S6_baselines، anyrag-results/posthoc/S2b_variance"
    },
    "file": "work/posthoc_2026-11/S2a_packs/RESULTS.md; work/posthoc_2026-11/S6_baselines/RESULTS.md; work/posthoc_2026-11/S2b_variance/RESULTS.md",
    "manuscript": "paper_journal/main.pdf (journal manuscript, in preparation)"
@@ -1442,8 +1442,8 @@
   ],
   "source": {
    "paper": {
-    "en": "Table “Practical recommendations with supporting evidence and confidence”; Sect. “Reliability of the rankings and practical guidance”; Table “Run-to-run noise of the reader and the selection call”; Table “Mixed-effects logistic model pooling six readers”",
-    "fa": "جدول «توصیه‌های عملی، دلیل‌های پشتیبان و میزان اطمینان»؛ بخش «اعتبار رتبه‌بندی‌ها و راهنمای عملی»؛ جدول «نوسان میان اجراها در مدل پاسخ‌گو و فراخوانی گزینش»؛ جدول «مدل لجستیک اثرهای آمیخته با دادهٔ تجمیع‌شدهٔ شش مدل پاسخ‌گو»"
+    "en": "Table “Practical recommendations with supporting evidence and confidence”; Sect. “Reliability of the rankings and practical guidance”; Table “Retrieval components varied one at a time”; Table “Test accuracy of four pipelines at two evidence budgets”; Data release: anyrag-results/posthoc/S2b_variance",
+    "fa": "جدول «توصیه‌های عملی، دلیل‌های پشتیبان و میزان اطمینان»؛ بخش «اعتبار رتبه‌بندی‌ها و راهنمای عملی»؛ جدول «تغییر اجزای بازیابی، هر بار یک جزء»؛ جدول «دقت چهار پایپ‌لاین در پرسش‌های آزمون با دو بودجهٔ شواهد»؛ داده‌های منتشرشده: anyrag-results/posthoc/S2b_variance"
    },
    "file": "work/posthoc_2026-11/S2b_variance/RESULTS.md (sec. 2.3); work/posthoc_2026-11/S8_factorial/tables.md; work/posthoc_2026-11/S5_stats/tables.md",
    "manuscript": "paper_journal/main.pdf (journal manuscript, in preparation)"
@@ -1518,8 +1518,8 @@
   ],
   "source": {
    "paper": {
-    "en": "Fig. “Accuracy at five evidence budgets”; Sect. “Evidence budget and iterative or long-context retrieval”",
-    "fa": "شکل «دقت در پنج بودجهٔ شواهد»؛ بخش «بودجهٔ شواهد و بازیابی تکرارشونده یا با پنجرهٔ متنی بلند»"
+    "en": "Fig. “Accuracy at five evidence budgets (left) and against tokens spent per question (right)”; Sect. “Evidence budget and iterative or long-context retrieval”",
+    "fa": "شکل «دقت در پنج بودجهٔ شواهد (چپ) و بر حسب توکن مصرف‌شده برای هر پرسش (راست)»؛ بخش «بودجهٔ شواهد و بازیابی تکرارشونده یا با پنجرهٔ متنی بلند»"
    },
    "file": "paper/figures/data/budget.dat (src: work/posthoc_2026-11/S2a_packs/results.json, work/posthoc_2026-11/S8_factorial/results.json)",
    "manuscript": "paper_journal/main.pdf (journal manuscript, in preparation)"
@@ -1595,8 +1595,8 @@
   ],
   "source": {
    "paper": {
-    "en": "Sect. “Evidence budget and iterative or long-context retrieval”; Table “Mixed-effects logistic model pooling six readers”; Table “Per-reader contrasts for six readers”",
-    "fa": "بخش «بودجهٔ شواهد و بازیابی تکرارشونده یا با پنجرهٔ متنی بلند»؛ جدول «مدل لجستیک اثرهای آمیخته با دادهٔ تجمیع‌شدهٔ شش مدل پاسخ‌گو»؛ جدول «مقایسه‌ها برای هر یک از شش مدل پاسخ‌گو»"
+    "en": "Sect. “Evidence budget and iterative or long-context retrieval”; Fig. “Accuracy at five evidence budgets (left) and against tokens spent per question (right)”; Data release: anyrag-results/posthoc/S2b_variance, anyrag-results/posthoc/S5_stats",
+    "fa": "بخش «بودجهٔ شواهد و بازیابی تکرارشونده یا با پنجرهٔ متنی بلند»؛ شکل «دقت در پنج بودجهٔ شواهد (چپ) و بر حسب توکن مصرف‌شده برای هر پرسش (راست)»؛ داده‌های منتشرشده: anyrag-results/posthoc/S2b_variance، anyrag-results/posthoc/S5_stats"
    },
    "file": "work/posthoc_2026-11/S2b_variance/RESULTS.md (sec. 2.1); work/posthoc_2026-11/S5_stats/tables.md",
    "manuscript": "paper_journal/main.pdf (journal manuscript, in preparation)"
@@ -1651,8 +1651,8 @@
   ],
   "source": {
    "paper": {
-    "en": "Table “Paired comparisons on the 90 answerable test questions”; Table “Query-time cost of each pipeline with the primary reader”; Sect. “Evidence budget and iterative or long-context retrieval”",
-    "fa": "جدول «مقایسه‌های زوجی روی ۹۰ پرسش پاسخ‌پذیر آزمون»؛ جدول «هزینهٔ هر پایپ‌لاین هنگام پاسخ به پرسش، با مدل پاسخ‌گوی اصلی»؛ بخش «بودجهٔ شواهد و بازیابی تکرارشونده یا با پنجرهٔ متنی بلند»"
+    "en": "Sect. “Evidence budget and iterative or long-context retrieval”; Sect. “Confirmatory test”; Data release: anyrag-results/test",
+    "fa": "بخش «بودجهٔ شواهد و بازیابی تکرارشونده یا با پنجرهٔ متنی بلند»؛ بخش «آزمون تأییدی»؛ داده‌های منتشرشده: anyrag-results/test"
    },
    "file": "paper/analysis/revision_stats.md; work/datasets_v2/test_run/TEST_RESULTS.md (sec. 4)",
    "manuscript": "paper_journal/main.pdf (journal manuscript, in preparation)"
@@ -1727,8 +1727,8 @@
   ],
   "source": {
    "paper": {
-    "en": "Table “Query-time cost of each pipeline with the primary reader”; Table “Search agents, long-context reading and routing”",
-    "fa": "جدول «هزینهٔ هر پایپ‌لاین هنگام پاسخ به پرسش، با مدل پاسخ‌گوی اصلی»؛ جدول «عامل‌های جست‌وجو، خواندن با پنجرهٔ متنی بلند و مسیریابی»"
+    "en": "Sect. “Confirmatory test”; Sect. “Evidence budget and iterative or long-context retrieval”; Data release: anyrag-results/test, anyrag-results/posthoc/S9_gpu",
+    "fa": "بخش «آزمون تأییدی»؛ بخش «بودجهٔ شواهد و بازیابی تکرارشونده یا با پنجرهٔ متنی بلند»؛ داده‌های منتشرشده: anyrag-results/test، anyrag-results/posthoc/S9_gpu"
    },
    "file": "work/datasets_v2/test_run/TEST_RESULTS.md (sec. 2, 4); work/posthoc_2026-11/S9_gpu/RESULTS.md (sec. 2)",
    "manuscript": "paper_journal/main.pdf (journal manuscript, in preparation)"
@@ -1823,8 +1823,8 @@
   ],
   "source": {
    "paper": {
-    "en": "Table “Gold evidence found by each retrieval channel in the top 40”; Sect. “Retrieval components and where answers are lost”",
-    "fa": "جدول «شواهد مرجعی که هر کانال بازیابی در ۴۰ نامزد برتر پیدا می‌کند»؛ بخش «اجزای بازیابی و مرحله‌ای که پاسخ‌ها در آن از دست می‌روند»"
+    "en": "Sect. “Retrieval components and where answers are lost”; Data release: anyrag-results/posthoc/S10_retrieval, anyrag-results/posthoc/S7_analysis",
+    "fa": "بخش «اجزای بازیابی و مرحله‌ای که پاسخ‌ها در آن از دست می‌روند»؛ داده‌های منتشرشده: anyrag-results/posthoc/S10_retrieval، anyrag-results/posthoc/S7_analysis"
    },
    "file": "work/posthoc_2026-11/S10_retrieval/RESULTS.md (sec. 2.4); work/posthoc_2026-11/S7_analysis/channels_tables.md",
    "manuscript": "paper_journal/main.pdf (journal manuscript, in preparation)"
@@ -1908,8 +1908,8 @@
   ],
   "source": {
    "paper": {
-    "en": "Sect. “Retrieval components and where answers are lost”",
-    "fa": "بخش «اجزای بازیابی و مرحله‌ای که پاسخ‌ها در آن از دست می‌روند»"
+    "en": "Sect. “Retrieval components and where answers are lost”; Table “Complete evidence bundles in the candidate list and in the pack, with accuracy under two judges”; Data release: anyrag-results/posthoc/S10_retrieval",
+    "fa": "بخش «اجزای بازیابی و مرحله‌ای که پاسخ‌ها در آن از دست می‌روند»؛ جدول «مجموعه‌های کامل شواهد در فهرست نامزدها و در بسته، و دقت با دو داور»؛ داده‌های منتشرشده: anyrag-results/posthoc/S10_retrieval"
    },
    "file": "work/posthoc_2026-11/S10_retrieval/RESULTS.md (sec. 2.3, 2.4, 3)",
    "manuscript": "paper_journal/main.pdf (journal manuscript, in preparation)"
@@ -1983,8 +1983,8 @@
   ],
   "source": {
    "paper": {
-    "en": "Table “Retrieval components varied one at a time”; Sect. “Retrieval components and where answers are lost”",
-    "fa": "جدول «تغییر اجزای بازیابی، هر بار یک جزء»؛ بخش «اجزای بازیابی و مرحله‌ای که پاسخ‌ها در آن از دست می‌روند»"
+    "en": "Table “Retrieval components varied one at a time”; Sect. “Retrieval components and where answers are lost”; Data release: anyrag-results/posthoc/S12_chunks",
+    "fa": "جدول «تغییر اجزای بازیابی، هر بار یک جزء»؛ بخش «اجزای بازیابی و مرحله‌ای که پاسخ‌ها در آن از دست می‌روند»؛ داده‌های منتشرشده: anyrag-results/posthoc/S12_chunks"
    },
    "file": "work/posthoc_2026-11/S12_chunks/RESULTS.md (sec. 2)",
    "manuscript": "paper_journal/main.pdf (journal manuscript, in preparation)"
@@ -2048,8 +2048,8 @@
   ],
   "source": {
    "paper": {
-    "en": "Table “Retrieval components varied one at a time”; Sect. “Retrieval components and where answers are lost”",
-    "fa": "جدول «تغییر اجزای بازیابی، هر بار یک جزء»؛ بخش «اجزای بازیابی و مرحله‌ای که پاسخ‌ها در آن از دست می‌روند»"
+    "en": "Table “Retrieval components varied one at a time”; Sect. “Retrieval components and where answers are lost”; Data release: anyrag-results/posthoc/S11_rewrite",
+    "fa": "جدول «تغییر اجزای بازیابی، هر بار یک جزء»؛ بخش «اجزای بازیابی و مرحله‌ای که پاسخ‌ها در آن از دست می‌روند»؛ داده‌های منتشرشده: anyrag-results/posthoc/S11_rewrite"
    },
    "file": "work/posthoc_2026-11/S11_rewrite/RESULTS.md (sec. 2)",
    "manuscript": "paper_journal/main.pdf (journal manuscript, in preparation)"
@@ -2113,8 +2113,8 @@
   ],
   "source": {
    "paper": {
-    "en": "Table “Retrieval components varied one at a time”; Sect. “Retrieval components and where answers are lost”",
-    "fa": "جدول «تغییر اجزای بازیابی، هر بار یک جزء»؛ بخش «اجزای بازیابی و مرحله‌ای که پاسخ‌ها در آن از دست می‌روند»"
+    "en": "Table “Retrieval components varied one at a time”; Sect. “Retrieval components and where answers are lost”; Data release: anyrag-results/posthoc/S13_embed",
+    "fa": "جدول «تغییر اجزای بازیابی، هر بار یک جزء»؛ بخش «اجزای بازیابی و مرحله‌ای که پاسخ‌ها در آن از دست می‌روند»؛ داده‌های منتشرشده: anyrag-results/posthoc/S13_embed"
    },
    "file": "work/posthoc_2026-11/S13_embed/RESULTS.md (sec. 2)",
    "manuscript": "paper_journal/main.pdf (journal manuscript, in preparation)"
@@ -2218,8 +2218,8 @@
   ],
   "source": {
    "paper": {
-    "en": "Table “Search agents, long-context reading and routing”; Sect. “Evidence budget and iterative or long-context retrieval”",
-    "fa": "جدول «عامل‌های جست‌وجو، خواندن با پنجرهٔ متنی بلند و مسیریابی»؛ بخش «بودجهٔ شواهد و بازیابی تکرارشونده یا با پنجرهٔ متنی بلند»"
+    "en": "Sect. “Evidence budget and iterative or long-context retrieval”; Data release: anyrag-results/posthoc/S3_agentic, anyrag-results/posthoc/S9_gpu",
+    "fa": "بخش «بودجهٔ شواهد و بازیابی تکرارشونده یا با پنجرهٔ متنی بلند»؛ داده‌های منتشرشده: anyrag-results/posthoc/S3_agentic، anyrag-results/posthoc/S9_gpu"
    },
    "file": "work/posthoc_2026-11/S3_agentic/RESULTS.md; work/posthoc_2026-11/S9_gpu/RESULTS.md (sec. 2)",
    "manuscript": "paper_journal/main.pdf (journal manuscript, in preparation)"
@@ -2275,8 +2275,8 @@
   ],
   "source": {
    "paper": {
-    "en": "Table “Contrasts split by language half”; Sect. “Persian and English”",
-    "fa": "جدول «مقایسه‌ها به تفکیک نیمهٔ زبانی»؛ بخش «فارسی و انگلیسی»"
+    "en": "Sect. “Persian and English”; Data release: anyrag-results/posthoc/S14_bilingual",
+    "fa": "بخش «فارسی و انگلیسی»؛ داده‌های منتشرشده: anyrag-results/posthoc/S14_bilingual"
    },
    "file": "work/posthoc_2026-11/S14_bilingual/RESULTS.md, compact_table.md",
    "manuscript": "paper_journal/main.pdf (journal manuscript, in preparation)"
@@ -2342,8 +2342,8 @@
   ],
   "source": {
    "paper": {
-    "en": "Table “Search agents, long-context reading and routing”; Sect. “Evidence budget and iterative or long-context retrieval”",
-    "fa": "جدول «عامل‌های جست‌وجو، خواندن با پنجرهٔ متنی بلند و مسیریابی»؛ بخش «بودجهٔ شواهد و بازیابی تکرارشونده یا با پنجرهٔ متنی بلند»"
+    "en": "Sect. “Evidence budget and iterative or long-context retrieval”; Data release: anyrag-results/posthoc/S4_route_long",
+    "fa": "بخش «بودجهٔ شواهد و بازیابی تکرارشونده یا با پنجرهٔ متنی بلند»؛ داده‌های منتشرشده: anyrag-results/posthoc/S4_route_long"
    },
    "file": "work/posthoc_2026-11/S4_route_long/RESULTS.md",
    "manuscript": "paper_journal/main.pdf (journal manuscript, in preparation)"
@@ -2408,8 +2408,8 @@
   ],
   "source": {
    "paper": {
-    "en": "Table “Search agents, long-context reading and routing”; Sect. “Evidence budget and iterative or long-context retrieval”",
-    "fa": "جدول «عامل‌های جست‌وجو، خواندن با پنجرهٔ متنی بلند و مسیریابی»؛ بخش «بودجهٔ شواهد و بازیابی تکرارشونده یا با پنجرهٔ متنی بلند»"
+    "en": "Sect. “Evidence budget and iterative or long-context retrieval”; Data release: anyrag-results/posthoc/S4_route_long",
+    "fa": "بخش «بودجهٔ شواهد و بازیابی تکرارشونده یا با پنجرهٔ متنی بلند»؛ داده‌های منتشرشده: anyrag-results/posthoc/S4_route_long"
    },
    "file": "work/posthoc_2026-11/S4_route_long/RESULTS.md",
    "manuscript": "paper_journal/main.pdf (journal manuscript, in preparation)"
@@ -2484,8 +2484,8 @@
   ],
   "source": {
    "paper": {
-    "en": "Table “Persian-to-English token ratio and tokens at equal budgets”; Sect. “Persian and English”",
-    "fa": "جدول «نسبت توکن فارسی به انگلیسی و توکن‌ها در بودجه‌های برابر»؛ بخش «فارسی و انگلیسی»"
+    "en": "Sect. “Persian and English”; Data release: anyrag-results/posthoc/S7_analysis",
+    "fa": "بخش «فارسی و انگلیسی»؛ داده‌های منتشرشده: anyrag-results/posthoc/S7_analysis"
    },
    "file": "work/posthoc_2026-11/S7_analysis/RESULTS.md (sec. 3), tokens_tables.md",
    "manuscript": "paper_journal/main.pdf (journal manuscript, in preparation)"
@@ -2561,8 +2561,8 @@
   ],
   "source": {
    "paper": {
-    "en": "Sect. “Persian and English”; Table “Main contrasts with and without questions answerable from memory”",
-    "fa": "بخش «فارسی و انگلیسی»؛ جدول «مقایسه‌های اصلی با پرسش‌های پاسخ‌پذیر از حافظه و بدون آن‌ها»"
+    "en": "Sect. “Persian and English”; Table “Retrieval when each question is asked in the other language”; Data release: anyrag-results/posthoc/S7_analysis",
+    "fa": "بخش «فارسی و انگلیسی»؛ جدول «بازیابی وقتی هر پرسش به زبان دیگر پرسیده می‌شود»؛ داده‌های منتشرشده: anyrag-results/posthoc/S7_analysis"
    },
    "file": "work/posthoc_2026-11/S6_baselines/RESULTS.md; work/posthoc_2026-11/S7_analysis/RESULTS.md (sec. 2); work/posthoc_2026-11/S15_crossling/RESULTS.md (sec. 2)",
    "manuscript": "paper_journal/main.pdf (journal manuscript, in preparation)"
@@ -2745,8 +2745,8 @@
   ],
   "source": {
    "paper": {
-    "en": "Sect. “Persian and English”; Table “Gold evidence found by each retrieval channel in the top 40”",
-    "fa": "بخش «فارسی و انگلیسی»؛ جدول «شواهد مرجعی که هر کانال بازیابی در ۴۰ نامزد برتر پیدا می‌کند»"
+    "en": "Sect. “Persian and English”; Sect. “Retrieval components and where answers are lost”; Data release: anyrag-results/posthoc/S15_crossling",
+    "fa": "بخش «فارسی و انگلیسی»؛ بخش «اجزای بازیابی و مرحله‌ای که پاسخ‌ها در آن از دست می‌روند»؛ داده‌های منتشرشده: anyrag-results/posthoc/S15_crossling"
    },
    "file": "work/posthoc_2026-11/S15_crossling/RESULTS.md (sec. 2, orthography); work/posthoc_2026-11/S7_analysis/RESULTS.md (sec. 5)",
    "manuscript": "paper_journal/main.pdf (journal manuscript, in preparation)"
@@ -2811,8 +2811,8 @@
   ],
   "source": {
    "paper": {
-    "en": "Table “Contrasts split by language half”; Sect. “Persian and English”",
-    "fa": "جدول «مقایسه‌ها به تفکیک نیمهٔ زبانی»؛ بخش «فارسی و انگلیسی»"
+    "en": "Sect. “Persian and English”; Table “Test accuracy of four pipelines at two evidence budgets”; Data release: anyrag-results/posthoc/S14_bilingual",
+    "fa": "بخش «فارسی و انگلیسی»؛ جدول «دقت چهار پایپ‌لاین در پرسش‌های آزمون با دو بودجهٔ شواهد»؛ داده‌های منتشرشده: anyrag-results/posthoc/S14_bilingual"
    },
    "file": "work/posthoc_2026-11/S14_bilingual/RESULTS.md, compact_table.md",
    "manuscript": "paper_journal/main.pdf (journal manuscript, in preparation)"
@@ -2887,8 +2887,8 @@
   ],
   "source": {
    "paper": {
-    "en": "Table “Run-to-run noise of the reader and the selection call”; Sect. “Reliability of the rankings and practical guidance”",
-    "fa": "جدول «نوسان میان اجراها در مدل پاسخ‌گو و فراخوانی گزینش»؛ بخش «اعتبار رتبه‌بندی‌ها و راهنمای عملی»"
+    "en": "Sect. “Reliability of the rankings and practical guidance”; Data release: anyrag-results/posthoc/S2b_variance",
+    "fa": "بخش «اعتبار رتبه‌بندی‌ها و راهنمای عملی»؛ داده‌های منتشرشده: anyrag-results/posthoc/S2b_variance"
    },
    "file": "work/posthoc_2026-11/S2b_variance/RESULTS.md (sec. 2.1)",
    "manuscript": "paper_journal/main.pdf (journal manuscript, in preparation)"
@@ -2944,8 +2944,8 @@
   ],
   "source": {
    "paper": {
-    "en": "Table “Run-to-run noise of the reader and the selection call”; Sect. “Reliability of the rankings and practical guidance”",
-    "fa": "جدول «نوسان میان اجراها در مدل پاسخ‌گو و فراخوانی گزینش»؛ بخش «اعتبار رتبه‌بندی‌ها و راهنمای عملی»"
+    "en": "Sect. “Reliability of the rankings and practical guidance”; Data release: anyrag-results/posthoc/S2b_variance",
+    "fa": "بخش «اعتبار رتبه‌بندی‌ها و راهنمای عملی»؛ داده‌های منتشرشده: anyrag-results/posthoc/S2b_variance"
    },
    "file": "work/posthoc_2026-11/S2b_variance/RESULTS.md (sec. 2.2)",
    "manuscript": "paper_journal/main.pdf (journal manuscript, in preparation)"
@@ -3029,8 +3029,8 @@
   ],
   "source": {
    "paper": {
-    "en": "Table “A second judge against the first judge and the human”; Sect. “Reliability of the rankings and practical guidance”",
-    "fa": "جدول «داور دوم در برابر داور اول و بازبین انسانی»؛ بخش «اعتبار رتبه‌بندی‌ها و راهنمای عملی»"
+    "en": "Sect. “Reliability of the rankings and practical guidance”; Table “Test accuracy of four pipelines at two evidence budgets”; Sect. “Readers and judging”",
+    "fa": "بخش «اعتبار رتبه‌بندی‌ها و راهنمای عملی»؛ جدول «دقت چهار پایپ‌لاین در پرسش‌های آزمون با دو بودجهٔ شواهد»؛ بخش «مدل‌های پاسخ‌گو و داوری»"
    },
    "file": "work/posthoc_2026-11/S1_evaluator/RESULTS.md; work/posthoc_2026-11/S8_factorial/tables.md; work/posthoc_2026-11/S14_bilingual/RESULTS.md (sec. 2.5)",
    "manuscript": "paper_journal/main.pdf (journal manuscript, in preparation)"
@@ -3086,8 +3086,8 @@
   ],
   "source": {
    "paper": {
-    "en": "Table “First judge against human review on reviewed answers”; Table “A second judge against the first judge and the human”; App. “Human review and judges”",
-    "fa": "جدول «داور اول در برابر بازبینی انسانی، روی پاسخ‌های بازبینی‌شده»؛ جدول «داور دوم در برابر داور اول و بازبین انسانی»؛ پیوست «بازبینی انسانی و داورها»"
+    "en": "Sect. “Reliability of the rankings and practical guidance”; Sect. “Experimental setup”; Data release: anyrag-results/human_review, anyrag-results/posthoc/S1_evaluator",
+    "fa": "بخش «اعتبار رتبه‌بندی‌ها و راهنمای عملی»؛ بخش «طرح آزمایش»؛ داده‌های منتشرشده: anyrag-results/human_review، anyrag-results/posthoc/S1_evaluator"
    },
    "file": "work/datasets_v2/test_run/TEST_RESULTS_HUMAN_SYM.md (sec. 4); work/posthoc_2026-11/S1_evaluator/RESULTS.md",
    "manuscript": "paper_journal/main.pdf (journal manuscript, in preparation)"
@@ -3143,8 +3143,8 @@
   ],
   "source": {
    "paper": {
-    "en": "Sect. “Reliability of the rankings and practical guidance”; App. “Human review and judges”",
-    "fa": "بخش «اعتبار رتبه‌بندی‌ها و راهنمای عملی»؛ پیوست «بازبینی انسانی و داورها»"
+    "en": "Sect. “Reliability of the rankings and practical guidance”; Sect. “Experimental setup”; Data release: anyrag-results/test, anyrag-results/test/superseded_asymmetric_review",
+    "fa": "بخش «اعتبار رتبه‌بندی‌ها و راهنمای عملی»؛ بخش «طرح آزمایش»؛ داده‌های منتشرشده: anyrag-results/test، anyrag-results/test/superseded_asymmetric_review"
    },
    "file": "work/datasets_v2/test_run/TEST_RESULTS_HUMAN_SYM.md; work/datasets_v2/test_run/TEST_RESULTS_HUMAN.md (sec. 2)",
    "manuscript": "paper_journal/main.pdf (journal manuscript, in preparation)"
@@ -3220,8 +3220,8 @@
   ],
   "source": {
    "paper": {
-    "en": "Table “Mixed-effects logistic model pooling six readers”; Sect. “Reliability of the rankings and practical guidance”",
-    "fa": "جدول «مدل لجستیک اثرهای آمیخته با دادهٔ تجمیع‌شدهٔ شش مدل پاسخ‌گو»؛ بخش «اعتبار رتبه‌بندی‌ها و راهنمای عملی»"
+    "en": "Sect. “Reliability of the rankings and practical guidance”; Sect. “Evidence budget and iterative or long-context retrieval”; Data release: anyrag-results/posthoc/S5_stats",
+    "fa": "بخش «اعتبار رتبه‌بندی‌ها و راهنمای عملی»؛ بخش «بودجهٔ شواهد و بازیابی تکرارشونده یا با پنجرهٔ متنی بلند»؛ داده‌های منتشرشده: anyrag-results/posthoc/S5_stats"
    },
    "file": "work/posthoc_2026-11/S5_stats/tables.md",
    "manuscript": "paper_journal/main.pdf (journal manuscript, in preparation)"
@@ -3393,8 +3393,8 @@
   ],
   "source": {
    "paper": {
-    "en": "Table “Practical recommendations with supporting evidence and confidence”; Sect. “Reliability of the rankings and practical guidance”; Table “Test accuracy of four pipelines at two evidence budgets”; Table “Search agents, long-context reading and routing”",
-    "fa": "جدول «توصیه‌های عملی، دلیل‌های پشتیبان و میزان اطمینان»؛ بخش «اعتبار رتبه‌بندی‌ها و راهنمای عملی»؛ جدول «دقت چهار پایپ‌لاین در پرسش‌های آزمون با دو بودجهٔ شواهد»؛ جدول «عامل‌های جست‌وجو، خواندن با پنجرهٔ متنی بلند و مسیریابی»"
+    "en": "Table “Practical recommendations with supporting evidence and confidence”; Sect. “Reliability of the rankings and practical guidance”; Table “Test accuracy of four pipelines at two evidence budgets”; Sect. “Evidence budget and iterative or long-context retrieval”",
+    "fa": "جدول «توصیه‌های عملی، دلیل‌های پشتیبان و میزان اطمینان»؛ بخش «اعتبار رتبه‌بندی‌ها و راهنمای عملی»؛ جدول «دقت چهار پایپ‌لاین در پرسش‌های آزمون با دو بودجهٔ شواهد»؛ بخش «بودجهٔ شواهد و بازیابی تکرارشونده یا با پنجرهٔ متنی بلند»"
    },
    "file": "work/datasets_v2/test_run/TEST_RESULTS.md; work/posthoc_2026-11/S9_gpu/RESULTS.md (sec. 2)",
    "manuscript": "paper_journal/main.pdf (journal manuscript, in preparation)"
@@ -3693,8 +3693,8 @@
   ],
   "source": {
    "paper": {
-    "en": "Table “Practical recommendations with supporting evidence and confidence”; Sect. “Reliability of the rankings and practical guidance”; Sect. “Retrieval components and where answers are lost”",
-    "fa": "جدول «توصیه‌های عملی، دلیل‌های پشتیبان و میزان اطمینان»؛ بخش «اعتبار رتبه‌بندی‌ها و راهنمای عملی»؛ بخش «اجزای بازیابی و مرحله‌ای که پاسخ‌ها در آن از دست می‌روند»"
+    "en": "Table “Practical recommendations with supporting evidence and confidence”; Sect. “Reliability of the rankings and practical guidance”; Table “Retrieval components varied one at a time”; Data release: anyrag-results/posthoc/S11_rewrite",
+    "fa": "جدول «توصیه‌های عملی، دلیل‌های پشتیبان و میزان اطمینان»؛ بخش «اعتبار رتبه‌بندی‌ها و راهنمای عملی»؛ جدول «تغییر اجزای بازیابی، هر بار یک جزء»؛ داده‌های منتشرشده: anyrag-results/posthoc/S11_rewrite"
    },
    "file": "work/posthoc_2026-11/S11_rewrite/RESULTS.md (sec. 2)",
    "manuscript": "paper_journal/main.pdf (journal manuscript, in preparation)"
@@ -3848,8 +3848,8 @@
   ],
   "source": {
    "paper": {
-    "en": "Table “Practical recommendations with supporting evidence and confidence”; Sect. “Reliability of the rankings and practical guidance”; Table “Reader prompt tokens per character of evidence in Persian and English”",
-    "fa": "جدول «توصیه‌های عملی، دلیل‌های پشتیبان و میزان اطمینان»؛ بخش «اعتبار رتبه‌بندی‌ها و راهنمای عملی»؛ جدول «توکن پرامپت مدل پاسخ‌گو برای هر کاراکتر شواهد در فارسی و انگلیسی»"
+    "en": "Table “Practical recommendations with supporting evidence and confidence”; Sect. “Reliability of the rankings and practical guidance”; Sect. “Persian and English”; Data release: anyrag-results/posthoc/S14_bilingual",
+    "fa": "جدول «توصیه‌های عملی، دلیل‌های پشتیبان و میزان اطمینان»؛ بخش «اعتبار رتبه‌بندی‌ها و راهنمای عملی»؛ بخش «فارسی و انگلیسی»؛ داده‌های منتشرشده: anyrag-results/posthoc/S14_bilingual"
    },
    "file": "work/posthoc_2026-11/S14_bilingual/RESULTS.md (sec. 2.4), tokjudge.json",
    "manuscript": "paper_journal/main.pdf (journal manuscript, in preparation)"
@@ -4061,8 +4061,8 @@
   ],
   "source": {
    "paper": {
-    "en": "Table “Practical recommendations with supporting evidence and confidence”; Sect. “Reliability of the rankings and practical guidance”; Table “Effect of the selection step at 6,000 characters”; Fig. “Accuracy at five evidence budgets”",
-    "fa": "جدول «توصیه‌های عملی، دلیل‌های پشتیبان و میزان اطمینان»؛ بخش «اعتبار رتبه‌بندی‌ها و راهنمای عملی»؛ جدول «اثر گام گزینش در بودجهٔ ۶٬۰۰۰ کاراکتر»؛ شکل «دقت در پنج بودجهٔ شواهد»"
+    "en": "Table “Practical recommendations with supporting evidence and confidence”; Sect. “Reliability of the rankings and practical guidance”; Fig. “Accuracy at five evidence budgets (left) and against tokens spent per question (right)”; Sect. “Evidence budget and iterative or long-context retrieval”; Data release: anyrag-results/posthoc/S8_factorial",
+    "fa": "جدول «توصیه‌های عملی، دلیل‌های پشتیبان و میزان اطمینان»؛ بخش «اعتبار رتبه‌بندی‌ها و راهنمای عملی»؛ شکل «دقت در پنج بودجهٔ شواهد (چپ) و بر حسب توکن مصرف‌شده برای هر پرسش (راست)»؛ بخش «بودجهٔ شواهد و بازیابی تکرارشونده یا با پنجرهٔ متنی بلند»؛ داده‌های منتشرشده: anyrag-results/posthoc/S8_factorial"
    },
    "file": "work/posthoc_2026-11/S8_factorial/tables.md",
    "manuscript": "paper_journal/main.pdf (journal manuscript, in preparation)"
@@ -4109,8 +4109,8 @@
   ],
   "source": {
    "paper": {
-    "en": "Table “Practical recommendations with supporting evidence and confidence”; Sect. “Reliability of the rankings and practical guidance”; Table “Effect of the selection step at 6,000 characters”",
-    "fa": "جدول «توصیه‌های عملی، دلیل‌های پشتیبان و میزان اطمینان»؛ بخش «اعتبار رتبه‌بندی‌ها و راهنمای عملی»؛ جدول «اثر گام گزینش در بودجهٔ ۶٬۰۰۰ کاراکتر»"
+    "en": "Table “Practical recommendations with supporting evidence and confidence”; Sect. “Reliability of the rankings and practical guidance”; Sect. “Retrieval components and where answers are lost”",
+    "fa": "جدول «توصیه‌های عملی، دلیل‌های پشتیبان و میزان اطمینان»؛ بخش «اعتبار رتبه‌بندی‌ها و راهنمای عملی»؛ بخش «اجزای بازیابی و مرحله‌ای که پاسخ‌ها در آن از دست می‌روند»"
    },
    "file": "work/posthoc_2026-11/S8_factorial/tables.md; work/posthoc_2026-11/S14_bilingual/RESULTS.md (sec. 2.1)",
    "manuscript": "paper_journal/main.pdf (journal manuscript, in preparation)"
@@ -4177,8 +4177,8 @@
   ],
   "source": {
    "paper": {
-    "en": "Table “Practical recommendations with supporting evidence and confidence”; Sect. “Reliability of the rankings and practical guidance”; Table “Mixed-effects logistic model pooling six readers”; Table “A second judge against the first judge and the human”",
-    "fa": "جدول «توصیه‌های عملی، دلیل‌های پشتیبان و میزان اطمینان»؛ بخش «اعتبار رتبه‌بندی‌ها و راهنمای عملی»؛ جدول «مدل لجستیک اثرهای آمیخته با دادهٔ تجمیع‌شدهٔ شش مدل پاسخ‌گو»؛ جدول «داور دوم در برابر داور اول و بازبین انسانی»"
+    "en": "Table “Practical recommendations with supporting evidence and confidence”; Sect. “Reliability of the rankings and practical guidance”; Table “Retrieval components varied one at a time”; Table “Complete evidence bundles in the candidate list and in the pack, with accuracy under two judges”",
+    "fa": "جدول «توصیه‌های عملی، دلیل‌های پشتیبان و میزان اطمینان»؛ بخش «اعتبار رتبه‌بندی‌ها و راهنمای عملی»؛ جدول «تغییر اجزای بازیابی، هر بار یک جزء»؛ جدول «مجموعه‌های کامل شواهد در فهرست نامزدها و در بسته، و دقت با دو داور»"
    },
    "file": "work/posthoc_2026-11/S5_stats/tables.md; work/posthoc_2026-11/S8_factorial/tables.md",
    "manuscript": "paper_journal/main.pdf (journal manuscript, in preparation)"
@@ -4235,8 +4235,8 @@
   ],
   "source": {
    "paper": {
-    "en": "Table “Practical recommendations with supporting evidence and confidence”; Sect. “Reliability of the rankings and practical guidance”; Fig. “Accuracy at five evidence budgets”",
-    "fa": "جدول «توصیه‌های عملی، دلیل‌های پشتیبان و میزان اطمینان»؛ بخش «اعتبار رتبه‌بندی‌ها و راهنمای عملی»؛ شکل «دقت در پنج بودجهٔ شواهد»"
+    "en": "Table “Practical recommendations with supporting evidence and confidence”; Sect. “Reliability of the rankings and practical guidance”; Fig. “Accuracy at five evidence budgets (left) and against tokens spent per question (right)”",
+    "fa": "جدول «توصیه‌های عملی، دلیل‌های پشتیبان و میزان اطمینان»؛ بخش «اعتبار رتبه‌بندی‌ها و راهنمای عملی»؛ شکل «دقت در پنج بودجهٔ شواهد (چپ) و بر حسب توکن مصرف‌شده برای هر پرسش (راست)»"
    },
    "file": "paper/figures/data/budget.dat; work/posthoc_2026-11/S2b_variance/RESULTS.md",
    "manuscript": "paper_journal/main.pdf (journal manuscript, in preparation)"
@@ -4282,8 +4282,8 @@
   ],
   "source": {
    "paper": {
-    "en": "Table “Practical recommendations with supporting evidence and confidence”; Sect. “Reliability of the rankings and practical guidance”; Table “Query-time cost of each pipeline with the primary reader”; Table “Search agents, long-context reading and routing”",
-    "fa": "جدول «توصیه‌های عملی، دلیل‌های پشتیبان و میزان اطمینان»؛ بخش «اعتبار رتبه‌بندی‌ها و راهنمای عملی»؛ جدول «هزینهٔ هر پایپ‌لاین هنگام پاسخ به پرسش، با مدل پاسخ‌گوی اصلی»؛ جدول «عامل‌های جست‌وجو، خواندن با پنجرهٔ متنی بلند و مسیریابی»"
+    "en": "Table “Practical recommendations with supporting evidence and confidence”; Sect. “Reliability of the rankings and practical guidance”; Sect. “Evidence budget and iterative or long-context retrieval”",
+    "fa": "جدول «توصیه‌های عملی، دلیل‌های پشتیبان و میزان اطمینان»؛ بخش «اعتبار رتبه‌بندی‌ها و راهنمای عملی»؛ بخش «بودجهٔ شواهد و بازیابی تکرارشونده یا با پنجرهٔ متنی بلند»"
    },
    "file": "work/datasets_v2/test_run/TEST_RESULTS.md (sec. 4); work/posthoc_2026-11/S9_gpu/RESULTS.md",
    "manuscript": "paper_journal/main.pdf (journal manuscript, in preparation)"
@@ -4329,8 +4329,8 @@
   ],
   "source": {
    "paper": {
-    "en": "Table “Practical recommendations with supporting evidence and confidence”; Sect. “Reliability of the rankings and practical guidance”; Fig. “Accuracy at five evidence budgets”",
-    "fa": "جدول «توصیه‌های عملی، دلیل‌های پشتیبان و میزان اطمینان»؛ بخش «اعتبار رتبه‌بندی‌ها و راهنمای عملی»؛ شکل «دقت در پنج بودجهٔ شواهد»"
+    "en": "Table “Practical recommendations with supporting evidence and confidence”; Sect. “Reliability of the rankings and practical guidance”; Fig. “Accuracy at five evidence budgets (left) and against tokens spent per question (right)”",
+    "fa": "جدول «توصیه‌های عملی، دلیل‌های پشتیبان و میزان اطمینان»؛ بخش «اعتبار رتبه‌بندی‌ها و راهنمای عملی»؛ شکل «دقت در پنج بودجهٔ شواهد (چپ) و بر حسب توکن مصرف‌شده برای هر پرسش (راست)»"
    },
    "file": "paper/figures/data/budget.dat",
    "manuscript": "paper_journal/main.pdf (journal manuscript, in preparation)"
@@ -4378,8 +4378,8 @@
   ],
   "source": {
    "paper": {
-    "en": "Table “Practical recommendations with supporting evidence and confidence”; Sect. “Reliability of the rankings and practical guidance”; Table “Main contrasts with and without questions answerable from memory”",
-    "fa": "جدول «توصیه‌های عملی، دلیل‌های پشتیبان و میزان اطمینان»؛ بخش «اعتبار رتبه‌بندی‌ها و راهنمای عملی»؛ جدول «مقایسه‌های اصلی با پرسش‌های پاسخ‌پذیر از حافظه و بدون آن‌ها»"
+    "en": "Table “Practical recommendations with supporting evidence and confidence”; Sect. “Reliability of the rankings and practical guidance”; Sect. “Retrieval components and where answers are lost”",
+    "fa": "جدول «توصیه‌های عملی، دلیل‌های پشتیبان و میزان اطمینان»؛ بخش «اعتبار رتبه‌بندی‌ها و راهنمای عملی»؛ بخش «اجزای بازیابی و مرحله‌ای که پاسخ‌ها در آن از دست می‌روند»"
    },
    "file": "work/posthoc_2026-11/S6_baselines/RESULTS.md; work/posthoc_2026-11/S7_analysis/RESULTS.md (sec. 2)",
    "manuscript": "paper_journal/main.pdf (journal manuscript, in preparation)"
@@ -4445,8 +4445,8 @@
   ],
   "source": {
    "paper": {
-    "en": "Table “Practical recommendations with supporting evidence and confidence”; Sect. “Reliability of the rankings and practical guidance”; Table “Main contrasts with and without questions answerable from memory”; Table “Search agents, long-context reading and routing”",
-    "fa": "جدول «توصیه‌های عملی، دلیل‌های پشتیبان و میزان اطمینان»؛ بخش «اعتبار رتبه‌بندی‌ها و راهنمای عملی»؛ جدول «مقایسه‌های اصلی با پرسش‌های پاسخ‌پذیر از حافظه و بدون آن‌ها»؛ جدول «عامل‌های جست‌وجو، خواندن با پنجرهٔ متنی بلند و مسیریابی»"
+    "en": "Table “Practical recommendations with supporting evidence and confidence”; Sect. “Reliability of the rankings and practical guidance”; Sect. “Evidence budget and iterative or long-context retrieval”",
+    "fa": "جدول «توصیه‌های عملی، دلیل‌های پشتیبان و میزان اطمینان»؛ بخش «اعتبار رتبه‌بندی‌ها و راهنمای عملی»؛ بخش «بودجهٔ شواهد و بازیابی تکرارشونده یا با پنجرهٔ متنی بلند»"
    },
    "file": "work/posthoc_2026-11/S7_analysis/contam_tables.md; work/posthoc_2026-11/S9_gpu/RESULTS.md (sec. 2)",
    "manuscript": "paper_journal/main.pdf (journal manuscript, in preparation)"
@@ -4553,8 +4553,8 @@
   ],
   "source": {
    "paper": {
-    "en": "Table “Search agents, long-context reading and routing”; Table “Main contrasts with and without questions answerable from memory”; Table “Contrasts split by language half”; Sect. “Evidence budget and iterative or long-context retrieval”",
-    "fa": "جدول «عامل‌های جست‌وجو، خواندن با پنجرهٔ متنی بلند و مسیریابی»؛ جدول «مقایسه‌های اصلی با پرسش‌های پاسخ‌پذیر از حافظه و بدون آن‌ها»؛ جدول «مقایسه‌ها به تفکیک نیمهٔ زبانی»؛ بخش «بودجهٔ شواهد و بازیابی تکرارشونده یا با پنجرهٔ متنی بلند»"
+    "en": "Sect. “Evidence budget and iterative or long-context retrieval”; Sect. “Persian and English”; Table “Test accuracy of four pipelines at two evidence budgets”; Data release: anyrag-results/posthoc/S3_agentic, anyrag-results/posthoc/S7_analysis",
+    "fa": "بخش «بودجهٔ شواهد و بازیابی تکرارشونده یا با پنجرهٔ متنی بلند»؛ بخش «فارسی و انگلیسی»؛ جدول «دقت چهار پایپ‌لاین در پرسش‌های آزمون با دو بودجهٔ شواهد»؛ داده‌های منتشرشده: anyrag-results/posthoc/S3_agentic، anyrag-results/posthoc/S7_analysis"
    },
    "file": "work/posthoc_2026-11/S3_agentic/RESULTS.md (cost); work/posthoc_2026-11/S7_analysis/contam_tables.md; work/posthoc_2026-11/S14_bilingual/RESULTS.md (sec. 2)",
    "manuscript": "paper_journal/main.pdf (journal manuscript, in preparation)"
