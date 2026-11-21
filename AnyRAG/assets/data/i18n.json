@@ -876,12 +876,12 @@
   "fa": "پیش‌نویس را عامل‌های Claude Opus 5.5 نوشتند؛ یک بررسی‌کنندهٔ خودکار و یک عامل بازبین آن را وارسی کردند"
  },
  "build.3": {
-  "en": "Persian wording reviewed by a native speaker",
-  "fa": "متن فارسی را یک فارسی‌زبان بازبینی کرد"
+  "en": "Two annotators, one a native Persian speaker, reviewed every question together",
+  "fa": "دو بازبین، که یکی از آن‌ها فارسی‌زبان است، همهٔ پرسش‌ها را با هم بازبینی کردند"
  },
  "build.4": {
-  "en": "32 of 156 checked by hand: 31 accepted, 1 fixed",
-  "fa": "۳۲ پرسش از ۱۵۶ دستی بررسی شد: ۳۱ پذیرفته و ۱ اصلاح شد"
+  "en": "Each question, its answer and its evidence checked and fixed by consensus",
+  "fa": "هر پرسش با پاسخ و شواهدش بررسی و با توافق اصلاح شد"
  },
  "how.l1": {
   "en": "Search the pool, order or select candidates, pack them into the budget",
