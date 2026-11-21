@@ -9,8 +9,8 @@
 
   var BASE = 'assets/';
   var LABEL = {
-    en: 'AnyRAG explainer video, 90 seconds, on-screen text with music, no narration',
-    fa: 'ویدیوی معرفی AnyRAG، ۹۰ ثانیه، متن روی تصویر همراه با موسیقی، بدون گفتار'
+    en: 'AnyRAG explainer video, about two minutes, on-screen text with music, no narration',
+    fa: 'ویدیوی معرفی AnyRAG، حدود دو دقیقه، متن روی تصویر همراه با موسیقی، بدون گفتار'
   };
   var FALLBACK = {
     en: 'Your browser cannot play this video. ',
@@ -21,10 +21,12 @@
   var CHAPTERS = [
     [5, 'The problem', 'مسئله'],
     [18.5, 'One question, two outcomes', 'یک پرسش، دو نتیجه'],
-    [43.5, 'How we tested', 'روش آزمون'],
-    [53.5, 'What we found', 'یافته‌ها'],
-    [78.4, 'Every method has trade-offs', 'مزیت و ضعف هر روش'],
-    [85.8, 'Find your RAG', 'RAG مناسب خود را پیدا کنید']
+    [43.5, 'What we tested', 'آنچه آزمودیم'],
+    [61.5, 'What we found', 'یافته‌ها'],
+    [86.4, 'What this study gives you', 'دستاوردهای این پژوهش'],
+    [99, 'Every method has trade-offs', 'مزیت و ضعف هر روش'],
+    [106.4, 'Let Claude or Codex choose', 'انتخاب با Claude یا Codex'],
+    [116.4, 'Find your RAG', 'RAG مناسب خود را پیدا کنید']
   ];
   var CH_LABEL = { en: 'Chapters', fa: 'فصل‌ها' };
   function clock(t, c) {
