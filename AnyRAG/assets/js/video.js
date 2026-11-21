@@ -19,10 +19,11 @@
   var DOWNLOAD = { en: 'Download the MP4', fa: 'دریافت فایل MP4' };
   // chapters (start in seconds, from the video's timeline.json); both renders share one timeline
   var CHAPTERS = [
-    [9.5, 'Your project', 'پروژهٔ شما'],
-    [22, 'The pick', 'انتخاب چیدمان'],
-    [41.8, 'The evidence', 'دلیل‌ها'],
-    [51.5, 'Find your RAG', 'RAG مناسب خود را پیدا کنید']
+    [0, 'One question, two outcomes', 'یک پرسش، دو نتیجه'],
+    [15, 'How we tested', 'روش آزمون'],
+    [23, 'Three findings', 'سه یافته'],
+    [47, 'Every method, pros and cons', 'همهٔ روش‌ها، مزایا و معایب'],
+    [53, 'Find your RAG', 'RAG مناسب خود را پیدا کنید']
   ];
   var CH_LABEL = { en: 'Chapters', fa: 'فصل‌ها' };
   function clock(t, c) {
