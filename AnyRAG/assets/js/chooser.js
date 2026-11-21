@@ -213,7 +213,8 @@
     loading: 'Loading the chooser.', failed: 'The chooser data could not be loaded.',
     st_query: 'Question', st_norm: 'Normalise', st_bm25: 'BM25', st_dense: 'Dense', st_fuse: 'Fuse',
     st_rerank: 'Rerank', st_select: 'LLM select', st_pack: 'Pack', st_reader: 'Reader', st_agent: 'Agent: search again',
-    st_optional: 'optional', st_if_fast: 'if fast enough', st_chars: 'chars', st_modest: 'modest'
+    st_optional: 'optional', st_if_fast: 'if fast enough', st_chars: 'chars', st_modest: 'modest',
+    more: 'More detail'
   };
 
   var lang = 'en';
@@ -247,6 +248,21 @@
     });
     arr(kids).forEach(function (c) { if (c == null || c === false) return; e.appendChild(typeof c === 'string' ? document.createTextNode(c) : c); });
     return e;
+  }
+  // "More detail": the page's i18n key "more" (assets/data/i18n.json), so the chooser's toggles read as the page's
+  function moreLabel() {
+    var a = G.AnyRAG, s = a && a.t ? a.t('more') : '';
+    if (s && s !== 'more' && (lang !== 'fa' || AR.test(s))) return s;
+    return lang === 'fa' ? '\u062c\u0632\u0626\u06cc\u0627\u062a \u0628\u06cc\u0634\u062a\u0631' : U('more');
+  }
+  // a native toggle in the page's "More detail" style, holding kids; null when there is nothing to fold
+  function more(cls, kids) {
+    kids = arr(kids).filter(function (k) { return k; });
+    if (!kids.length) return null;
+    var d = el('details', { class: 'more ' + (cls || '') });
+    d.appendChild(el('summary', { text: moreLabel() }));
+    kids.forEach(function (k) { d.appendChild(k); });
+    return d;
   }
   function T(tag, cls, v) { var e = el(tag, cls ? { class: cls } : null); e.textContent = L(v); return e; }
 
@@ -324,7 +340,9 @@
     var name = 'ch-' + q.id, helpId = 'ch-help-' + q.id;
     var fs = el('fieldset', { class: 'ch-q', 'aria-describedby': q.help ? helpId : null });
     fs.appendChild(el('legend', { class: 'ch-qtext', tabindex: '-1', 'data-focus': '' }, [T('span', '', q.text)]));
-    if (hasText(q.help)) { var hp = T('p', 'ch-help', q.help); hp.id = helpId; fs.appendChild(hp); }
+    var hp = null;
+    if (hasText(q.help)) { hp = T('p', 'ch-help', q.help); hp.id = helpId; }
+    var hints = el('dl', { class: 'ch-hints' }), nh = 0;
     var list = el('div', { class: 'ch-opts' });
     var cur = state.ans[q.id];
     q.options.forEach(function (o, oi) {
@@ -337,10 +355,12 @@
       lab.appendChild(el('span', { class: 'ch-mark', 'aria-hidden': 'true' }));
       lab.appendChild(T('span', 'ch-olabel', o.label));
       var hint = o.hint || (o.unsure ? U('unsure_hint') : null);
-      if (hint) lab.appendChild(T('span', 'ch-ohint', hint));
+      if (hint && hasText(hint)) { hints.appendChild(T('dt', '', o.label)); hints.appendChild(T('dd', 'ch-ohint', hint)); nh++; }
       list.appendChild(lab);
     });
     fs.appendChild(list);
+    var qm = more('ch-qmore', [hp, nh ? hints : null]);
+    if (qm) fs.appendChild(qm);
     wrap.appendChild(fs);
     var nav = el('div', { class: 'ch-nav' });
     nav.appendChild(el('button', { type: 'button', class: 'ch-btn ghost', disabled: i === 0, onclick: function () { go(-1); } }, [U('back')]));
@@ -537,8 +557,8 @@
     var main = el('div', { class: 'ch-itext' }, [T('span', '', o.text)]);
     var r = refs(o); if (r) main.appendChild(r);
     li.appendChild(main);
-    if (hasText(o.note)) li.appendChild(T('p', 'ch-inote', o.note));
     li.appendChild(confLine(o));
+    if (hasText(o.note)) li.appendChild(more('ch-imore', T('p', 'ch-inote', o.note)));
     return li;
   }
 
@@ -550,15 +570,19 @@
     var top = el('div', { class: 'ch-ev-top' }, [el('span', { class: 'ch-evno', text: nf(refNo[id]) }), badge(lv)]);
     art.appendChild(top);
     var h = T('h4', 'ch-claim', e.claim); h.id = 'ch-evh-' + id; art.appendChild(h);
-    var nums = arr(e.numbers);
-    if (nums.length) {
-      var dl = el('dl', { class: 'ch-nums' });
-      nums.forEach(function (x) { dl.appendChild(T('dt', '', x.label)); dl.appendChild(el('dd', { text: LN(x.value) })); });
-      art.appendChild(dl);
+    var nums = arr(e.numbers), folded = [];
+    function numList(xs, cls) {
+      var dl = el('dl', { class: 'ch-nums' + (cls ? ' ' + cls : '') });
+      xs.forEach(function (x) { dl.appendChild(T('dt', '', x.label)); dl.appendChild(el('dd', { text: LN(x.value) })); });
+      return dl;
     }
-    if (hasText(e.caveat)) art.appendChild(el('p', { class: 'ch-cav' }, [el('span', { class: 'ch-k', text: U('caveat') }), ' ', T('span', '', e.caveat)]));
+    if (nums.length) art.appendChild(numList(nums.slice(0, 1), 'ch-head-num'));
+    if (nums.length > 1) folded.push(numList(nums.slice(1), 'ch-rest-num'));
+    if (hasText(e.caveat)) folded.push(el('p', { class: 'ch-cav' }, [el('span', { class: 'ch-k', text: U('caveat') }), ' ', T('span', '', e.caveat)]));
     var src = e.source && (isObj(e.source) && !('en' in e.source) ? e.source.paper : e.source);
-    if (src && (typeof src === 'string' || isObj(src)) && hasText(src)) art.appendChild(el('p', { class: 'ch-src' }, [el('span', { class: 'ch-k', text: U('src') }), ' ', el('span', { text: LN(src) })]));
+    if (src && (typeof src === 'string' || isObj(src)) && hasText(src)) folded.push(el('p', { class: 'ch-src' }, [el('span', { class: 'ch-k', text: U('src') }), ' ', el('span', { text: LN(src) })]));
+    var fm = more('ch-evmore', folded);
+    if (fm) art.appendChild(fm);
     return art;
   }
 
@@ -664,7 +688,7 @@
       var es = el('div', { class: 'ch-block ch-evs', role: 'group', 'aria-labelledby': 'ch-h-ev' });
       es.appendChild(el('h4', { class: 'ch-h', id: 'ch-h-ev', text: U('evidence_title') }));
       var hidden = order.filter(function (id) { return keys.indexOf(id) < 0; });
-      if (hidden.length) es.appendChild(el('p', { class: 'ch-keynote', text: U('key_note') }));
+      var keynote = hidden.length ? el('p', { class: 'ch-keynote', text: U('key_note') }) : null;
       var grid = el('div', { class: 'ch-grid', id: 'ch-grid' });
       var expanded = false;
       order.forEach(function (id) { var c = evidenceCard(id); if (c) { if (keys.indexOf(id) < 0) { c.hidden = true; c.classList.add('ch-extra-card'); } grid.appendChild(c); } });
@@ -687,7 +711,8 @@
       if (hasText(D.notes.ranges)) leg.appendChild(T('p', '', D.notes.ranges));
       if (hasText(D.notes.scope)) leg.appendChild(T('p', '', D.notes.scope));
       if (hasText(D.notes.source)) leg.appendChild(T('p', '', D.notes.source));
-      es.appendChild(leg);
+      var lm = more('ch-legmore', [keynote, leg.childNodes.length ? leg : null]);
+      if (lm) es.appendChild(lm);
       wrap.appendChild(es);
     }
     return wrap;

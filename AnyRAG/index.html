@@ -23,9 +23,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Estedad:wght@300..800&family=Fraunces:opsz,wght,SOFT,WONK@9..144,300..700,50,0&family=Geist+Mono:wght@400..600&family=Geist:wght@300..700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/style.css?v=2026-11-21v4">
-<link rel="stylesheet" href="assets/css/chooser.css?v=2026-11-21v4">
-<link rel="stylesheet" href="assets/css/viz.css?v=2026-11-21v4">
+<link rel="stylesheet" href="assets/css/style.css?v=2026-11-21f5">
+<link rel="stylesheet" href="assets/css/chooser.css?v=2026-11-21f5">
+<link rel="stylesheet" href="assets/css/viz.css?v=2026-11-21f5">
 <script>
 /* set theme + language before first paint */
 (function(){var q={};try{q=Object.fromEntries(new URLSearchParams(location.search));}catch(e){}
@@ -34,12 +34,12 @@ if(t==='dark'||t==='light')document.documentElement.setAttribute('data-theme',t)
 if(l==='fa'){document.documentElement.lang='fa';document.documentElement.dir='rtl';}
 document.documentElement.classList.add('js');})();
 </script>
-<script defer src="assets/js/num.js?v=2026-11-21v4"></script>
-<script defer src="assets/js/app.js?v=2026-11-21v4"></script>
-<script defer src="assets/js/video.js?v=2026-11-21v4"></script>
-<script defer src="assets/js/viz2d.js?v=2026-11-21v4"></script>
-<script defer src="assets/js/pipeline3d.js?v=2026-11-21v4"></script>
-<script defer src="assets/js/chooser.js?v=2026-11-21v4"></script>
+<script defer src="assets/js/num.js?v=2026-11-21f5"></script>
+<script defer src="assets/js/app.js?v=2026-11-21f5"></script>
+<script defer src="assets/js/video.js?v=2026-11-21f5"></script>
+<script defer src="assets/js/viz2d.js?v=2026-11-21f5"></script>
+<script defer src="assets/js/pipeline3d.js?v=2026-11-21f5"></script>
+<script defer src="assets/js/chooser.js?v=2026-11-21f5"></script>
 </head>
 <body>
 <a class="skip" href="#video" data-i18n="skip">Skip to content</a>
@@ -119,26 +119,38 @@ document.documentElement.classList.add('js');})();
         <div class="gl">
           <h3 data-i18n="about.q.h">The question</h3>
           <ul class="pts">
-            <li data-i18n="about.q.1">RAG (retrieval-augmented generation) finds passages; an LLM, the reader, writes the answer.</li>
-            <li data-i18n="about.q.2">Search matches keywords (BM25), meaning (dense retrieval), or both.</li>
             <li data-i18n="about.q.3">Which search, ranking and budget choices matter in Persian and English?</li>
           </ul>
+          <details class="more"><summary data-i18n="more">More detail</summary>
+          <ul class="pts">
+            <li data-i18n="about.q.1">RAG (retrieval-augmented generation) finds passages; an LLM, the reader, writes the answer.</li>
+            <li data-i18n="about.q.2">Search matches keywords (BM25), meaning (dense retrieval), or both.</li>
+          </ul>
+          </details>
         </div>
         <div class="gl">
           <h3 data-i18n="about.b.h">The benchmark</h3>
           <ul class="pts">
             <li data-i18n="about.b.1">156 questions on 155 real reports, books and statutes</li>
+          </ul>
+          <details class="more"><summary data-i18n="more">More detail</summary>
+          <ul class="pts">
             <li data-i18n="about.b.2">Six search pools, three difficulty tiers</li>
             <li data-i18n="about.b.3">Half Persian, half English, with annotated gold evidence</li>
             <li data-i18n="about.b.4">90 answerable test questions</li>
           </ul>
+          </details>
         </div>
         <div class="gl">
           <h3 data-i18n="about.c.h">What was compared</h3>
           <ul class="pts">
             <li data-i18n="about.c.1">Fixed in advance: four whole pipelines at two evidence budgets</li>
+          </ul>
+          <details class="more"><summary data-i18n="more">More detail</summary>
+          <ul class="pts">
             <li data-i18n="about.c.2">Post hoc: search channels, chunk size, rewriting, embeddings, reranking, LLM selection, budgets, agents</li>
           </ul>
+          </details>
         </div>
         <div class="gl answer">
           <h3 data-i18n="about.a.h">The answer</h3>
@@ -146,6 +158,7 @@ document.documentElement.classList.add('js');})();
           <p class="fine" data-i18n="about.a.note">Post hoc. The test fixed in advance missed its pass mark.</p>
         </div>
       </div>
+      <details class="more terms-more"><summary data-i18n="more">More detail</summary>
       <dl class="terms">
         <div><dt data-i18n="term.budget">Evidence budget</dt><dd data-i18n="term.budget.d">Retrieved text the reader sees, in characters; 6,000 is the tight budget.</dd></div>
         <div><dt data-i18n="term.pack">Evidence pack</dt><dd data-i18n="term.pack.d">The text the reader actually gets, cut to the budget.</dd></div>
@@ -154,6 +167,7 @@ document.documentElement.classList.add('js');})();
         <div><dt data-i18n="term.prereg">Test fixed in advance</dt><dd data-i18n="term.prereg.d">Committed before any test answer was seen; not registered externally.</dd></div>
         <div><dt data-i18n="term.posthoc">Post hoc</dt><dd data-i18n="term.posthoc.d">Run after the test answers were known; not confirmatory.</dd></div>
       </dl>
+      </details>
     </div>
   </div>
 </section>
@@ -173,34 +187,55 @@ document.documentElement.classList.add('js');})();
         <article class="tier">
           <header><span class="tcode">T1</span><h3 data-i18n="tier1.h">Local fact</h3></header>
           <p class="tdef" data-i18n="tier1.d">One passage, list or table region answers it.</p>
-          <p class="ex" lang="en" dir="ltr">Whose consent is needed before a prosecution under the Bribery Act 2010 can be brought in England and Wales?</p>
-          <p class="src">LAW-en</p>
-          <p class="ex fa" lang="fa" dir="rtl">در سال ۱۴۰۰ دیوار چند کاربر را مسدود کرد و این تعداد چند برابر سال ۱۳۹۹ بود؟</p>
-          <p class="gloss" data-i18n="tier1.gloss">In 1400, how many users did Divar block, and how many times the 1399 figure was that?</p>
-          <p class="src">RPT-fa</p>
+          <div class="exb" data-ex="en">
+            <p class="ex" lang="en" dir="ltr">Whose consent is needed before a prosecution under the Bribery Act 2010 can be brought in England and Wales?</p>
+            <p class="src">LAW-en</p>
+          </div>
+          <details class="more ex-more"><summary data-i18n="more">More detail</summary>
+          <div class="exb" data-ex="fa">
+            <p class="ex fa" lang="fa" dir="rtl">در سال ۱۴۰۰ دیوار چند کاربر را مسدود کرد و این تعداد چند برابر سال ۱۳۹۹ بود؟</p>
+            <p class="gloss" data-i18n="tier1.gloss">In 1400, how many users did Divar block, and how many times the 1399 figure was that?</p>
+            <p class="src">RPT-fa</p>
+          </div>
+          </details>
         </article>
         <article class="tier">
           <header><span class="tcode">T2</span><h3 data-i18n="tier2.h">Within one document</h3></header>
           <p class="tdef" data-i18n="tier2.d">One document suffices, but no single region does.</p>
-          <p class="ex" lang="en" dir="ltr">Wise's FY2024 annual report gives its total customer balances and, in the Wise Business section, the business deposits it holds. Roughly what share of total customer balances were business deposits?</p>
-          <p class="src">RPT-en</p>
-          <p class="ex fa" lang="fa" dir="rtl">در سال ۱۴۰۰ تقریباً چند نفر در دیوار بدون پرداخت هزینه آگهی گذاشتند؟</p>
-          <p class="gloss" data-i18n="tier2.gloss">Roughly how many people posted ads on Divar free of charge in 1400?</p>
-          <p class="src">RPT-fa</p>
+          <div class="exb" data-ex="en">
+            <p class="ex" lang="en" dir="ltr">Wise's FY2024 annual report gives its total customer balances and, in the Wise Business section, the business deposits it holds. Roughly what share of total customer balances were business deposits?</p>
+            <p class="src">RPT-en</p>
+          </div>
+          <details class="more ex-more"><summary data-i18n="more">More detail</summary>
+          <div class="exb" data-ex="fa">
+            <p class="ex fa" lang="fa" dir="rtl">در سال ۱۴۰۰ تقریباً چند نفر در دیوار بدون پرداخت هزینه آگهی گذاشتند؟</p>
+            <p class="gloss" data-i18n="tier2.gloss">Roughly how many people posted ads on Divar free of charge in 1400?</p>
+            <p class="src">RPT-fa</p>
+          </div>
+          </details>
         </article>
         <article class="tier">
           <header><span class="tcode">T3</span><h3 data-i18n="tier3.h">Across documents</h3></header>
           <p class="tdef" data-i18n="tier3.d">Every sufficient bundle spans two or more documents.</p>
-          <p class="ex" lang="en" dir="ltr">Turkcell and Vodafone Turkey both had their 2G licences extended to 30 April 2029. What fee did each operator agree for the extension, and how did the way they paid it differ?</p>
-          <p class="src">RPT-en</p>
-          <p class="ex fa" lang="fa" dir="rtl">حداقل سنی که برای متقاضی امتیاز روزنامه یا نشریه تعیین شده بود، از لایحهٔ قانونی مطبوعات ۱۳۳۴ تا قانون مطبوعات ۱۳۶۴ چه تغییری کرد؟</p>
-          <p class="gloss" data-i18n="tier3.gloss">How did the minimum age set for an applicant for a newspaper or periodical licence change from the 1334 [1955] Press Bill to the 1364 [1985] Press Law?</p>
-          <p class="src">LAW-fa</p>
+          <div class="exb" data-ex="en">
+            <p class="ex" lang="en" dir="ltr">Turkcell and Vodafone Turkey both had their 2G licences extended to 30 April 2029. What fee did each operator agree for the extension, and how did the way they paid it differ?</p>
+            <p class="src">RPT-en</p>
+          </div>
+          <details class="more ex-more"><summary data-i18n="more">More detail</summary>
+          <div class="exb" data-ex="fa">
+            <p class="ex fa" lang="fa" dir="rtl">حداقل سنی که برای متقاضی امتیاز روزنامه یا نشریه تعیین شده بود، از لایحهٔ قانونی مطبوعات ۱۳۳۴ تا قانون مطبوعات ۱۳۶۴ چه تغییری کرد؟</p>
+            <p class="gloss" data-i18n="tier3.gloss">How did the minimum age set for an applicant for a newspaper or periodical licence change from the 1334 [1955] Press Bill to the 1364 [1985] Press Law?</p>
+            <p class="src">LAW-fa</p>
+          </div>
+          </details>
         </article>
       </div>
+      <details class="more"><summary data-i18n="more">More detail</summary>
       <p class="fine" data-i18n="bench.counts">Each pool: 3 development and 5 test questions per tier, plus one unanswerable per split. Totals: 60 development, 96 test.</p>
+      </details>
 
       <h3 class="sub-h" data-i18n="pools.h">Six search pools</h3>
+      <details class="more"><summary data-i18n="more">More detail</summary>
       <div class="scroll">
         <table class="pools">
           <thead><tr><th scope="col" data-i18n="pools.c.pool">Pool</th><th scope="col" class="num" data-i18n="pools.c.docs">Documents</th><th scope="col" class="num" data-i18n="pools.c.chars">Characters</th><th scope="col" data-i18n="pools.c.src">Sources</th></tr></thead>
@@ -219,8 +254,10 @@ document.documentElement.classList.add('js');})();
         <li data-i18n="pools.n1">Born-digital text or checked transcriptions only; no scans.</li>
         <li data-i18n="pools.n2">Persian and English use different documents, so language and source are mixed.</li>
       </ul>
+      </details>
 
       <h3 class="sub-h" data-i18n="annot.h">How evidence is annotated</h3>
+      <details class="more annot-more"><summary data-i18n="more">More detail</summary>
       <div class="annot">
         <ol class="annot-list">
           <li><b data-i18n="annot.req">Requirements</b><span data-i18n="annot.req.d">atomic points a correct answer must meet;</span></li>
@@ -247,12 +284,15 @@ document.documentElement.classList.add('js');})();
           <figcaption id="fig1cap"><span class="figno" data-i18n="fig1.no">Fig. 1</span> <span data-i18n="fig1.cap">A development question (T3) whose bundle spans two documents. Neither passage answers alone.</span></figcaption>
         </figure>
       </div>
+      </details>
       <h4 class="mini-h" data-i18n="build.h">How the questions were built</h4>
+      <details class="more"><summary data-i18n="more">More detail</summary>
       <ul class="pts small">
         <li data-i18n="build.1">Drafted by Claude Opus 5.5 agents; checked by a verifier and a review agent</li>
         <li data-i18n="build.3">Persian wording reviewed by a native speaker</li>
         <li data-i18n="build.4">32 of 156 checked by hand: 31 accepted, 1 fixed</li>
       </ul>
+      </details>
     </div>
   </div>
 </section>
@@ -274,6 +314,7 @@ document.documentElement.classList.add('js');})();
       </figure>
 
       <h3 class="sub-h" data-i18n="pipes.h">Four pipelines, fixed in advance</h3>
+      <details class="more"><summary data-i18n="more">More detail</summary>
       <div class="scroll">
       <table class="pipes">
         <thead><tr>
@@ -291,12 +332,15 @@ document.documentElement.classList.add('js');})();
       </table>
       </div>
       <p class="fine" data-i18n="pipes.note">6,000 characters, 96 test questions. Latency on a shared laptop GPU: only the order is reliable.</p>
+      </details>
       <h4 class="mini-h" data-i18n="readers.h">Readers and scoring</h4>
+      <details class="more"><summary data-i18n="more">More detail</summary>
       <ul class="pts">
         <li data-i18n="readers.1">Primary reader: GLM-5.3-flash, also used for both selection calls.</li>
         <li data-i18n="readers.2">Five readers from other model families answer the same packs.</li>
         <li data-i18n="readers.3">A strict LLM judge: every required point met, nothing wrong or unsupported.</li>
       </ul>
+      </details>
     </div>
   </div>
 </section>
@@ -321,11 +365,13 @@ document.documentElement.classList.add('js');})();
     <div class="sc">
       <h2 id="h-skill" data-i18n="skill.h">Use it in Claude Code or Codex</h2>
       <p class="lead" data-i18n="skill.lead">An agent skill that reads your codebase and recommends a RAG setup, using the same rules and evidence as the chooser.</p>
+      <details class="more"><summary data-i18n="more">More detail</summary>
       <ul class="pts">
         <li data-i18n="skill.1">It scans your repo read-only: document languages, file types and size, plus any vector DB, embedding model, chunk size, reranker, GPU or LLM provider.</li>
         <li data-i18n="skill.2">It asks only what it can't infer.</li>
         <li data-i18n="skill.3">It returns a setup, the evidence behind it, and file-by-file changes to your existing stack.</li>
       </ul>
+      </details>
       <div class="bib cmd">
         <div class="bib-head">
           <h3 lang="en" dir="ltr">Claude Code</h3>
@@ -358,7 +404,7 @@ document.documentElement.classList.add('js');})();
     <div class="sn" aria-hidden="true">7</div>
     <div class="sc">
       <h2 id="h-res" data-i18n="res.h">What the results show</h2>
-      <p class="lead" data-i18n="res.lead">Correct answers of 90 (primary reader, first judge). A range like 62–63 includes answers the judge could not score.</p>
+      <div class="lead" data-i18n="res.lead" data-fold-rest>Correct answers of 90 (primary reader, first judge). A range like 62–63 includes answers the judge could not score.</div>
 
       <div class="mainres-wrap">
         <h3 data-i18n="main.h">The main result</h3>
@@ -377,31 +423,36 @@ document.documentElement.classList.add('js');})();
         <div class="gate">
           <h4 data-i18n="gate.h">Test fixed in advance: not met</h4>
           <ul class="pts">
-            <li data-i18n="gate.1">Pass mark: at least 5 of 90 above both baselines at 6,000 characters.</li>
             <li class="verdict" data-i18n="gate.2">Result: 5 to 7 more than Hybrid, 0 to 3 fewer than Hybrid + reranker.</li>
             <li data-i18n="gate.3">Neither primary test was significant. Everything below is post hoc.</li>
           </ul>
+          <details class="more"><summary data-i18n="more">More detail</summary>
+          <ul class="pts">
+            <li data-i18n="gate.1">Pass mark: at least 5 of 90 above both baselines at 6,000 characters.</li>
+          </ul>
+          </details>
         </div>
       </div>
 
       <figure class="fig" aria-labelledby="fig3cap">
         <figcaption id="fig3cap"><span class="figno" data-i18n="fig3.no">Fig. 3</span> <span class="ft" data-i18n="fig3.t">Where answers are lost</span></figcaption>
         <div id="fig-funnel" class="mount mount-fig" data-viz-head="off"><div class="ph"><span data-i18n="fig.ph">The figure loads here.</span></div></div>
-        <p class="take" data-i18n="fig3.take">Gold evidence only: 83 of 90. Lost in retrieval: 15 to 18. Lost in packing: 11 to 15 more.</p>
+        <div class="take" data-i18n="fig3.take" data-fold-rest>Gold evidence only: 83 of 90. Lost in retrieval: 15 to 18. Lost in packing: 11 to 15 more.</div>
       </figure>
 
       <figure class="fig" aria-labelledby="fig4cap">
         <figcaption id="fig4cap"><span class="figno" data-i18n="fig4.no">Fig. 4</span> <span class="ft" data-i18n="fig4.t">How much text to show</span></figcaption>
         <div id="fig-budget" class="mount mount-fig" data-viz-head="off"><div class="ph"><span data-i18n="fig.ph2">The figure loads here.</span></div></div>
-        <p class="take" data-i18n="fig4.take">Selection adds 15 to 16 answers at 3,000 characters (one run), 2 to 4 from 10,000. Plain hybrid climbs from about 50 to 72.</p>
+        <div class="take" data-i18n="fig4.take" data-fold-rest>Selection adds 15 to 16 answers at 3,000 characters (one run), 2 to 4 from 10,000. Plain hybrid climbs from about 50 to 72.</div>
       </figure>
 
       <figure class="fig" aria-labelledby="fig5cap">
         <figcaption id="fig5cap"><span class="figno" data-i18n="fig5.no">Fig. 5</span> <span class="ft" data-i18n="fig5.t">Which parts of the pipeline matter</span></figcaption>
         <div id="fig-components" class="mount mount-fig" data-viz-head="off"><div class="ph"><span data-i18n="fig.ph3">The figure loads here.</span></div></div>
-        <p class="take" data-i18n="fig5.take">Hybrid 62 to 63, dense alone 53, BM25 alone 48. 2,000-character chunks lose 13 to 20. Rewriting and a second embedding model did not help.</p>
+        <div class="take" data-i18n="fig5.take" data-fold-rest>Hybrid 62 to 63, dense alone 53, BM25 alone 48. 2,000-character chunks lose 13 to 20. Rewriting and a second embedding model did not help.</div>
       </figure>
 
+      <details class="more"><summary data-i18n="more">More detail</summary>
       <div class="aside2">
         <div>
           <h3 data-i18n="search.h">Searching harder</h3>
@@ -420,6 +471,7 @@ document.documentElement.classList.add('js');})();
           </ul>
         </div>
       </div>
+      </details>
     </div>
   </div>
 </section>
@@ -437,26 +489,38 @@ document.documentElement.classList.add('js');})();
           <p class="big" data-i18n="lang.tok.big">1.5–1.8×</p>
           <ul class="pts">
             <li data-i18n="lang.tok.1">Persian costs 1.46 to 1.80× the tokens per character for five of six readers; Qwen3 235B 2.99×.</li>
+          </ul>
+          <details class="more"><summary data-i18n="more">More detail</summary>
+          <ul class="pts">
             <li data-i18n="lang.tok.2">Set budgets in tokens: 6,000 Persian characters ≈ 10,000 English (primary reader).</li>
           </ul>
+          </details>
         </div>
         <div class="cell">
           <h3 data-i18n="lang.mem.h">Memory gap</h3>
           <p class="big" data-i18n="lang.mem.big">20 and 6 of 45</p>
           <ul class="pts">
             <li data-i18n="lang.mem.1">No evidence: 20 of 45 English and 6 of 45 Persian correct.</li>
+          </ul>
+          <details class="more"><summary data-i18n="more">More detail</summary>
+          <ul class="pts">
             <li data-i18n="lang.mem.2">Asked in the other language: still 18 and 4 or 5.</li>
             <li data-i18n="lang.mem.3">The gap follows the source texts, not the question language.</li>
           </ul>
+          </details>
         </div>
         <div class="cell">
           <h3 data-i18n="lang.swap.h">Questions in the other language</h3>
           <p class="big" data-i18n="lang.swap.big">37 → 2</p>
           <ul class="pts">
             <li data-i18n="lang.swap.1">BM25 top 40: a complete bundle for only 2 and 8 of 45 (was 37 and 29).</li>
+          </ul>
+          <details class="more"><summary data-i18n="more">More detail</summary>
+          <ul class="pts">
             <li data-i18n="lang.swap.2">Dense retrieval keeps 35 and 28 (was 38 and 33).</li>
             <li data-i18n="lang.swap.3">Reranked pipeline: 53 to 54 correct, down from 69 to 71.</li>
           </ul>
+          </details>
         </div>
       </div>
       <figure class="fig" aria-labelledby="fig6cap">
@@ -466,10 +530,14 @@ document.documentElement.classList.add('js');})();
       </figure>
       <h4 class="mini-h" data-i18n="spell.h">Persian spelling</h4>
       <ul class="pts">
-        <li data-i18n="spell.1">Spelling varies: Arabic or Persian letters, non-joiners, three digit systems.</li>
-        <li data-i18n="spell.2">Without normalising, BM25 loses 5 to 8 of 45 complete bundles; dense at most one.</li>
         <li data-i18n="spell.3">Normalise before BM25. <span class="grade g-tent">Tentative, retrieval only</span></li>
       </ul>
+      <details class="more"><summary data-i18n="more">More detail</summary>
+      <ul class="pts">
+        <li data-i18n="spell.1">Spelling varies: Arabic or Persian letters, non-joiners, three digit systems.</li>
+        <li data-i18n="spell.2">Without normalising, BM25 loses 5 to 8 of 45 complete bundles; dense at most one.</li>
+      </ul>
+      </details>
     </div>
   </div>
 </section>
@@ -484,31 +552,39 @@ document.documentElement.classList.add('js');})();
       <div class="limits">
         <div class="lim">
           <h3 data-i18n="trust.post.h">The rest is post hoc</h3>
+          <details class="more"><summary data-i18n="more">More detail</summary>
           <ul class="pts">
             <li data-i18n="trust.post.1">Other results reuse test questions whose answers were already seen.</li>
             <li data-i18n="trust.post.2">Their p-values are descriptive; the advice needs a fresh test.</li>
           </ul>
+          </details>
         </div>
         <div class="lim">
           <h3 data-i18n="trust.power.h">90 questions detect about 11 answers</h3>
+          <details class="more"><summary data-i18n="more">More detail</summary>
           <ul class="pts">
             <li data-i18n="trust.power.1">80% power only for gaps of about 11 answers (about 8 within one language).</li>
             <li data-i18n="trust.power.2">Detecting a gap of 5 needs about 400 to 460 questions.</li>
           </ul>
+          </details>
         </div>
         <div class="lim">
           <h3 data-i18n="trust.judge.h">Judges and the human review disagree</h3>
+          <details class="more"><summary data-i18n="more">More detail</summary>
           <ul class="pts">
             <li data-i18n="trust.judge.1">A second judge agrees on 91% (kappa 0.76) but reorders the middle pipelines.</li>
             <li data-i18n="trust.judge.2">The human review: 30 questions, blind to the method, by the author alone.</li>
             <li data-i18n="trust.judge.3">Its significant +8 for Lex-RAG over Hybrid fell to +5 (corrected p = .36) with all four reviewed.</li>
           </ul>
+          </details>
         </div>
         <div class="lim">
           <h3 data-i18n="trust.noise.h">The reader is noisy, about ±2</h3>
+          <details class="more"><summary data-i18n="more">More detail</summary>
           <ul class="pts">
             <li data-i18n="trust.noise.1">Same packs rerun: standard deviation about 2 answers; single cells moved up to six.</li>
           </ul>
+          </details>
         </div>
       </div>
       <figure class="fig" aria-labelledby="fig7cap">
@@ -541,7 +617,9 @@ document.documentElement.classList.add('js');})();
         </tbody>
       </table>
       </div>
+      <details class="more"><summary data-i18n="more">More detail</summary>
       <p class="fine" data-i18n="rsc.corpus">Documents are not redistributed; a manifest with file hashes lets you rebuild each pool.</p>
+      </details>
 
       <div class="bib">
         <div class="bib-head">

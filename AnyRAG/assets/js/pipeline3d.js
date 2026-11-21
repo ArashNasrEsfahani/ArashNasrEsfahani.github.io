@@ -15,6 +15,8 @@
      pipeline's own step: fusion, the reranker or the selection call; losers fade), 3 pack into the budget (the budget
      bar fills), 4 the pack goes to the reader, 5 the answer comes out. Each stage moves for about 1.1 s, then holds. */
   var STEPS = 6, STEP_MS = 2700, MOVE_MS = 1100, BUDGET = 6000;
+  /* tests can slow every move down (window.__pipeTimeScale = 4) to film frames inside a stage; 1 on the page */
+  function TS() { var t = +window.__pipeTimeScale; return t > 0 ? t : 1; }
   /* step names and the few new captions live in i18n.json (pipe.*); this table is the fallback if it has not loaded */
   var FB = {
     'pipe.steps': { en: 'Steps of the pipeline', fa: 'گام‌های پایپ‌لاین' },
@@ -60,7 +62,16 @@
   }
 
   /* ---------------- model: what each passage does at each step ---------------- */
+  /* one model per (question, pipeline). It is cached: the views rebuild their scene only when this object changes, so a
+     step change animates from where the scene stands instead of rebuilding it from the pool (the W9 bug: model() used to
+     return a new object on every call, every step rebuilt the scene, and each stage replayed from the beginning). */
+  var Mcache = null;
   function model() {
+    var key = st.ex + '|' + st.pipe;
+    if (!Mcache || Mcache.key !== key || Mcache.D !== D) { Mcache = buildModel(); Mcache.key = key; Mcache.D = D; }
+    return Mcache;
+  }
+  function buildModel() {
     var ex = D.examples[st.ex], cell = ex.cells[st.pipe];
     var list1 = st.pipe === 'hr' ? ex.rrf.slice(0, 40) : cell.order.slice(0, 40);
     var list2 = cell.order.slice(0, 40);
@@ -91,13 +102,14 @@
   function itemState(M, i, k) {
     var r1 = M.list1.indexOf(i), r2 = M.list2.indexOf(i), inPack = M.packIdx[i] != null, ev = M.ex.passages[i].sp.length > 0;
     var pick = !!(M.pick && M.pick[i]);
-    if (k === 0) return { zone: 'doc', vis: 0 };
+    if (k <= 0) return { zone: 'doc', vis: 0 }; // -1 is the empty scene before the question arrives
     if (k === 1) return r1 >= 0 ? { zone: 'list', slot: r1, vis: 1, ev: ev } : { zone: 'doc', vis: 0 };
     // order or select: the new order; what will not fit the pack (the losers) fades
     if (k === 2) return r2 >= 0 ? { zone: 'list', slot: r2, vis: inPack ? 1 : 0.32, ev: ev, pick: pick, lose: !inPack } : (r1 >= 0 ? { zone: 'list', slot: r1, vis: 0.12, ev: ev, out: 1, lose: true } : { zone: 'doc', vis: 0 });
     if (k === 3) return inPack ? { zone: 'pack', vis: 1, ev: ev, pp: M.packPos[i] } : (r2 >= 0 ? { zone: 'drop', slot: r2, di: M.dropIdx[i], vis: 0.28, ev: ev } : { zone: 'doc', vis: 0 });
-    if (inPack && M.packPos[i].lit) return { zone: 'reader', vis: 1, ev: ev, pp: M.packPos[i], lit: true };
-    return inPack ? { zone: 'reader', vis: 0, ev: ev, pp: M.packPos[i] } : (r2 >= 0 ? { zone: 'drop', slot: r2, di: M.dropIdx[i], vis: 0.12, ev: ev } : { zone: 'doc', vis: 0 });
+    // from 'to the reader' on, the pack stays filled (a copy of it travels to the reader, drawn by the views) and the
+    // dropped pile stays where it fell: every stage keeps the results of the ones before it
+    return inPack ? { zone: 'pack', vis: 1, ev: ev, pp: M.packPos[i], sent: true } : (r2 >= 0 ? { zone: 'drop', slot: r2, di: M.dropIdx[i], vis: 0.28, ev: ev } : { zone: 'doc', vis: 0 });
   }
   function caption(M, k) {
     var c = M.cell;
@@ -137,7 +149,7 @@
       var b = h('button', { type: 'button' }, li);
       h('span', { 'class': 'pv-sn', 'aria-hidden': 'true' }, b, fmt(k + 1));
       h('span', { 'class': 'pv-sl' }, b);
-      b.addEventListener('click', function () { stop(); go(k); });
+      b.addEventListener('click', function () { stop(); go(k, 'play'); });
       stepB.push(b);
     })(i);
     var stage = h('div', { 'class': 'pv-stage' + (mode === '2d' ? ' is-2d' : ''), role: 'img', 'aria-label': S('stage_label') }, root);
@@ -159,10 +171,10 @@
     var ans = h('div', { 'class': 'pv-ans', hidden: '' }, root);
     if (mode === '2d') h('p', { 'class': 'pv-fb', dir: 'auto' }, root, S('fallback'));
     h('p', { 'class': 'pv-note', dir: 'auto' }, root, S('note'));
-    prev.addEventListener('click', function () { stop(); go(Math.max(0, st.step - 1)); });
-    next.addEventListener('click', function () { stop(); go(Math.min(STEPS - 1, st.step + 1)); });
+    prev.addEventListener('click', function () { stop(); go(Math.max(0, st.step - 1), 'snap'); });
+    next.addEventListener('click', function () { stop(); go(Math.min(STEPS - 1, st.step + 1), 'play'); });
     play.addEventListener('click', function () { if (st.playing) stop(); else start(); });
-    replay.addEventListener('click', function () { stop(); go(0, true); start(); });
+    replay.addEventListener('click', function () { stop(); start(true); });
     ui = { root: root, stage: stage, qBtns: qBtns, pBtns: pBtns, qt: qt, qgl: qgl, prev: prev, next: next, play: play, replay: replay, steps: stepB, stepn: stepn, cap: cap, ans: ans,
       meter: meter, mFill: mFill, mNum: mNum };
   }
@@ -170,14 +182,14 @@
   var meterRaf = 0;
   function setMeter(M, k, instant) {
     if (!ui) return;
-    cancelAnimationFrame(meterRaf);
+    cancelAnimationFrame(meterRaf); meterRaf = 0;
     var to = k >= 3 ? M.used : 0, chars = k >= 3 ? M.cell.rendered : 0;
     ui.meter.classList.toggle('is-on', k === 3);
     ui.meter.classList.toggle('is-full', k >= 3);
     function put(f) { ui.mFill.style.width = (f * to * 100).toFixed(2) + '%'; ui.mNum.textContent = fmt(Math.round(f * chars)) + ' ' + S('of') + ' ' + fmt(BUDGET) + ' ' + I('pipe.chars'); }
     if (instant || k !== 3) { put(1); return; }
-    var t0 = performance.now(), dur = MOVE_MS + 400;
-    (function f(now) { var t = Math.min(1, (now - t0) / dur); put(t); if (t < 1) meterRaf = requestAnimationFrame(f); })(t0);
+    var t0 = performance.now(), dur = (MOVE_MS + 400) * TS();
+    (function f(now) { var t = Math.min(1, (now - t0) / dur); put(t); meterRaf = t < 1 ? requestAnimationFrame(f) : 0; })(t0);
   }
   function syncUI(M) {
     ui.qBtns.forEach(function (b, i) { b.setAttribute('aria-pressed', String(i === st.ex)); });
@@ -213,26 +225,35 @@
   }
 
   /* ---------------- controller ---------------- */
-  function go(k, instant) {
+  /* One cumulative timeline. go(k, 'play') shows the end state of stage k-1 (the scene as it already stands when
+     stepping forward) and animates only stage k; go(k, 'snap') shows the end state of stage k at once (prev, resize,
+     theme, language). Stage 0 plays from the empty scene (-1). One timer at most; the views keep one frame loop. */
+  var HOLD_END = 1800;
+  function go(k, how) {
+    var play = how !== 'snap' && how !== true && !mqReduce.matches;
     st.step = k;
     var M = model();
     syncUI(M);
-    setMeter(M, k, instant || mqReduce.matches);
-    if (view) view.show(M, k, instant || mqReduce.matches);
+    setMeter(M, k, !play);
+    if (view) view.show(M, k, play ? 'play' : 'snap');
   }
-  function reset() { var was = st.playing; stop(); if (view) view.setData(model()); go(0, true); if (was) start(); }
+  function clearTimer() { if (timer) { clearTimeout(timer); timer = null; } }
+  function schedule(ms) { clearTimer(); timer = setTimeout(tick, ms); }
+  // a new question or pipeline: the scene is rebuilt and starts again at stage 1
+  function reset() { var was = st.playing; stop(); if (view) view.setData(model()); go(0, was ? 'play' : 'snap'); if (was) { st.playing = true; syncUI(model()); schedule(STEP_MS); } }
   function tick() {
+    timer = null;
     if (!st.playing) return;
-    if (st.step >= STEPS - 1) { stop(); return; }
-    go(st.step + 1);
-    timer = setTimeout(tick, STEP_MS);
+    if (st.step >= STEPS - 1) { go(0, 'play'); schedule(STEP_MS); return; } // the loop: a clean reset only here
+    go(st.step + 1, 'play');
+    schedule(st.step >= STEPS - 1 ? STEP_MS + HOLD_END : STEP_MS);
   }
-  function start() {
-    if (st.step >= STEPS - 1) go(0, true);
-    st.playing = true; syncUI(model());
-    clearTimeout(timer); timer = setTimeout(tick, mqReduce.matches ? STEP_MS : 900);
+  function start(fromTop) {
+    st.playing = true;
+    if (fromTop || st.step >= STEPS - 1) { go(0, 'play'); schedule(STEP_MS); }
+    else { syncUI(model()); schedule(mqReduce.matches ? STEP_MS : 700); }
   }
-  function stop() { st.playing = false; clearTimeout(timer); if (ui) syncUI(model()); }
+  function stop() { st.playing = false; clearTimer(); if (ui) syncUI(model()); }
 
   function css(el, name, fb) { var v = getComputedStyle(el).getPropertyValue(name).trim(); return v || fb; }
 
@@ -440,6 +461,24 @@
         var cur = { x: t0.x, y: t0.y, z: t0.z, sx: t0.sx, sy: t0.sy, sz: t0.sz, op: 0, r: t0.c.r, g: t0.c.g, b: t0.c.b, e: 0 };
         items[kq] = { mesh: mesh, cur: cur, from: null, tgt: null, delay: 0 };
       });
+      // the copy of each pack passage that travels to the reader at stage 5
+      m.cell.pack.forEach(function (p) {
+        var mt = new THREE.MeshStandardMaterial({ roughness: 0.6, metalness: 0, transparent: true, opacity: 0, color: col.plate });
+        var mesh = new THREE.Mesh(plateGeo, mt); mesh.visible = false; scene.add(mesh);
+        items['C' + p.p] = { mesh: mesh, cur: {}, from: null, tgt: null, delay: 0 };
+      });
+      dispStep = -1; snapTo(-1);
+    }
+    function keys() { return Object.keys(items); }
+    function copyTarget(pi, k) {
+      var t = target(pi, 3), lit = M.packPos[pi].lit;
+      if (k < 4) { t.op = 0; t.e = 0; return t; }
+      if (lit) {
+        var evList = M.cell.pack.filter(function (q) { return q.sp.length > 0; }).map(function (q) { return q.p; });
+        var j = evList.indexOf(pi), n = evList.length;
+        return { x: Z.readerX, y: -0.2 + 1.0 - j * (2.0 / Math.max(1, n)) - 1.0 / Math.max(1, n), z: 1.62, sx: 2.4, sy: Math.min(0.38, 1.5 / Math.max(1, n)), sz: 0.14, op: 1, c: col.turq, e: 0.6 };
+      }
+      return { x: Z.readerX, y: -0.2, z: 0, sx: 1.6, sy: 0.12, sz: 1.2, op: 0, c: col.plate, e: 0 };
     }
     function cardTarget(kq, k) {
       if (kq === 'Q') {
@@ -463,6 +502,8 @@
     }
     function target(pi, k) {
       if (pi === 'Q' || pi === 'A') return cardTarget(pi, k);
+      if (typeof pi === 'string' && pi.charAt(0) === 'C') return copyTarget(+pi.slice(1), k);
+      pi = +pi; // item keys are strings; the lists hold numbers
       var s = itemState(M, pi, k), p = M.ex.passages[pi];
       var w = 0.8 + 1.7 * Math.min(p.n, 1200) / 1200;
       var base = s.ev ? col.turq : (s.pick && k === 2 ? col.accent : col.plate);
@@ -477,13 +518,7 @@
       }
       if (s.zone === 'pack') {
         var a = s.pp.a * Z.colH, b = s.pp.b * Z.colH;
-        return { x: Z.packX, y: Z.top - (a + b) / 2, z: 0, sx: 2.5, sy: Math.max(0.04, (b - a) - 0.06), sz: 0.7, op: Math.max(0.45, s.vis), c: base, e: s.ev ? 0.25 : 0 };
-      }
-      // reader: evidence pieces rest lit in front of the reader; the rest goes inside
-      if (s.lit) {
-        var evList = M.cell.pack.filter(function (q) { return q.sp.length > 0; }).map(function (q) { return q.p; });
-        var j = evList.indexOf(pi), n = evList.length;
-        return { x: Z.readerX, y: -0.2 + 1.0 - j * (2.0 / Math.max(1, n)) - 1.0 / Math.max(1, n), z: 1.62, sx: 2.4, sy: Math.min(0.38, 1.5 / Math.max(1, n)), sz: 0.14, op: 1, c: col.turq, e: 0.6 };
+        return { x: Z.packX, y: Z.top - (a + b) / 2, z: 0, sx: 2.5, sy: Math.max(0.04, (b - a) - 0.06), sz: 0.7, op: s.sent ? 0.8 : 1, c: base, e: s.ev ? 0.25 : 0 };
       }
       return { x: Z.readerX, y: -0.2, z: 0, sx: 1.2, sy: 0.1, sz: 0.8, op: 0, c: base, e: 0 };
     }
@@ -498,32 +533,48 @@
       m.material.emissive.setRGB(v.r * v.e, v.g * v.e, v.b * v.e);
       m.material.opacity = v.op; m.visible = v.op > 0.01;
     }
-    var curStep = 0;
-    function show(m, k, instant) {
-      if (m !== M) setData(m);
-      var back = k < curStep; curStep = k;
-      docColors(k);
+    /* curStep: the stage on screen; dispStep: the stage whose end state the meshes hold (or are moving to) */
+    var curStep = 0, dispStep = -1;
+    var FIELDS = ['x', 'y', 'z', 'sx', 'sy', 'sz', 'op', 'r', 'g', 'b', 'e'];
+    function asState(t) { return { x: t.x, y: t.y, z: t.z, sx: t.sx, sy: t.sy, sz: t.sz, op: t.op, r: t.c.r, g: t.c.g, b: t.c.b, e: t.e }; }
+    function copyState(c) { var o = {}; FIELDS.forEach(function (k) { o[k] = c[k]; }); return o; }
+    // put every mesh at the end state of stage j at once, and stop any movement
+    function snapTo(j) {
+      keys().forEach(function (pi) { var it = items[pi]; it.cur = asState(target(pi, j)); it.tgt = null; apply(it, it.cur); });
+      anim = null; flow = null; parts.visible = false;
+    }
+    function setScene(k) {
+      docColors(Math.max(0, k));
       var endCol = k >= 4 ? (M.cell.full ? col.turq : col.saff) : col.ink;
       readerEdgeMat.color.copy(endCol);
       readerMat.emissive.copy(k >= 4 && M.cell.full ? col.turq : new THREE.Color(0x000000)).multiplyScalar(k === 5 ? 0.3 : 0.12);
       frameMat.opacity = k === 3 ? 1 : 0.6; guideMat.color.copy(k === 2 && st.pipe !== 'hybrid' ? col.accent : col.lineMuted);
-      var dur = instant ? 0 : MOVE_MS, nPack = Math.max(1, M.cell.pack.length);
-      M.ids.concat(['Q', 'A']).forEach(function (pi) {
-        var it = items[pi], t = target(pi, k);
-        it.from = { x: it.cur.x, y: it.cur.y, z: it.cur.z, sx: it.cur.sx, sy: it.cur.sy, sz: it.cur.sz, op: it.cur.op, r: it.cur.r, g: it.cur.g, b: it.cur.b, e: it.cur.e };
-        it.tgt = { x: t.x, y: t.y, z: t.z, sx: t.sx, sy: t.sy, sz: t.sz, op: t.op, r: t.c.r, g: t.c.g, b: t.c.b, e: t.e };
-        it.dur = dur;
-        if (instant || back || pi === 'Q' || pi === 'A') { it.delay = pi === 'A' && !instant && !back ? 250 : 0; return; }
-        var s1 = itemState(M, pi, k);
+    }
+    function show(m, k, how) {
+      if (m !== M) setData(m);
+      if (how !== 'play') { snapTo(k); curStep = dispStep = k; setScene(k); kick(); return; }
+      // play stage k from the end of stage k-1: if the scene is not already there (a jump, or k-1 still moving), snap it
+      if (dispStep !== k - 1 || anim) snapTo(k - 1);
+      curStep = dispStep = k; setScene(k);
+      var nPack = Math.max(1, M.cell.pack.length), ts = TS();
+      keys().forEach(function (pi) {
+        var it = items[pi];
+        it.from = copyState(it.cur);
+        it.tgt = asState(target(pi, k));
+        it.dur = MOVE_MS; it.delay = 0;
+        if (pi === 'A') { it.delay = 250; return; }
+        if (pi === 'Q') return;
+        if (pi.charAt(0) === 'C') { it.delay = (M.packIdx[+pi.slice(1)] || 0) * 60; return; }
+        var s1 = itemState(M, +pi, k);
         // the pack fills one passage after another, in step with the budget meter
         if (k === 3 && s1.zone === 'pack') { it.delay = (M.packIdx[pi] || 0) * (900 / nPack); it.dur = 700; }
         else if (k === 3 && s1.zone === 'drop') it.delay = 1000 + s1.di * 6;
-        else if (k >= 4) it.delay = (M.packIdx[pi] || 0) * 60;
-        else it.delay = Math.min(450, (s1.slot || 0) * 11);
+        else if (k < 3) it.delay = Math.min(450, (s1.slot || 0) * 11);
       });
+      if (ts !== 1) keys().forEach(function (pi) { items[pi].dur *= ts; items[pi].delay *= ts; });
       var now = performance.now();
       anim = { t0: now };
-      flow = instant || back ? null : { seg: k, t0: now, t1: now + MOVE_MS + 900 };
+      flow = { seg: k, t0: now, t1: now + (MOVE_MS + 900) * ts };
       kick();
     }
     function frameStep(now) {
@@ -532,13 +583,13 @@
       if (frames.length > 240) frames.shift();
       var busy = false;
       if (anim) {
-        Object.keys(items).forEach(function (pi) {
+        keys().forEach(function (pi) {
           var it = items[pi]; if (!it.tgt) return;
           var t = it.dur ? (now - anim.t0 - it.delay) / it.dur : 1;
           t = Math.max(0, Math.min(1, t));
           if (t < 1) busy = true;
           var e = ease(t), f = it.from, g = it.tgt, c = it.cur;
-          ['x', 'y', 'z', 'sx', 'sy', 'sz', 'op', 'r', 'g', 'b', 'e'].forEach(function (k) { c[k] = f[k] + (g[k] - f[k]) * e; });
+          FIELDS.forEach(function (k) { c[k] = f[k] + (g[k] - f[k]) * e; });
           // lift passages along an arc while they travel between zones
           var arc = Math.sin(Math.PI * e) * (Math.abs(g.x - f.x) > 1 ? 0.8 : 0);
           var v = { x: c.x, y: c.y + arc, z: c.z + arc * 0.5, sx: c.sx, sy: c.sy, sz: c.sz, op: c.op, r: c.r, g: c.g, b: c.b, e: c.e };
@@ -582,7 +633,8 @@
       if (docEdges) docEdges.material.color.copy(col.turq);
       conMat.color.copy(col.lineMuted); pMat.color.copy(col.turq);
       if (items.Q) items.Q.mesh.material.color.copy(col.accent);
-      if (M) show(M, st.step, true);
+      // a theme change recolours the scene where it stands; a stage in motion finishes at once, nothing restarts
+      if (M) { snapTo(dispStep); setScene(dispStep); kick(); }
     }
     function relabel() { labs.pool.textContent = S('l_pool'); labs.list.textContent = S('l_cands'); labs.pack.textContent = S('l_pack'); labs.reader.textContent = S('l_reader'); labs.drop.textContent = S('l_drop'); labs.q.textContent = I('pipe.st.q'); labs.ans.textContent = I('pipe.st.answer'); }
     var destroyed = false;
@@ -593,6 +645,18 @@
       renderer.dispose(); try { renderer.forceContextLoss(); } catch (e) {}
     }
     return { setData: setData, show: show, retheme: retheme, relabel: relabel, destroy: destroy, kind: '3d',
+      busy: function () { return !!anim || !!(flow && performance.now() < flow.t1); }, loopRunning: function () { return !!raf; },
+      shown: function () { return dispStep; },
+      probe: function () {
+        var o = { q: items.Q ? +items.Q.cur.op.toFixed(2) : 0, a: items.A ? +items.A.cur.op.toFixed(2) : 0, inPack: 0, inList: 0, inPool: 0, toReader: 0 };
+        keys().forEach(function (pi) {
+          var c = items[pi].cur; if (pi === 'Q' || pi === 'A') return;
+          if (pi.charAt(0) === 'C') { if (c.op > 0.5 && Math.abs(c.x - Z.readerX) < 1.6) o.toReader++; return; }
+          if (c.op < 0.3) { o.inPool++; return; }
+          if (Math.abs(c.x - Z.packX) < 0.3) o.inPack++; else if (Math.abs(c.x - Z.listX) < 0.6) o.inList++;
+        });
+        return o;
+      },
       fps: function () { if (frames.length < 2) return 0; var span = frames[frames.length - 1] - frames[0]; return (frames.length - 1) * 1000 / span; },
       frames: frames, renderer: renderer };
   }
@@ -663,54 +727,86 @@
       });
     }
     function docBox(di) { var c = di % L.cols, r = Math.floor(di / L.cols), s = L.cell - 3; return { x: mirror(L.pad + c * L.cell, s), y: L.yPool + r * L.cell, w: s, h: s }; }
-    var prevK = 0;
-    function show(m, k, instant) {
-      if (m !== M || !L || Math.abs(L.W - stage.clientWidth) > 2) setData(m);
-      var back = k < prevK; prevK = k;
+    /* disp: the stage whose end state is on screen (or being animated to); busyUntil: when the current move ends */
+    var disp = -1, busyUntil = 0, copies = {};
+    function makeCopies() {
+      copies = {};
+      M.cell.pack.forEach(function (q) { copies[q.p] = el('rect', { x: 0, y: 0, width: 1, height: 1, 'class': 'it ev lit hid cp' }); });
+    }
+    // put the scene at the end state of stage k, animated (the move of stage k only) or at once
+    function applyStep(k, instant) {
       svg.classList.toggle('instant', !!instant);
       docs.forEach(function (d, i) {
         d.setAttribute('class', 'doc' + (k >= 1 && M.srcDocs[i] ? ' src' : '') + (M.ex.docs[i].g ? ' gold' : ''));
       });
       reader.setAttribute('class', 'reader' + (k >= 4 && M.cell.full ? ' lit' : '') + (k === 4 ? ' cur' : ''));
       frame.setAttribute('class', 'frame' + (k === 3 ? ' cur' : ''));
-      pillQ.setAttribute('class', 'pill q' + (k === 0 ? ' cur' : ' past'));
-      pillA.setAttribute('class', 'pill a' + (k === 5 ? ' cur ' + (M.cell.correct ? 'ok' : 'no') : k < 5 ? ' wait' : ''));
-      // the connector into the current stage runs; the ones already passed stay solid; the rest wait
-      // connector i leads into stage i (0 question to pool ... 4 reader to answer); order/select happens inside the list
-      var ci = [0, 1, -1, 2, 3, 4][k], done = [-1, 0, 1, 1, 2, 3][k];
-      conns.forEach(function (g, i) { g.setAttribute('class', 'con' + (i === ci && !instant && !back ? ' run' : i <= done || i === ci ? ' past' : '')); });
-      var curZone = [0, 2, 2, 3, 4, 0][k];
+      pillQ.setAttribute('class', 'pill q' + (k === 0 ? ' cur' : k > 0 ? ' past' : ' wait'));
+      pillA.setAttribute('class', 'pill a' + (k === 5 ? ' cur ' + (M.cell.correct ? 'ok' : 'no') : ' wait'));
+      // connector i leads into stage i (0 question to pool ... 4 reader to answer); order/select happens inside the list.
+      // The one into the current stage runs while it plays; the ones already passed stay solid.
+      var ci = k >= 0 ? [0, 1, -1, 2, 3, 4][k] : -1, done = k >= 0 ? [-1, 0, 1, 1, 2, 3][k] : -1;
+      conns.forEach(function (g, i) { g.setAttribute('class', 'con' + (i === ci && !instant ? ' run' : i <= done || i === ci ? ' past' : '')); });
+      var curZone = k >= 0 ? [0, 2, 2, 3, 4, 0][k] : 0;
       [1, 2, 3, 4].forEach(function (z) { zoneT[z].setAttribute('class', 'zl' + (z === curZone ? ' cur' : '')); });
       var own = st.pipe !== 'hybrid';
       tag.textContent = own ? I(st.pipe === 'hr' ? 'pipe.stage.rerank' : 'pipe.stage.select') : '';
       tag.setAttribute('class', 'tag' + (k === 2 && own ? ' on' : ''));
       var evList = M.cell.pack.filter(function (q) { return q.sp.length > 0; }).map(function (q) { return q.p; });
       var nPack = Math.max(1, M.cell.pack.length);
+      function put(r, bx, d, cls) {
+        var ts = TS();
+        r.style.transition = instant ? 'none' : (ts !== 1 ? 'transform ' + (900 * ts) + 'ms cubic-bezier(.65, 0, .35, 1), opacity ' + (600 * ts) + 'ms ease, fill ' + (600 * ts) + 'ms ease' : '');
+        r.style.transitionDelay = (instant ? 0 : d * ts) + 'ms';
+        r.style.transform = 'translate(' + bx.x.toFixed(1) + 'px,' + bx.y.toFixed(1) + 'px) scale(' + bx.w.toFixed(2) + ',' + bx.h.toFixed(2) + ')';
+        r.setAttribute('class', cls);
+      }
+      function packBox(pp) { var full = L.W - 2 * L.pad - 4, a = pp.a * full, bb = pp.b * full; return { x: mirror(L.pad + 2 + a, bb - a - 2), y: L.yPack + 3, w: Math.max(2, bb - a - 2), h: L.packH - 6 }; }
       M.ids.forEach(function (pi) {
-        var s = itemState(M, pi, k), p = M.ex.passages[pi], r = rects[pi], b;
+        var s = itemState(M, pi, k), p = M.ex.passages[pi], b;
         var hgt = L.listH * (0.25 + 0.75 * Math.min(p.n, 1200) / 1200);
         if (s.zone === 'doc') b = docBox(p.d);
-        else if (s.zone === 'list' || s.zone === 'drop') { var w = Math.max(2, L.colW - 2); b = { x: mirror(L.pad + s.slot * L.colW + 1, w), y: L.yList + L.listH - hgt + (k === 2 && s.lose ? hgt * 0.35 : 0), w: w, h: hgt * (k === 2 && s.lose ? 0.65 : 1) }; }
-        else if (s.zone === 'pack') { var full = L.W - 2 * L.pad - 4, a = s.pp.a * full, bb = s.pp.b * full; b = { x: mirror(L.pad + 2 + a, bb - a - 2), y: L.yPack + 3, w: Math.max(2, bb - a - 2), h: L.packH - 6 }; }
-        else if (s.lit) { var j = evList.indexOf(pi), fw = Math.min(140, (L.W - 2 * L.pad - 24) / Math.max(1, evList.length)); b = { x: mirror(L.pad + 12 + j * (fw + 6), fw), y: L.yRead + L.readH / 2 - 7, w: fw, h: 14 }; }
-        else b = { x: L.W / 2, y: L.yRead + L.readH / 2, w: 1, h: 1 };
-        var d = instant || back ? 0 : k === 3 && s.zone === 'pack' ? (M.packIdx[pi] || 0) * (900 / nPack) : k === 3 ? 1000 : k >= 4 ? (M.packIdx[pi] || 0) * 60 : Math.min(450, (s.slot || 0) * 11);
-        r.style.transitionDelay = d + 'ms';
-        if (instant) r.style.transition = 'none'; else r.style.transition = '';
-        r.style.transform = 'translate(' + b.x.toFixed(1) + 'px,' + b.y.toFixed(1) + 'px) scale(' + b.w.toFixed(2) + ',' + b.h.toFixed(2) + ')';
+        else if (s.zone === 'list' || s.zone === 'drop') { var w = Math.max(2, L.colW - 2), lose = s.lose || s.zone === 'drop'; b = { x: mirror(L.pad + s.slot * L.colW + 1, w), y: L.yList + L.listH - hgt + (lose ? hgt * 0.35 : 0), w: w, h: hgt * (lose ? 0.65 : 1) }; }
+        else b = packBox(s.pp);
+        var d = k === 3 && s.zone === 'pack' ? (M.packIdx[pi] || 0) * (900 / nPack) : k === 3 ? 1000 : Math.min(450, (s.slot || 0) * 11);
         var cls = 'it ' + (p.sp.length ? 'ev' : 'ot');
-        if (s.vis === 0 || (s.zone === 'reader' && !s.lit)) cls += ' hid';
-        else if (s.vis < 0.5) cls += ' dim';
-        if (s.lit) cls += ' lit';
+        if (s.vis === 0) cls += ' hid'; else if (s.vis < 0.5) cls += ' dim';
         if (k === 1 && s.zone === 'list') cls += ' new';
         if (k === 2 && s.pick) cls += ' pick';
-        r.setAttribute('class', cls);
+        put(rects[pi], b, d, cls);
+      });
+      // from stage 5 the evidence of the pack is copied into the reader; the pack itself stays filled
+      M.cell.pack.forEach(function (q) {
+        var r = copies[q.p], pp = M.packPos[q.p], j = evList.indexOf(q.p);
+        if (k < 4 || j < 0) { put(r, packBox(pp), 0, 'it ev lit cp hid'); return; }
+        var fw = Math.min(140, (L.W - 2 * L.pad - 24) / Math.max(1, evList.length));
+        put(r, { x: mirror(L.pad + 12 + j * (fw + 6), fw), y: L.yRead + L.readH / 2 - 7, w: fw, h: 14 }, (M.packIdx[q.p] || 0) * 60, 'it ev lit cp');
       });
     }
-    function resize() { if (M) show(M, st.step, true); }
+    function show(m, k, how) {
+      if (m !== M || !L || Math.abs(L.W - stage.clientWidth) > 2) { setData(m); makeCopies(); applyStep(-1, true); disp = -1; }
+      if (how !== 'play') { applyStep(k, true); disp = k; busyUntil = 0; return; }
+      // play stage k from the end of stage k-1; jump there first if the scene is elsewhere or still moving
+      if (disp !== k - 1 || performance.now() < busyUntil) { applyStep(k - 1, true); svg.getBoundingClientRect(); }
+      applyStep(k, false); disp = k; busyUntil = performance.now() + 2100 * TS();
+    }
+    function resize() { if (M) show(M, st.step, 'snap'); }
     var ro = 'ResizeObserver' in window ? new ResizeObserver(function () { if (L && Math.abs(L.W - stage.clientWidth) > 2) resize(); }) : null;
     if (ro) ro.observe(stage);
-    return { setData: setData, show: show, retheme: function () {}, relabel: function () { if (M) { setData(M); show(M, st.step, true); } }, destroy: function () { if (ro) ro.disconnect(); }, kind: '2d', fps: function () { return 0; } };
+    return { setData: function (m) { setData(m); makeCopies(); applyStep(-1, true); disp = -1; }, show: show, retheme: function () {},
+      relabel: function () { if (M) { setData(M); makeCopies(); applyStep(disp, true); } }, destroy: function () { if (ro) ro.disconnect(); }, kind: '2d', fps: function () { return 0; },
+      busy: function () { return performance.now() < busyUntil; }, loopRunning: function () { return false; }, shown: function () { return disp; },
+      // where the passages are headed (their target transforms), not mid-flight positions
+      probe: function () {
+        var o = { q: /cur/.test(pillQ.getAttribute('class')) ? 1 : 0, a: /cur/.test(pillA.getAttribute('class')) ? 1 : 0, inPack: 0, inList: 0, inPool: 0, toReader: 0 };
+        M.ids.forEach(function (pi) {
+          var r = rects[pi], c = r.getAttribute('class'), m = /translate\(([-\d.]+)px,\s*([-\d.]+)px\)/.exec(r.style.transform), y = m ? +m[2] : 0;
+          if (/hid/.test(c)) { o.inPool++; return; }
+          if (Math.abs(y - (L.yPack + 3)) < 1) o.inPack++; else if (y >= L.yList - 1 && y <= L.yList + L.listH) o.inList++;
+        });
+        Object.keys(copies).forEach(function (k) { if (!/hid/.test(copies[k].getAttribute('class'))) o.toReader++; });
+        return o;
+      } };
   }
 
   /* ================= mounting ================= */
@@ -740,7 +836,7 @@
   }
   function maybeAutoplay() {
     if (st.autoplayed || mqReduce.matches || !st.visible) return;
-    st.autoplayed = true; start();
+    st.autoplayed = true; start(true);
   }
   function init() {
     m3 = document.getElementById('pipeline3d'); m2 = document.getElementById('pipeline2d');
@@ -767,9 +863,19 @@
       io.observe(host); if (m2 && m2 !== host) io.observe(m2);
     } else { st.visible = true; begin(); }
     document.addEventListener('langchange', function () { if (D) { var was = st.playing; stop(); build(mode); if (was) start(); } });
-    document.addEventListener('themechange', function () { if (view) setTimeout(function () { view.retheme(); if (view.kind === '2d') go(st.step, true); }, 30); });
+    document.addEventListener('themechange', function () { if (view) setTimeout(function () { if (view) view.retheme(); }, 30); }); // recolour in place; the timeline is untouched
     document.addEventListener('visibilitychange', function () { if (document.hidden && st.playing) stop(); });
   }
+  /* debug and test hook: where the timeline stands */
+  window.__pipeState = function () {
+    var v = view, busy = !!(v && v.busy && v.busy()), lis = ui ? [].slice.call(ui.root.querySelectorAll('.pv-steps li')) : [];
+    return { step: st.step, shown: v && v.shown ? v.shown() : null, playing: st.playing, mode: mode, busy: busy,
+      complete: busy ? st.step : st.step + 1, budget: ui ? (parseFloat(ui.mFill.style.width) || 0) : 0,
+      timer: !!timer, meterLoop: !!meterRaf, sceneLoop: !!(v && v.loopRunning && v.loopRunning()),
+      stripCur: lis.findIndex(function (l) { return /is-cur/.test(l.className); }), stripDone: lis.filter(function (l) { return /is-done/.test(l.className); }).length,
+      frames: v && v.frames ? v.frames.length : 0, fps: v ? v.fps() : 0, pipe: st.pipe, builds: buildId,
+      probe: v && v.probe ? v.probe() : null, packN: D ? model().cell.pack.length : 0 };
+  };
   window.AnyRAGPipeline = {
     state: st, go: function (k) { stop(); go(k); }, play: start, pause: stop,
     fps: function () { return view ? view.fps() : 0; }, mode: function () { return mode; }, view: function () { return view; }

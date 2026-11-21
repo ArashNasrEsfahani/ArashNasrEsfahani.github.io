@@ -506,3 +506,51 @@ mark{background:var(--mark);color:inherit;padding:0 .15em;border-bottom:1.5px so
 #skill .btns{margin-top:20px}
 #skill .btn:not(.accent){background:var(--surface)}
 #skill .btn:not(.accent):hover{background:color-mix(in srgb,var(--surface) 80%,var(--ink2))}
+
+/* ---------- "More detail" toggles (fold pass, 2026-11-21): native <details class="more">, a hairline index-card tab
+   with a mono chevron that turns down when open (mirrored in Persian); keyboard and screen readers come with
+   <summary>; every toggle prints open ---------- */
+.more{margin:12px 0 0;min-width:0}
+.more > summary{display:inline-flex;align-items:center;gap:8px;list-style:none;cursor:pointer;user-select:none;-webkit-user-select:none;
+  min-height:30px;padding:5px 11px 5px 9px;font:500 11.5px/1.2 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);
+  background:var(--surface);border:1px solid var(--line2);border-radius:var(--r);position:relative;transition:color .2s,border-color .2s}
+.more > summary::-webkit-details-marker{display:none}
+.more > summary::marker{content:''}
+.more > summary::before{content:'›';flex:none;display:inline-block;width:.7em;text-align:center;font:500 16px/1 var(--mono);color:var(--lapis);transform:translateY(-1px);transition:transform .22s var(--ease)}
+.more[open] > summary::before{transform:rotate(90deg)}
+:root[dir="rtl"] .more > summary::before{transform:translateY(-1px) scaleX(-1)}
+:root[dir="rtl"] .more[open] > summary::before{transform:rotate(-90deg) scaleX(-1)}
+.more > summary:hover{color:var(--lapis);border-color:color-mix(in srgb,var(--lapis) 55%,var(--line2))}
+.more > summary:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+.more > summary:lang(fa){font:500 13px/1.5 var(--fa);letter-spacing:0;text-transform:none;padding-block:4px}
+.more[open] > summary{color:var(--ink2);margin-bottom:12px}
+/* the folded part: a dashed hairline down its start edge, like a card tucked behind the one in view */
+.more[open] > :not(summary){border-inline-start:1px dashed var(--line2);padding-inline-start:14px;margin-inline-start:4px}
+.more > .scroll{margin-top:0}
+.more > .pts + .pts,.more > .pts + p{margin-top:8px}
+@media (prefers-reduced-motion:no-preference){
+  .more[open] > :not(summary){animation:more-in .28s var(--ease)}
+  @keyframes more-in{from{opacity:0;transform:translateY(-3px)}to{opacity:1;transform:none}}
+}
+@media (prefers-reduced-motion:reduce){.more > summary::before{transition:none}}
+/* placement */
+.gl .more,.cell .more{margin-top:10px}
+.terms-more{margin-top:26px}
+.terms-more .terms{margin-top:0}
+.lim .more{margin-top:0}
+.tier .ex-more{margin-top:14px}
+.exb{display:flex;flex-direction:column}
+.tier > .exb .ex.fa{border-top:0;padding-top:0;margin-top:0}
+.tier .ex-more .exb .ex.fa{border-top:0;padding-top:0;margin-top:0}
+.annot-more[open] > .annot{padding-top:4px}
+.mainres-wrap .gate .more{margin-top:12px}
+.fold-1{display:inline}
+.more-rest{margin-top:8px}
+.more-rest > .fold-2{display:block}
+.lead .more-rest{margin-top:10px;font-size:15.5px}
+.take .more-rest > summary{min-height:26px}
+@media print{
+  .more > summary{display:none}
+  .more[open] > :not(summary){border:0;padding:0;margin-inline-start:0;animation:none}
+}
+@media print{details.more::details-content{content-visibility:visible;display:contents}}

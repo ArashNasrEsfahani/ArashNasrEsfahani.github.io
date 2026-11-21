@@ -1170,5 +1170,9 @@
  "skill.note": {
   "en": "Its advice holds within the study's scope: Persian and English, 155 documents, one primary reader.",
   "fa": "توصیه‌هایش در محدودهٔ همین پژوهش معتبر است: فارسی و انگلیسی، ۱۵۵ سند و یک مدل پاسخ‌گوی اصلی."
+ },
+ "more": {
+  "en": "More detail",
+  "fa": "جزئیات بیشتر"
  }
 }

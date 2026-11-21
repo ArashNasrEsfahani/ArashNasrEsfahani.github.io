@@ -20,7 +20,7 @@
   /* ---------- language ---------- */
   var lang = root.lang === 'fa' ? 'fa' : 'en';
   var dict = {};
-  var EXTRA = { 'lang.toFa': 'تغییر به فارسی', 'lang.toEn': 'Switch to English' };
+  var EXTRA = { 'lang.toFa': 'تغییر به فارسی', 'lang.toEn': 'Switch to English', 'more': 'More detail' };
 
   function entry(key) { return dict[key] || null; }
   function t(key) {
@@ -63,9 +63,53 @@
       el.textContent = lang === 'fa' && N ? N.local(el.dataset.numEn, 'fa') : el.dataset.numEn;
     });
     labelPipes();
+    placeExamples();
+    foldRest();
     lattice();
     document.title = 'AnyRAG';
   }
+
+  /* ---------- "More detail" toggles (native <details class="more">) ---------- */
+  // A string marked data-fold-rest keeps its first sentence in view; the rest goes into a toggle under it.
+  // Runs after each language change on the freshly set text, and keeps the toggle's open state.
+  var SENT = /^([^<]*?[.!?؟])(\s+)(\S[\s\S]*)$/;
+  function foldRest() {
+    $$('[data-fold-rest]').forEach(function (el) {
+      if ($(':scope > details.more', el)) return; // already folded for this language
+      var m = SENT.exec(el.innerHTML);
+      if (!m) return;
+      el.innerHTML = '';
+      var first = document.createElement('span'); first.className = 'fold-1'; first.innerHTML = m[1];
+      var d = document.createElement('details'); d.className = 'more more-rest'; d.open = el.hasAttribute('data-fold-open');
+      d.addEventListener('toggle', function () { if (d.open) el.setAttribute('data-fold-open', ''); else el.removeAttribute('data-fold-open'); });
+      var s = document.createElement('summary'); s.textContent = t('more');
+      var rest = document.createElement('span'); rest.className = 'fold-2'; rest.innerHTML = m[3];
+      d.appendChild(s); d.appendChild(rest);
+      el.appendChild(first); el.appendChild(d);
+    });
+  }
+  // Benchmark tiers: the example in the page's language stays in view; the other one folds.
+  function placeExamples() {
+    $$('.tier').forEach(function (tier) {
+      var d = $(':scope > details.ex-more', tier); if (!d) return;
+      var want = $('.exb[data-ex="' + lang + '"]', tier), other = $('.exb:not([data-ex="' + lang + '"])', tier);
+      if (!want || !other || !d.contains(want)) return;
+      tier.insertBefore(want, d); d.appendChild(other);
+    });
+  }
+  // A link or hash that points inside a closed toggle opens it first.
+  function openTo(el) { for (var d = el && el.closest('details'); d; d = d.parentElement && d.parentElement.closest('details')) d.open = true; }
+  function openHash() {
+    var id = ''; try { id = decodeURIComponent(location.hash.slice(1).split('?')[0]); } catch (e) {}
+    var el = id && document.getElementById(id); if (el) openTo(el);
+  }
+  window.addEventListener('hashchange', openHash);
+  // Printing shows every toggle open, then restores the reader's own state.
+  var printOpened = [];
+  window.addEventListener('beforeprint', function () {
+    printOpened = $$('details:not([open])'); printOpened.forEach(function (d) { d.open = true; });
+  });
+  window.addEventListener('afterprint', function () { printOpened.forEach(function (d) { d.open = false; }); printOpened = []; });
   function setLang(next, announce) {
     lang = next;
     applyLang();
@@ -297,6 +341,7 @@
 
   /* ---------- start ---------- */
   applyLang();
+  openHash();
   lazyVideos();
   settleAnchor();
   function finish() { if (readyResolve) readyResolve(window.AnyRAG); if (lang === 'fa') document.dispatchEvent(new CustomEvent('langchange', { detail: { lang: lang } })); }
